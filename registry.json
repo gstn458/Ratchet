@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "registry_version": "2026.10.0",
+  "schema_version": 2,
+  "registry_version": "2026.10.1",
   "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
   "field_notes": {
     "quantum": {
@@ -12,12 +12,9 @@
       "broken": "Already broken today, independent of quantum.",
       "ok": "Not broken classically."
     },
-    "nist_quantum_security_level": "Value written to CycloneDX nistQuantumSecurityLevel for each quantum status."
-  },
-  "nist_quantum_security_level": {
-    "broken": 0,
-    "reduced": 1,
-    "safe": 3
+    "nist_quantum_security_level": "NIST PQC security category written to CycloneDX nistQuantumSecurityLevel: 0 meets no category, 1 to 5 as defined by NIST's PQC evaluation criteria. The entry's value applies when the parameter set is unknown and is the lowest category any common parameter set reaches; parameter_sets overrides it when the parameter set is known.",
+    "oid": "OID of the algorithm. null when no single OID identifies it without information Ratchet does not detect; oid_note says why.",
+    "parameter_sets": "Optional. Keyed by the parameterSetIdentifier Ratchet records; each may set its own oid and nist_quantum_security_level."
   },
   "algorithms": {
     "RSA": {
@@ -25,6 +22,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.2.840.113549.1.1.1",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "encrypt",
@@ -39,7 +37,9 @@
       "primitive": "signature",
       "quantum": "broken",
       "classical": "ok",
-      "oid": "1.2.840.10045.4",
+      "oid": null,
+      "oid_note": "An ECDSA signature OID names the hash as well as the algorithm (for example ecdsa-with-SHA256, 1.2.840.10045.4.3.2, RFC 5758). The hash is not detected, so no OID is claimed. 1.2.840.10045.4 is the parent arc, not an algorithm.",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "sign",
@@ -53,6 +53,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.3.132.1.12",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "keyderive"
@@ -65,6 +66,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.3.101.112",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "sign",
@@ -78,6 +80,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.3.101.110",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "keyderive"
@@ -90,6 +93,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.2.840.113549.1.3.1",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "keyderive"
@@ -102,6 +106,7 @@
       "quantum": "broken",
       "classical": "ok",
       "oid": "1.2.840.10040.4.1",
+      "nist_quantum_security_level": 0,
       "functions": [
         "keygen",
         "sign",
@@ -115,6 +120,7 @@
       "quantum": "reduced",
       "classical": "broken",
       "oid": "1.2.840.113549.2.5",
+      "nist_quantum_security_level": 0,
       "functions": [
         "digest"
       ],
@@ -126,6 +132,7 @@
       "quantum": "reduced",
       "classical": "broken",
       "oid": "1.3.14.3.2.26",
+      "nist_quantum_security_level": 0,
       "functions": [
         "digest"
       ],
@@ -137,6 +144,7 @@
       "quantum": "reduced",
       "classical": "broken",
       "oid": "1.3.14.3.2.7",
+      "nist_quantum_security_level": 0,
       "functions": [
         "encrypt",
         "decrypt"
@@ -149,18 +157,20 @@
       "quantum": "reduced",
       "classical": "broken",
       "oid": "1.2.840.113549.3.7",
+      "nist_quantum_security_level": 0,
       "functions": [
         "encrypt",
         "decrypt"
       ],
       "replacement": "AES-256-GCM",
-      "why": "Sweet32 birthday attacks. Deprecated by NIST after 2023."
+      "why": "Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023."
     },
     "RC4": {
       "primitive": "stream-cipher",
       "quantum": "reduced",
       "classical": "broken",
       "oid": "1.2.840.113549.3.4",
+      "nist_quantum_security_level": 0,
       "functions": [
         "encrypt",
         "decrypt"
@@ -172,7 +182,20 @@
       "primitive": "block-cipher",
       "quantum": "reduced",
       "classical": "ok",
-      "oid": "2.16.840.1.101.3.4.1",
+      "oid": null,
+      "oid_note": "An AES OID names key size and mode together (for example aes128-GCM, 2.16.840.1.101.3.4.1.6). Mode is not detected, so no OID is claimed. 2.16.840.1.101.3.4.1 is the parent arc.",
+      "nist_quantum_security_level": 1,
+      "parameter_sets": {
+        "128": {
+          "nist_quantum_security_level": 1
+        },
+        "192": {
+          "nist_quantum_security_level": 3
+        },
+        "256": {
+          "nist_quantum_security_level": 5
+        }
+      },
       "functions": [
         "encrypt",
         "decrypt"
@@ -185,6 +208,7 @@
       "quantum": "reduced",
       "classical": "ok",
       "oid": "2.16.840.1.101.3.4.2.1",
+      "nist_quantum_security_level": 2,
       "functions": [
         "digest"
       ],
@@ -195,7 +219,23 @@
       "primitive": "kem",
       "quantum": "safe",
       "classical": "ok",
-      "oid": "2.16.840.1.101.3.4.4",
+      "oid": null,
+      "oid_note": "Each ML-KEM parameter set has its own OID, listed under parameter_sets. 2.16.840.1.101.3.4.4 is the parent arc.",
+      "nist_quantum_security_level": 1,
+      "parameter_sets": {
+        "512": {
+          "oid": "2.16.840.1.101.3.4.4.1",
+          "nist_quantum_security_level": 1
+        },
+        "768": {
+          "oid": "2.16.840.1.101.3.4.4.2",
+          "nist_quantum_security_level": 3
+        },
+        "1024": {
+          "oid": "2.16.840.1.101.3.4.4.3",
+          "nist_quantum_security_level": 5
+        }
+      },
       "functions": [
         "keygen",
         "encapsulate",
@@ -208,7 +248,23 @@
       "primitive": "signature",
       "quantum": "safe",
       "classical": "ok",
-      "oid": "2.16.840.1.101.3.4.3",
+      "oid": null,
+      "oid_note": "Each ML-DSA parameter set has its own OID, listed under parameter_sets. 2.16.840.1.101.3.4.3 is NIST's signature-algorithms arc, shared with DSA, ECDSA and RSA variants and with SLH-DSA.",
+      "nist_quantum_security_level": 2,
+      "parameter_sets": {
+        "44": {
+          "oid": "2.16.840.1.101.3.4.3.17",
+          "nist_quantum_security_level": 2
+        },
+        "65": {
+          "oid": "2.16.840.1.101.3.4.3.18",
+          "nist_quantum_security_level": 3
+        },
+        "87": {
+          "oid": "2.16.840.1.101.3.4.3.19",
+          "nist_quantum_security_level": 5
+        }
+      },
       "functions": [
         "keygen",
         "sign",

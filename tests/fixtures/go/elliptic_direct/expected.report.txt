@@ -1,6 +1,6 @@
 
 ratchet 0.1.0  scanned 1 files in .
-registry 2026.10.0  from registry.json
+registry 2026.10.1  from registry.json
 ========================================================================
 ========================================================================
 No quantum-vulnerable primitives found.

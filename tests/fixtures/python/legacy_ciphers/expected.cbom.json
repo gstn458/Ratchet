@@ -22,11 +22,11 @@
     "properties": [
       {
         "name": "ratchet:scan_registry_sha256",
-        "value": "4590536946952fb0683ea948055fc00c736efb79f57ac96064022fe3a4150029"
+        "value": "ced35b2338a8b06fae7249629ed17b3a62c34309eaaf86341aff98e182a427c2"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.0"
+        "value": "2026.10.1"
       }
     ]
   },
@@ -49,7 +49,7 @@
             "decrypt",
             "encrypt"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 0
         },
         "oid": "1.2.840.113549.3.7"
       },
@@ -75,7 +75,7 @@
         },
         {
           "name": "ratchet:rationale",
-          "value": "Sweet32 birthday attacks. Deprecated by NIST after 2023."
+          "value": "Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023."
         },
         {
           "name": "ratchet:recommended_replacement",
@@ -102,8 +102,7 @@
             "encrypt"
           ],
           "nistQuantumSecurityLevel": 1
-        },
-        "oid": "2.16.840.1.101.3.4.1"
+        }
       },
       "evidence": {
         "occurrences": [
@@ -153,7 +152,7 @@
             "decrypt",
             "encrypt"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 0
         },
         "oid": "1.3.14.3.2.7"
       },
@@ -204,7 +203,7 @@
           "cryptoFunctions": [
             "digest"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 0
         },
         "oid": "1.2.840.113549.2.5"
       },
@@ -256,7 +255,7 @@
             "decrypt",
             "encrypt"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 0
         },
         "oid": "1.2.840.113549.3.4"
       },
@@ -307,7 +306,7 @@
           "cryptoFunctions": [
             "digest"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 0
         },
         "oid": "1.3.14.3.2.26"
       },

@@ -22,11 +22,11 @@
     "properties": [
       {
         "name": "ratchet:scan_registry_sha256",
-        "value": "4590536946952fb0683ea948055fc00c736efb79f57ac96064022fe3a4150029"
+        "value": "ced35b2338a8b06fae7249629ed17b3a62c34309eaaf86341aff98e182a427c2"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.0"
+        "value": "2026.10.1"
       }
     ]
   },
@@ -51,8 +51,7 @@
             "verify"
           ],
           "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.2.840.10045.4"
+        }
       },
       "evidence": {
         "occurrences": [
@@ -104,8 +103,7 @@
             "verify"
           ],
           "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.2.840.10045.4"
+        }
       },
       "evidence": {
         "occurrences": [

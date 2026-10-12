@@ -41,7 +41,8 @@ The registry lives in `registry.json`. To change it:
 3. Run `python3 tools/embed_registry.py` to refresh the copy embedded in `ratchet.py`.
    CI fails if the two differ.
 
-Do not edit the embedded copy in `ratchet.py` by hand.
+Record each change, with its claim and source, in `REGISTRY_CHANGELOG.md`. Do not edit
+the embedded copy in `ratchet.py` by hand.
 
 ## Changing detection rules
 
