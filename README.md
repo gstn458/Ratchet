@@ -41,23 +41,38 @@ every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`.
 
 ## What it found on real repositories
 
-paramiko, the Python SSH library, 70 files scanned:
+Two libraries, scanned at the commits shown. Call sites are calls into a cryptographic
+API; imports show a library is present without proving it is used, and are counted
+separately.
+
+paramiko, the Python SSH library, at `d87f9c0` (2026-10-10), 70 files scanned:
 
 ```
 QUANTUM VULNERABLE
-  X25519    9 occurrences
-  ECDSA     7 occurrences
-  RSA       5 occurrences
-  Ed25519   2 occurrences
+  X25519    4 call sites, 3 imports
+  RSA       1 call site,  4 imports
+  ECDH      3 call sites, 1 import
+  ECDSA     3 call sites, 1 import
+  Ed25519   2 imports
+USAGE UNDETERMINED
+  EC        3 imports
 ALREADY BROKEN
-  SHA-1     3 occurrences
-  MD5       1 occurrence
+  SHA-1     3 call sites
+  MD5       1 call site
 
-23 quantum-vulnerable call sites across 10 files.
+11 quantum-vulnerable call sites and 14 imports across 10 files.
 ```
 
-golang-jwt/jwt, 46 files scanned: 14 quantum-vulnerable call sites across 13 files,
-including an RSA-2048 key generation the scanner picked the key size out of.
+The ECDH and ECDSA lines are worth a second look. Both come from the same
+`cryptography` module, and Ratchet separates them by what the key is used for:
+`kex_ecdh_nist.py` exchanges keys, so it migrates to ML-KEM, and `ecdsakey.py` signs,
+so it migrates to ML-DSA. The three undetermined imports are files where that use is
+not visible. The full CBOM is in [`paramiko-cbom.json`](paramiko-cbom.json).
+
+golang-jwt/jwt at `73c870b` (2026-09-14), 46 files scanned: 8 quantum-vulnerable call
+sites and 13 imports across 13 files. RSA has 5 call sites (PKCS #1 v1.5 and PSS
+signing and verification, and one key generation whose 2048-bit size the scanner read
+from the call), ECDSA 2 and Ed25519 1.
 
 Neither of these is a criticism of either library. Both are doing exactly what every
 library does today. That is the point.
@@ -122,10 +137,9 @@ RSA and RSA-2048 are reported as separate components when key size is known for 
 call sites and not others. Correct per the spec, since they are different parameter
 sets, and noisy in the report.
 
-The figures above are from v0, which counted import lines as call sites. Counted
-separately, as Ratchet now does, the same repositories give 11 call sites and 14
-imports for paramiko, and 1 call site and 13 imports for golang-jwt. An import shows a
-library is present, not that it is used. Imports stay in the CBOM, marked as imports.
+Imports are reported, and kept in the CBOM marked as imports, because a library that
+is present matters for the inventory even when no call is visible. They are counted
+separately from call sites; v0 counted them together, which overstated its figures.
 
 Go call sites are recognised for the package-level functions of the standard crypto
 packages: key generation, signing, verification, encryption and the hash and cipher
