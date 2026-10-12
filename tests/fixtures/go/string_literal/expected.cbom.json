@@ -51,12 +51,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "reduced"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
         },
         {
           "name": "ratchet:rationale",
@@ -65,10 +69,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "SHA-256 or SHA-3, or BLAKE2 for non-compliance use"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     },
@@ -87,9 +87,9 @@
             "none"
           ],
           "cryptoFunctions": [
-            "keygen",
-            "encrypt",
             "decrypt",
+            "encrypt",
+            "keygen",
             "sign",
             "verify"
           ],
@@ -106,12 +106,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -120,10 +124,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     }

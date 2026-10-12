@@ -16,11 +16,6 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       gateway/jwt.go:11   return rsa.GenerateKey(rand.Reader, 2048)
       service/tokens.py:4   signing_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
 
-  RSA-1024  (1 occurrence)
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      service/tokens.py:5   legacy = rsa.generate_private_key(public_exponent=65537, key_size=1024)
-
   ECDSA  (1 occurrence)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
@@ -30,6 +25,11 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       service/session.py:3   key = ec.generate_private_key(ec.SECP256R1())
+
+  RSA-1024  (1 occurrence)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      service/tokens.py:5   legacy = rsa.generate_private_key(public_exponent=65537, key_size=1024)
 
 
 ALREADY BROKEN       weak today, quantum is not the issue

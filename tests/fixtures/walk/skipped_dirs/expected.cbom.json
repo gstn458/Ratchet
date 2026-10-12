@@ -51,12 +51,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "reduced"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
         },
         {
           "name": "ratchet:rationale",
@@ -65,10 +69,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "SHA-256 or SHA-3"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     }

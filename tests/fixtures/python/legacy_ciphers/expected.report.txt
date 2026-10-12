@@ -4,9 +4,9 @@ ratchet 0.1.0  scanned 1 files in .
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  RC4  (1 occurrence)
-    Biased keystream. Prohibited in TLS since RFC 7465.
-    migrate to: AES-256-GCM or ChaCha20-Poly1305
+  3DES  (1 occurrence)
+    Sweet32 birthday attacks. Deprecated by NIST after 2023.
+    migrate to: AES-256-GCM
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
   DES  (1 occurrence)
@@ -14,15 +14,15 @@ ALREADY BROKEN       weak today, quantum is not the issue
     migrate to: AES-256-GCM
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  3DES  (1 occurrence)
-    Sweet32 birthday attacks. Deprecated by NIST after 2023.
-    migrate to: AES-256-GCM
-      ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
-
   MD5  (1 occurrence)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       ciphers.py:2   from Crypto.Hash import MD5, SHA1
+
+  RC4  (1 occurrence)
+    Biased keystream. Prohibited in TLS since RFC 7465.
+    migrate to: AES-256-GCM or ChaCha20-Poly1305
+      ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
   SHA-1  (1 occurrence)
     Chosen-prefix collisions demonstrated in 2020. Retire it.

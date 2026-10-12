@@ -401,8 +401,10 @@ def walk(root):
     findings = []
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith(".")]
-        for fn in filenames:
+        # Sorted so the scan order, and everything derived from it, does not
+        # depend on the filesystem's directory ordering.
+        dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS and not d.startswith("."))
+        for fn in sorted(filenames):
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
             if fn.endswith(".py"):
@@ -432,6 +434,7 @@ def build_cbom(findings, root, tool_version=VERSION):
 
     components = []
     for label, group in sorted(grouped.items()):
+        group = sorted(group, key=lambda f: (f.path, f.line))
         algo = group[0].algorithm
         spec = ALGORITHMS[algo]
         params = group[0].params
@@ -447,7 +450,7 @@ def build_cbom(findings, root, tool_version=VERSION):
                     "executionEnvironment": "software-plain-ram",
                     "implementationPlatform": "generic",
                     "certificationLevel": ["none"],
-                    "cryptoFunctions": spec["functions"],
+                    "cryptoFunctions": sorted(spec["functions"]),
                     "nistQuantumSecurityLevel": QUANTUM_LEVEL[spec["quantum"]],
                 },
                 "oid": spec["oid"],
@@ -457,13 +460,13 @@ def build_cbom(findings, root, tool_version=VERSION):
                     {"location": f"{f.path}#L{f.line}"} for f in group[:50]
                 ]
             },
-            "properties": [
+            "properties": sorted([
                 {"name": "ratchet:quantum_status", "value": spec["quantum"]},
                 {"name": "ratchet:classical_status", "value": spec["classical"]},
                 {"name": "ratchet:rationale", "value": spec["why"]},
                 {"name": "ratchet:recommended_replacement", "value": spec["replacement"]},
                 {"name": "ratchet:occurrence_count", "value": str(len(group))},
-            ],
+            ], key=lambda p: p["name"]),
         })
 
     return {
@@ -511,7 +514,8 @@ def report(findings, files_scanned, root):
         if not bucket:
             return
         print(f"\n{title}\n")
-        for label, group in sorted(bucket.items(), key=lambda kv: -len(kv[1])):
+        for label, group in sorted(bucket.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+            group = sorted(group, key=lambda f: (f.path, f.line))
             spec = ALGORITHMS[group[0].algorithm]
             print(f"  {label}  ({len(group)} occurrence{'s' if len(group) != 1 else ''})")
             print(f"    {spec['why']}")

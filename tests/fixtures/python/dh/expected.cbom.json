@@ -36,8 +36,8 @@
             "none"
           ],
           "cryptoFunctions": [
-            "keygen",
-            "keyderive"
+            "keyderive",
+            "keygen"
           ],
           "nistQuantumSecurityLevel": 0
         },
@@ -52,12 +52,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -66,10 +70,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-KEM-768 (FIPS 203)"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     },
@@ -88,8 +88,8 @@
             "none"
           ],
           "cryptoFunctions": [
-            "keygen",
-            "keyderive"
+            "keyderive",
+            "keygen"
           ],
           "nistQuantumSecurityLevel": 0
         },
@@ -104,12 +104,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -118,10 +122,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-KEM-768 (FIPS 203)"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     }

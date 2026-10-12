@@ -36,8 +36,8 @@
             "none"
           ],
           "cryptoFunctions": [
-            "encrypt",
-            "decrypt"
+            "decrypt",
+            "encrypt"
           ],
           "nistQuantumSecurityLevel": 1
         },
@@ -52,12 +52,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "reduced"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
         },
         {
           "name": "ratchet:rationale",
@@ -66,10 +70,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "AES-256 if currently AES-128"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     },
@@ -88,8 +88,8 @@
             "none"
           ],
           "cryptoFunctions": [
-            "encrypt",
-            "decrypt"
+            "decrypt",
+            "encrypt"
           ],
           "nistQuantumSecurityLevel": 1
         },
@@ -107,12 +107,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "reduced"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
         },
         {
           "name": "ratchet:rationale",
@@ -121,10 +125,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "AES-256-GCM or ChaCha20-Poly1305"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "2"
         }
       ]
     }

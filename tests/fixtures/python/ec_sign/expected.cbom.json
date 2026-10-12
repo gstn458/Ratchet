@@ -56,12 +56,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -70,10 +74,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "2"
         }
       ]
     },
@@ -109,12 +109,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -123,10 +127,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
         }
       ]
     }

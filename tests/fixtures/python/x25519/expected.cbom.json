@@ -36,8 +36,8 @@
             "none"
           ],
           "cryptoFunctions": [
-            "keygen",
-            "keyderive"
+            "keyderive",
+            "keygen"
           ],
           "nistQuantumSecurityLevel": 0
         },
@@ -58,12 +58,16 @@
       },
       "properties": [
         {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
         },
         {
           "name": "ratchet:rationale",
@@ -72,10 +76,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "hybrid X25519+ML-KEM-768, then ML-KEM alone"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "3"
         }
       ]
     }

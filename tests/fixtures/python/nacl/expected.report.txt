@@ -4,17 +4,17 @@ ratchet 0.1.0  scanned 1 files in .
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  X25519  (2 occurrences)
-    Curve25519 discrete log falls to Shor's algorithm.
-    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
-      keys.py:1   from nacl.public import PrivateKey
-      keys.py:5   box_key = PrivateKey.generate()
-
   Ed25519  (2 occurrences)
     Edwards-curve discrete log falls to Shor's algorithm.
     migrate to: ML-DSA-65 (FIPS 204)
       keys.py:2   from nacl.signing import SigningKey
       keys.py:4   signing_key = SigningKey.generate()
+
+  X25519  (2 occurrences)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      keys.py:1   from nacl.public import PrivateKey
+      keys.py:5   box_key = PrivateKey.generate()
 
 ========================================================================
 4 quantum-vulnerable call sites across 1 files.
