@@ -861,20 +861,19 @@ def scan_go(path):
                 if import_path == "crypto/ecdh":
                     ecdh_import.append(findings[-1])
     ecdh_curves = set()
-    for i, line in enumerate(lines, start=1):
-        stripped = line.strip()
-        if stripped.startswith("//"):
-            continue
+    # Patterns run on code only, so calls in comments and strings never match.
+    # The finding still shows the original line.
+    for i, (line, text) in enumerate(zip(lines, code), start=1):
         for pattern, algo, group in GO_CALL_PATTERNS:
-            m = pattern.search(line)
+            m = pattern.search(text)
             if m:
                 params = m.group(group) if group else None
                 findings.append(Finding(algo, path, i, line, params))
         for pattern, algo in GO_ECDH_CURVES:
-            if pattern.search(line):
+            if pattern.search(text):
                 ecdh_curves.add(algo)
                 findings.append(Finding(algo, path, i, line))
-        if GO_ELLIPTIC_IMPORT in imports and any(p.search(line) for p in GO_ELLIPTIC_DIRECT):
+        if GO_ELLIPTIC_IMPORT in imports and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
             findings.append(Finding("EC", path, i, line))
 
     # The crypto/ecdh import is X25519 when every curve the file uses is.

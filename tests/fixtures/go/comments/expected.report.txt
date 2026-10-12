@@ -3,22 +3,6 @@ ratchet 0.1.0  scanned 1 files in .
 registry 2026.10.2  from registry.json
 ========================================================================
 
-QUANTUM VULNERABLE   Shor's algorithm breaks these outright
-
-  RSA-1024  (1 occurrence)
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      notes.go:9   rsa.GenerateKey(rand.Reader, 1024)
-
-
-ALREADY BROKEN       weak today, quantum is not the issue
-
-  MD5  (1 occurrence)
-    Collisions are practical today. Quantum is not the problem here.
-    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
-      notes.go:13   return sha256.Sum256(b) // md5.Sum(b) in a trailing comment
-
-
 REVIEW               reduced margin under Grover, usually acceptable
 
   SHA-256  (1 occurrence)
@@ -27,5 +11,5 @@ REVIEW               reduced margin under Grover, usually acceptable
       notes.go:3   import "crypto/sha256"
 
 ========================================================================
-1 quantum-vulnerable call sites across 1 files.
+No quantum-vulnerable primitives found.
 
