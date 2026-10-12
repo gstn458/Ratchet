@@ -1,0 +1,571 @@
+#!/usr/bin/env python3
+"""
+Ratchet v0 - find quantum-breakable cryptography in a codebase.
+
+Walks a repository, finds cryptographic primitives in Python and Go source,
+flags what a quantum computer breaks, and emits a CycloneDX 1.6 CBOM.
+
+Stdlib only. No dependencies. Run it anywhere.
+
+    python3 ratchet.py /path/to/repo
+    python3 ratchet.py /path/to/repo --cbom cbom.json
+    python3 ratchet.py /path/to/repo --fail-on-vulnerable   # for CI
+"""
+
+import argparse
+import ast
+import json
+import os
+import re
+import sys
+import uuid
+from collections import defaultdict
+from datetime import datetime, timezone
+
+VERSION = "0.1.0"
+
+# ---------------------------------------------------------------------------
+# Algorithm registry
+#
+# quantum: "broken"  -> Shor's algorithm breaks it outright. Must migrate.
+#          "reduced" -> Grover halves the effective security. Usually fine at
+#                       higher parameter sizes, but worth recording.
+#          "safe"    -> a NIST post-quantum standard.
+# classical: "broken" -> already broken today, independent of quantum.
+# ---------------------------------------------------------------------------
+
+ALGORITHMS = {
+    "RSA": {
+        "primitive": "pke",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.2.840.113549.1.1.1",
+        "functions": ["keygen", "encrypt", "decrypt", "sign", "verify"],
+        "replacement": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures",
+        "why": "Shor's algorithm factors the modulus in polynomial time.",
+    },
+    "ECDSA": {
+        "primitive": "signature",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.2.840.10045.4",
+        "functions": ["keygen", "sign", "verify"],
+        "replacement": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based",
+        "why": "Shor's algorithm solves the discrete log on the curve.",
+    },
+    "ECDH": {
+        "primitive": "key-agree",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.3.132.1.12",
+        "functions": ["keygen", "keyderive"],
+        "replacement": "ML-KEM-768, ideally hybrid X25519+ML-KEM during transition",
+        "why": "Shor's algorithm solves the discrete log on the curve.",
+    },
+    "Ed25519": {
+        "primitive": "signature",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.3.101.112",
+        "functions": ["keygen", "sign", "verify"],
+        "replacement": "ML-DSA-65 (FIPS 204)",
+        "why": "Edwards-curve discrete log falls to Shor's algorithm.",
+    },
+    "X25519": {
+        "primitive": "key-agree",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.3.101.110",
+        "functions": ["keygen", "keyderive"],
+        "replacement": "hybrid X25519+ML-KEM-768, then ML-KEM alone",
+        "why": "Curve25519 discrete log falls to Shor's algorithm.",
+    },
+    "DH": {
+        "primitive": "key-agree",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.2.840.113549.1.3.1",
+        "functions": ["keygen", "keyderive"],
+        "replacement": "ML-KEM-768 (FIPS 203)",
+        "why": "Shor's algorithm solves the finite-field discrete log.",
+    },
+    "DSA": {
+        "primitive": "signature",
+        "quantum": "broken",
+        "classical": "ok",
+        "oid": "1.2.840.10040.4.1",
+        "functions": ["keygen", "sign", "verify"],
+        "replacement": "ML-DSA-65 (FIPS 204)",
+        "why": "Shor's algorithm solves the finite-field discrete log.",
+    },
+    "MD5": {
+        "primitive": "hash",
+        "quantum": "reduced",
+        "classical": "broken",
+        "oid": "1.2.840.113549.2.5",
+        "functions": ["digest"],
+        "replacement": "SHA-256 or SHA-3, or BLAKE2 for non-compliance use",
+        "why": "Collisions are practical today. Quantum is not the problem here.",
+    },
+    "SHA-1": {
+        "primitive": "hash",
+        "quantum": "reduced",
+        "classical": "broken",
+        "oid": "1.3.14.3.2.26",
+        "functions": ["digest"],
+        "replacement": "SHA-256 or SHA-3",
+        "why": "Chosen-prefix collisions demonstrated in 2020. Retire it.",
+    },
+    "DES": {
+        "primitive": "block-cipher",
+        "quantum": "reduced",
+        "classical": "broken",
+        "oid": "1.3.14.3.2.7",
+        "functions": ["encrypt", "decrypt"],
+        "replacement": "AES-256-GCM",
+        "why": "56-bit key. Brute-forced on commodity hardware.",
+    },
+    "3DES": {
+        "primitive": "block-cipher",
+        "quantum": "reduced",
+        "classical": "broken",
+        "oid": "1.2.840.113549.3.7",
+        "functions": ["encrypt", "decrypt"],
+        "replacement": "AES-256-GCM",
+        "why": "Sweet32 birthday attacks. Deprecated by NIST after 2023.",
+    },
+    "RC4": {
+        "primitive": "stream-cipher",
+        "quantum": "reduced",
+        "classical": "broken",
+        "oid": "1.2.840.113549.3.4",
+        "functions": ["encrypt", "decrypt"],
+        "replacement": "AES-256-GCM or ChaCha20-Poly1305",
+        "why": "Biased keystream. Prohibited in TLS since RFC 7465.",
+    },
+    "AES": {
+        "primitive": "block-cipher",
+        "quantum": "reduced",
+        "classical": "ok",
+        "oid": "2.16.840.1.101.3.4.1",
+        "functions": ["encrypt", "decrypt"],
+        "replacement": "AES-256 if currently AES-128",
+        "why": "Grover halves effective key length. AES-256 stays at 128-bit margin.",
+    },
+    "SHA-256": {
+        "primitive": "hash",
+        "quantum": "reduced",
+        "classical": "ok",
+        "oid": "2.16.840.1.101.3.4.2.1",
+        "functions": ["digest"],
+        "replacement": "no action needed",
+        "why": "Grover gives a quadratic speedup only. Still acceptable.",
+    },
+    "ML-KEM": {
+        "primitive": "kem",
+        "quantum": "safe",
+        "classical": "ok",
+        "oid": "2.16.840.1.101.3.4.4",
+        "functions": ["keygen", "encapsulate", "decapsulate"],
+        "replacement": "none",
+        "why": "FIPS 203. Module-lattice KEM.",
+    },
+    "ML-DSA": {
+        "primitive": "signature",
+        "quantum": "safe",
+        "classical": "ok",
+        "oid": "2.16.840.1.101.3.4.3",
+        "functions": ["keygen", "sign", "verify"],
+        "replacement": "none",
+        "why": "FIPS 204. Module-lattice signature.",
+    },
+}
+
+# ---------------------------------------------------------------------------
+# Python detection: module paths and attribute names
+# ---------------------------------------------------------------------------
+
+PY_MODULES = {
+    "cryptography.hazmat.primitives.asymmetric.rsa": "RSA",
+    "cryptography.hazmat.primitives.asymmetric.ec": "ECDSA",
+    "cryptography.hazmat.primitives.asymmetric.dh": "DH",
+    "cryptography.hazmat.primitives.asymmetric.dsa": "DSA",
+    "cryptography.hazmat.primitives.asymmetric.ed25519": "Ed25519",
+    "cryptography.hazmat.primitives.asymmetric.x25519": "X25519",
+    "Crypto.PublicKey.RSA": "RSA",
+    "Crypto.PublicKey.DSA": "DSA",
+    "Crypto.PublicKey.ECC": "ECDSA",
+    "Crypto.Cipher.DES": "DES",
+    "Crypto.Cipher.DES3": "3DES",
+    "Crypto.Cipher.ARC4": "RC4",
+    "Crypto.Cipher.AES": "AES",
+    "Crypto.Hash.MD5": "MD5",
+    "Crypto.Hash.SHA1": "SHA-1",
+    "rsa": "RSA",
+    "ecdsa": "ECDSA",
+    "nacl.signing": "Ed25519",
+    "nacl.public": "X25519",
+}
+
+# attribute or function name -> algorithm, for calls like hashlib.md5()
+PY_CALLS = {
+    "md5": "MD5",
+    "sha1": "SHA-1",
+    "new_md5": "MD5",
+    "generate_private_key": None,   # resolved from the module it hangs off
+    "generate_parameters": None,
+}
+
+PY_HASH_NAMES = {
+    "md5": "MD5",
+    "sha1": "SHA-1",
+    "sha256": "SHA-256",
+    "sha-1": "SHA-1",
+}
+
+# ---------------------------------------------------------------------------
+# Go detection: import paths
+# ---------------------------------------------------------------------------
+
+GO_IMPORTS = {
+    "crypto/rsa": "RSA",
+    "crypto/ecdsa": "ECDSA",
+    "crypto/ed25519": "Ed25519",
+    "crypto/ecdh": "ECDH",
+    "crypto/dsa": "DSA",
+    "crypto/md5": "MD5",
+    "crypto/sha1": "SHA-1",
+    "crypto/des": "DES",
+    "crypto/rc4": "RC4",
+    "crypto/aes": "AES",
+    "crypto/sha256": "SHA-256",
+    "golang.org/x/crypto/ed25519": "Ed25519",
+    "golang.org/x/crypto/curve25519": "X25519",
+}
+
+GO_CALL_PATTERNS = [
+    (re.compile(r"\brsa\.GenerateKey\s*\(\s*[^,]+,\s*(\d+)"), "RSA", 1),
+    (re.compile(r"\becdsa\.GenerateKey\s*\("), "ECDSA", None),
+    (re.compile(r"\bed25519\.GenerateKey\s*\("), "Ed25519", None),
+    (re.compile(r"\bmd5\.(Sum|New)\s*\("), "MD5", None),
+    (re.compile(r"\bsha1\.(Sum|New)\s*\("), "SHA-1", None),
+    (re.compile(r"\bdes\.New(Triple)?Cipher\s*\("), "DES", None),
+    (re.compile(r"\brc4\.NewCipher\s*\("), "RC4", None),
+]
+
+SKIP_DIRS = {
+    ".git", "node_modules", "vendor", "venv", ".venv", "__pycache__",
+    "dist", "build", ".tox", "site-packages", "testdata", ".mypy_cache",
+}
+
+
+class Finding:
+    def __init__(self, algorithm, path, line, snippet, params=None):
+        self.algorithm = algorithm
+        self.path = path
+        self.line = line
+        self.snippet = snippet.strip()[:160]
+        self.params = params
+
+    @property
+    def label(self):
+        return f"{self.algorithm}-{self.params}" if self.params else self.algorithm
+
+
+# ---------------------------------------------------------------------------
+# Python scanning via AST
+# ---------------------------------------------------------------------------
+
+class PyVisitor(ast.NodeVisitor):
+    def __init__(self, path, source_lines):
+        self.path = path
+        self.lines = source_lines
+        self.findings = []
+        self.aliases = {}   # local name -> algorithm
+
+    def _line(self, node):
+        idx = node.lineno - 1
+        return self.lines[idx] if 0 <= idx < len(self.lines) else ""
+
+    def _add(self, algo, node, params=None):
+        self.findings.append(
+            Finding(algo, self.path, node.lineno, self._line(node), params)
+        )
+
+    def visit_Import(self, node):
+        for alias in node.names:
+            algo = PY_MODULES.get(alias.name)
+            if algo:
+                local = alias.asname or alias.name.split(".")[0]
+                self.aliases[local] = algo
+                self._add(algo, node)
+        self.generic_visit(node)
+
+    def visit_ImportFrom(self, node):
+        if not node.module:
+            return self.generic_visit(node)
+        for alias in node.names:
+            full = f"{node.module}.{alias.name}"
+            algo = PY_MODULES.get(full) or PY_MODULES.get(node.module)
+            if algo:
+                self.aliases[alias.asname or alias.name] = algo
+                self._add(algo, node)
+        self.generic_visit(node)
+
+    def visit_Call(self, node):
+        func = node.func
+        name = getattr(func, "attr", None) or getattr(func, "id", None)
+        owner = None
+        if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+            owner = func.value.id
+
+        # hashlib.md5(), hashlib.sha1()
+        if name in ("md5", "sha1"):
+            self._add(PY_HASH_NAMES[name], node)
+
+        # hashlib.new("md5")
+        elif name == "new" and node.args:
+            first = node.args[0]
+            if isinstance(first, ast.Constant) and isinstance(first.value, str):
+                algo = PY_HASH_NAMES.get(first.value.lower())
+                if algo:
+                    self._add(algo, node)
+
+        # rsa.generate_private_key(key_size=2048)
+        elif name in ("generate_private_key", "generate_parameters", "generate"):
+            algo = self.aliases.get(owner)
+            if algo:
+                params = None
+                for kw in node.keywords:
+                    if kw.arg in ("key_size", "bits") and isinstance(kw.value, ast.Constant):
+                        params = str(kw.value.value)
+                if params is None and node.args:
+                    a = node.args[0]
+                    if isinstance(a, ast.Constant) and isinstance(a.value, int):
+                        params = str(a.value)
+                    elif isinstance(a, ast.Call):
+                        curve = getattr(a.func, "attr", None) or getattr(a.func, "id", None)
+                        if curve:
+                            params = curve
+                self._add(algo, node, params)
+
+        self.generic_visit(node)
+
+
+def scan_python(path):
+    try:
+        source = open(path, "r", encoding="utf-8", errors="replace").read()
+        tree = ast.parse(source, filename=path)
+    except (SyntaxError, ValueError, OSError):
+        return []
+    visitor = PyVisitor(path, source.splitlines())
+    visitor.visit(tree)
+    return visitor.findings
+
+
+# ---------------------------------------------------------------------------
+# Go scanning via text patterns
+# ---------------------------------------------------------------------------
+
+GO_IMPORT_RE = re.compile(r'"([a-zA-Z0-9_\-./]+)"')
+
+
+def scan_go(path):
+    findings = []
+    try:
+        lines = open(path, "r", encoding="utf-8", errors="replace").read().splitlines()
+    except OSError:
+        return []
+
+    for i, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if stripped.startswith("//"):
+            continue
+        for m in GO_IMPORT_RE.finditer(line):
+            algo = GO_IMPORTS.get(m.group(1))
+            if algo:
+                findings.append(Finding(algo, path, i, line))
+        for pattern, algo, group in GO_CALL_PATTERNS:
+            m = pattern.search(line)
+            if m:
+                params = m.group(group) if group else None
+                findings.append(Finding(algo, path, i, line, params))
+    return findings
+
+
+# ---------------------------------------------------------------------------
+# Walk
+# ---------------------------------------------------------------------------
+
+def walk(root):
+    findings = []
+    files = 0
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith(".")]
+        for fn in filenames:
+            full = os.path.join(dirpath, fn)
+            rel = os.path.relpath(full, root)
+            if fn.endswith(".py"):
+                files += 1
+                for f in scan_python(full):
+                    f.path = rel
+                    findings.append(f)
+            elif fn.endswith(".go"):
+                files += 1
+                for f in scan_go(full):
+                    f.path = rel
+                    findings.append(f)
+    return findings, files
+
+
+# ---------------------------------------------------------------------------
+# CycloneDX 1.6 CBOM output
+# ---------------------------------------------------------------------------
+
+QUANTUM_LEVEL = {"broken": 0, "reduced": 1, "safe": 3}
+
+
+def build_cbom(findings, root, tool_version=VERSION):
+    grouped = defaultdict(list)
+    for f in findings:
+        grouped[f.label].append(f)
+
+    components = []
+    for label, group in sorted(grouped.items()):
+        algo = group[0].algorithm
+        spec = ALGORITHMS[algo]
+        params = group[0].params
+        components.append({
+            "type": "cryptographic-asset",
+            "bom-ref": f"crypto/algorithm/{label.lower()}",
+            "name": label,
+            "cryptoProperties": {
+                "assetType": "algorithm",
+                "algorithmProperties": {
+                    "primitive": spec["primitive"],
+                    "parameterSetIdentifier": str(params) if params else "unspecified",
+                    "executionEnvironment": "software-plain-ram",
+                    "implementationPlatform": "generic",
+                    "certificationLevel": ["none"],
+                    "cryptoFunctions": spec["functions"],
+                    "nistQuantumSecurityLevel": QUANTUM_LEVEL[spec["quantum"]],
+                },
+                "oid": spec["oid"],
+            },
+            "evidence": {
+                "occurrences": [
+                    {"location": f"{f.path}#L{f.line}"} for f in group[:50]
+                ]
+            },
+            "properties": [
+                {"name": "ratchet:quantum_status", "value": spec["quantum"]},
+                {"name": "ratchet:classical_status", "value": spec["classical"]},
+                {"name": "ratchet:rationale", "value": spec["why"]},
+                {"name": "ratchet:recommended_replacement", "value": spec["replacement"]},
+                {"name": "ratchet:occurrence_count", "value": str(len(group))},
+            ],
+        })
+
+    return {
+        "bomFormat": "CycloneDX",
+        "specVersion": "1.6",
+        "serialNumber": f"urn:uuid:{uuid.uuid4()}",
+        "version": 1,
+        "metadata": {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "tools": {
+                "components": [{
+                    "type": "application",
+                    "name": "ratchet",
+                    "version": tool_version,
+                }]
+            },
+            "component": {
+                "type": "application",
+                "bom-ref": "target",
+                "name": os.path.basename(os.path.abspath(root)) or "target",
+            },
+        },
+        "components": components,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Terminal report
+# ---------------------------------------------------------------------------
+
+def report(findings, files_scanned, root):
+    grouped = defaultdict(list)
+    for f in findings:
+        grouped[f.label].append(f)
+
+    broken = {k: v for k, v in grouped.items() if ALGORITHMS[v[0].algorithm]["quantum"] == "broken"}
+    weak = {k: v for k, v in grouped.items() if ALGORITHMS[v[0].algorithm]["classical"] == "broken"}
+    other = {k: v for k, v in grouped.items() if k not in broken and k not in weak}
+
+    print()
+    print(f"ratchet {VERSION}  scanned {files_scanned} files in {root}")
+    print("=" * 72)
+
+    def section(title, bucket):
+        if not bucket:
+            return
+        print(f"\n{title}\n")
+        for label, group in sorted(bucket.items(), key=lambda kv: -len(kv[1])):
+            spec = ALGORITHMS[group[0].algorithm]
+            print(f"  {label}  ({len(group)} occurrence{'s' if len(group) != 1 else ''})")
+            print(f"    {spec['why']}")
+            print(f"    migrate to: {spec['replacement']}")
+            for f in group[:3]:
+                print(f"      {f.path}:{f.line}   {f.snippet}")
+            if len(group) > 3:
+                print(f"      ... and {len(group) - 3} more")
+            print()
+
+    section("QUANTUM VULNERABLE   Shor's algorithm breaks these outright", broken)
+    section("ALREADY BROKEN       weak today, quantum is not the issue", weak)
+    section("REVIEW               reduced margin under Grover, usually acceptable", other)
+
+    total_broken = sum(len(v) for v in broken.values())
+    print("=" * 72)
+    if total_broken:
+        print(f"{total_broken} quantum-vulnerable call sites across "
+              f"{len(set(f.path for g in broken.values() for f in g))} files.")
+    else:
+        print("No quantum-vulnerable primitives found.")
+    print()
+    return total_broken
+
+
+def main():
+    p = argparse.ArgumentParser(description="Find quantum-breakable cryptography in a codebase.")
+    p.add_argument("path", help="repository or directory to scan")
+    p.add_argument("--cbom", metavar="FILE", help="write a CycloneDX 1.6 CBOM to FILE")
+    p.add_argument("--json", action="store_true", help="print the CBOM to stdout instead of a report")
+    p.add_argument("--fail-on-vulnerable", action="store_true",
+                   help="exit 1 if quantum-vulnerable primitives are found (for CI)")
+    args = p.parse_args()
+
+    if not os.path.isdir(args.path):
+        print(f"not a directory: {args.path}", file=sys.stderr)
+        return 2
+
+    findings, files_scanned = walk(args.path)
+
+    if args.json:
+        print(json.dumps(build_cbom(findings, args.path), indent=2))
+        broken = sum(1 for f in findings if ALGORITHMS[f.algorithm]["quantum"] == "broken")
+    else:
+        broken = report(findings, files_scanned, args.path)
+
+    if args.cbom:
+        with open(args.cbom, "w") as fh:
+            json.dump(build_cbom(findings, args.path), fh, indent=2)
+        if not args.json:
+            print(f"CBOM written to {args.cbom}")
+
+    return 1 if (args.fail_on_vulnerable and broken) else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

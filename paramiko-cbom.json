@@ -1,0 +1,403 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:2c3a95b6-181f-4e28-9350-f8649b288d32",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-14T15:06:22.517716+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "paramiko"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.4"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/kex_ecdh_nist.py#L11"
+          },
+          {
+            "location": "paramiko/kex_ecdh_nist.py#L59"
+          },
+          {
+            "location": "paramiko/ecdsakey.py#L28"
+          },
+          {
+            "location": "paramiko/ecdsakey.py#L268"
+          },
+          {
+            "location": "paramiko/pkey.py#L37"
+          },
+          {
+            "location": "tests/pkey.py#L5"
+          },
+          {
+            "location": "tests/test_kex.py#L31"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "7"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.112"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/pkey.py#L40"
+          },
+          {
+            "location": "paramiko/ed25519key.py#L20"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Edwards-curve discrete log falls to Shor's algorithm."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/md5",
+      "name": "MD5",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "1.2.840.113549.2.5"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/pkey.py#L390"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Collisions are practical today. Quantum is not the problem here."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "SHA-256 or SHA-3, or BLAKE2 for non-compliance use"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/rsakey.py#L28"
+          },
+          {
+            "location": "paramiko/rsakey.py#L184"
+          },
+          {
+            "location": "paramiko/pkey.py#L41"
+          },
+          {
+            "location": "tests/test_pkey.py#L34"
+          },
+          {
+            "location": "tests/pkey.py#L9"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "1.3.14.3.2.26"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/hostkeys.py#L294"
+          },
+          {
+            "location": "paramiko/hostkeys.py#L299"
+          },
+          {
+            "location": "paramiko/config.py#L449"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Chosen-prefix collisions demonstrated in 2020. Retire it."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "SHA-256 or SHA-3"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/x25519",
+      "name": "X25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.110"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "paramiko/kex_curve25519.py#L6"
+          },
+          {
+            "location": "paramiko/kex_curve25519.py#L6"
+          },
+          {
+            "location": "paramiko/kex_curve25519.py#L30"
+          },
+          {
+            "location": "paramiko/kex_curve25519.py#L45"
+          },
+          {
+            "location": "paramiko/kex_mlkem.py#L20"
+          },
+          {
+            "location": "paramiko/kex_mlkem.py#L20"
+          },
+          {
+            "location": "paramiko/kex_mlkem.py#L76"
+          },
+          {
+            "location": "paramiko/kex_mlkem.py#L84"
+          },
+          {
+            "location": "tests/test_kex.py#L34"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Curve25519 discrete log falls to Shor's algorithm."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "hybrid X25519+ML-KEM-768, then ML-KEM alone"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "9"
+        }
+      ]
+    }
+  ]
+}
