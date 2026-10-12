@@ -21,12 +21,52 @@
     },
     "properties": [
       {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
         "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
       },
       {
         "name": "ratchet:scan_registry_version",
         "value": "2026.10.2"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": ".hidden (tooling, build output or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "build (tooling, build output or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "dist (tooling, build output or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "node_modules (vendored or test data)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "site-packages (vendored or test data)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "testdata (vendored or test data)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "vendor (vendored or test data)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": "venv (vendored or test data)"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "8"
       }
     ]
   },

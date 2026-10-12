@@ -227,8 +227,7 @@ def metadata_properties(doc):
 
 
 def test_cbom_records_which_registry_produced_it(registry):
-    findings, _ = ratchet.walk(str(FIXTURES / "go" / "rsa"))
-    props = metadata_properties(ratchet.build_cbom(findings, "."))
+    props = metadata_properties(ratchet.build_cbom(ratchet.walk(str(FIXTURES / "go" / "rsa")), "."))
     assert props["ratchet:scan_registry_version"] == registry["registry_version"]
     assert props["ratchet:scan_registry_sha256"] == REGISTRY_CONTENT[registry["registry_version"]]
 

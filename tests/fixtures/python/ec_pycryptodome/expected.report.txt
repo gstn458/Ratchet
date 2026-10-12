@@ -1,6 +1,7 @@
 
 ratchet 0.1.0  scanned 3 files in .
 registry 2026.10.2  from registry.json
+skipped no directories
 ========================================================================
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright

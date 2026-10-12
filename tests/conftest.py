@@ -49,19 +49,27 @@ def dumps(cbom):
     return json.dumps(cbom, indent=2) + "\n"
 
 
+def fixture_options(root):
+    """Scan options for a fixture, from an optional options.json beside it,
+    e.g. {"include_vendored": true}."""
+    path = Path(root) / "options.json"
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
 def scan(root):
     """Scan a fixture the way the CLI does, from inside it, so paths are relative.
 
     Returns (normalised CBOM dict, terminal report text).
     """
+    options = fixture_options(root)
     old = os.getcwd()
     os.chdir(root)
     try:
-        findings, files = ratchet.walk(".")
-        cbom = normalise(ratchet.build_cbom(findings, "."))
+        result = ratchet.walk(".", **options)
+        cbom = normalise(ratchet.build_cbom(result, "."))
         out = io.StringIO()
         with redirect_stdout(out):
-            ratchet.report(findings, files, ".")
+            ratchet.report(result, ".")
     finally:
         os.chdir(old)
     return cbom, out.getvalue()

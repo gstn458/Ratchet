@@ -47,8 +47,7 @@ def test_golden_cbom_is_valid(root, cbom_validator):
 @pytest.mark.parametrize("root", fixture_dirs(), ids=fixture_id)
 def test_fresh_scan_is_valid(root, cbom_validator):
     # Covers the real timestamp and serial number formats, which goldens normalise.
-    findings, _ = ratchet.walk(str(root))
-    assert errors(cbom_validator, ratchet.build_cbom(findings, str(root))) == []
+    assert errors(cbom_validator, ratchet.build_cbom(ratchet.walk(str(root)), str(root))) == []
 
 
 @pytest.mark.parametrize("root", fixture_dirs(), ids=fixture_id)

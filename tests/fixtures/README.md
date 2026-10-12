@@ -2,7 +2,8 @@
 
 Each `<group>/<case>/` directory is one scan root: a few lines of source, plus
 `expected.cbom.json` and `expected.report.txt`, which are what Ratchet produces
-when run from inside that directory. `tests/test_golden.py` compares them
+when run from inside that directory. An optional `options.json` holds scan
+options for that fixture, such as `{"include_vendored": true}`. `tests/test_golden.py` compares them
 byte for byte, after replacing the timestamp and serial number with fixed values.
 `tests/test_schema.py` validates every expected CBOM against CycloneDX 1.6.
 
@@ -98,7 +99,8 @@ after the fixtures were first written:
 
 | Case | Pins down | Status |
 | --- | --- | --- |
-| `skipped_dirs` | `vendor`, `testdata`, `node_modules`, `build`, `dist`, `venv`, `site-packages` and dot-directories are skipped without a word in the report | wrong → step 8 |
+| `skipped_dirs` | `vendor`, `testdata`, `node_modules`, `venv` and `site-packages` are skipped by default and `build`, `dist` and dot-directories always; the report lists each kind and the CBOM records every skipped directory, the count and `ratchet:include_vendored` | ok (skipped silently before step 8) |
+| `include_vendored` | The same tree with `--include-vendored` (via `options.json`): vendored and test-data code is scanned, and tooling and build directories are still skipped and listed | ok |
 | `occurrence_cap` | 51 MD5 call sites in one file: the CBOM lists 50 locations, silently drops the 51st, and still reports `occurrence_count` 51 | wrong → step 10 |
 | `mixed` | Python and Go in one tree, relative paths, the report sections, RSA grouped across both languages, and a summary counting call sites and imports apart | ok |
 

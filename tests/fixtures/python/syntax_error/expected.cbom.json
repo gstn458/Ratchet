@@ -21,12 +21,20 @@
     },
     "properties": [
       {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
         "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
       },
       {
         "name": "ratchet:scan_registry_version",
         "value": "2026.10.2"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "0"
       }
     ]
   },

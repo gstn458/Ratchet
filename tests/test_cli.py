@@ -85,3 +85,22 @@ def test_runs_with_no_third_party_packages():
     )
     assert r.returncode == 0, r.stderr
     json.loads(r.stdout)
+
+
+def test_include_vendored_scans_vendored_directories():
+    target = str(FIXTURES / "walk" / "skipped_dirs")
+    default = json.loads(run(target, "--json").stdout)
+    included = json.loads(run(target, "--json", "--include-vendored").stdout)
+    names = lambda doc: {c["name"] for c in doc["components"]}
+    assert names(default) == {"SHA-1"}
+    assert {"MD5", "DES"} <= names(included)
+    props = lambda doc: {p["name"]: p["value"] for p in doc["metadata"]["properties"]}
+    assert props(default)["ratchet:include_vendored"] == "false"
+    assert props(included)["ratchet:include_vendored"] == "true"
+
+
+def test_report_always_states_skipped_directories(tmp_path):
+    (tmp_path / "app.py").write_text("print('hello')\n")
+    assert "skipped no directories" in run(str(tmp_path)).stdout
+    (tmp_path / "vendor").mkdir()
+    assert "skipped 1 directory:" in run(str(tmp_path)).stdout

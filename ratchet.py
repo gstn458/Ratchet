@@ -568,10 +568,16 @@ GO_ECDSA_SIGNING = re.compile(
     r"\becdsa\.(Sign|SignASN1|Verify|VerifyASN1)\s*\(|\.Sign\s*\(\s*[^\s)]"
 )
 
-SKIP_DIRS = {
-    ".git", "node_modules", "vendor", "venv", ".venv", "__pycache__",
-    "dist", "build", ".tox", "site-packages", "testdata", ".mypy_cache",
-}
+# Skipped by default for speed, scanned with --include-vendored. Vendored code
+# is exactly where unmaintained cryptography lives, so a scan that skips it
+# says so in the report and the CBOM.
+VENDORED_DIRS = {"vendor", "node_modules", "site-packages", "venv", ".venv", "testdata"}
+
+# Always skipped: version control, caches and build output. Any other directory
+# whose name starts with a dot is skipped too.
+TOOLING_DIRS = {".git", "__pycache__", ".tox", ".mypy_cache", "dist", "build"}
+
+VENDORED, TOOLING = "vendored or test data", "tooling, build output or hidden"
 
 
 IMPORT, CALL = "import", "call site"
@@ -979,13 +985,40 @@ def scan_go(path):
 # Walk
 # ---------------------------------------------------------------------------
 
-def walk(root):
-    findings = []
+class Scan:
+    """Everything one scan produced: findings, the number of source files
+    read, the directories skipped as (relative path, reason), and whether
+    vendored directories were included."""
+
+    def __init__(self, findings, files, skipped, include_vendored):
+        self.findings = findings
+        self.files = files
+        self.skipped = skipped
+        self.include_vendored = include_vendored
+
+
+def skip_reason(name, include_vendored):
+    if name in VENDORED_DIRS:
+        return None if include_vendored else VENDORED
+    if name in TOOLING_DIRS or name.startswith("."):
+        return TOOLING
+    return None
+
+
+def walk(root, include_vendored=False):
+    findings, skipped = [], []
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
+        keep = []
+        for d in dirnames:
+            reason = skip_reason(d, include_vendored)
+            if reason:
+                skipped.append((os.path.relpath(os.path.join(dirpath, d), root), reason))
+            else:
+                keep.append(d)
         # Sorted so the scan order, and everything derived from it, does not
         # depend on the filesystem's directory ordering.
-        dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS and not d.startswith("."))
+        dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
@@ -999,16 +1032,16 @@ def walk(root):
                 for f in scan_go(full):
                     f.path = rel
                     findings.append(f)
-    return findings, files
+    return Scan(findings, files, sorted(skipped), include_vendored)
 
 
 # ---------------------------------------------------------------------------
 # CycloneDX 1.6 CBOM output
 # ---------------------------------------------------------------------------
 
-def build_cbom(findings, root, tool_version=VERSION):
+def build_cbom(scan, root, tool_version=VERSION):
     grouped = defaultdict(list)
-    for f in findings:
+    for f in scan.findings:
         grouped[f.label].append(f)
 
     components = []
@@ -1077,10 +1110,17 @@ def build_cbom(findings, root, tool_version=VERSION):
             },
             # CycloneDX metadata admits no custom fields, so the registry that
             # produced this CBOM is recorded as namespaced properties.
+            # What was not scanned is part of what the document claims, so
+            # every skipped directory is listed (property names may repeat).
             "properties": sorted([
                 {"name": "ratchet:scan_registry_version", "value": REGISTRY["registry_version"]},
                 {"name": "ratchet:scan_registry_sha256", "value": REGISTRY_DIGEST},
-            ], key=lambda p: p["name"]),
+                {"name": "ratchet:include_vendored", "value": str(scan.include_vendored).lower()},
+                {"name": "ratchet:skipped_directory_count", "value": str(len(scan.skipped))},
+            ] + [
+                {"name": "ratchet:skipped_directory", "value": f"{path} ({reason})"}
+                for path, reason in scan.skipped
+            ], key=lambda p: (p["name"], p["value"])),
         },
         "components": components,
     }
@@ -1121,7 +1161,23 @@ def parameter_line(algorithm, calls):
     return f"{noun}: " + ", ".join(parts)
 
 
-def report(findings, files_scanned, root):
+def print_skipped(scan, shown=10):
+    """Say which directories the scan did not read, on every run."""
+    if scan.include_vendored:
+        print("vendored directories included (--include-vendored)")
+    if not scan.skipped:
+        print("skipped no directories")
+        return
+    print(f"skipped {plural(len(scan.skipped), 'directory', 'directories')}:")
+    for reason, hint in ((VENDORED, " (scan with --include-vendored)"), (TOOLING, "")):
+        paths = [p for p, r in scan.skipped if r == reason]
+        if paths:
+            listed = ", ".join(paths[:shown])
+            more = f", and {len(paths) - shown} more" if len(paths) > shown else ""
+            print(f"  {reason}{hint}: {listed}{more}")
+
+
+def report(scan, root):
     """Print the terminal report and return the number of quantum-vulnerable
     occurrences, imports included, for --fail-on-vulnerable.
 
@@ -1130,7 +1186,7 @@ def report(findings, files_scanned, root):
     parameter set as the spec requires.
     """
     by_algorithm = defaultdict(list)
-    for f in findings:
+    for f in scan.findings:
         by_algorithm[f.algorithm].append(f)
 
     def bucket_of(algorithm):
@@ -1148,9 +1204,10 @@ def report(findings, files_scanned, root):
         buckets[bucket_of(algorithm)][algorithm] = group
 
     print()
-    print(f"ratchet {VERSION}  scanned {files_scanned} files in {root}")
+    print(f"ratchet {VERSION}  scanned {scan.files} files in {root}")
     source = "embedded copy" if REGISTRY_SOURCE == "embedded" else "registry.json"
     print(f"registry {REGISTRY['registry_version']}  from {source}")
+    print_skipped(scan)
     print("=" * 72)
 
     def section(title, bucket):
@@ -1213,23 +1270,26 @@ def main():
     p.add_argument("--json", action="store_true", help="print the CBOM to stdout instead of a report")
     p.add_argument("--fail-on-vulnerable", action="store_true",
                    help="exit 1 if quantum-vulnerable primitives are found (for CI)")
+    p.add_argument("--include-vendored", action="store_true",
+                   help="also scan vendored and test-data directories: "
+                        + ", ".join(sorted(VENDORED_DIRS)))
     args = p.parse_args()
 
     if not os.path.isdir(args.path):
         print(f"not a directory: {args.path}", file=sys.stderr)
         return 2
 
-    findings, files_scanned = walk(args.path)
+    scan = walk(args.path, include_vendored=args.include_vendored)
 
     if args.json:
-        print(json.dumps(build_cbom(findings, args.path), indent=2))
-        broken = sum(1 for f in findings if ALGORITHMS[f.algorithm]["quantum"] == "broken")
+        print(json.dumps(build_cbom(scan, args.path), indent=2))
+        broken = sum(1 for f in scan.findings if ALGORITHMS[f.algorithm]["quantum"] == "broken")
     else:
-        broken = report(findings, files_scanned, args.path)
+        broken = report(scan, args.path)
 
     if args.cbom:
         with open(args.cbom, "w") as fh:
-            json.dump(build_cbom(findings, args.path), fh, indent=2)
+            json.dump(build_cbom(scan, args.path), fh, indent=2)
         if not args.json:
             print(f"CBOM written to {args.cbom}")
 
