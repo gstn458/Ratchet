@@ -11,6 +11,11 @@ ALREADY BROKEN       weak today, quantum is not the issue
       cipher.go:3   import "crypto/des"
       cipher.go:6   _, _ = des.NewCipher(key)
 
+  3DES  (1 occurrence)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      cipher.go:10   _, _ = des.NewTripleDESCipher(key)
+
 ========================================================================
 No quantum-vulnerable primitives found.
 

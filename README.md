@@ -76,7 +76,8 @@ it ECDH. A key whose use is not visible is reported as EC, usage undetermined, u
 its own heading. It still counts as quantum vulnerable, and it is never reported as
 confirmed ECDSA.
 
-Go is pattern matched on import paths and call sites. There is no Go AST here yet.
+Go is pattern matched on import declarations and call sites, after a small lexer has
+removed comments and string contents. There is no Go AST here yet.
 
 Every finding is classified three ways. Quantum broken means Shor's algorithm defeats
 it outright and it has to be migrated. Already broken means it is weak today and
@@ -133,9 +134,12 @@ though `ratchet:occurrence_count` still gives the full number.
 
 Known misclassifications, each pinned by a fixture in `tests/fixtures` until fixed:
 `rsa.generate_private_key(65537, 2048)` with positional arguments is recorded as
-RSA-65537; Go's `des.NewTripleDESCipher` is recorded as DES rather than 3DES; Go
-string literals containing a crypto package path are recorded as imports. See
-`tests/fixtures/README.md` for the full list, including false negatives.
+RSA-65537. See `tests/fixtures/README.md` for the full list, including false negatives.
+
+Go is read by a small lexer and regular expressions, not a parser. It separates code
+from comments and strings and recognises import declarations, but a call through an
+aliased import (`gorsa.GenerateKey`) is not matched, and a key size held in a variable
+is not captured.
 
 Elliptic-curve usage is followed within one file and by name only. A key is tracked
 through the variable or attribute it is assigned to and through `.public_key()`, but

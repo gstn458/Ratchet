@@ -215,6 +215,7 @@ def test_detection_tables_only_name_registry_entries(registry):
         | set(ratchet.PY_HASH_NAMES.values())
         | set(ratchet.GO_IMPORTS.values())
         | {algo for _, algo, _ in ratchet.GO_CALL_PATTERNS}
+        | {algo for calls in ratchet.GO_VARIANT_CALLS.values() for _, algo in calls}
     )
     assert referenced <= names, referenced - names
 

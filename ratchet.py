@@ -493,16 +493,22 @@ GO_CALL_PATTERNS = [
     (re.compile(r"\bed25519\.GenerateKey\s*\("), "Ed25519", None),
     (re.compile(r"\bmd5\.(Sum|New)\s*\("), "MD5", None),
     (re.compile(r"\bsha1\.(Sum|New)\s*\("), "SHA-1", None),
-    (re.compile(r"\bdes\.New(Triple)?Cipher\s*\("), "DES", None),
     (re.compile(r"\brc4\.NewCipher\s*\("), "RC4", None),
 ]
 
-# crypto/ecdh serves both NIST-curve ECDH and X25519; the curve constructor
-# says which.
-GO_ECDH_CURVES = [
-    (re.compile(r"\becdh\.X25519\s*\("), "X25519"),
-    (re.compile(r"\becdh\.P(256|384|521)\s*\("), "ECDH"),
-]
+# Packages that serve more than one algorithm. The call says which, and the
+# package's import takes that algorithm when every such call in the file
+# agrees; otherwise it keeps its GO_IMPORTS mapping.
+GO_VARIANT_CALLS = {
+    "crypto/ecdh": [
+        (re.compile(r"\becdh\.X25519\s*\("), "X25519"),
+        (re.compile(r"\becdh\.P(256|384|521)\s*\("), "ECDH"),
+    ],
+    "crypto/des": [
+        (re.compile(r"\bdes\.NewCipher\s*\("), "DES"),
+        (re.compile(r"\bdes\.NewTripleDESCipher\s*\("), "3DES"),
+    ],
+}
 
 # Direct use of crypto/elliptic: curve arithmetic or point encoding outside
 # crypto/ecdsa and crypto/ecdh, so the usage is not visible. Only counted when
@@ -852,15 +858,14 @@ def scan_go(path):
     import_lines = go_imports(code, strings)
     imports = {p for paths in import_lines.values() for p in paths}
 
-    ecdh_import = []
+    import_findings = defaultdict(list)  # import path -> its findings
     for idx, paths in sorted(import_lines.items()):
         for import_path in paths:
             algo = GO_IMPORTS.get(import_path)
             if algo:
                 findings.append(Finding(algo, path, idx + 1, lines[idx]))
-                if import_path == "crypto/ecdh":
-                    ecdh_import.append(findings[-1])
-    ecdh_curves = set()
+                import_findings[import_path].append(findings[-1])
+    variants = defaultdict(set)  # import path -> algorithms its calls used
     # Patterns run on code only, so calls in comments and strings never match.
     # The finding still shows the original line.
     for i, (line, text) in enumerate(zip(lines, code), start=1):
@@ -869,17 +874,18 @@ def scan_go(path):
             if m:
                 params = m.group(group) if group else None
                 findings.append(Finding(algo, path, i, line, params))
-        for pattern, algo in GO_ECDH_CURVES:
-            if pattern.search(text):
-                ecdh_curves.add(algo)
-                findings.append(Finding(algo, path, i, line))
+        for import_path, patterns in GO_VARIANT_CALLS.items():
+            for pattern, algo in patterns:
+                if pattern.search(text):
+                    variants[import_path].add(algo)
+                    findings.append(Finding(algo, path, i, line))
         if GO_ELLIPTIC_IMPORT in imports and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
             findings.append(Finding("EC", path, i, line))
 
-    # The crypto/ecdh import is X25519 when every curve the file uses is.
-    if ecdh_curves == {"X25519"}:
-        for f in ecdh_import:
-            f.algorithm = "X25519"
+    for import_path, used in variants.items():
+        if len(used) == 1:
+            for f in import_findings[import_path]:
+                f.algorithm = next(iter(used))
     return findings
 
 
