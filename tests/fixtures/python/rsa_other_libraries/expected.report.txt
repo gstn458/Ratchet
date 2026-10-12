@@ -5,17 +5,14 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (2 occurrences)
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      keys.py:1   import rsa
-      keys.py:2   from Crypto.PublicKey import RSA
-
-  RSA-3072  (1 occurrence)
+  RSA  (1 call site, 2 imports)
+    key sizes: 3072: 1
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       keys.py:5   key = RSA.generate(3072)
+      keys.py:1   import rsa
+      keys.py:2   from Crypto.PublicKey import RSA
 
 ========================================================================
-3 quantum-vulnerable call sites across 1 files.
+1 quantum-vulnerable call site and 2 imports across 1 file.
 

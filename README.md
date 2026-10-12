@@ -122,9 +122,15 @@ RSA and RSA-2048 are reported as separate components when key size is known for 
 call sites and not others. Correct per the spec, since they are different parameter
 sets, and noisy in the report.
 
-Imports are counted as occurrences. Every recognised import line is recorded alongside
-real call sites, and the summary line calls the total "call sites", so it overstates.
-The paramiko and golang-jwt figures above are counted this way.
+The figures above are from v0, which counted import lines as call sites. Counted
+separately, as Ratchet now does, the same repositories give 11 call sites and 14
+imports for paramiko, and 1 call site and 13 imports for golang-jwt. An import shows a
+library is present, not that it is used. Imports stay in the CBOM, marked as imports.
+
+Go call sites are recognised only for key generation and a few cipher and hash
+constructors. Signing, verification and encryption calls such as `rsa.SignPKCS1v15`,
+`ecdsa.Sign` or `ed25519.Sign` are not matched, so a Go file that only signs shows up
+through its import alone.
 
 Files that fail to parse are skipped silently. A Python 2 file, or anything else
 `ast.parse` rejects, contributes nothing, and neither the report nor the CBOM says

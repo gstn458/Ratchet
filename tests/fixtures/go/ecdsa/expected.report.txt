@@ -5,12 +5,13 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDSA  (2 occurrences)
+  ECDSA  (1 call site, 1 import)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      sign.go:4   "crypto/ecdsa"
       sign.go:10   key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+      sign.go:4   "crypto/ecdsa"
 
 ========================================================================
-2 quantum-vulnerable call sites across 1 files.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

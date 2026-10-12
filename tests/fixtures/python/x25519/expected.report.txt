@@ -5,13 +5,14 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  X25519  (3 occurrences)
+  X25519  (2 call sites, 1 import)
+    parameter set: not stated in any call site
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
-      keys.py:1   from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
       keys.py:3   key = X25519PrivateKey.generate()
       keys.py:4   peer = X25519PrivateKey.generate()
+      keys.py:1   from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
 
 ========================================================================
-3 quantum-vulnerable call sites across 1 files.
+2 quantum-vulnerable call sites and 1 import across 1 file.
 

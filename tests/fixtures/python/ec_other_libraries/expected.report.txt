@@ -5,14 +5,15 @@ registry 2026.10.2  from registry.json
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (3 occurrences)
+  EC  (1 call site, 2 imports)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      keys.py:5   key = ECC.generate(curve="P-256")
       keys.py:1   import ecdsa
       keys.py:2   from Crypto.PublicKey import ECC
-      keys.py:5   key = ECC.generate(curve="P-256")
 
 ========================================================================
-3 quantum-vulnerable call sites across 1 files.
-3 of them with usage undetermined: review before choosing a migration target.
+1 quantum-vulnerable call site and 2 imports across 1 file.
+1 call site and 2 imports with usage undetermined: review before choosing a migration target.
 

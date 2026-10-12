@@ -5,12 +5,13 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  Ed25519  (2 occurrences)
+  Ed25519  (1 call site, 1 import)
+    parameter set: not stated in any call site
     Edwards-curve discrete log falls to Shor's algorithm.
     migrate to: ML-DSA-65 (FIPS 204)
-      keys.go:4   "crypto/ed25519"
       keys.go:9   return ed25519.GenerateKey(rand.Reader)
+      keys.go:4   "crypto/ed25519"
 
 ========================================================================
-2 quantum-vulnerable call sites across 1 files.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

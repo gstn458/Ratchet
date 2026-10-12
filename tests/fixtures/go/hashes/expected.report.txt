@@ -5,22 +5,22 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (2 occurrences)
+  MD5  (1 call site, 1 import)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
-      digest.go:4   "crypto/md5"
       digest.go:10   _ = md5.Sum(b)
+      digest.go:4   "crypto/md5"
 
-  SHA-1  (2 occurrences)
+  SHA-1  (1 call site, 1 import)
     Chosen-prefix collisions demonstrated in 2020. Retire it.
     migrate to: SHA-256 or SHA-3
-      digest.go:5   "crypto/sha1"
       digest.go:11   _ = sha1.New()
+      digest.go:5   "crypto/sha1"
 
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  SHA-256  (1 occurrence)
+  SHA-256  (no call sites, 1 import)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
       digest.go:6   "crypto/sha256"

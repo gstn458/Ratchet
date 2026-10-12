@@ -5,7 +5,7 @@ registry 2026.10.2  from registry.json
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  SHA-256  (1 occurrence)
+  SHA-256  (no call sites, 1 import)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
       notes.go:3   import "crypto/sha256"

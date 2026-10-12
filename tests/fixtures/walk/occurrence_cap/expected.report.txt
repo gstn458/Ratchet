@@ -5,7 +5,7 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (51 occurrences)
+  MD5  (51 call sites)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       many.py:6   hashlib.md5(b"1")

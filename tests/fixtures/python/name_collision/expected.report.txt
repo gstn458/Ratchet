@@ -5,7 +5,7 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (1 occurrence)
+  MD5  (1 call site)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       local.py:6   md5("README")

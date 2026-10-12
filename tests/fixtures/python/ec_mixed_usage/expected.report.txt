@@ -5,41 +5,32 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDH-SECP384R1  (2 occurrences)
+  ECDH  (3 call sites)
+    parameter sets: SECP384R1: 2, not stated: 1
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       keys.py:7   agreer = ec.generate_private_key(ec.SECP384R1())
       keys.py:8   peer = ec.generate_private_key(ec.SECP384R1())
-
-  ECDH  (1 occurrence)
-    Shor's algorithm solves the discrete log on the curve.
-    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       keys.py:9   shared = agreer.exchange(ec.ECDH(), peer.public_key())
 
-  ECDSA  (1 occurrence)
-    Shor's algorithm solves the discrete log on the curve.
-    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      keys.py:5   signature = signer.sign(b"message", ec.ECDSA(hashes.SHA256()))
-
-  ECDSA-SECP256R1  (1 occurrence)
+  ECDSA  (2 call sites)
+    parameter sets: SECP256R1: 1, not stated: 1
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       keys.py:4   signer = ec.generate_private_key(ec.SECP256R1())
+      keys.py:5   signature = signer.sign(b"message", ec.ECDSA(hashes.SHA256()))
 
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (1 occurrence)
-    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
-    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
-      keys.py:2   from cryptography.hazmat.primitives.asymmetric import ec
-
-  EC-SECP521R1  (1 occurrence)
+  EC  (1 call site, 1 import)
+    parameter sets: SECP521R1: 1
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
       keys.py:13   spare = ec.generate_private_key(ec.SECP521R1())
+      keys.py:2   from cryptography.hazmat.primitives.asymmetric import ec
 
 ========================================================================
-7 quantum-vulnerable call sites across 1 files.
-2 of them with usage undetermined: review before choosing a migration target.
+6 quantum-vulnerable call sites and 1 import across 1 file.
+1 call site and 1 import with usage undetermined: review before choosing a migration target.
 

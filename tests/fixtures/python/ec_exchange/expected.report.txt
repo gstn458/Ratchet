@@ -5,18 +5,15 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDH  (2 occurrences)
-    Shor's algorithm solves the discrete log on the curve.
-    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
-      exchange.py:1   from cryptography.hazmat.primitives.asymmetric import ec
-      exchange.py:5   shared_key = private_key.exchange(ec.ECDH(), peer_public_key)
-
-  ECDH-SECP384R1  (2 occurrences)
+  ECDH  (3 call sites, 1 import)
+    parameter sets: SECP384R1: 2, not stated: 1
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       exchange.py:3   private_key = ec.generate_private_key(ec.SECP384R1())
       exchange.py:4   peer_public_key = ec.generate_private_key(ec.SECP384R1()).public_key()
+      exchange.py:5   shared_key = private_key.exchange(ec.ECDH(), peer_public_key)
+      ... and 1 more
 
 ========================================================================
-4 quantum-vulnerable call sites across 1 files.
+3 quantum-vulnerable call sites and 1 import across 1 file.
 

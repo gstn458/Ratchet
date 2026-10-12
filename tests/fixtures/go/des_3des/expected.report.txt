@@ -5,13 +5,13 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  DES  (2 occurrences)
+  DES  (1 call site, 1 import)
     56-bit key. Brute-forced on commodity hardware.
     migrate to: AES-256-GCM
-      cipher.go:3   import "crypto/des"
       cipher.go:6   _, _ = des.NewCipher(key)
+      cipher.go:3   import "crypto/des"
 
-  3DES  (1 occurrence)
+  3DES  (1 call site)
     Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
     migrate to: AES-256-GCM
       cipher.go:10   _, _ = des.NewTripleDESCipher(key)

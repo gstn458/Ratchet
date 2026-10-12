@@ -5,27 +5,27 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  3DES  (1 occurrence)
+  3DES  (no call sites, 1 import)
     Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
     migrate to: AES-256-GCM
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  DES  (1 occurrence)
+  DES  (no call sites, 1 import)
     56-bit key. Brute-forced on commodity hardware.
     migrate to: AES-256-GCM
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  MD5  (1 occurrence)
+  MD5  (no call sites, 1 import)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       ciphers.py:2   from Crypto.Hash import MD5, SHA1
 
-  RC4  (1 occurrence)
+  RC4  (no call sites, 1 import)
     Biased keystream. Prohibited in TLS since RFC 7465.
     migrate to: AES-256-GCM or ChaCha20-Poly1305
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  SHA-1  (1 occurrence)
+  SHA-1  (no call sites, 1 import)
     Chosen-prefix collisions demonstrated in 2020. Retire it.
     migrate to: SHA-256 or SHA-3
       ciphers.py:2   from Crypto.Hash import MD5, SHA1
@@ -33,7 +33,7 @@ ALREADY BROKEN       weak today, quantum is not the issue
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  AES  (1 occurrence)
+  AES  (no call sites, 1 import)
     Grover halves effective key length. AES-256 stays at 128-bit margin.
     migrate to: AES-256 if currently AES-128
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3

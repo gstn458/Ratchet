@@ -5,7 +5,7 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  SHA-1  (1 occurrence)
+  SHA-1  (1 call site)
     Chosen-prefix collisions demonstrated in 2020. Retire it.
     migrate to: SHA-256 or SHA-3
       app/main.py:3   hashlib.sha1(b"first-party")

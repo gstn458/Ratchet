@@ -5,16 +5,13 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (1 occurrence)
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      keys.go:5   "crypto/rsa"
-
-  RSA-2048  (1 occurrence)
+  RSA  (1 call site, 1 import)
+    key sizes: 2048: 1
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       keys.go:9   return rsa.GenerateKey(rand.Reader, 2048)
+      keys.go:5   "crypto/rsa"
 
 ========================================================================
-2 quantum-vulnerable call sites across 1 files.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

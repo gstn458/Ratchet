@@ -5,7 +5,7 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (1 occurrence)
+  RSA  (no call sites, 1 import)
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       uses.py:2   from cryptography.hazmat.primitives.asymmetric import rsa, ec
@@ -13,12 +13,12 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (1 occurrence)
+  EC  (no call sites, 1 import)
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
       uses.py:2   from cryptography.hazmat.primitives.asymmetric import rsa, ec
 
 ========================================================================
-2 quantum-vulnerable call sites across 1 files.
-1 of them with usage undetermined: review before choosing a migration target.
+No quantum-vulnerable call sites and 2 imports across 1 file.
+No call sites and 1 import with usage undetermined: review before choosing a migration target.
 

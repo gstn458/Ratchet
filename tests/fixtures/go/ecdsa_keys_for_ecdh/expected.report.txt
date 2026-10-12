@@ -5,14 +5,15 @@ registry 2026.10.2  from registry.json
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (3 occurrences)
+  EC  (2 call sites, 1 import)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
-      kex.go:6   "crypto/ecdsa"
       kex.go:13   ephKey, err := ecdsa.GenerateKey(curve, rand)
       kex.go:20   secret, _ := curve.ScalarMult(x, y, ephKey.D.Bytes())
+      kex.go:6   "crypto/ecdsa"
 
 ========================================================================
-3 quantum-vulnerable call sites across 1 files.
-3 of them with usage undetermined: review before choosing a migration target.
+2 quantum-vulnerable call sites and 1 import across 1 file.
+2 call sites and 1 import with usage undetermined: review before choosing a migration target.
 

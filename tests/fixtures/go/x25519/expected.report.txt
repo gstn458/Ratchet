@@ -5,11 +5,11 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  X25519  (1 occurrence)
+  X25519  (no call sites, 1 import)
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
       agree.go:3   import "golang.org/x/crypto/curve25519"
 
 ========================================================================
-1 quantum-vulnerable call sites across 1 files.
+No quantum-vulnerable call sites and 1 import across 1 file.
 

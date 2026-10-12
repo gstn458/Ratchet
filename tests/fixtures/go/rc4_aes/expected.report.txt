@@ -5,16 +5,16 @@ registry 2026.10.2  from registry.json
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  RC4  (2 occurrences)
+  RC4  (1 call site, 1 import)
     Biased keystream. Prohibited in TLS since RFC 7465.
     migrate to: AES-256-GCM or ChaCha20-Poly1305
-      cipher.go:5   "crypto/rc4"
       cipher.go:9   _, _ = rc4.NewCipher(key)
+      cipher.go:5   "crypto/rc4"
 
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  AES  (1 occurrence)
+  AES  (no call sites, 1 import)
     Grover halves effective key length. AES-256 stays at 128-bit margin.
     migrate to: AES-256 if currently AES-128
       cipher.go:4   "crypto/aes"

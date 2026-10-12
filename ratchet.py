@@ -1068,23 +1068,58 @@ def build_cbom(findings, root, tool_version=VERSION):
 # Terminal report
 # ---------------------------------------------------------------------------
 
+# Primitives whose parameter set (key size or curve) matters for migration, so
+# the report says so even when no call site states it.
+ASYMMETRIC_PRIMITIVES = {"pke", "signature", "key-agree", "kem", "unknown"}
+
+
+def plural(n, word, words=None):
+    return f"{n or 'no'} {word if n == 1 else (words or word + 's')}"
+
+
+def parameter_line(algorithm, calls):
+    """The distribution of parameter sets across an algorithm's call sites,
+    such as "key sizes: 2048: 2, 1024: 1, not stated: 1", or None."""
+    stated = defaultdict(int)
+    for f in calls:
+        stated[f.params] += 1
+    unstated = stated.pop(None, 0)
+    if not stated:
+        if calls and ALGORITHMS[algorithm]["primitive"] in ASYMMETRIC_PRIMITIVES:
+            return f"parameter set: not stated in any call site"
+        return None
+    noun = "key sizes" if all(p.isdigit() for p in stated) else "parameter sets"
+    parts = [f"{p}: {n}" for p, n in sorted(stated.items(), key=lambda kv: (-kv[1], kv[0]))]
+    if unstated:
+        parts.append(f"not stated: {unstated}")
+    return f"{noun}: " + ", ".join(parts)
+
+
 def report(findings, files_scanned, root):
-    grouped = defaultdict(list)
+    """Print the terminal report and return the number of quantum-vulnerable
+    occurrences, imports included, for --fail-on-vulnerable.
+
+    The report groups by algorithm: RSA, RSA-2048 and RSA-4096 are one entry
+    with the distribution of key sizes, while the CBOM keeps one component per
+    parameter set as the spec requires.
+    """
+    by_algorithm = defaultdict(list)
     for f in findings:
-        grouped[f.label].append(f)
+        by_algorithm[f.algorithm].append(f)
 
-    def spec(group):
-        return ALGORITHMS[group[0].algorithm]
+    def bucket_of(algorithm):
+        spec = ALGORITHMS[algorithm]
+        if spec["quantum"] == "broken":
+            # Quantum broken, but the migration target depends on a usage the
+            # scanner could not see. Kept apart so it never reads as ECDSA.
+            return "undetermined" if spec["primitive"] == "unknown" else "broken"
+        if spec["classical"] == "broken":
+            return "weak"
+        return "other"
 
-    # Quantum broken, but the registry cannot say what to migrate to until the
-    # usage is known. Reported apart so it is never read as confirmed ECDSA.
-    undetermined = {k: v for k, v in grouped.items()
-                    if spec(v)["quantum"] == "broken" and spec(v)["primitive"] == "unknown"}
-    broken = {k: v for k, v in grouped.items()
-              if spec(v)["quantum"] == "broken" and k not in undetermined}
-    weak = {k: v for k, v in grouped.items() if spec(v)["classical"] == "broken"}
-    other = {k: v for k, v in grouped.items()
-             if k not in broken and k not in weak and k not in undetermined}
+    buckets = defaultdict(dict)
+    for algorithm, group in by_algorithm.items():
+        buckets[bucket_of(algorithm)][algorithm] = group
 
     print()
     print(f"ratchet {VERSION}  scanned {files_scanned} files in {root}")
@@ -1096,38 +1131,53 @@ def report(findings, files_scanned, root):
         if not bucket:
             return
         print(f"\n{title}\n")
-        for label, group in sorted(bucket.items(), key=lambda kv: (-len(kv[1]), kv[0])):
-            group = sorted(group, key=lambda f: (f.path, f.line))
-            spec = ALGORITHMS[group[0].algorithm]
-            print(f"  {label}  ({len(group)} occurrence{'s' if len(group) != 1 else ''})")
+        for algorithm, group in sorted(bucket.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+            spec = ALGORITHMS[algorithm]
+            calls = sorted((f for f in group if f.kind == CALL), key=lambda f: (f.path, f.line))
+            imports = sorted((f for f in group if f.kind == IMPORT), key=lambda f: (f.path, f.line))
+            counts = [plural(len(calls), "call site")]
+            if imports:
+                counts.append(plural(len(imports), "import"))
+            print(f"  {algorithm}  ({', '.join(counts)})")
+            params = parameter_line(algorithm, calls)
+            if params:
+                print(f"    {params}")
             print(f"    {spec['why']}")
             print(f"    migrate to: {spec['replacement']}")
-            for f in group[:3]:
+            shown = (calls + imports)[:3]
+            for f in shown:
                 print(f"      {f.path}:{f.line}   {f.snippet}")
-            if len(group) > 3:
-                print(f"      ... and {len(group) - 3} more")
+            if len(group) > len(shown):
+                print(f"      ... and {len(group) - len(shown)} more")
             print()
 
-    section("QUANTUM VULNERABLE   Shor's algorithm breaks these outright", broken)
+    section("QUANTUM VULNERABLE   Shor's algorithm breaks these outright", buckets["broken"])
     section("USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible",
-            undetermined)
-    section("ALREADY BROKEN       weak today, quantum is not the issue", weak)
-    section("REVIEW               reduced margin under Grover, usually acceptable", other)
+            buckets["undetermined"])
+    section("ALREADY BROKEN       weak today, quantum is not the issue", buckets["weak"])
+    section("REVIEW               reduced margin under Grover, usually acceptable", buckets["other"])
 
-    vulnerable = {**broken, **undetermined}
-    total_broken = sum(len(v) for v in vulnerable.values())
-    total_undetermined = sum(len(v) for v in undetermined.values())
+    def tally(groups):
+        flat = [f for g in groups for f in g]
+        return (sum(f.kind == CALL for f in flat), sum(f.kind == IMPORT for f in flat),
+                len({f.path for f in flat}))
+
+    vulnerable = list(buckets["broken"].values()) + list(buckets["undetermined"].values())
+    calls, imports, files = tally(vulnerable)
+    u_calls, u_imports, _ = tally(buckets["undetermined"].values())
     print("=" * 72)
-    if total_broken:
-        print(f"{total_broken} quantum-vulnerable call sites across "
-              f"{len(set(f.path for g in vulnerable.values() for f in g))} files.")
-        if total_undetermined:
-            print(f"{total_undetermined} of them with usage undetermined: "
-                  f"review before choosing a migration target.")
+    if calls or imports:
+        line = (f"{plural(calls, 'quantum-vulnerable call site')} and "
+                f"{plural(imports, 'import')} across {plural(files, 'file')}.")
+        print(line[0].upper() + line[1:])
+        if u_calls or u_imports:
+            line = (f"{plural(u_calls, 'call site')} and {plural(u_imports, 'import')} with usage "
+                    f"undetermined: review before choosing a migration target.")
+            print(line[0].upper() + line[1:])
     else:
         print("No quantum-vulnerable primitives found.")
     print()
-    return total_broken
+    return calls + imports
 
 
 def main():

@@ -43,7 +43,7 @@ after the fixtures were first written:
 | `hashlib` | `hashlib.md5`, `hashlib.sha1`, `hashlib.new("md5")`, case-insensitive `hashlib.new("SHA1")`, `hashlib.new("sha256")` | ok |
 | | `hashlib.sha256()` called by name is not recorded, but `hashlib.new("sha256")` is | gap |
 | `rsa_cryptography` | `key_size=` keyword captured as RSA-2048 and RSA-4096; key size from a variable falls back to plain RSA | ok |
-| | The import line is counted as an RSA occurrence, so plain RSA appears even though every call has a size | wrong → step 7, see note 1 |
+| | The report shows one RSA entry with `key sizes: 2048: 1, 4096: 1, not stated: 1` and the import counted apart; the CBOM keeps RSA, RSA-2048 and RSA-4096 as separate components | ok (step 7) |
 | `rsa_positional_args` | `rsa.generate_private_key(65537, 2048)` is RSA-2048: the key size is read from its documented position, not the first argument | ok (was RSA-65537 before step 6) |
 | `keysize_signatures` | Positional and keyword parameters for every key-generation call with a known signature: RSA, DSA and DH in `cryptography` (DH was recorded as DH-2, the generator), `curve=` and curve classes for `ec`, and PyCryptodome `RSA`/`DSA`; a variable key size or `self.curve` claims nothing | ok |
 | `rsa_other_libraries` | PyCryptodome `RSA.generate(3072)` captured as RSA-3072 | ok |
@@ -64,7 +64,7 @@ after the fixtures were first written:
 | `x25519` | `X25519PrivateKey.generate()` resolved the same way | ok |
 | `nacl` | PyNaCl `SigningKey` → Ed25519, `PrivateKey` → X25519 | ok |
 | `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports; `.new(...)` calls add nothing | ok |
-| `import_only` | Importing `rsa` and `ec` with no calls still yields two quantum-broken "call sites"; the `ec` import is EC, usage undetermined | wrong → step 7, see note 1 |
+| `import_only` | Importing `rsa` and `ec` with no calls yields two imports and no call sites; the `ec` import is EC, usage undetermined | ok (counted as call sites before step 7) |
 | `name_collision` | A project's own function named `md5()` is reported as MD5 | wrong, unscheduled (precision, Phase 1) |
 | `syntax_error` | A Python 2 file that `ast.parse` rejects is skipped **without any notice**, along with the `RSA.generate(1024)` in it | wrong → step 9, see note 3 |
 
@@ -99,19 +99,17 @@ after the fixtures were first written:
 | --- | --- | --- |
 | `skipped_dirs` | `vendor`, `testdata`, `node_modules`, `build`, `dist`, `venv`, `site-packages` and dot-directories are skipped without a word in the report | wrong → step 8 |
 | `occurrence_cap` | 51 MD5 call sites in one file: the CBOM lists 50 locations, silently drops the 51st, and still reports `occurrence_count` 51 | wrong → step 10 |
-| `mixed` | Python and Go in one tree, relative paths, the three report sections and the summary line | ok, but see note 1 on the summary count |
+| `mixed` | Python and Go in one tree, relative paths, the report sections, RSA grouped across both languages, and a summary counting call sites and imports apart | ok |
 
 ## Notes
 
-1. **Imports are counted as call sites.** Every recognised import becomes an
-   occurrence, in both languages, and the summary line calls the total
-   "quantum-vulnerable call sites". In `mixed`, 3 of the 7 reported call sites
-   are import lines. The README's paramiko and golang-jwt figures are counted
-   the same way. This also explains most RSA vs RSA-2048 splits: the import
-   produces a size-less RSA occurrence even when every call has a key size.
-   Step 7 keeps imports in the CBOM, since the inventory favours recall, but
-   counts them apart from call sites in the report. Phase 2's confidence
-   model, where import-only is medium and a call site is high, is the full fix.
+1. **Imports and call sites.** v0 counted every recognised import as a call site.
+   Since step 7 each occurrence is marked as an import or a call site, in the
+   report and in the CBOM's `additionalContext`, and a statement importing several
+   names from one library is one import. The report groups each algorithm's
+   parameter sets into one entry with the distribution of key sizes; the CBOM keeps
+   one component per parameter set. Imports still count toward
+   `--fail-on-vulnerable` until Phase 2's confidence levels.
 2. **More mapping decisions like `ec`.** PyCryptodome's `ECC` keys and the
    `ecdsa` package both also do ECDH. Go's `ecdh.X25519()` is X25519 key
    agreement, which the registry has as its own entry. These are detection
