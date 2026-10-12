@@ -1,7 +1,25 @@
 
-ratchet 0.1.0  scanned 1 files in .
+ratchet 0.1.0  scanned 2 files in .
 registry 2026.10.2  from registry.json
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  X25519  (1 occurrence)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      encode.go:7   "golang.org/x/crypto/curve25519"
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (2 occurrences)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      encode.go:13   return elliptic.Marshal(elliptic.P256(), x, y)
+      scalar.go:11   return curve.ScalarBaseMult(k)
+
 ========================================================================
-No quantum-vulnerable primitives found.
+3 quantum-vulnerable call sites across 2 files.
+2 of them with usage undetermined: review before choosing a migration target.
 

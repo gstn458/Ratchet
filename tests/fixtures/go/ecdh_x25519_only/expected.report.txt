@@ -1,0 +1,16 @@
+
+ratchet 0.1.0  scanned 1 files in .
+registry 2026.10.2  from registry.json
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  X25519  (2 occurrences)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      agree.go:4   "crypto/ecdh"
+      agree.go:9   return ecdh.X25519().GenerateKey(rand.Reader)
+
+========================================================================
+2 quantum-vulnerable call sites across 1 files.
+

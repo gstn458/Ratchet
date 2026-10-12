@@ -74,10 +74,11 @@ after the fixtures were first written:
 | --- | --- | --- |
 | `rsa` | `rsa.GenerateKey(rand.Reader, 2048)` captured as RSA-2048 | ok |
 | | With a variable key size, the call pattern does not match at all, and only the import is recorded | gap |
-| `ecdsa` | `crypto/ecdsa` import and `ecdsa.GenerateKey` call | ok |
-| `ecdh` | `crypto/ecdh` maps to ECDH | ok |
-| | `ecdh.X25519()` is reported as ECDH, not X25519 | step 4, see note 2 |
-| `elliptic_direct` | `crypto/elliptic` used directly (`ScalarBaseMult`) produces no finding | gap → step 4 (EC, usage undetermined) |
+| `ecdsa` | `crypto/ecdsa` import and `ecdsa.GenerateKey` call; `elliptic.P256()` passed to it is curve selection, not direct `crypto/elliptic` use | ok |
+| `ecdh` | `crypto/ecdh` maps to ECDH; `ecdh.P256()` is an ECDH call site and `ecdh.X25519()` an X25519 one; with both curves in the file the import stays ECDH | ok |
+| `ecdh_x25519_only` | When every curve a file takes from `crypto/ecdh` is X25519, the import is X25519 too | ok |
+| `elliptic_direct` | Direct `crypto/elliptic` use (`curve.ScalarBaseMult`, `elliptic.Marshal`) is EC, usage undetermined; `curve25519.ScalarBaseMult` in the same file is not | ok (was no finding before step 4) |
+| | `curve25519.ScalarBaseMult` is not recorded as an X25519 call site, only the import is | gap |
 | `ed25519` | `crypto/ed25519` import and `GenerateKey` call | ok |
 | `x25519` | `golang.org/x/crypto/curve25519` maps to X25519 | ok |
 | `dsa` | `crypto/dsa` import; the `L2048N256` parameter set is not captured | ok, gap on parameters |

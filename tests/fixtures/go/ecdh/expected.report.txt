@@ -5,11 +5,17 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDH  (1 occurrence)
+  ECDH  (2 occurrences)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       agree.go:4   "crypto/ecdh"
+      agree.go:9   return ecdh.P256().GenerateKey(rand.Reader)
+
+  X25519  (1 occurrence)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      agree.go:13   return ecdh.X25519().GenerateKey(rand.Reader)
 
 ========================================================================
-1 quantum-vulnerable call sites across 1 files.
+3 quantum-vulnerable call sites across 1 files.
 

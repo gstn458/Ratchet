@@ -497,6 +497,24 @@ GO_CALL_PATTERNS = [
     (re.compile(r"\brc4\.NewCipher\s*\("), "RC4", None),
 ]
 
+# crypto/ecdh serves both NIST-curve ECDH and X25519; the curve constructor
+# says which.
+GO_ECDH_CURVES = [
+    (re.compile(r"\becdh\.X25519\s*\("), "X25519"),
+    (re.compile(r"\becdh\.P(256|384|521)\s*\("), "ECDH"),
+]
+
+# Direct use of crypto/elliptic: curve arithmetic or point encoding outside
+# crypto/ecdsa and crypto/ecdh, so the usage is not visible. Only counted when
+# the file imports crypto/elliptic. Passing elliptic.P256() to ecdsa.GenerateKey
+# is curve selection and does not match. curve25519.ScalarMult is X25519, not
+# crypto/elliptic, and is excluded.
+GO_ELLIPTIC_IMPORT = "crypto/elliptic"
+GO_ELLIPTIC_DIRECT = [
+    re.compile(r"\belliptic\.(GenerateKey|Marshal|MarshalCompressed|Unmarshal|UnmarshalCompressed)\s*\("),
+    re.compile(r"(?:\)|\b(?!curve25519\b)\w+)\.(ScalarMult|ScalarBaseMult)\s*\("),
+]
+
 SKIP_DIRS = {
     ".git", "node_modules", "vendor", "venv", ".venv", "__pycache__",
     "dist", "build", ".tox", "site-packages", "testdata", ".mypy_cache",
@@ -740,6 +758,13 @@ def scan_go(path):
     except OSError:
         return []
 
+    imports = set()
+    for line in lines:
+        if not line.strip().startswith("//"):
+            imports.update(m.group(1) for m in GO_IMPORT_RE.finditer(line))
+
+    ecdh_import = []
+    ecdh_curves = set()
     for i, line in enumerate(lines, start=1):
         stripped = line.strip()
         if stripped.startswith("//"):
@@ -748,11 +773,24 @@ def scan_go(path):
             algo = GO_IMPORTS.get(m.group(1))
             if algo:
                 findings.append(Finding(algo, path, i, line))
+                if m.group(1) == "crypto/ecdh":
+                    ecdh_import.append(findings[-1])
         for pattern, algo, group in GO_CALL_PATTERNS:
             m = pattern.search(line)
             if m:
                 params = m.group(group) if group else None
                 findings.append(Finding(algo, path, i, line, params))
+        for pattern, algo in GO_ECDH_CURVES:
+            if pattern.search(line):
+                ecdh_curves.add(algo)
+                findings.append(Finding(algo, path, i, line))
+        if GO_ELLIPTIC_IMPORT in imports and any(p.search(line) for p in GO_ELLIPTIC_DIRECT):
+            findings.append(Finding("EC", path, i, line))
+
+    # The crypto/ecdh import is X25519 when every curve the file uses is.
+    if ecdh_curves == {"X25519"}:
+        for f in ecdh_import:
+            f.algorithm = "X25519"
     return findings
 
 
