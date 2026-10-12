@@ -114,11 +114,9 @@ after the fixtures were first written:
    parameter sets into one entry with the distribution of key sizes; the CBOM keeps
    one component per parameter set. Imports still count toward
    `--fail-on-vulnerable` until Phase 2's confidence levels.
-2. **More mapping decisions like `ec`.** PyCryptodome's `ECC` keys and the
-   `ecdsa` package both also do ECDH. Go's `ecdh.X25519()` is X25519 key
-   agreement, which the registry has as its own entry. These are detection
-   mappings, not registry entries, but they decide which registry entry a
-   finding lands on. Scheduled for step 4; the exact treatment is confirmed
-   with the owner before that step is built.
+2. **Elliptic-curve usage.** `cryptography`'s `ec`, PyCryptodome's `ECC`, the
+   `ecdsa` package and Go's `crypto/elliptic` produce keys that can sign or agree
+   keys. Since step 4 they are ECDSA or ECDH when the usage is visible and EC,
+   usage undetermined, otherwise; Go's `ecdh.X25519()` is X25519.
 3. **Unparseable files.** Since step 9 they are listed with a reason in every
    report and CBOM. Their contents are still not scanned.
