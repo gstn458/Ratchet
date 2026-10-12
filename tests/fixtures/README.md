@@ -75,6 +75,8 @@ after the fixtures were first written:
 | `rsa` | `rsa.GenerateKey(rand.Reader, 2048)` captured as RSA-2048 | ok |
 | | With a variable key size, the call pattern does not match at all, and only the import is recorded | gap |
 | `ecdsa` | `crypto/ecdsa` import and `ecdsa.GenerateKey` call; `elliptic.P256()` passed to it is curve selection, not direct `crypto/elliptic` use | ok |
+| `ecdsa_keys_for_ecdh` | x/crypto/ssh's idiom: keys from `ecdsa.GenerateKey` used for ECDH through `curve.ScalarMult`, with no signing in the file, are EC, usage undetermined; `x.Sign()` on a big.Int is not signing | ok (was ECDSA) |
+| `ecdsa_signs_and_multiplies` | A file that signs with `ecdsa.SignASN1` stays ECDSA even though it also does a raw `ScalarMult` | ok |
 | `ecdh` | `crypto/ecdh` maps to ECDH; `ecdh.P256()` is an ECDH call site and `ecdh.X25519()` an X25519 one; with both curves in the file the import stays ECDH | ok |
 | `ecdh_x25519_only` | When every curve a file takes from `crypto/ecdh` is X25519, the import is X25519 too | ok |
 | `elliptic_direct` | Direct `crypto/elliptic` use (`curve.ScalarBaseMult`, `elliptic.Marshal`) is EC, usage undetermined; `curve25519.ScalarBaseMult` in the same file is not | ok (was no finding before step 4) |

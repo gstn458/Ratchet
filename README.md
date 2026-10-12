@@ -139,7 +139,10 @@ RSA-65537. See `tests/fixtures/README.md` for the full list, including false neg
 Go is read by a small lexer and regular expressions, not a parser. It separates code
 from comments and strings and recognises import declarations, but a call through an
 aliased import (`gorsa.GenerateKey`) is not matched, and a key size held in a variable
-is not captured.
+is not captured. In a Go file that does a raw `ScalarMult` and never signs,
+`crypto/ecdsa` findings are reported as usage undetermined, because pre-1.20 code
+generated ECDH keys with `ecdsa.GenerateKey`. A file that both signs and does
+key agreement with such keys is reported as ECDSA.
 
 Elliptic-curve usage is followed within one file and by name only. A key is tracked
 through the variable or attribute it is assigned to and through `.public_key()`, but

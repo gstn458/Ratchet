@@ -521,6 +521,17 @@ GO_ELLIPTIC_DIRECT = [
     re.compile(r"(?:\)|\b(?!curve25519\b)\w+)\.(ScalarMult|ScalarBaseMult)\s*\("),
 ]
 
+# Before crypto/ecdh (Go 1.20), ECDH was commonly done with keys from
+# ecdsa.GenerateKey and a raw curve.ScalarMult (golang.org/x/crypto/ssh still
+# does), so the crypto/ecdsa import alone does not prove signing. In a file
+# that multiplies a point by a scalar and never signs, crypto/ecdsa findings
+# are EC, usage undetermined. ScalarBaseMult only derives a public key, and
+# x.Sign() with no arguments is big.Int's sign function, so neither counts.
+GO_SCALAR_MULT = re.compile(r"(?:\)|\b(?!curve25519\b)\w+)\.ScalarMult\s*\(")
+GO_ECDSA_SIGNING = re.compile(
+    r"\becdsa\.(Sign|SignASN1|Verify|VerifyASN1)\s*\(|\.Sign\s*\(\s*[^\s)]"
+)
+
 SKIP_DIRS = {
     ".git", "node_modules", "vendor", "venv", ".venv", "__pycache__",
     "dist", "build", ".tox", "site-packages", "testdata", ".mypy_cache",
@@ -881,6 +892,14 @@ def scan_go(path):
                     findings.append(Finding(algo, path, i, line))
         if GO_ELLIPTIC_IMPORT in imports and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
             findings.append(Finding("EC", path, i, line))
+
+    if GO_ELLIPTIC_IMPORT in imports:
+        multiplies = any(GO_SCALAR_MULT.search(text) for text in code)
+        signs = any(GO_ECDSA_SIGNING.search(text) for text in code)
+        if multiplies and not signs:
+            for f in findings:
+                if f.algorithm == "ECDSA":
+                    f.algorithm = "EC"
 
     for import_path, used in variants.items():
         if len(used) == 1:

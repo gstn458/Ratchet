@@ -55,6 +55,12 @@
       "evidence": {
         "occurrences": [
           {
+            "location": "kex.go#L6"
+          },
+          {
+            "location": "kex.go#L13"
+          },
+          {
             "location": "kex.go#L20"
           }
         ]
@@ -66,7 +72,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -79,61 +85,6 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/ecdsa",
-      "name": "ECDSA",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "signature",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "keygen",
-            "sign",
-            "verify"
-          ],
-          "nistQuantumSecurityLevel": 0
-        }
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "kex.go#L6"
-          },
-          {
-            "location": "kex.go#L13"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:classical_status",
-          "value": "ok"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "2"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "Shor's algorithm solves the discrete log on the curve."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
         }
       ]
     }
