@@ -416,7 +416,7 @@ PY_MODULES = {
     "cryptography.hazmat.primitives.asymmetric.x25519": "X25519",
     "Crypto.PublicKey.RSA": "RSA",
     "Crypto.PublicKey.DSA": "DSA",
-    "Crypto.PublicKey.ECC": "ECDSA",
+    "Crypto.PublicKey.ECC": "EC",
     "Crypto.Cipher.DES": "DES",
     "Crypto.Cipher.DES3": "3DES",
     "Crypto.Cipher.ARC4": "RC4",
@@ -424,25 +424,41 @@ PY_MODULES = {
     "Crypto.Hash.MD5": "MD5",
     "Crypto.Hash.SHA1": "SHA-1",
     "rsa": "RSA",
-    "ecdsa": "ECDSA",
+    "ecdsa": "EC",
     "nacl.signing": "Ed25519",
     "nacl.public": "X25519",
 }
 
-# Elliptic-curve modules whose keys can either sign or agree keys. Findings from
-# them start as "EC" (usage undetermined) and are resolved per file once the
-# whole file has been seen; see PyVisitor.resolve_ec.
-PY_EC_MODULE = "cryptography.hazmat.primitives.asymmetric.ec"
+# Elliptic-curve modules (cryptography's ec, PyCryptodome's ECC, the ecdsa
+# package) map to "EC", usage undetermined: their keys can either sign or agree
+# keys. Findings are resolved per file once the whole file has been seen; see
+# PyVisitor.resolve_ec.
 
-# Objects that only exist for one usage: ec.ECDSA(hash) is passed to sign and
-# verify, ec.ECDH() to exchange.
-PY_EC_USAGE_OBJECTS = {"ECDSA": "ECDSA", "ECDH": "ECDH"}
+# Calls that only exist for one usage. They are call sites with a known usage,
+# and any key passed to them is used that way.
+PY_EC_USAGE_OBJECTS = {
+    "cryptography.hazmat.primitives.asymmetric.ec.ECDSA": "ECDSA",
+    "cryptography.hazmat.primitives.asymmetric.ec.ECDH": "ECDH",
+    "ecdsa.ECDH": "ECDH",
+    "ecdsa.ecdh.ECDH": "ECDH",
+}
+
+# Calls that are not EC-specific (DSS also signs with DSA keys) but say what an
+# EC key passed to them is used for.
+PY_EC_USAGE_FUNCTIONS = {
+    "Crypto.Signature.DSS.new": "ECDSA",
+    "Crypto.Protocol.DH.key_agreement": "ECDH",
+}
 
 # Methods on an EC key object, and the usage each one proves.
-PY_EC_USAGE_METHODS = {"sign": "ECDSA", "verify": "ECDSA", "exchange": "ECDH"}
+PY_EC_USAGE_METHODS = {
+    "sign": "ECDSA", "verify": "ECDSA",
+    "sign_digest": "ECDSA", "sign_deterministic": "ECDSA", "verify_digest": "ECDSA",
+    "exchange": "ECDH",
+}
 
 # Methods that derive one key object from another without changing what it is.
-PY_EC_DERIVE_METHODS = {"public_key"}
+PY_EC_DERIVE_METHODS = {"public_key", "get_verifying_key"}
 
 PY_HASH_NAMES = {
     "md5": "MD5",
@@ -527,18 +543,22 @@ class PyVisitor(ast.NodeVisitor):
         self.findings.append(finding)
         return finding
 
-    def _ec_symbol(self, func):
-        """Name of the cryptography ec-module symbol a call refers to, if any:
-        "ECDH" for both ec.ECDH() and a from-imported ECDH()."""
-        if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
-            module, name = self.imported.get(func.value.id, (None, None))
-            if module == PY_EC_MODULE and name is None:
-                return func.attr
-        if isinstance(func, ast.Name):
-            module, name = self.imported.get(func.id, (None, None))
-            if module == PY_EC_MODULE and name is not None:
-                return name
+    def _qualified(self, expr):
+        """Fully qualified dotted name an expression refers to through this
+        file's imports, or None: ec.ECDH and a from-imported ECDH both give
+        cryptography.hazmat.primitives.asymmetric.ec.ECDH."""
+        if isinstance(expr, ast.Name) and expr.id in self.imported:
+            module, name = self.imported[expr.id]
+            return f"{module}.{name}" if name else module
+        if isinstance(expr, ast.Attribute):
+            base = self._qualified(expr.value)
+            return f"{base}.{expr.attr}" if base else None
         return None
+
+    def _key_arguments(self, node):
+        """Bindings of every argument and keyword value of a call."""
+        values = list(node.args) + [kw.value for kw in node.keywords]
+        return [b for b in (self._binding(v) for v in values) if b]
 
     @staticmethod
     def _binding(expr):
@@ -607,12 +627,11 @@ class PyVisitor(ast.NodeVisitor):
 
     def visit_Import(self, node):
         for alias in node.names:
+            local = alias.asname or alias.name.split(".")[0]
+            self.imported[local] = (alias.name if alias.asname else local, None)
             algo = PY_MODULES.get(alias.name)
             if algo:
-                local = alias.asname or alias.name.split(".")[0]
                 self.aliases[local] = algo
-                if alias.asname:
-                    self.imported[local] = (alias.name, None)
                 self._add(algo, node)
         self.generic_visit(node)
 
@@ -621,14 +640,11 @@ class PyVisitor(ast.NodeVisitor):
             return self.generic_visit(node)
         for alias in node.names:
             full = f"{node.module}.{alias.name}"
+            local = alias.asname or alias.name
+            self.imported[local] = (node.module, alias.name)
             algo = PY_MODULES.get(full) or PY_MODULES.get(node.module)
             if algo:
-                local = alias.asname or alias.name
                 self.aliases[local] = algo
-                if full in PY_MODULES:
-                    self.imported[local] = (full, None)
-                else:
-                    self.imported[local] = (node.module, alias.name)
                 self._add(algo, node)
         self.generic_visit(node)
 
@@ -641,7 +657,12 @@ class PyVisitor(ast.NodeVisitor):
 
         # Elliptic-curve usage: ec.ECDSA(...) and ec.ECDH() are call sites with
         # a known usage; .sign(), .verify() and .exchange() say what a key is for.
-        symbol = self._ec_symbol(func)
+        qualified = self._qualified(func)
+        usage_object = PY_EC_USAGE_OBJECTS.get(qualified)
+        usage_function = PY_EC_USAGE_FUNCTIONS.get(qualified)
+        for kind in filter(None, (usage_object, usage_function)):
+            for key in self._key_arguments(node):
+                self.ec_uses.append((key, kind))
         if isinstance(func, ast.Attribute) and func.attr in PY_EC_USAGE_METHODS:
             kind = PY_EC_USAGE_METHODS[func.attr]
             receiver = self._binding(func.value)
@@ -654,10 +675,9 @@ class PyVisitor(ast.NodeVisitor):
                     if peer:
                         self.ec_uses.append((peer, kind))
 
-        if symbol in PY_EC_USAGE_OBJECTS:
-            kind = PY_EC_USAGE_OBJECTS[symbol]
-            self.ec_markers.add(kind)
-            self._add(kind, node)
+        if usage_object:
+            self.ec_markers.add(usage_object)
+            self._add(usage_object, node)
 
         # hashlib.md5(), hashlib.sha1()
         elif name in ("md5", "sha1"):
