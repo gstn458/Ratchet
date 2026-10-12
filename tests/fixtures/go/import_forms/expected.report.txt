@@ -5,11 +5,6 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  DSA  (1 occurrence)
-    Shor's algorithm solves the finite-field discrete log.
-    migrate to: ML-DSA-65 (FIPS 204)
-      forms.go:16   this tool used to import "crypto/dsa"
-
   RSA  (1 occurrence)
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
@@ -24,16 +19,19 @@ ALREADY BROKEN       weak today, quantum is not the issue
       forms.go:3   import "crypto/sha1"
       forms.go:24   _ = sha1.New()
 
-  DES  (1 occurrence)
-    56-bit key. Brute-forced on commodity hardware.
-    migrate to: AES-256-GCM
-      forms.go:12   /* "crypto/des" */
-
   MD5  (1 occurrence)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       forms.go:10   m "crypto/md5" // trailing comment
 
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (1 occurrence)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      forms.go:11   _ `crypto/sha256`
+
 ========================================================================
-2 quantum-vulnerable call sites across 1 files.
+1 quantum-vulnerable call sites across 1 files.
 

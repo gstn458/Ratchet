@@ -33,111 +33,6 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/des",
-      "name": "DES",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "block-cipher",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "decrypt",
-            "encrypt"
-          ],
-          "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.3.14.3.2.7"
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "forms.go#L12"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:classical_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "reduced"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "56-bit key. Brute-forced on commodity hardware."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "AES-256-GCM"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/dsa",
-      "name": "DSA",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "signature",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "keygen",
-            "sign",
-            "verify"
-          ],
-          "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.2.840.10040.4.1"
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "forms.go#L16"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:classical_status",
-          "value": "ok"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "Shor's algorithm solves the finite-field discrete log."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "ML-DSA-65 (FIPS 204)"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
       "bom-ref": "crypto/algorithm/md5",
       "name": "MD5",
       "cryptoProperties": {
@@ -293,6 +188,57 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "SHA-256 or SHA-3"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 2
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "forms.go#L11"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Grover gives a quadratic speedup only. Still acceptable."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "no action needed"
         }
       ]
     }

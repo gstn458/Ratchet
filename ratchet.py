@@ -748,7 +748,97 @@ def scan_python(path):
 # Go scanning via text patterns
 # ---------------------------------------------------------------------------
 
-GO_IMPORT_RE = re.compile(r'"([a-zA-Z0-9_\-./]+)"')
+def go_lex(text):
+    """Split Go source into code and string literals, line by line.
+
+    Returns (code, strings): code[i] is line i with comments removed and every
+    string or rune literal reduced to its empty quotes, and strings[i] lists
+    the contents of the string literals that start on line i. This is not a Go
+    parser. It is just enough to tell code from comments and strings, so
+    nothing inside either is mistaken for an import or a call.
+    """
+    code, strings = [], []
+    line_code, line_strings = [], []
+    i, n = 0, len(text)
+    state = None  # None, "block" (/* */) or "raw" (`...`)
+    raw, raw_line = [], 0
+
+    def end_line():
+        code.append("".join(line_code))
+        strings.append(line_strings[:])
+        line_code.clear()
+        line_strings.clear()
+
+    while i < n:
+        c = text[i]
+        if c == "\n":
+            if state == "raw":
+                raw.append(c)
+            end_line()
+            i += 1
+        elif state == "block":
+            if text.startswith("*/", i):
+                state = None
+                line_code.append(" ")
+                i += 2
+            else:
+                i += 1
+        elif state == "raw":
+            if c == "`":
+                state = None
+                line_code.append("``")
+                # Attributed to the line the literal opens on.
+                if raw_line == len(code):
+                    line_strings.append("".join(raw))
+                else:
+                    strings[raw_line].append("".join(raw))
+                i += 1
+            else:
+                raw.append(c)
+                i += 1
+        elif text.startswith("//", i):
+            while i < n and text[i] != "\n":
+                i += 1
+        elif text.startswith("/*", i):
+            state = "block"
+            i += 2
+        elif c == "`":
+            state = "raw"
+            raw, raw_line = [], len(code)
+            i += 1
+        elif c in "\"'":
+            j = i + 1
+            while j < n and text[j] != c and text[j] != "\n":
+                j += 2 if text[j] == "\\" else 1
+            if c == '"':
+                line_strings.append(text[i + 1:j])
+            line_code.append(c + c)
+            i = j + 1
+        else:
+            line_code.append(c)
+            i += 1
+    end_line()
+    return code, strings
+
+
+GO_IMPORT_LINE = re.compile(r"^\s*import\b")
+
+
+def go_imports(code, strings):
+    """{line index: [import paths]} for import declarations only."""
+    imports = {}
+    in_group = False
+    for idx, line in enumerate(code):
+        if in_group:
+            imports[idx] = strings[idx]
+            if ")" in line:
+                in_group = False
+        elif GO_IMPORT_LINE.match(line):
+            imports[idx] = strings[idx]
+            after = line.split("import", 1)[1]
+            if after.lstrip().startswith("(") and ")" not in after:
+                in_group = True
+    return {k: v for k, v in imports.items() if v}
 
 
 def scan_go(path):
@@ -758,23 +848,23 @@ def scan_go(path):
     except OSError:
         return []
 
-    imports = set()
-    for line in lines:
-        if not line.strip().startswith("//"):
-            imports.update(m.group(1) for m in GO_IMPORT_RE.finditer(line))
+    code, strings = go_lex("\n".join(lines))
+    import_lines = go_imports(code, strings)
+    imports = {p for paths in import_lines.values() for p in paths}
 
     ecdh_import = []
+    for idx, paths in sorted(import_lines.items()):
+        for import_path in paths:
+            algo = GO_IMPORTS.get(import_path)
+            if algo:
+                findings.append(Finding(algo, path, idx + 1, lines[idx]))
+                if import_path == "crypto/ecdh":
+                    ecdh_import.append(findings[-1])
     ecdh_curves = set()
     for i, line in enumerate(lines, start=1):
         stripped = line.strip()
         if stripped.startswith("//"):
             continue
-        for m in GO_IMPORT_RE.finditer(line):
-            algo = GO_IMPORTS.get(m.group(1))
-            if algo:
-                findings.append(Finding(algo, path, i, line))
-                if m.group(1) == "crypto/ecdh":
-                    ecdh_import.append(findings[-1])
         for pattern, algo, group in GO_CALL_PATTERNS:
             m = pattern.search(line)
             if m:

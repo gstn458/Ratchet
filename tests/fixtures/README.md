@@ -85,7 +85,8 @@ after the fixtures were first written:
 | `hashes` | `crypto/md5`, `crypto/sha1` imports and calls; `crypto/sha256` from its import only | ok |
 | `des_3des` | `des.NewTripleDESCipher` is reported as **DES**, not 3DES, so it gets the wrong OID and rationale | wrong → step 5 |
 | `rc4_aes` | `crypto/rc4` and `crypto/aes` | ok |
-| `string_literal` | `"crypto/rsa"` and `"crypto/md5"` in ordinary strings are reported as imports | wrong → step 5 |
+| `string_literal` | `"crypto/rsa"` and `"crypto/md5"` in ordinary strings are not imports | ok (were reported before step 5) |
+| `import_forms` | Single-line, aliased, grouped, blank and raw-string imports are found; a commented-out import, an import path in a block comment, a raw string, a struct tag and an escaped string are not | ok |
 | `aliased_import` | `gorsa "crypto/rsa"` import is seen, but `gorsa.GenerateKey(..., 2048)` is not, so the key size is lost | gap (tree-sitter, Phase 1) |
 | `comments` | Lines starting with `//` are skipped; code inside `/* */` blocks and after a trailing `//` is still matched | wrong → step 5 |
 
