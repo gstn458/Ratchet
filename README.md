@@ -22,6 +22,18 @@ python3 ratchet.py /path/to/repo --json > cbom.json
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 for CI
 ```
 
+## Tests
+
+The scanner needs nothing installed. The test suite needs pytest and jsonschema:
+
+```
+pip install -r requirements-dev.txt
+pytest
+```
+
+Tests compare scans of small fixtures against committed golden output and validate
+every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`.
+
 ## What it found on real repositories
 
 paramiko, the Python SSH library, 70 files scanned:
@@ -89,6 +101,24 @@ all of those, which is why the incumbent tools use network probes.
 RSA and RSA-2048 are reported as separate components when key size is known for some
 call sites and not others. Correct per the spec, since they are different parameter
 sets, and noisy in the report.
+
+Imports are counted as occurrences. Every recognised import line is recorded alongside
+real call sites, and the summary line calls the total "call sites", so it overstates.
+The paramiko and golang-jwt figures above are counted this way.
+
+Files that fail to parse are skipped silently. A Python 2 file, or anything else
+`ast.parse` rejects, contributes nothing, and neither the report nor the CBOM says
+it was skipped.
+
+The CBOM lists at most 50 occurrence locations per component. The rest are dropped,
+though `ratchet:occurrence_count` still gives the full number.
+
+Known misclassifications, each pinned by a fixture in `tests/fixtures` until fixed:
+`rsa.generate_private_key(65537, 2048)` with positional arguments is recorded as
+RSA-65537; Go's `des.NewTripleDESCipher` is recorded as DES rather than 3DES; the
+Python `ec` module is always recorded as ECDSA, even when used for ECDH; Go string
+literals containing a crypto package path are recorded as imports. See
+`tests/fixtures/README.md` for the full list, including false negatives.
 
 No remediation yet. The scanner finds things. Opening a pull request that migrates
 to ML-KEM or ML-DSA without silently breaking production is the actual hard problem
