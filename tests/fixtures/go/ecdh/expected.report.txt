@@ -13,7 +13,6 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       agree.go:4   "crypto/ecdh"
 
   X25519  (1 call site)
-    parameter set: not stated in any call site
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
       agree.go:13   return ecdh.X25519().GenerateKey(rand.Reader)

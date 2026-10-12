@@ -6,7 +6,6 @@ registry 2026.10.2  from registry.json
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
   X25519  (1 call site, 1 import)
-    parameter set: not stated in any call site
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
       encode.go:17   curve25519.ScalarBaseMult(dst, scalar)

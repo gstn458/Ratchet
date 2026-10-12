@@ -1094,6 +1094,9 @@ def build_cbom(findings, root, tool_version=VERSION):
 # the report says so even when no call site states it.
 ASYMMETRIC_PRIMITIVES = {"pke", "signature", "key-agree", "kem", "unknown"}
 
+# Algorithms whose name fixes the parameter set, so "not stated" means nothing.
+FIXED_PARAMETER_ALGORITHMS = {"Ed25519", "X25519"}
+
 
 def plural(n, word, words=None):
     return f"{n or 'no'} {word if n == 1 else (words or word + 's')}"
@@ -1107,7 +1110,8 @@ def parameter_line(algorithm, calls):
         stated[f.params] += 1
     unstated = stated.pop(None, 0)
     if not stated:
-        if calls and ALGORITHMS[algorithm]["primitive"] in ASYMMETRIC_PRIMITIVES:
+        if (calls and ALGORITHMS[algorithm]["primitive"] in ASYMMETRIC_PRIMITIVES
+                and algorithm not in FIXED_PARAMETER_ALGORITHMS):
             return f"parameter set: not stated in any call site"
         return None
     noun = "key sizes" if all(p.isdigit() for p in stated) else "parameter sets"

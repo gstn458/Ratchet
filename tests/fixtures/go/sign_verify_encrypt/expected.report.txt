@@ -23,7 +23,6 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       ops.go:7   "crypto/ecdsa"
 
   Ed25519  (2 call sites, 1 import)
-    parameter set: not stated in any call site
     Edwards-curve discrete log falls to Shor's algorithm.
     migrate to: ML-DSA-65 (FIPS 204)
       ops.go:33   sig := ed25519.Sign(priv, msg)
@@ -38,7 +37,6 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       ops.go:6   "crypto/dsa"
 
   X25519  (1 call site, 1 import)
-    parameter set: not stated in any call site
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
       ops.go:43   _, _ = curve25519.X25519(scalar, point)
