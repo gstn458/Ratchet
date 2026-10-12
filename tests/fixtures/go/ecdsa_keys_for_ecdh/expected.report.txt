@@ -1,0 +1,25 @@
+
+ratchet 0.1.0  scanned 1 files in .
+registry 2026.10.2  from registry.json
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (2 occurrences)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      kex.go:6   "crypto/ecdsa"
+      kex.go:13   ephKey, err := ecdsa.GenerateKey(curve, rand)
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (1 occurrence)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      kex.go:20   secret, _ := curve.ScalarMult(x, y, ephKey.D.Bytes())
+
+========================================================================
+3 quantum-vulnerable call sites across 1 files.
+1 of them with usage undetermined: review before choosing a migration target.
+
