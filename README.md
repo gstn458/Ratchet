@@ -66,9 +66,15 @@ library does today. That is the point.
 
 Python goes through the standard library `ast` module. It tracks import aliases, so
 `from cryptography.hazmat.primitives.asymmetric import ec` followed by
-`ec.generate_private_key(...)` resolves to ECDSA rather than being missed. It reads
+`ec.generate_private_key(...)` is recognised rather than being missed. It reads
 key sizes out of keyword arguments, so `rsa.generate_private_key(key_size=2048)`
 records the parameter set rather than just the algorithm family.
+
+Elliptic-curve keys are classified by what they are used for, because the migration
+target depends on it: `.sign()` or `.verify()` makes a key ECDSA, `.exchange()` makes
+it ECDH. A key whose use is not visible is reported as EC, usage undetermined, under
+its own heading. It still counts as quantum vulnerable, and it is never reported as
+confirmed ECDSA.
 
 Go is pattern matched on import paths and call sites. There is no Go AST here yet.
 
@@ -127,10 +133,16 @@ though `ratchet:occurrence_count` still gives the full number.
 
 Known misclassifications, each pinned by a fixture in `tests/fixtures` until fixed:
 `rsa.generate_private_key(65537, 2048)` with positional arguments is recorded as
-RSA-65537; Go's `des.NewTripleDESCipher` is recorded as DES rather than 3DES; the
-Python `ec` module is always recorded as ECDSA, even when used for ECDH; Go string
-literals containing a crypto package path are recorded as imports. See
+RSA-65537; Go's `des.NewTripleDESCipher` is recorded as DES rather than 3DES; Go
+string literals containing a crypto package path are recorded as imports. See
 `tests/fixtures/README.md` for the full list, including false negatives.
+
+Elliptic-curve usage is followed within one file and by name only. A key is tracked
+through the variable or attribute it is assigned to and through `.public_key()`, but
+not through function arguments, return values or other files. A key that cannot be
+followed takes its file's usage only when every usage in that file agrees, and is
+otherwise reported as usage undetermined. Two unrelated keys that share a name in one
+file are treated as the same key.
 
 No remediation yet. The scanner finds things. Opening a pull request that migrates
 to ML-KEM or ML-DSA without silently breaking production is the actual hard problem
