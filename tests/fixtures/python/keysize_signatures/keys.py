@@ -24,3 +24,9 @@ pycryptodome_dsa = PyDSA.generate(2048)
 # Not a literal: no parameter set can be claimed.
 def from_config(n):
     return rsa.generate_private_key(65537, n)
+
+
+class Kex:
+    def start(self):
+        # A curve held in a variable: no parameter set, not a curve named "curve".
+        return ec.generate_private_key(self.curve)

@@ -44,11 +44,11 @@ after the fixtures were first written:
 | | `hashlib.sha256()` called by name is not recorded, but `hashlib.new("sha256")` is | gap |
 | `rsa_cryptography` | `key_size=` keyword captured as RSA-2048 and RSA-4096; key size from a variable falls back to plain RSA | ok |
 | | The import line is counted as an RSA occurrence, so plain RSA appears even though every call has a size | wrong → step 7, see note 1 |
-| `rsa_positional_args` | `rsa.generate_private_key(65537, 2048)` is recorded as **RSA-65537**: the public exponent is read as the key size | wrong → step 6 |
+| `rsa_positional_args` | `rsa.generate_private_key(65537, 2048)` is RSA-2048: the key size is read from its documented position, not the first argument | ok (was RSA-65537 before step 6) |
+| `keysize_signatures` | Positional and keyword parameters for every key-generation call with a known signature: RSA, DSA and DH in `cryptography` (DH was recorded as DH-2, the generator), `curve=` and curve classes for `ec`, and PyCryptodome `RSA`/`DSA`; a variable key size or `self.curve` claims nothing | ok |
 | `rsa_other_libraries` | PyCryptodome `RSA.generate(3072)` captured as RSA-3072 | ok |
 | | python-rsa `rsa.newkeys(2048)` is not recognised as a call, only the import is | gap |
 | `ec_sign` | A key used with `.sign()` and `.public_key().verify()` is ECDSA-SECP256R1; each `ec.ECDSA(...)` is an ECDSA call site; the unbound key and the import take the file's single usage | ok |
-| | `curve=` keyword is not read, so the curve is lost | gap |
 | `ec_exchange` | `.exchange(ec.ECDH(), ...)` makes the key, its peer and the import ECDH | ok (was ECDSA before step 4) |
 | `ec_undetermined` | A key that is generated and serialised but never used is EC, usage undetermined, under its own report heading | ok |
 | `ec_mixed_usage` | One signing key and one key-agreement key in the same file are each labelled by their own usage; the peer passed to `exchange()` is ECDH; an unused key and the import stay undetermined because the file's usages disagree | ok |

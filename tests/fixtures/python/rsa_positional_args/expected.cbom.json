@@ -88,13 +88,13 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/rsa-65537",
-      "name": "RSA-65537",
+      "bom-ref": "crypto/algorithm/rsa-2048",
+      "name": "RSA-2048",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "pke",
-          "parameterSetIdentifier": "65537",
+          "parameterSetIdentifier": "2048",
           "executionEnvironment": "software-plain-ram",
           "implementationPlatform": "generic",
           "certificationLevel": [

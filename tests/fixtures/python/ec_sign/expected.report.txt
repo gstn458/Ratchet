@@ -5,18 +5,22 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDSA  (4 occurrences)
+  ECDSA  (3 occurrences)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       sign.py:2   from cryptography.hazmat.primitives.asymmetric import ec
       sign.py:5   signature = key.sign(b"message", ec.ECDSA(hashes.SHA256()))
       sign.py:6   key.public_key().verify(signature, b"message", ec.ECDSA(hashes.SHA256()))
-      ... and 1 more
 
   ECDSA-SECP256R1  (1 occurrence)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       sign.py:4   key = ec.generate_private_key(ec.SECP256R1())
+
+  ECDSA-SECP384R1  (1 occurrence)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      sign.py:8   keyword_curve = ec.generate_private_key(curve=ec.SECP384R1())
 
 ========================================================================
 5 quantum-vulnerable call sites across 1 files.

@@ -67,8 +67,9 @@ library does today. That is the point.
 Python goes through the standard library `ast` module. It tracks import aliases, so
 `from cryptography.hazmat.primitives.asymmetric import ec` followed by
 `ec.generate_private_key(...)` is recognised rather than being missed. It reads
-key sizes out of keyword arguments, so `rsa.generate_private_key(key_size=2048)`
-records the parameter set rather than just the algorithm family.
+key sizes and curves from each call's documented argument position or keyword, so
+`rsa.generate_private_key(65537, 2048)` records RSA-2048 rather than just the
+algorithm family.
 
 Elliptic-curve keys are classified by what they are used for, because the migration
 target depends on it: `.sign()` or `.verify()` makes a key ECDSA, `.exchange()` makes
@@ -132,9 +133,10 @@ it was skipped.
 The CBOM lists at most 50 occurrence locations per component. The rest are dropped,
 though `ratchet:occurrence_count` still gives the full number.
 
-Known misclassifications, each pinned by a fixture in `tests/fixtures` until fixed:
-`rsa.generate_private_key(65537, 2048)` with positional arguments is recorded as
-RSA-65537. See `tests/fixtures/README.md` for the full list, including false negatives.
+Parameter sets are read only from literal values in calls whose signature Ratchet
+knows: `cryptography`'s RSA, DSA, DH and EC key generation and PyCryptodome's RSA and
+DSA. A key size or curve held in a variable is not resolved. See
+`tests/fixtures/README.md` for the full list of known gaps.
 
 Go is read by a small lexer and regular expressions, not a parser. It separates code
 from comments and strings and recognises import declarations, but a call through an

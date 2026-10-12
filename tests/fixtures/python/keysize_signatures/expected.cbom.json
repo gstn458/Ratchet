@@ -85,13 +85,13 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/dh-2",
-      "name": "DH-2",
+      "bom-ref": "crypto/algorithm/dh-2048",
+      "name": "DH-2048",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "key-agree",
-          "parameterSetIdentifier": "2",
+          "parameterSetIdentifier": "2048",
           "executionEnvironment": "software-plain-ram",
           "implementationPlatform": "generic",
           "certificationLevel": [
@@ -327,8 +327,56 @@
             "location": "keys.py#L3"
           },
           {
-            "location": "keys.py#L17"
-          },
+            "location": "keys.py#L32"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec-secp384r1",
+      "name": "EC-SECP384R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "SECP384R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
           {
             "location": "keys.py#L18"
           }
@@ -341,7 +389,58 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "3"
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec-secp521r1",
+      "name": "EC-SECP521R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "SECP521R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys.py#L17"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
         },
         {
           "name": "ratchet:quantum_status",
@@ -389,6 +488,9 @@
           },
           {
             "location": "keys.py#L3"
+          },
+          {
+            "location": "keys.py#L26"
           }
         ]
       },
@@ -399,7 +501,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "2"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -554,61 +656,6 @@
         "occurrences": [
           {
             "location": "keys.py#L7"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:classical_status",
-          "value": "ok"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "Shor's algorithm factors the modulus in polynomial time."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/rsa-65537",
-      "name": "RSA-65537",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "pke",
-          "parameterSetIdentifier": "65537",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "decrypt",
-            "encrypt",
-            "keygen",
-            "sign",
-            "verify"
-          ],
-          "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.2.840.113549.1.1.1"
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "keys.py#L26"
           }
         ]
       },

@@ -460,6 +460,22 @@ PY_EC_USAGE_METHODS = {
 # Methods that derive one key object from another without changing what it is.
 PY_EC_DERIVE_METHODS = {"public_key", "get_verifying_key"}
 
+# Where each key-generation call takes its parameter set: (position, keyword).
+# From each library's documented signature. Reading "the first argument" for
+# every call recorded the public exponent as an RSA key size and the DH
+# generator as a DH key size.
+PY_KEYGEN_PARAMS = {
+    # cryptography
+    "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key": (1, "key_size"),
+    "cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key": (0, "key_size"),
+    "cryptography.hazmat.primitives.asymmetric.dsa.generate_parameters": (0, "key_size"),
+    "cryptography.hazmat.primitives.asymmetric.dh.generate_parameters": (1, "key_size"),
+    "cryptography.hazmat.primitives.asymmetric.ec.generate_private_key": (0, "curve"),
+    # PyCryptodome
+    "Crypto.PublicKey.RSA.generate": (0, "bits"),
+    "Crypto.PublicKey.DSA.generate": (0, "bits"),
+}
+
 PY_HASH_NAMES = {
     "md5": "MD5",
     "sha1": "SHA-1",
@@ -588,6 +604,31 @@ class PyVisitor(ast.NodeVisitor):
         if isinstance(expr, ast.Attribute):
             base = self._qualified(expr.value)
             return f"{base}.{expr.attr}" if base else None
+        return None
+
+    def _keygen_params(self, node, qualified):
+        """The parameter set a key-generation call states, or None.
+
+        Only calls with a known signature are read, and only literal values:
+        an integer key size, or a curve named from the same module, as in
+        ec.SECP256R1(), ec.SECP256R1 or a from-imported SECP256R1(). A
+        variable such as self.curve states nothing that can be claimed.
+        """
+        if qualified not in PY_KEYGEN_PARAMS:
+            return None
+        position, keyword = PY_KEYGEN_PARAMS[qualified]
+        value = next((kw.value for kw in node.keywords if kw.arg == keyword), None)
+        if value is None and len(node.args) > position:
+            value = node.args[position]
+        if isinstance(value, ast.Constant) and type(value.value) is int:
+            return str(value.value)
+        if keyword == "curve" and value is not None:
+            if isinstance(value, ast.Call):
+                value = value.func
+            module = qualified.rsplit(".", 1)[0]
+            name = self._qualified(value)
+            if name and name.startswith(module + "."):
+                return name[len(module) + 1:]
         return None
 
     def _key_arguments(self, node):
@@ -730,19 +771,7 @@ class PyVisitor(ast.NodeVisitor):
         elif name in ("generate_private_key", "generate_parameters", "generate"):
             algo = self.aliases.get(owner)
             if algo:
-                params = None
-                for kw in node.keywords:
-                    if kw.arg in ("key_size", "bits") and isinstance(kw.value, ast.Constant):
-                        params = str(kw.value.value)
-                if params is None and node.args:
-                    a = node.args[0]
-                    if isinstance(a, ast.Constant) and isinstance(a.value, int):
-                        params = str(a.value)
-                    elif isinstance(a, ast.Call):
-                        curve = getattr(a.func, "attr", None) or getattr(a.func, "id", None)
-                        if curve:
-                            params = curve
-                finding = self._add(algo, node, params)
+                finding = self._add(algo, node, self._keygen_params(node, qualified))
                 if algo == "EC":
                     self._keygen[id(node)] = finding
 

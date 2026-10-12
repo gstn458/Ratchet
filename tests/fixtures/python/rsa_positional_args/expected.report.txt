@@ -10,7 +10,7 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       keys.py:1   from cryptography.hazmat.primitives.asymmetric import rsa
 
-  RSA-65537  (1 occurrence)
+  RSA-2048  (1 occurrence)
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       keys.py:4   key = rsa.generate_private_key(65537, 2048)

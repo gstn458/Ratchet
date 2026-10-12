@@ -63,9 +63,6 @@
           },
           {
             "location": "sign.py#L6"
-          },
-          {
-            "location": "sign.py#L8"
           }
         ]
       },
@@ -76,7 +73,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "4"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -118,6 +115,58 @@
         "occurrences": [
           {
             "location": "sign.py#L4"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa-secp384r1",
+      "name": "ECDSA-SECP384R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "SECP384R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "sign.py#L8"
           }
         ]
       },
