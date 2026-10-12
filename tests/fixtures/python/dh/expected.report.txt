@@ -1,0 +1,19 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  DH  (1 occurrence)
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-KEM-768 (FIPS 203)
+      params.py:1   from cryptography.hazmat.primitives.asymmetric import dh
+
+  DH-2048  (1 occurrence)
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-KEM-768 (FIPS 203)
+      params.py:3   parameters = dh.generate_parameters(generator=2, key_size=2048)
+
+========================================================================
+2 quantum-vulnerable call sites across 1 files.
+

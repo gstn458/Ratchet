@@ -1,0 +1,29 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (2 occurrences)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      digest.go:4   "crypto/md5"
+      digest.go:10   _ = md5.Sum(b)
+
+  SHA-1  (2 occurrences)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      digest.go:5   "crypto/sha1"
+      digest.go:11   _ = sha1.New()
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (1 occurrence)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      digest.go:6   "crypto/sha256"
+
+========================================================================
+No quantum-vulnerable primitives found.
+

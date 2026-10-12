@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+# Do not add build/, dist/, vendor/, venv/ or similar here: tests/fixtures/walk
+# has directories with those names on purpose.

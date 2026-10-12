@@ -1,0 +1,23 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  RC4  (2 occurrences)
+    Biased keystream. Prohibited in TLS since RFC 7465.
+    migrate to: AES-256-GCM or ChaCha20-Poly1305
+      cipher.go:5   "crypto/rc4"
+      cipher.go:9   _, _ = rc4.NewCipher(key)
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  AES  (1 occurrence)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      cipher.go:4   "crypto/aes"
+
+========================================================================
+No quantum-vulnerable primitives found.
+

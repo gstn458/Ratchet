@@ -1,0 +1,14 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (1 occurrence)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      local.py:6   md5("README")
+
+========================================================================
+No quantum-vulnerable primitives found.
+

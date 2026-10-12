@@ -1,0 +1,15 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  DES  (2 occurrences)
+    56-bit key. Brute-forced on commodity hardware.
+    migrate to: AES-256-GCM
+      cipher.go:3   import "crypto/des"
+      cipher.go:6   _, _ = des.NewCipher(key)
+
+========================================================================
+No quantum-vulnerable primitives found.
+

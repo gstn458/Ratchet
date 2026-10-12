@@ -1,0 +1,129 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "dh"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dh",
+      "name": "DH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.3.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "params.py#L1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the finite-field discrete log."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 (FIPS 203)"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dh-2048",
+      "name": "DH-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "2048",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.3.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "params.py#L3"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the finite-field discrete log."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 (FIPS 203)"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        }
+      ]
+    }
+  ]
+}

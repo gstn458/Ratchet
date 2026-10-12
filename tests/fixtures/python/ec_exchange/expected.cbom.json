@@ -1,0 +1,134 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "ec_exchange"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.4"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "exchange.py#L1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa-secp384r1",
+      "name": "ECDSA-SECP384R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "SECP384R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.4"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "exchange.py#L3"
+          },
+          {
+            "location": "exchange.py#L4"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        }
+      ]
+    }
+  ]
+}

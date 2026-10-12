@@ -1,0 +1,58 @@
+
+ratchet 0.1.0  scanned 4 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (2 occurrences)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      gateway/jwt.go:5   "crypto/rsa"
+      service/tokens.py:1   from cryptography.hazmat.primitives.asymmetric import rsa
+
+  RSA-2048  (2 occurrences)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      gateway/jwt.go:11   return rsa.GenerateKey(rand.Reader, 2048)
+      service/tokens.py:4   signing_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+
+  RSA-1024  (1 occurrence)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      service/tokens.py:5   legacy = rsa.generate_private_key(public_exponent=65537, key_size=1024)
+
+  ECDSA  (1 occurrence)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      service/session.py:1   from cryptography.hazmat.primitives.asymmetric import ec
+
+  ECDSA-SECP256R1  (1 occurrence)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      service/session.py:3   key = ec.generate_private_key(ec.SECP256R1())
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (2 occurrences)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      gateway/jwt.go:6   "crypto/sha1"
+      gateway/jwt.go:10   _ = sha1.New()
+
+  MD5  (1 occurrence)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      service/tokens.py:6   etag = hashlib.md5(b"body").hexdigest()
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (1 occurrence)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      gateway/cache.go:3   import "crypto/sha256"
+
+========================================================================
+7 quantum-vulnerable call sites across 3 files.
+

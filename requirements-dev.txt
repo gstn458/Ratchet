@@ -1,0 +1,3 @@
+# Test-only dependencies. ratchet.py itself needs nothing outside the standard library.
+pytest>=8.0,<10
+jsonschema>=4.18,<5

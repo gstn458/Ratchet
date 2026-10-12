@@ -1,0 +1,14 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  DSA  (1 occurrence)
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      keys.go:4   "crypto/dsa"
+
+========================================================================
+1 quantum-vulnerable call sites across 1 files.
+

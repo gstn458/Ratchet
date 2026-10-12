@@ -1,0 +1,80 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "des_3des"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/des",
+      "name": "DES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "1.3.14.3.2.7"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cipher.go#L3"
+          },
+          {
+            "location": "cipher.go#L6"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "56-bit key. Brute-forced on commodity hardware."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "AES-256-GCM"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        }
+      ]
+    }
+  ]
+}

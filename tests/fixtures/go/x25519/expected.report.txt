@@ -1,0 +1,14 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  X25519  (1 occurrence)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      agree.go:3   import "golang.org/x/crypto/curve25519"
+
+========================================================================
+1 quantum-vulnerable call sites across 1 files.
+

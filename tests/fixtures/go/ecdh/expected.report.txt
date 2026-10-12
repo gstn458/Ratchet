@@ -1,0 +1,14 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDH  (1 occurrence)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      agree.go:4   "crypto/ecdh"
+
+========================================================================
+1 quantum-vulnerable call sites across 1 files.
+

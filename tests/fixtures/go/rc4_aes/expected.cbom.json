@@ -1,0 +1,132 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "rc4_aes"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes",
+      "name": "AES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "2.16.840.1.101.3.4.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cipher.go#L4"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Grover halves effective key length. AES-256 stays at 128-bit margin."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "AES-256 if currently AES-128"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rc4",
+      "name": "RC4",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 1
+        },
+        "oid": "1.2.840.113549.3.4"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cipher.go#L5"
+          },
+          {
+            "location": "cipher.go#L9"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Biased keystream. Prohibited in TLS since RFC 7465."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "AES-256-GCM or ChaCha20-Poly1305"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        }
+      ]
+    }
+  ]
+}

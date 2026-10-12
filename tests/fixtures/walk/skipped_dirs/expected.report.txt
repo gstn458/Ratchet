@@ -1,0 +1,14 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (1 occurrence)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      app/main.py:3   hashlib.sha1(b"first-party")
+
+========================================================================
+No quantum-vulnerable primitives found.
+

@@ -1,0 +1,20 @@
+
+ratchet 0.1.0  scanned 1 files in .
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (2 occurrences)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.py:1   import rsa
+      keys.py:2   from Crypto.PublicKey import RSA
+
+  RSA-3072  (1 occurrence)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.py:5   key = RSA.generate(3072)
+
+========================================================================
+3 quantum-vulnerable call sites across 1 files.
+
