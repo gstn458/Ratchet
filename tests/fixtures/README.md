@@ -47,9 +47,13 @@ after the fixtures were first written:
 | `rsa_positional_args` | `rsa.generate_private_key(65537, 2048)` is recorded as **RSA-65537**: the public exponent is read as the key size | wrong → step 6 |
 | `rsa_other_libraries` | PyCryptodome `RSA.generate(3072)` captured as RSA-3072 | ok |
 | | python-rsa `rsa.newkeys(2048)` is not recognised as a call, only the import is | gap |
-| `ec_sign` | `ec.generate_private_key(ec.SECP256R1())` captured as ECDSA-SECP256R1 | ok, until step 4 relabels by usage |
+| `ec_sign` | A key used with `.sign()` and `.public_key().verify()` is ECDSA-SECP256R1; each `ec.ECDSA(...)` is an ECDSA call site; the unbound key and the import take the file's single usage | ok |
 | | `curve=` keyword is not read, so the curve is lost | gap |
-| `ec_exchange` | `.exchange(ec.ECDH(), ...)` is reported as **ECDSA** | wrong → step 4 |
+| `ec_exchange` | `.exchange(ec.ECDH(), ...)` makes the key, its peer and the import ECDH | ok (was ECDSA before step 4) |
+| `ec_undetermined` | A key that is generated and serialised but never used is EC, usage undetermined, under its own report heading | ok |
+| `ec_mixed_usage` | One signing key and one key-agreement key in the same file are each labelled by their own usage; the peer passed to `exchange()` is ECDH; an unused key and the import stay undetermined because the file's usages disagree | ok |
+| `ec_across_methods` | paramiko's shapes: a key bound to `self.P` in one method and exchanged in another is ECDH; a key returned from a classmethod in a file whose only usage is signing is ECDSA | ok |
+| `ec_from_import` | `import ... ec as curves` and a from-imported `ECDH()` are both recognised | ok |
 | `ec_other_libraries` | `import ecdsa` and PyCryptodome `ECC` map to ECDSA; `ECC.generate(curve="P-256")` loses the curve; `ecdsa.SigningKey.generate(...)` is not seen as a call | step 4, see note 2 |
 | `dh` | `dh.generate_parameters(key_size=2048)` captured as DH-2048 | ok |
 | `dsa` | `dsa.generate_private_key(key_size=1024)` captured as DSA-1024 | ok |
@@ -57,7 +61,7 @@ after the fixtures were first written:
 | `x25519` | `X25519PrivateKey.generate()` resolved the same way | ok |
 | `nacl` | PyNaCl `SigningKey` → Ed25519, `PrivateKey` → X25519 | ok |
 | `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports; `.new(...)` calls add nothing | ok |
-| `import_only` | Importing `rsa` and `ec` with no calls still yields two quantum-broken "call sites" | wrong → step 7, see note 1 |
+| `import_only` | Importing `rsa` and `ec` with no calls still yields two quantum-broken "call sites"; the `ec` import is EC, usage undetermined | wrong → step 7, see note 1 |
 | `name_collision` | A project's own function named `md5()` is reported as MD5 | wrong, unscheduled (precision, Phase 1) |
 | `syntax_error` | A Python 2 file that `ast.parse` rejects is skipped **without any notice**, along with the `RSA.generate(1024)` in it | wrong → step 9, see note 3 |
 

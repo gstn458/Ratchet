@@ -33,12 +33,12 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/ecdsa",
-      "name": "ECDSA",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
-          "primitive": "signature",
+          "primitive": "unknown",
           "parameterSetIdentifier": "unspecified",
           "executionEnvironment": "software-plain-ram",
           "implementationPlatform": "generic",
@@ -46,12 +46,11 @@
             "none"
           ],
           "cryptoFunctions": [
-            "keygen",
-            "sign",
-            "verify"
+            "unknown"
           ],
           "nistQuantumSecurityLevel": 0
-        }
+        },
+        "oid": "1.2.840.10045.2.1"
       },
       "evidence": {
         "occurrences": [
@@ -75,11 +74,11 @@
         },
         {
           "name": "ratchet:rationale",
-          "value": "Shor's algorithm solves the discrete log on the curve."
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
         },
         {
           "name": "ratchet:recommended_replacement",
-          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
         }
       ]
     },

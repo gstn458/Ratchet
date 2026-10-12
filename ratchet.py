@@ -409,7 +409,7 @@ REGISTRY_DIGEST = registry_digest(REGISTRY)
 
 PY_MODULES = {
     "cryptography.hazmat.primitives.asymmetric.rsa": "RSA",
-    "cryptography.hazmat.primitives.asymmetric.ec": "ECDSA",
+    "cryptography.hazmat.primitives.asymmetric.ec": "EC",
     "cryptography.hazmat.primitives.asymmetric.dh": "DH",
     "cryptography.hazmat.primitives.asymmetric.dsa": "DSA",
     "cryptography.hazmat.primitives.asymmetric.ed25519": "Ed25519",
@@ -428,6 +428,21 @@ PY_MODULES = {
     "nacl.signing": "Ed25519",
     "nacl.public": "X25519",
 }
+
+# Elliptic-curve modules whose keys can either sign or agree keys. Findings from
+# them start as "EC" (usage undetermined) and are resolved per file once the
+# whole file has been seen; see PyVisitor.resolve_ec.
+PY_EC_MODULE = "cryptography.hazmat.primitives.asymmetric.ec"
+
+# Objects that only exist for one usage: ec.ECDSA(hash) is passed to sign and
+# verify, ec.ECDH() to exchange.
+PY_EC_USAGE_OBJECTS = {"ECDSA": "ECDSA", "ECDH": "ECDH"}
+
+# Methods on an EC key object, and the usage each one proves.
+PY_EC_USAGE_METHODS = {"sign": "ECDSA", "verify": "ECDSA", "exchange": "ECDH"}
+
+# Methods that derive one key object from another without changing what it is.
+PY_EC_DERIVE_METHODS = {"public_key"}
 
 PY_HASH_NAMES = {
     "md5": "MD5",
@@ -495,15 +510,100 @@ class PyVisitor(ast.NodeVisitor):
         self.lines = source_lines
         self.findings = []
         self.aliases = {}   # local name -> algorithm
+        self.imported = {}  # local name -> (module, imported name or None)
+        # Elliptic-curve usage, resolved in resolve_ec once the file is read.
+        self.ec_keys = defaultdict(list)  # binding -> keygen findings
+        self.ec_derived = {}              # binding -> binding it derives from
+        self.ec_uses = []                 # (binding, usage)
+        self.ec_markers = set()           # usages proven by usage objects
+        self._keygen = {}                 # id(call node) -> keygen finding
 
     def _line(self, node):
         idx = node.lineno - 1
         return self.lines[idx] if 0 <= idx < len(self.lines) else ""
 
     def _add(self, algo, node, params=None):
-        self.findings.append(
-            Finding(algo, self.path, node.lineno, self._line(node), params)
-        )
+        finding = Finding(algo, self.path, node.lineno, self._line(node), params)
+        self.findings.append(finding)
+        return finding
+
+    def _ec_symbol(self, func):
+        """Name of the cryptography ec-module symbol a call refers to, if any:
+        "ECDH" for both ec.ECDH() and a from-imported ECDH()."""
+        if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+            module, name = self.imported.get(func.value.id, (None, None))
+            if module == PY_EC_MODULE and name is None:
+                return func.attr
+        if isinstance(func, ast.Name):
+            module, name = self.imported.get(func.id, (None, None))
+            if module == PY_EC_MODULE and name is not None:
+                return name
+        return None
+
+    @staticmethod
+    def _binding(expr):
+        """A stable text name for the object an expression refers to, with
+        derivations such as .public_key() stripped, or None."""
+        while (isinstance(expr, ast.Call) and not expr.args and not expr.keywords
+               and isinstance(expr.func, ast.Attribute)
+               and expr.func.attr in PY_EC_DERIVE_METHODS):
+            expr = expr.func.value
+        if isinstance(expr, (ast.Name, ast.Attribute)):
+            return ast.unparse(expr)
+        return None
+
+    def visit_Assign(self, node):
+        self.generic_visit(node)
+        value = node.value
+        stripped = value
+        while (isinstance(stripped, ast.Call) and isinstance(stripped.func, ast.Attribute)
+               and stripped.func.attr in PY_EC_DERIVE_METHODS):
+            stripped = stripped.func.value
+        keygen = self._keygen.get(id(stripped))
+        source = None if keygen else self._binding(value)
+        for target in node.targets:
+            if not isinstance(target, (ast.Name, ast.Attribute)):
+                continue
+            name = ast.unparse(target)
+            if keygen:
+                self.ec_keys[name].append(keygen)
+            elif source and source != name:
+                self.ec_derived[name] = source
+
+    def resolve_ec(self):
+        """Relabel EC findings as ECDSA or ECDH where the usage is visible.
+
+        A generated key takes the usage of the name it is bound to, following
+        derivations such as public_key(). A key that cannot be followed, and
+        the import line, take the file's usage only when every usage seen in
+        the file agrees. Anything else stays EC, usage undetermined.
+        """
+        def root(name):
+            seen = set()
+            while name in self.ec_derived and name not in seen:
+                seen.add(name)
+                name = self.ec_derived[name]
+            return name
+
+        usage = defaultdict(set)
+        for name, kind in self.ec_uses:
+            usage[root(name)].add(kind)
+
+        resolved = set()
+        file_kinds = set(self.ec_markers)
+        for name, keygens in self.ec_keys.items():
+            kinds = usage.get(root(name), set())
+            file_kinds |= kinds
+            if len(kinds) == 1:
+                for f in keygens:
+                    f.algorithm = next(iter(kinds))
+                    resolved.add(id(f))
+
+        if len(file_kinds) == 1:
+            only = next(iter(file_kinds))
+            for f in self.findings:
+                if f.algorithm == "EC" and id(f) not in resolved:
+                    f.algorithm = only
 
     def visit_Import(self, node):
         for alias in node.names:
@@ -511,6 +611,8 @@ class PyVisitor(ast.NodeVisitor):
             if algo:
                 local = alias.asname or alias.name.split(".")[0]
                 self.aliases[local] = algo
+                if alias.asname:
+                    self.imported[local] = (alias.name, None)
                 self._add(algo, node)
         self.generic_visit(node)
 
@@ -521,7 +623,12 @@ class PyVisitor(ast.NodeVisitor):
             full = f"{node.module}.{alias.name}"
             algo = PY_MODULES.get(full) or PY_MODULES.get(node.module)
             if algo:
-                self.aliases[alias.asname or alias.name] = algo
+                local = alias.asname or alias.name
+                self.aliases[local] = algo
+                if full in PY_MODULES:
+                    self.imported[local] = (full, None)
+                else:
+                    self.imported[local] = (node.module, alias.name)
                 self._add(algo, node)
         self.generic_visit(node)
 
@@ -532,8 +639,28 @@ class PyVisitor(ast.NodeVisitor):
         if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
             owner = func.value.id
 
+        # Elliptic-curve usage: ec.ECDSA(...) and ec.ECDH() are call sites with
+        # a known usage; .sign(), .verify() and .exchange() say what a key is for.
+        symbol = self._ec_symbol(func)
+        if isinstance(func, ast.Attribute) and func.attr in PY_EC_USAGE_METHODS:
+            kind = PY_EC_USAGE_METHODS[func.attr]
+            receiver = self._binding(func.value)
+            if receiver:
+                self.ec_uses.append((receiver, kind))
+            # The peer key passed to exchange() is a key-agreement key too.
+            if kind == "ECDH":
+                for arg in node.args:
+                    peer = self._binding(arg)
+                    if peer:
+                        self.ec_uses.append((peer, kind))
+
+        if symbol in PY_EC_USAGE_OBJECTS:
+            kind = PY_EC_USAGE_OBJECTS[symbol]
+            self.ec_markers.add(kind)
+            self._add(kind, node)
+
         # hashlib.md5(), hashlib.sha1()
-        if name in ("md5", "sha1"):
+        elif name in ("md5", "sha1"):
             self._add(PY_HASH_NAMES[name], node)
 
         # hashlib.new("md5")
@@ -560,7 +687,9 @@ class PyVisitor(ast.NodeVisitor):
                         curve = getattr(a.func, "attr", None) or getattr(a.func, "id", None)
                         if curve:
                             params = curve
-                self._add(algo, node, params)
+                finding = self._add(algo, node, params)
+                if algo == "EC":
+                    self._keygen[id(node)] = finding
 
         self.generic_visit(node)
 
@@ -573,6 +702,7 @@ def scan_python(path):
         return []
     visitor = PyVisitor(path, source.splitlines())
     visitor.visit(tree)
+    visitor.resolve_ec()
     return visitor.findings
 
 
@@ -721,9 +851,18 @@ def report(findings, files_scanned, root):
     for f in findings:
         grouped[f.label].append(f)
 
-    broken = {k: v for k, v in grouped.items() if ALGORITHMS[v[0].algorithm]["quantum"] == "broken"}
-    weak = {k: v for k, v in grouped.items() if ALGORITHMS[v[0].algorithm]["classical"] == "broken"}
-    other = {k: v for k, v in grouped.items() if k not in broken and k not in weak}
+    def spec(group):
+        return ALGORITHMS[group[0].algorithm]
+
+    # Quantum broken, but the registry cannot say what to migrate to until the
+    # usage is known. Reported apart so it is never read as confirmed ECDSA.
+    undetermined = {k: v for k, v in grouped.items()
+                    if spec(v)["quantum"] == "broken" and spec(v)["primitive"] == "unknown"}
+    broken = {k: v for k, v in grouped.items()
+              if spec(v)["quantum"] == "broken" and k not in undetermined}
+    weak = {k: v for k, v in grouped.items() if spec(v)["classical"] == "broken"}
+    other = {k: v for k, v in grouped.items()
+             if k not in broken and k not in weak and k not in undetermined}
 
     print()
     print(f"ratchet {VERSION}  scanned {files_scanned} files in {root}")
@@ -748,14 +887,21 @@ def report(findings, files_scanned, root):
             print()
 
     section("QUANTUM VULNERABLE   Shor's algorithm breaks these outright", broken)
+    section("USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible",
+            undetermined)
     section("ALREADY BROKEN       weak today, quantum is not the issue", weak)
     section("REVIEW               reduced margin under Grover, usually acceptable", other)
 
-    total_broken = sum(len(v) for v in broken.values())
+    vulnerable = {**broken, **undetermined}
+    total_broken = sum(len(v) for v in vulnerable.values())
+    total_undetermined = sum(len(v) for v in undetermined.values())
     print("=" * 72)
     if total_broken:
         print(f"{total_broken} quantum-vulnerable call sites across "
-              f"{len(set(f.path for g in broken.values() for f in g))} files.")
+              f"{len(set(f.path for g in vulnerable.values() for f in g))} files.")
+        if total_undetermined:
+            print(f"{total_undetermined} of them with usage undetermined: "
+                  f"review before choosing a migration target.")
     else:
         print("No quantum-vulnerable primitives found.")
     print()

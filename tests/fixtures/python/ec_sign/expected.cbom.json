@@ -59,6 +59,12 @@
             "location": "sign.py#L2"
           },
           {
+            "location": "sign.py#L5"
+          },
+          {
+            "location": "sign.py#L6"
+          },
+          {
             "location": "sign.py#L8"
           }
         ]
@@ -70,7 +76,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "2"
+          "value": "4"
         },
         {
           "name": "ratchet:quantum_status",

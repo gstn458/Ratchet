@@ -1,0 +1,23 @@
+
+ratchet 0.1.0  scanned 1 files in .
+registry 2026.10.2  from registry.json
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDH  (3 occurrences)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      agree.py:1   import cryptography.hazmat.primitives.asymmetric.ec as curves
+      agree.py:2   from cryptography.hazmat.primitives.asymmetric.ec import ECDH
+      agree.py:7   shared = private_key.exchange(ECDH(), derived)
+
+  ECDH-SECP256R1  (2 occurrences)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      agree.py:4   private_key = curves.generate_private_key(curves.SECP256R1())
+      agree.py:5   peer = curves.generate_private_key(curves.SECP256R1())
+
+========================================================================
+5 quantum-vulnerable call sites across 1 files.
+
