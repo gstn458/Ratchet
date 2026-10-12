@@ -207,15 +207,6 @@ PY_MODULES = {
     "nacl.public": "X25519",
 }
 
-# attribute or function name -> algorithm, for calls like hashlib.md5()
-PY_CALLS = {
-    "md5": "MD5",
-    "sha1": "SHA-1",
-    "new_md5": "MD5",
-    "generate_private_key": None,   # resolved from the module it hangs off
-    "generate_parameters": None,
-}
-
 PY_HASH_NAMES = {
     "md5": "MD5",
     "sha1": "SHA-1",
