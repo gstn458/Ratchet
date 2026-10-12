@@ -22,6 +22,11 @@ python3 ratchet.py /path/to/repo --json > cbom.json
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 for CI
 ```
 
+`ratchet.py` runs on its own. The algorithm registry, which holds every claim Ratchet
+makes about an algorithm, is maintained in `registry.json` and embedded in the script.
+If `registry.json` sits next to `ratchet.py` it is used instead of the embedded copy.
+A `registry.json` that is present but unreadable is an error, not a silent fallback.
+
 ## Tests
 
 The scanner needs nothing installed. The test suite needs pytest and jsonschema:
