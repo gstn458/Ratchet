@@ -18,7 +18,17 @@
       "type": "application",
       "bom-ref": "target",
       "name": "mixed"
-    }
+    },
+    "properties": [
+      {
+        "name": "ratchet:scan_registry_sha256",
+        "value": "4590536946952fb0683ea948055fc00c736efb79f57ac96064022fe3a4150029"
+      },
+      {
+        "name": "ratchet:scan_registry_version",
+        "value": "2026.10.0"
+      }
+    ]
   },
   "components": [
     {

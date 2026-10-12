@@ -85,6 +85,13 @@ CycloneDX 1.6, `cryptographic-asset` components with `cryptoProperties`, OIDs, a
 and line references. Ratchet-specific rationale and recommended replacement are
 attached as properties so the file stays valid against the spec.
 
+Every CBOM records which registry produced it, as `ratchet:scan_registry_version` and
+`ratchet:scan_registry_sha256` in the metadata properties. When a migration target
+changes in a later registry version, a CBOM made before that change still says which
+claims it was built on, and a CBOM made with a locally edited registry is identifiable
+by its hash. Output is deterministic: two scans of the same tree differ only in
+timestamp and serial number.
+
 ## Limitations, stated plainly
 
 Because they will come up in the first conversation with anyone technical.

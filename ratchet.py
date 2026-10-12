@@ -14,6 +14,7 @@ Stdlib only. No dependencies. Run it anywhere.
 
 import argparse
 import ast
+import hashlib
 import json
 import os
 import re
@@ -305,6 +306,20 @@ except RegistryError as e:
 
 ALGORITHMS = REGISTRY["algorithms"]
 QUANTUM_LEVEL = REGISTRY["nist_quantum_security_level"]
+
+
+def registry_digest(registry):
+    """SHA-256 of the registry's content, independent of formatting.
+
+    Recorded in every CBOM next to registry_version, so a CBOM produced from a
+    locally edited registry is distinguishable from one produced from the
+    published registry of the same version.
+    """
+    text = json.dumps(registry, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+REGISTRY_DIGEST = registry_digest(REGISTRY)
 
 # ---------------------------------------------------------------------------
 # Python detection: module paths and attribute names
@@ -601,6 +616,12 @@ def build_cbom(findings, root, tool_version=VERSION):
                 "bom-ref": "target",
                 "name": os.path.basename(os.path.abspath(root)) or "target",
             },
+            # CycloneDX metadata admits no custom fields, so the registry that
+            # produced this CBOM is recorded as namespaced properties.
+            "properties": sorted([
+                {"name": "ratchet:scan_registry_version", "value": REGISTRY["registry_version"]},
+                {"name": "ratchet:scan_registry_sha256", "value": REGISTRY_DIGEST},
+            ], key=lambda p: p["name"]),
         },
         "components": components,
     }
@@ -621,6 +642,8 @@ def report(findings, files_scanned, root):
 
     print()
     print(f"ratchet {VERSION}  scanned {files_scanned} files in {root}")
+    source = "embedded copy" if REGISTRY_SOURCE == "embedded" else "registry.json"
+    print(f"registry {REGISTRY['registry_version']}  from {source}")
     print("=" * 72)
 
     def section(title, bucket):

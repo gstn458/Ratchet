@@ -1,7 +1,6 @@
 """The registry is data. These tests keep registry.json, the copy embedded in
 ratchet.py, and the detection tables that point into it consistent."""
 
-import hashlib
 import json
 import re
 import shutil
@@ -27,11 +26,6 @@ REGISTRY_CONTENT = {
 }
 
 ENTRY_FIELDS = {"primitive", "quantum", "classical", "oid", "functions", "replacement", "why"}
-
-
-def canonical_sha256(registry):
-    text = json.dumps(registry, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 @pytest.fixture(scope="module")
@@ -119,7 +113,7 @@ def test_registry_version_pins_content(registry):
     assert version in REGISTRY_CONTENT, (
         f"registry_version {version} has no pinned hash in tests/test_registry.py"
     )
-    assert canonical_sha256(registry) == REGISTRY_CONTENT[version], (
+    assert ratchet.registry_digest(registry) == REGISTRY_CONTENT[version], (
         "registry.json content changed without a registry_version bump"
     )
 
@@ -171,3 +165,36 @@ def test_detection_tables_only_name_registry_entries(registry):
         | {algo for _, algo, _ in ratchet.GO_CALL_PATTERNS}
     )
     assert referenced <= names, referenced - names
+
+
+# --- provenance in the output ------------------------------------------------
+
+def metadata_properties(doc):
+    return {p["name"]: p["value"] for p in doc["metadata"]["properties"]}
+
+
+def test_cbom_records_which_registry_produced_it(registry):
+    findings, _ = ratchet.walk(str(FIXTURES / "go" / "rsa"))
+    props = metadata_properties(ratchet.build_cbom(findings, "."))
+    assert props["ratchet:scan_registry_version"] == registry["registry_version"]
+    assert props["ratchet:scan_registry_sha256"] == REGISTRY_CONTENT[registry["registry_version"]]
+
+
+def test_edited_registry_is_visible_in_the_cbom(tmp_path, registry):
+    # Same registry_version, different content: the hash must give it away.
+    shutil.copy(REPO_ROOT / "ratchet.py", tmp_path)
+    edited = json.loads(json.dumps(registry))
+    edited["algorithms"]["RSA"]["replacement"] = "something else"
+    (tmp_path / "registry.json").write_text(json.dumps(edited))
+    r = run_copy(tmp_path, str(FIXTURES / "go" / "rsa"), "--json")
+    props = metadata_properties(json.loads(r.stdout))
+    assert props["ratchet:scan_registry_version"] == registry["registry_version"]
+    assert props["ratchet:scan_registry_sha256"] != REGISTRY_CONTENT[registry["registry_version"]]
+
+
+def test_report_names_the_registry_source(tmp_path):
+    shutil.copy(REPO_ROOT / "ratchet.py", tmp_path)
+    alone = run_copy(tmp_path, str(FIXTURES / "go" / "rsa"))
+    assert "registry 2026.10.0  from embedded copy" in alone.stdout
+    beside = run_copy(REPO_ROOT, str(FIXTURES / "go" / "rsa"))
+    assert "registry 2026.10.0  from registry.json" in beside.stdout
