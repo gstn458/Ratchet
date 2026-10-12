@@ -1,0 +1,48 @@
+
+ratchet 0.1.0  scanned 1 files in .
+registry 2026.10.2  from registry.json
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  DSA  (no call sites, 1 import)
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      ops.go:6   "crypto/dsa"
+
+  ECDSA  (no call sites, 1 import)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      ops.go:7   "crypto/ecdsa"
+
+  Ed25519  (no call sites, 1 import)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      ops.go:8   "crypto/ed25519"
+
+  RSA  (no call sites, 1 import)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      ops.go:10   "crypto/rsa"
+
+  X25519  (no call sites, 1 import)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      ops.go:13   "golang.org/x/crypto/curve25519"
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  AES  (no call sites, 1 import)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      ops.go:5   "crypto/aes"
+
+  SHA-256  (no call sites, 1 import)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      ops.go:11   "crypto/sha256"
+
+========================================================================
+No quantum-vulnerable call sites and 5 imports across 1 file.
+
