@@ -148,9 +148,9 @@ constructors. Methods called on a key value, such as `key.Sign(...)` through the
 `crypto.Signer` interface, are not attributed, so a Go file that signs only that way
 shows up through its import alone.
 
-Files that fail to parse are skipped silently. A Python 2 file, or anything else
-`ast.parse` rejects, contributes nothing, and neither the report nor the CBOM says
-it was skipped.
+Files that cannot be parsed contribute no findings. A Python 2 file, or anything else
+`ast.parse` rejects, is listed with the reason in every report and every CBOM, but the
+cryptography in it is not detected.
 
 The CBOM lists at most 50 occurrence locations per component. The rest are dropped,
 though `ratchet:occurrence_count` still gives the full number.

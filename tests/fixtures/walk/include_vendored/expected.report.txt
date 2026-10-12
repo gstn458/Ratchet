@@ -4,6 +4,7 @@ registry 2026.10.2  from registry.json
 vendored directories included (--include-vendored)
 skipped 1 directory:
   tooling or hidden: .hidden
+parsed all 9 files
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue

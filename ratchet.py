@@ -822,12 +822,32 @@ class PyVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def scan_python(path):
+class Unparsed(Exception):
+    """A source file the scanner could not read or parse. walk() records it,
+    with this reason, in the report and the CBOM; it never disappears."""
+
+
+def read_source(path):
     try:
-        source = open(path, "r", encoding="utf-8", errors="replace").read()
+        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+            return fh.read()
+    except OSError as e:
+        raise Unparsed(f"could not be read: {e.strerror or e.__class__.__name__}")
+
+
+def scan_python(path):
+    source = read_source(path)
+    # Reasons are fixed strings so output is identical on every Python version;
+    # the interpreter's own messages differ between releases.
+    if "\x00" in source:
+        raise Unparsed("contains null bytes")
+    try:
         tree = ast.parse(source, filename=path)
-    except (SyntaxError, ValueError, OSError):
-        return []
+    except SyntaxError as e:
+        raise Unparsed(f"not valid Python 3 syntax at line {e.lineno}"
+                       if e.lineno else "not valid Python 3 syntax")
+    except (RecursionError, MemoryError):
+        raise Unparsed("too deeply nested to parse")
     visitor = PyVisitor(path, source.splitlines())
     visitor.visit(tree)
     visitor.resolve_ec()
@@ -933,10 +953,7 @@ def go_imports(code, strings):
 
 def scan_go(path):
     findings = []
-    try:
-        lines = open(path, "r", encoding="utf-8", errors="replace").read().splitlines()
-    except OSError:
-        return []
+    lines = read_source(path).splitlines()
 
     code, strings = go_lex("\n".join(lines))
     import_lines = go_imports(code, strings)
@@ -989,14 +1006,16 @@ def scan_go(path):
 
 class Scan:
     """Everything one scan produced: findings, the number of source files
-    read, the directories skipped as (relative path, reason), and whether
-    vendored directories were included."""
+    attempted, the directories skipped and the files that could not be parsed
+    as (relative path, reason), and whether vendored directories were
+    included."""
 
-    def __init__(self, findings, files, skipped, include_vendored):
+    def __init__(self, findings, files, skipped, include_vendored, unparsed=()):
         self.findings = findings
         self.files = files
         self.skipped = skipped
         self.include_vendored = include_vendored
+        self.unparsed = list(unparsed)
 
 
 def skip_reason(name, include_vendored):
@@ -1007,8 +1026,11 @@ def skip_reason(name, include_vendored):
     return None
 
 
+SCANNERS = {".py": scan_python, ".go": scan_go}
+
+
 def walk(root, include_vendored=False):
-    findings, skipped = [], []
+    findings, skipped, unparsed = [], [], []
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
         keep = []
@@ -1022,19 +1044,21 @@ def walk(root, include_vendored=False):
         # depend on the filesystem's directory ordering.
         dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
+            scanner = SCANNERS.get(os.path.splitext(fn)[1])
+            if not scanner:
+                continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
-            if fn.endswith(".py"):
-                files += 1
-                for f in scan_python(full):
-                    f.path = rel
-                    findings.append(f)
-            elif fn.endswith(".go"):
-                files += 1
-                for f in scan_go(full):
-                    f.path = rel
-                    findings.append(f)
-    return Scan(findings, files, sorted(skipped), include_vendored)
+            files += 1
+            try:
+                found = scanner(full)
+            except Unparsed as e:
+                unparsed.append((rel, str(e)))
+                continue
+            for f in found:
+                f.path = rel
+                findings.append(f)
+    return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed))
 
 
 # ---------------------------------------------------------------------------
@@ -1119,9 +1143,13 @@ def build_cbom(scan, root, tool_version=VERSION):
                 {"name": "ratchet:scan_registry_sha256", "value": REGISTRY_DIGEST},
                 {"name": "ratchet:include_vendored", "value": str(scan.include_vendored).lower()},
                 {"name": "ratchet:skipped_directory_count", "value": str(len(scan.skipped))},
+                {"name": "ratchet:unparsed_file_count", "value": str(len(scan.unparsed))},
             ] + [
                 {"name": "ratchet:skipped_directory", "value": f"{path} ({reason})"}
                 for path, reason in scan.skipped
+            ] + [
+                {"name": "ratchet:unparsed_file", "value": f"{path} ({reason})"}
+                for path, reason in scan.unparsed
             ], key=lambda p: (p["name"], p["value"])),
         },
         "components": components,
@@ -1179,6 +1207,20 @@ def print_skipped(scan, shown=10):
             print(f"  {reason}{hint}: {listed}{more}")
 
 
+def print_unparsed(scan, shown=10):
+    """Say which files could not be parsed, on every run. Their cryptography,
+    if any, is not in the findings."""
+    if not scan.unparsed:
+        print(f"parsed all {plural(scan.files, 'file')}" if scan.files else "found no source files")
+        return
+    print(f"could not parse {len(scan.unparsed)} of {plural(scan.files, 'file')}, "
+          f"so any cryptography in them is missing from this report:")
+    for path, reason in scan.unparsed[:shown]:
+        print(f"  {path}: {reason}")
+    if len(scan.unparsed) > shown:
+        print(f"  ... and {len(scan.unparsed) - shown} more")
+
+
 def report(scan, root):
     """Print the terminal report and return the number of quantum-vulnerable
     occurrences, imports included, for --fail-on-vulnerable.
@@ -1206,10 +1248,11 @@ def report(scan, root):
         buckets[bucket_of(algorithm)][algorithm] = group
 
     print()
-    print(f"ratchet {VERSION}  scanned {scan.files} files in {root}")
+    print(f"ratchet {VERSION}  scanned {plural(scan.files, 'file')} in {root}")
     source = "embedded copy" if REGISTRY_SOURCE == "embedded" else "registry.json"
     print(f"registry {REGISTRY['registry_version']}  from {source}")
     print_skipped(scan)
+    print_unparsed(scan)
     print("=" * 72)
 
     def section(title, bucket):
@@ -1259,6 +1302,9 @@ def report(scan, root):
             line = (f"{plural(u_calls, 'call site')} and {plural(u_imports, 'import')} with usage "
                     f"undetermined: review before choosing a migration target.")
             print(line[0].upper() + line[1:])
+    elif scan.unparsed:
+        print(f"No quantum-vulnerable primitives found in the files that could be parsed; "
+              f"{plural(len(scan.unparsed), 'file was', 'files were')} not.")
     else:
         print("No quantum-vulnerable primitives found.")
     print()

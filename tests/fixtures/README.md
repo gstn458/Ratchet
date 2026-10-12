@@ -67,7 +67,8 @@ after the fixtures were first written:
 | `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports; `.new(...)` calls add nothing | ok |
 | `import_only` | Importing `rsa` and `ec` with no calls yields two imports and no call sites; the `ec` import is EC, usage undetermined | ok (counted as call sites before step 7) |
 | `name_collision` | A project's own function named `md5()` is reported as MD5 | wrong, unscheduled (precision, Phase 1) |
-| `syntax_error` | A Python 2 file that `ast.parse` rejects is skipped **without any notice**, along with the `RSA.generate(1024)` in it | wrong → step 9, see note 3 |
+| `syntax_error` | A Python 2 file is listed as `not valid Python 3 syntax at line 3` in the report and the CBOM, and the closing line says the result covers only parsed files; the `RSA.generate(1024)` in it is still not detected | ok, gap on the file's contents (skipped silently before step 9) |
+| `null_bytes` | A file containing null bytes is listed as such, with a reason that is the same on every Python version; the other file in the tree is still scanned | ok |
 
 ## go/
 
@@ -119,5 +120,5 @@ after the fixtures were first written:
    mappings, not registry entries, but they decide which registry entry a
    finding lands on. Scheduled for step 4; the exact treatment is confirmed
    with the owner before that step is built.
-3. **Unparseable files vanish.** No count, no warning, no CBOM record. Old
-   repositories with Python 2 files are exactly where legacy crypto is.
+3. **Unparseable files.** Since step 9 they are listed with a reason in every
+   report and CBOM. Their contents are still not scanned.

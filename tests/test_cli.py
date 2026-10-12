@@ -104,3 +104,13 @@ def test_report_always_states_skipped_directories(tmp_path):
     assert "skipped no directories" in run(str(tmp_path)).stdout
     (tmp_path / "vendor").mkdir()
     assert "skipped 1 directory:" in run(str(tmp_path)).stdout
+
+
+def test_unreadable_file_is_reported_not_dropped(tmp_path):
+    (tmp_path / "ok.py").write_text("import hashlib\nhashlib.md5(b'x')\n")
+    (tmp_path / "gone.py").symlink_to(tmp_path / "missing.py")
+    r = run(str(tmp_path), "--json")
+    assert r.returncode == 0, r.stderr
+    props = [(p["name"], p["value"]) for p in json.loads(r.stdout)["metadata"]["properties"]]
+    assert ("ratchet:unparsed_file", "gone.py (could not be read: No such file or directory)") in props
+    assert "could not parse 1 of 2 files" in run(str(tmp_path)).stdout

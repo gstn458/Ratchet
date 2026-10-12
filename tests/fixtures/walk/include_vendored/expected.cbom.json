@@ -39,6 +39,10 @@
       {
         "name": "ratchet:skipped_directory_count",
         "value": "1"
+      },
+      {
+        "name": "ratchet:unparsed_file_count",
+        "value": "0"
       }
     ]
   },
