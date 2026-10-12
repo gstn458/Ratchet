@@ -4,6 +4,29 @@ Every change to `registry.json`, with the claim it makes and the primary source 
 it, as `CONTRIBUTING.md` requires. Each CBOM records the `registry_version` and
 content hash it was produced with, so this file says what any given CBOM was built on.
 
+## 2026.10.2 (registry schema 2)
+
+**New entry: EC, usage undetermined.** An elliptic-curve key whose use the scanner
+cannot see. The `ec` module in `cryptography`, PyCryptodome's `ECC`, the `ecdsa`
+package and Go's `crypto/elliptic` all produce keys that can either sign or agree
+keys, and the migration target differs: ML-DSA for signatures, ML-KEM for key
+establishment. Detection assigns ECDSA or ECDH when it sees the usage, and this entry
+otherwise.
+
+- Bucket: quantum broken. The primitive is broken by Shor's algorithm whatever it is
+  used for, and under-reporting is the worse error.
+- OID: 1.2.840.10045.2.1, id-ecPublicKey (RFC 5480, section 2.1.1). It identifies an
+  elliptic-curve public key without restricting its use, which is exactly the
+  ambiguity being recorded.
+- Primitive and functions: CycloneDX `unknown` ("the primitive is not known").
+- Security level: 0, as for every Shor-broken entry.
+- Migration target: "determine usage before migrating, ML-DSA-65 if signing,
+  ML-KEM-768 if key agreement". ML-DSA-65 from FIPS 204 and ML-KEM-768 from FIPS
+  203, matching the ECDSA and ECDH entries.
+
+It is a separate entry, not a null state on ECDSA, so it reports under its own
+heading and is never counted as confirmed ECDSA.
+
 ## 2026.10.1 (registry schema 2)
 
 **Security levels are per algorithm, not per bucket.** In 2026.10.0 the CycloneDX
