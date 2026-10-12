@@ -55,17 +55,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "stored.py#L1"
+            "location": "stored.py#L1",
+            "additionalContext": "import"
           },
           {
-            "location": "stored.py#L3"
+            "location": "stored.py#L3",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -110,20 +120,31 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "agree.py#L3"
+            "location": "agree.py#L3",
+            "additionalContext": "import"
           },
           {
-            "location": "agree.py#L10"
+            "location": "agree.py#L10",
+            "additionalContext": "call site"
           },
           {
-            "location": "agree.py#L11"
+            "location": "agree.py#L11",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -168,17 +189,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "sign.py#L2"
+            "location": "sign.py#L2",
+            "additionalContext": "import"
           },
           {
-            "location": "sign.py#L5"
+            "location": "sign.py#L5",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

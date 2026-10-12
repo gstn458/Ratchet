@@ -55,161 +55,219 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "many.py#L6"
+            "location": "many.py#L6",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L7"
+            "location": "many.py#L7",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L8"
+            "location": "many.py#L8",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L9"
+            "location": "many.py#L9",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L10"
+            "location": "many.py#L10",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L11"
+            "location": "many.py#L11",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L12"
+            "location": "many.py#L12",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L13"
+            "location": "many.py#L13",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L14"
+            "location": "many.py#L14",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L15"
+            "location": "many.py#L15",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L16"
+            "location": "many.py#L16",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L17"
+            "location": "many.py#L17",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L18"
+            "location": "many.py#L18",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L19"
+            "location": "many.py#L19",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L20"
+            "location": "many.py#L20",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L21"
+            "location": "many.py#L21",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L22"
+            "location": "many.py#L22",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L23"
+            "location": "many.py#L23",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L24"
+            "location": "many.py#L24",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L25"
+            "location": "many.py#L25",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L26"
+            "location": "many.py#L26",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L27"
+            "location": "many.py#L27",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L28"
+            "location": "many.py#L28",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L29"
+            "location": "many.py#L29",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L30"
+            "location": "many.py#L30",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L31"
+            "location": "many.py#L31",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L32"
+            "location": "many.py#L32",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L33"
+            "location": "many.py#L33",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L34"
+            "location": "many.py#L34",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L35"
+            "location": "many.py#L35",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L36"
+            "location": "many.py#L36",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L37"
+            "location": "many.py#L37",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L38"
+            "location": "many.py#L38",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L39"
+            "location": "many.py#L39",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L40"
+            "location": "many.py#L40",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L41"
+            "location": "many.py#L41",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L42"
+            "location": "many.py#L42",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L43"
+            "location": "many.py#L43",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L44"
+            "location": "many.py#L44",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L45"
+            "location": "many.py#L45",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L46"
+            "location": "many.py#L46",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L47"
+            "location": "many.py#L47",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L48"
+            "location": "many.py#L48",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L49"
+            "location": "many.py#L49",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L50"
+            "location": "many.py#L50",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L51"
+            "location": "many.py#L51",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L52"
+            "location": "many.py#L52",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L53"
+            "location": "many.py#L53",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L54"
+            "location": "many.py#L54",
+            "additionalContext": "call site"
           },
           {
-            "location": "many.py#L55"
+            "location": "many.py#L55",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "51"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

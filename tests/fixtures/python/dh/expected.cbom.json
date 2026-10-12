@@ -56,14 +56,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "params.py#L1"
+            "location": "params.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -108,14 +117,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "params.py#L3"
+            "location": "params.py#L3",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

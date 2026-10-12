@@ -56,17 +56,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "sign.go#L4"
+            "location": "sign.go#L4",
+            "additionalContext": "import"
           },
           {
-            "location": "sign.go#L10"
+            "location": "sign.go#L10",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

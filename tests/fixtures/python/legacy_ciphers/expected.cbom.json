@@ -56,14 +56,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L1"
+            "location": "ciphers.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -107,14 +116,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L1"
+            "location": "ciphers.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -159,14 +177,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L1"
+            "location": "ciphers.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -210,14 +237,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L2"
+            "location": "ciphers.py#L2",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -262,14 +298,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L1"
+            "location": "ciphers.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -313,14 +358,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "ciphers.py#L2"
+            "location": "ciphers.py#L2",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

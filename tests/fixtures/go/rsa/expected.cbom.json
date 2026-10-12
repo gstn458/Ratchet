@@ -59,14 +59,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.go#L5"
+            "location": "keys.go#L5",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -114,14 +123,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.go#L9"
+            "location": "keys.go#L9",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

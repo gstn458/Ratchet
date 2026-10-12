@@ -55,14 +55,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "service/session.py#L1"
+            "location": "service/session.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -106,14 +115,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "service/session.py#L3"
+            "location": "service/session.py#L3",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -157,14 +175,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "service/tokens.py#L6"
+            "location": "service/tokens.py#L6",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -212,17 +239,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "gateway/jwt.go#L5"
+            "location": "gateway/jwt.go#L5",
+            "additionalContext": "import"
           },
           {
-            "location": "service/tokens.py#L1"
+            "location": "service/tokens.py#L1",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "2"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -270,14 +307,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "service/tokens.py#L5"
+            "location": "service/tokens.py#L5",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -325,17 +371,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "gateway/jwt.go#L11"
+            "location": "gateway/jwt.go#L11",
+            "additionalContext": "call site"
           },
           {
-            "location": "service/tokens.py#L4"
+            "location": "service/tokens.py#L4",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -379,17 +435,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "gateway/jwt.go#L6"
+            "location": "gateway/jwt.go#L6",
+            "additionalContext": "import"
           },
           {
-            "location": "gateway/jwt.go#L10"
+            "location": "gateway/jwt.go#L10",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -433,14 +499,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "gateway/cache.go#L3"
+            "location": "gateway/cache.go#L3",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

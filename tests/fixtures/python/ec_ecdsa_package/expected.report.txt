@@ -5,21 +5,19 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDH  (5 occurrences)
+  ECDH  (3 occurrences)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       agree.py:1   from ecdsa import ECDH, NIST256p, SigningKey
-      agree.py:1   from ecdsa import ECDH, NIST256p, SigningKey
-      agree.py:1   from ecdsa import ECDH, NIST256p, SigningKey
-      ... and 2 more
+      agree.py:3   local = SigningKey.generate(curve=NIST256p)
+      agree.py:4   ecdh = ECDH(curve=NIST256p, private_key=local)
 
-  ECDSA  (3 occurrences)
+  ECDSA  (2 occurrences)
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      sign.py:1   from ecdsa import NIST256p, SigningKey
       sign.py:1   from ecdsa import NIST256p, SigningKey
       sign.py:3   sk = SigningKey.generate(curve=NIST256p)
 
 ========================================================================
-8 quantum-vulnerable call sites across 2 files.
+5 quantum-vulnerable call sites across 2 files.
 

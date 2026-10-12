@@ -55,17 +55,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "encode.go#L13"
+            "location": "encode.go#L13",
+            "additionalContext": "call site"
           },
           {
-            "location": "scalar.go#L11"
+            "location": "scalar.go#L11",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -110,14 +120,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "encode.go#L7"
+            "location": "encode.go#L7",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

@@ -57,7 +57,7 @@ after the fixtures were first written:
 | `ec_other_libraries` | `import ecdsa` and PyCryptodome `ECC` with no visible usage are EC, usage undetermined; `ECC.generate(curve="P-256")` loses the curve; `ecdsa.SigningKey.generate(...)` is not seen as a call | ok, gaps on curve and the dotted call |
 | `ec_pycryptodome` | `DSS.new(key, ...)` makes a PyCryptodome `ECC` key ECDSA; `key_agreement(static_priv=..., static_pub=...)` makes both keys ECDH; an exported, unused key is undetermined | ok |
 | `ec_ecdsa_package` | `sk.sign()` and `sk.get_verifying_key().verify()` make an `ecdsa` key ECDSA; `ECDH(private_key=...)` makes it ECDH | ok |
-| | `from ecdsa import ECDH, NIST256p, SigningKey` records three occurrences on one line, one per imported name | wrong → step 7, see note 1 |
+| | `from ecdsa import ECDH, NIST256p, SigningKey` is one import occurrence, not one per imported name | ok (was three before step 7) |
 | `dh` | `dh.generate_parameters(key_size=2048)` captured as DH-2048 | ok |
 | `dsa` | `dsa.generate_private_key(key_size=1024)` captured as DSA-1024 | ok |
 | `ed25519` | `Ed25519PrivateKey.generate()` resolved through an imported class name | ok |
@@ -109,7 +109,6 @@ after the fixtures were first written:
    are import lines. The README's paramiko and golang-jwt figures are counted
    the same way. This also explains most RSA vs RSA-2048 splits: the import
    produces a size-less RSA occurrence even when every call has a key size.
-   A from-import of several names records one occurrence per name.
    Step 7 keeps imports in the CBOM, since the inventory favours recall, but
    counts them apart from call sites in the report. Phase 2's confidence
    model, where import-only is medium and a call site is high, is the full fix.

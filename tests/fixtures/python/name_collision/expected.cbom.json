@@ -55,14 +55,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "local.py#L6"
+            "location": "local.py#L6",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

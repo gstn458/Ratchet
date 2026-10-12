@@ -56,20 +56,31 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L1"
+            "location": "keys.py#L1",
+            "additionalContext": "import"
           },
           {
-            "location": "keys.py#L3"
+            "location": "keys.py#L3",
+            "additionalContext": "call site"
           },
           {
-            "location": "keys.py#L4"
+            "location": "keys.py#L4",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",

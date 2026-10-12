@@ -56,20 +56,31 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "sign.py#L2"
+            "location": "sign.py#L2",
+            "additionalContext": "import"
           },
           {
-            "location": "sign.py#L5"
+            "location": "sign.py#L5",
+            "additionalContext": "call site"
           },
           {
-            "location": "sign.py#L6"
+            "location": "sign.py#L6",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -114,14 +125,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "sign.py#L4"
+            "location": "sign.py#L4",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -166,14 +186,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "sign.py#L8"
+            "location": "sign.py#L8",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

@@ -554,13 +554,20 @@ SKIP_DIRS = {
 }
 
 
+IMPORT, CALL = "import", "call site"
+
+
 class Finding:
-    def __init__(self, algorithm, path, line, snippet, params=None):
+    """One occurrence of an algorithm. kind is IMPORT for an import line, which
+    shows a library is present but not that it is used, or CALL otherwise."""
+
+    def __init__(self, algorithm, path, line, snippet, params=None, kind=CALL):
         self.algorithm = algorithm
         self.path = path
         self.line = line
         self.snippet = snippet.strip()[:160]
         self.params = params
+        self.kind = kind
 
     @property
     def label(self):
@@ -589,8 +596,8 @@ class PyVisitor(ast.NodeVisitor):
         idx = node.lineno - 1
         return self.lines[idx] if 0 <= idx < len(self.lines) else ""
 
-    def _add(self, algo, node, params=None):
-        finding = Finding(algo, self.path, node.lineno, self._line(node), params)
+    def _add(self, algo, node, params=None, kind=CALL):
+        finding = Finding(algo, self.path, node.lineno, self._line(node), params, kind)
         self.findings.append(finding)
         return finding
 
@@ -701,19 +708,28 @@ class PyVisitor(ast.NodeVisitor):
                 if f.algorithm == "EC" and id(f) not in resolved:
                     f.algorithm = only
 
+    def _add_import(self, algo, node, recorded):
+        # One import occurrence per algorithm per statement, however many
+        # names the statement imports from the same library.
+        if algo not in recorded:
+            recorded.add(algo)
+            self._add(algo, node, kind=IMPORT)
+
     def visit_Import(self, node):
+        recorded = set()
         for alias in node.names:
             local = alias.asname or alias.name.split(".")[0]
             self.imported[local] = (alias.name if alias.asname else local, None)
             algo = PY_MODULES.get(alias.name)
             if algo:
                 self.aliases[local] = algo
-                self._add(algo, node)
+                self._add_import(algo, node, recorded)
         self.generic_visit(node)
 
     def visit_ImportFrom(self, node):
         if not node.module:
             return self.generic_visit(node)
+        recorded = set()
         for alias in node.names:
             full = f"{node.module}.{alias.name}"
             local = alias.asname or alias.name
@@ -721,7 +737,7 @@ class PyVisitor(ast.NodeVisitor):
             algo = PY_MODULES.get(full) or PY_MODULES.get(node.module)
             if algo:
                 self.aliases[local] = algo
-                self._add(algo, node)
+                self._add_import(algo, node, recorded)
         self.generic_visit(node)
 
     def visit_Call(self, node):
@@ -903,7 +919,7 @@ def scan_go(path):
         for import_path in paths:
             algo = GO_IMPORTS.get(import_path)
             if algo:
-                findings.append(Finding(algo, path, idx + 1, lines[idx]))
+                findings.append(Finding(algo, path, idx + 1, lines[idx], kind=IMPORT))
                 import_findings[import_path].append(findings[-1])
     variants = defaultdict(set)  # import path -> algorithms its calls used
     # Patterns run on code only, so calls in comments and strings never match.
@@ -1001,7 +1017,8 @@ def build_cbom(findings, root, tool_version=VERSION):
             "cryptoProperties": crypto_properties,
             "evidence": {
                 "occurrences": [
-                    {"location": f"{f.path}#L{f.line}"} for f in group[:50]
+                    {"location": f"{f.path}#L{f.line}", "additionalContext": f.kind}
+                    for f in group[:50]
                 ]
             },
             "properties": sorted([
@@ -1010,6 +1027,10 @@ def build_cbom(findings, root, tool_version=VERSION):
                 {"name": "ratchet:rationale", "value": spec["why"]},
                 {"name": "ratchet:recommended_replacement", "value": spec["replacement"]},
                 {"name": "ratchet:occurrence_count", "value": str(len(group))},
+                {"name": "ratchet:call_site_count",
+                 "value": str(sum(f.kind == CALL for f in group))},
+                {"name": "ratchet:import_count",
+                 "value": str(sum(f.kind == IMPORT for f in group))},
             ], key=lambda p: p["name"]),
         })
 

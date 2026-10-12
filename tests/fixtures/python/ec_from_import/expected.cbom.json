@@ -56,20 +56,31 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "agree.py#L1"
+            "location": "agree.py#L1",
+            "additionalContext": "import"
           },
           {
-            "location": "agree.py#L2"
+            "location": "agree.py#L2",
+            "additionalContext": "import"
           },
           {
-            "location": "agree.py#L7"
+            "location": "agree.py#L7",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "2"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -114,17 +125,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "agree.py#L4"
+            "location": "agree.py#L4",
+            "additionalContext": "call site"
           },
           {
-            "location": "agree.py#L5"
+            "location": "agree.py#L5",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

@@ -55,14 +55,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L2"
+            "location": "keys.py#L2",
+            "additionalContext": "import"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -106,14 +115,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L13"
+            "location": "keys.py#L13",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -158,14 +176,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L9"
+            "location": "keys.py#L9",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -210,17 +237,27 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L7"
+            "location": "keys.py#L7",
+            "additionalContext": "call site"
           },
           {
-            "location": "keys.py#L8"
+            "location": "keys.py#L8",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -265,14 +302,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L5"
+            "location": "keys.py#L5",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",
@@ -317,14 +363,23 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "keys.py#L4"
+            "location": "keys.py#L4",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

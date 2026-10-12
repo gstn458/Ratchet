@@ -55,20 +55,31 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "kex.go#L6"
+            "location": "kex.go#L6",
+            "additionalContext": "import"
           },
           {
-            "location": "kex.go#L13"
+            "location": "kex.go#L13",
+            "additionalContext": "call site"
           },
           {
-            "location": "kex.go#L20"
+            "location": "kex.go#L20",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
+          "name": "ratchet:call_site_count",
+          "value": "2"
+        },
+        {
           "name": "ratchet:classical_status",
           "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
