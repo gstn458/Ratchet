@@ -34,19 +34,11 @@
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": ".hidden (tooling, build output or hidden)"
-      },
-      {
-        "name": "ratchet:skipped_directory",
-        "value": "build (tooling, build output or hidden)"
-      },
-      {
-        "name": "ratchet:skipped_directory",
-        "value": "dist (tooling, build output or hidden)"
+        "value": ".hidden (tooling or hidden)"
       },
       {
         "name": "ratchet:skipped_directory_count",
-        "value": "3"
+        "value": "1"
       }
     ]
   },
@@ -140,6 +132,14 @@
       "evidence": {
         "occurrences": [
           {
+            "location": "build/lib.py#L3",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "dist/lib.py#L3",
+            "additionalContext": "call site"
+          },
+          {
             "location": "node_modules/lib.py#L3",
             "additionalContext": "call site"
           },
@@ -164,7 +164,7 @@
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "5"
+          "value": "7"
         },
         {
           "name": "ratchet:classical_status",
@@ -176,7 +176,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "5"
+          "value": "7"
         },
         {
           "name": "ratchet:quantum_status",

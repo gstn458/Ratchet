@@ -34,35 +34,35 @@
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": ".hidden (tooling, build output or hidden)"
+        "value": ".hidden (tooling or hidden)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "build (tooling, build output or hidden)"
+        "value": "build (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "dist (tooling, build output or hidden)"
+        "value": "dist (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "node_modules (vendored or test data)"
+        "value": "node_modules (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "site-packages (vendored or test data)"
+        "value": "site-packages (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "testdata (vendored or test data)"
+        "value": "testdata (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "vendor (vendored or test data)"
+        "value": "vendor (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory",
-        "value": "venv (vendored or test data)"
+        "value": "venv (vendored, test data or build output)"
       },
       {
         "name": "ratchet:skipped_directory_count",

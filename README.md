@@ -20,7 +20,7 @@ python3 ratchet.py /path/to/repo
 python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 for CI
-python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, testdata/...
+python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 ```
 
 `ratchet.py` runs on its own. The algorithm registry, which holds every claim Ratchet
@@ -175,11 +175,12 @@ followed takes its file's usage only when every usage in that file agrees, and i
 otherwise reported as usage undetermined. Two unrelated keys that share a name in one
 file are treated as the same key.
 
-Vendored and test-data directories (`vendor`, `node_modules`, `site-packages`, `venv`,
-`.venv`, `testdata`) are skipped by default for speed, although vendored code is where
-unmaintained cryptography tends to live. Every report says how many directories were
-skipped and which, and every CBOM lists them; `--include-vendored` scans them. Build
-output (`build`, `dist`), caches and dot-directories are always skipped, and listed.
+Vendored, test-data and build-output directories (`vendor`, `node_modules`,
+`site-packages`, `venv`, `.venv`, `testdata`, `build`, `dist`) are skipped by default for
+speed, although vendored code is where unmaintained cryptography tends to live and
+build output can bundle it. Every report says how many directories were skipped and
+which, and every CBOM lists them; `--include-vendored` scans them. Version control,
+caches and other dot-directories are always skipped, and listed.
 
 No remediation yet. The scanner finds things. Opening a pull request that migrates
 to ML-KEM or ML-DSA without silently breaking production is the actual hard problem

@@ -1,20 +1,20 @@
 
-ratchet 0.1.0  scanned 7 files in .
+ratchet 0.1.0  scanned 9 files in .
 registry 2026.10.2  from registry.json
 vendored directories included (--include-vendored)
-skipped 3 directories:
-  tooling, build output or hidden: .hidden, build, dist
+skipped 1 directory:
+  tooling or hidden: .hidden
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (5 call sites)
+  MD5  (7 call sites)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      build/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")
+      dist/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")
       node_modules/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")
-      site-packages/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")
-      testdata/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")
-      ... and 2 more
+      ... and 4 more
 
   DES  (1 call site, 1 import)
     56-bit key. Brute-forced on commodity hardware.

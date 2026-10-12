@@ -569,15 +569,17 @@ GO_ECDSA_SIGNING = re.compile(
 )
 
 # Skipped by default for speed, scanned with --include-vendored. Vendored code
-# is exactly where unmaintained cryptography lives, so a scan that skips it
-# says so in the report and the CBOM.
-VENDORED_DIRS = {"vendor", "node_modules", "site-packages", "venv", ".venv", "testdata"}
+# is exactly where unmaintained cryptography lives, and build output can bundle
+# third-party code, so a scan that skips them says so in the report and CBOM.
+VENDORED_DIRS = {
+    "vendor", "node_modules", "site-packages", "venv", ".venv", "testdata", "build", "dist",
+}
 
-# Always skipped: version control, caches and build output. Any other directory
-# whose name starts with a dot is skipped too.
-TOOLING_DIRS = {".git", "__pycache__", ".tox", ".mypy_cache", "dist", "build"}
+# Always skipped: version control and caches. Any other directory whose name
+# starts with a dot is skipped too.
+TOOLING_DIRS = {".git", "__pycache__", ".tox", ".mypy_cache"}
 
-VENDORED, TOOLING = "vendored or test data", "tooling, build output or hidden"
+VENDORED, TOOLING = "vendored, test data or build output", "tooling or hidden"
 
 
 IMPORT, CALL = "import", "call site"
