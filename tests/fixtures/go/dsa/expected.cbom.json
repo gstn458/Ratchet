@@ -92,6 +92,68 @@
           "value": "ML-DSA-65 (FIPS 204)"
         }
       ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dsa-l2048n256",
+      "name": "DSA-L2048N256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "L2048N256",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10040.4.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys.go#L10",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the finite-field discrete log."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        }
+      ]
     }
   ]
 }

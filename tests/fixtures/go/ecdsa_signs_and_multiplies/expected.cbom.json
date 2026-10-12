@@ -122,13 +122,17 @@
           {
             "location": "sign.go#L13",
             "additionalContext": "call site"
+          },
+          {
+            "location": "sign.go#L18",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:classical_status",
@@ -140,7 +144,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "2"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",

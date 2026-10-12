@@ -5,11 +5,12 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDSA  (1 call site, 1 import)
+  ECDSA  (2 call sites, 1 import)
     parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       sign.go:13   key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+      sign.go:18   return ecdsa.SignASN1(rand.Reader, key, digest)
       sign.go:4   "crypto/ecdsa"
 
 
@@ -22,6 +23,6 @@ USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not vis
       sign.go:17   _, _ = elliptic.P256().ScalarMult(x, y, key.D.Bytes())
 
 ========================================================================
-2 quantum-vulnerable call sites and 1 import across 1 file.
+3 quantum-vulnerable call sites and 1 import across 1 file.
 1 call site and no imports with usage undetermined: review before choosing a migration target.
 

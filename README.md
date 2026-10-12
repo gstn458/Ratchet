@@ -127,10 +127,11 @@ separately, as Ratchet now does, the same repositories give 11 call sites and 14
 imports for paramiko, and 1 call site and 13 imports for golang-jwt. An import shows a
 library is present, not that it is used. Imports stay in the CBOM, marked as imports.
 
-Go call sites are recognised only for key generation and a few cipher and hash
-constructors. Signing, verification and encryption calls such as `rsa.SignPKCS1v15`,
-`ecdsa.Sign` or `ed25519.Sign` are not matched, so a Go file that only signs shows up
-through its import alone.
+Go call sites are recognised for the package-level functions of the standard crypto
+packages: key generation, signing, verification, encryption and the hash and cipher
+constructors. Methods called on a key value, such as `key.Sign(...)` through the
+`crypto.Signer` interface, are not attributed, so a Go file that signs only that way
+shows up through its import alone.
 
 Files that fail to parse are skipped silently. A Python 2 file, or anything else
 `ast.parse` rejects, contributes nothing, and neither the report nor the CBOM says

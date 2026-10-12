@@ -5,44 +5,62 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  DSA  (no call sites, 1 import)
-    Shor's algorithm solves the finite-field discrete log.
-    migrate to: ML-DSA-65 (FIPS 204)
-      ops.go:6   "crypto/dsa"
-
-  ECDSA  (no call sites, 1 import)
-    Shor's algorithm solves the discrete log on the curve.
-    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      ops.go:7   "crypto/ecdsa"
-
-  Ed25519  (no call sites, 1 import)
-    Edwards-curve discrete log falls to Shor's algorithm.
-    migrate to: ML-DSA-65 (FIPS 204)
-      ops.go:8   "crypto/ed25519"
-
-  RSA  (no call sites, 1 import)
+  RSA  (8 call sites, 1 import)
+    parameter set: not stated in any call site
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      ops.go:10   "crypto/rsa"
+      ops.go:17   sig, _ := rsa.SignPKCS1v15(rand.Reader, priv, crypto.SHA256, digest)
+      ops.go:18   _ = rsa.VerifyPKCS1v15(&priv.PublicKey, crypto.SHA256, digest, sig)
+      ops.go:19   pss, _ := rsa.SignPSS(rand.Reader, priv, crypto.SHA256, digest, nil)
+      ... and 6 more
 
-  X25519  (no call sites, 1 import)
+  ECDSA  (2 call sites, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      ops.go:28   sig, _ := ecdsa.SignASN1(rand.Reader, priv, digest)
+      ops.go:29   _ = ecdsa.VerifyASN1(&priv.PublicKey, digest, sig)
+      ops.go:7   "crypto/ecdsa"
+
+  Ed25519  (2 call sites, 1 import)
+    parameter set: not stated in any call site
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      ops.go:33   sig := ed25519.Sign(priv, msg)
+      ops.go:34   _ = ed25519.Verify(priv.Public().(ed25519.PublicKey), msg, sig)
+      ops.go:8   "crypto/ed25519"
+
+  DSA  (1 call site, 1 import)
+    parameter sets: L2048N256: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      ops.go:39   _ = dsa.GenerateParameters(&params, rand.Reader, dsa.L2048N256)
+      ops.go:6   "crypto/dsa"
+
+  X25519  (1 call site, 1 import)
+    parameter set: not stated in any call site
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      ops.go:43   _, _ = curve25519.X25519(scalar, point)
       ops.go:13   "golang.org/x/crypto/curve25519"
 
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  AES  (no call sites, 1 import)
-    Grover halves effective key length. AES-256 stays at 128-bit margin.
-    migrate to: AES-256 if currently AES-128
-      ops.go:5   "crypto/aes"
-
-  SHA-256  (no call sites, 1 import)
+  SHA-256  (3 call sites, 1 import)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
-      ops.go:11   "crypto/sha256"
+      ops.go:21   ct, _ := rsa.EncryptOAEP(sha256.New(), rand.Reader, &priv.PublicKey, digest, nil)
+      ops.go:22   _, _ = rsa.DecryptOAEP(sha256.New(), rand.Reader, priv, ct, nil)
+      ops.go:48   return sha256.Sum256(key)
+      ... and 1 more
+
+  AES  (1 call site, 1 import)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      ops.go:47   _, _ = aes.NewCipher(key)
+      ops.go:5   "crypto/aes"
 
 ========================================================================
-No quantum-vulnerable call sites and 5 imports across 1 file.
+14 quantum-vulnerable call sites and 5 imports across 1 file.
 

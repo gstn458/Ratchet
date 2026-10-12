@@ -14,9 +14,10 @@ ALREADY BROKEN       weak today, quantum is not the issue
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  AES  (no call sites, 1 import)
+  AES  (1 call site, 1 import)
     Grover halves effective key length. AES-256 stays at 128-bit margin.
     migrate to: AES-256 if currently AES-128
+      cipher.go:10   _, _ = aes.NewCipher(key)
       cipher.go:4   "crypto/aes"
 
 ========================================================================

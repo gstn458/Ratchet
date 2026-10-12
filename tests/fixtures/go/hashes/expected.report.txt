@@ -20,9 +20,10 @@ ALREADY BROKEN       weak today, quantum is not the issue
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  SHA-256  (no call sites, 1 import)
+  SHA-256  (1 call site, 1 import)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
+      digest.go:12   _ = sha256.Sum256(b)
       digest.go:6   "crypto/sha256"
 
 ========================================================================

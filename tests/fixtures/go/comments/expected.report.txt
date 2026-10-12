@@ -5,9 +5,10 @@ registry 2026.10.2  from registry.json
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  SHA-256  (no call sites, 1 import)
+  SHA-256  (1 call site, 1 import)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
+      notes.go:13   return sha256.Sum256(b) // md5.Sum(b) in a trailing comment
       notes.go:3   import "crypto/sha256"
 
 ========================================================================

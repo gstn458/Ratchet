@@ -57,13 +57,17 @@
           {
             "location": "ops.go#L5",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L47",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -75,7 +79,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -155,6 +159,68 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dsa-l2048n256",
+      "name": "DSA-L2048N256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "L2048N256",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10040.4.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ops.go#L39",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the finite-field discrete log."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/algorithm/ecdsa",
       "name": "ECDSA",
       "cryptoProperties": {
@@ -180,13 +246,21 @@
           {
             "location": "ops.go#L7",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L28",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L29",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "2"
         },
         {
           "name": "ratchet:classical_status",
@@ -198,7 +272,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -242,13 +316,21 @@
           {
             "location": "ops.go#L8",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L33",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L34",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "2"
         },
         {
           "name": "ratchet:classical_status",
@@ -260,7 +342,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -306,13 +388,45 @@
           {
             "location": "ops.go#L10",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L17",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L18",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L19",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L20",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L21",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L22",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L23",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L24",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "8"
         },
         {
           "name": "ratchet:classical_status",
@@ -324,7 +438,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "9"
         },
         {
           "name": "ratchet:quantum_status",
@@ -366,13 +480,25 @@
           {
             "location": "ops.go#L11",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L21",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L22",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "ops.go#L48",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "3"
         },
         {
           "name": "ratchet:classical_status",
@@ -384,7 +510,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "4"
         },
         {
           "name": "ratchet:quantum_status",
@@ -427,13 +553,17 @@
           {
             "location": "ops.go#L13",
             "additionalContext": "import"
+          },
+          {
+            "location": "ops.go#L43",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -445,7 +575,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",

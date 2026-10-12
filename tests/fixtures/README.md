@@ -73,21 +73,22 @@ after the fixtures were first written:
 | Case | Pins down | Status |
 | --- | --- | --- |
 | `rsa` | `rsa.GenerateKey(rand.Reader, 2048)` captured as RSA-2048 | ok |
-| | With a variable key size, the call pattern does not match at all, and only the import is recorded | gap |
+| | With a variable key size the call is an RSA call site with no stated key size | ok (only the import was recorded before) |
 | `ecdsa` | `crypto/ecdsa` import and `ecdsa.GenerateKey` call; `elliptic.P256()` passed to it is curve selection, not direct `crypto/elliptic` use | ok |
 | `ecdsa_keys_for_ecdh` | x/crypto/ssh's idiom: keys from `ecdsa.GenerateKey` used for ECDH through `curve.ScalarMult`, with no signing in the file, are EC, usage undetermined; `x.Sign()` on a big.Int is not signing | ok (was ECDSA) |
 | `ecdsa_signs_and_multiplies` | A file that signs with `ecdsa.SignASN1` stays ECDSA even though it also does a raw `ScalarMult` | ok |
 | `ecdh` | `crypto/ecdh` maps to ECDH; `ecdh.P256()` is an ECDH call site and `ecdh.X25519()` an X25519 one; with both curves in the file the import stays ECDH | ok |
 | `ecdh_x25519_only` | When every curve a file takes from `crypto/ecdh` is X25519, the import is X25519 too | ok |
 | `elliptic_direct` | Direct `crypto/elliptic` use (`curve.ScalarBaseMult`, `elliptic.Marshal`) is EC, usage undetermined; `curve25519.ScalarBaseMult` in the same file is not | ok (was no finding before step 4) |
-| | `curve25519.ScalarBaseMult` is not recorded as an X25519 call site, only the import is | gap |
+| | `curve25519.ScalarBaseMult` is an X25519 call site | ok |
 | `ed25519` | `crypto/ed25519` import and `GenerateKey` call | ok |
 | `x25519` | `golang.org/x/crypto/curve25519` maps to X25519 | ok |
-| `dsa` | `crypto/dsa` import; the `L2048N256` parameter set is not captured | ok, gap on parameters |
+| `dsa` | `dsa.GenerateParameters(..., dsa.L2048N256)` is DSA-L2048N256 | ok (parameter set was not captured before) |
 | `hashes` | `crypto/md5`, `crypto/sha1` imports and calls; `crypto/sha256` from its import only | ok |
 | `des_3des` | `des.NewCipher` is DES and `des.NewTripleDESCipher` is 3DES; with both in the file the `crypto/des` import stays DES | ok (3DES was reported as DES before step 5) |
 | `tripledes_only` | When every `crypto/des` call in a file is 3DES, the import is 3DES too | ok |
 | `rc4_aes` | `crypto/rc4` and `crypto/aes` | ok |
+| `sign_verify_encrypt` | RSA, ECDSA and Ed25519 signing and verification, RSA encryption and decryption, DSA parameter generation, X25519, AES and SHA-256 calls are call sites, each only when the file imports the package | ok (only imports were recorded before) |
 | `string_literal` | `"crypto/rsa"` and `"crypto/md5"` in ordinary strings are not imports | ok (were reported before step 5) |
 | `import_forms` | Single-line, aliased, grouped, blank and raw-string imports are found; a commented-out import, an import path in a block comment, a raw string, a struct tag and an escaped string are not | ok |
 | `aliased_import` | `gorsa "crypto/rsa"` import is seen, but `gorsa.GenerateKey(..., 2048)` is not, so the key size is lost | gap (tree-sitter, Phase 1) |

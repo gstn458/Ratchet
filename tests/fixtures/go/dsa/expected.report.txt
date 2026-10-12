@@ -5,11 +5,13 @@ registry 2026.10.2  from registry.json
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  DSA  (no call sites, 1 import)
+  DSA  (1 call site, 1 import)
+    parameter sets: L2048N256: 1
     Shor's algorithm solves the finite-field discrete log.
     migrate to: ML-DSA-65 (FIPS 204)
+      keys.go:10   return dsa.GenerateParameters(&params, rand.Reader, dsa.L2048N256)
       keys.go:4   "crypto/dsa"
 
 ========================================================================
-No quantum-vulnerable call sites and 1 import across 1 file.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

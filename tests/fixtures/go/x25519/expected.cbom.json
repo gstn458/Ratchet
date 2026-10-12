@@ -58,13 +58,17 @@
           {
             "location": "agree.go#L3",
             "additionalContext": "import"
+          },
+          {
+            "location": "agree.go#L6",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -76,7 +80,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",

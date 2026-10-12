@@ -503,13 +503,33 @@ GO_IMPORTS = {
     "golang.org/x/crypto/curve25519": "X25519",
 }
 
+# Call sites, as (import path, pattern, algorithm, parameter group). A pattern
+# applies only when the file imports that path, so a third-party package that
+# happens to be called rsa does not match. Calls through an aliased import are
+# not matched (the tree-sitter backend in Phase 1 resolves aliases).
 GO_CALL_PATTERNS = [
-    (re.compile(r"\brsa\.GenerateKey\s*\(\s*[^,]+,\s*(\d+)"), "RSA", 1),
-    (re.compile(r"\becdsa\.GenerateKey\s*\("), "ECDSA", None),
-    (re.compile(r"\bed25519\.GenerateKey\s*\("), "Ed25519", None),
-    (re.compile(r"\bmd5\.(Sum|New)\s*\("), "MD5", None),
-    (re.compile(r"\bsha1\.(Sum|New)\s*\("), "SHA-1", None),
-    (re.compile(r"\brc4\.NewCipher\s*\("), "RC4", None),
+    # RSA: key generation, with the key size when it is a literal.
+    ("crypto/rsa", re.compile(r"\brsa\.GenerateKey\s*\((?:[^,()]*,\s*(\d+)\s*\))?"), "RSA", 1),
+    ("crypto/rsa", re.compile(r"\brsa\.GenerateMultiPrimeKey\s*\("), "RSA", None),
+    ("crypto/rsa", re.compile(
+        r"\brsa\.(SignPKCS1v15|VerifyPKCS1v15|SignPSS|VerifyPSS|EncryptOAEP|DecryptOAEP"
+        r"|EncryptPKCS1v15|DecryptPKCS1v15|DecryptPKCS1v15SessionKey)\s*\("), "RSA", None),
+    ("crypto/ecdsa", re.compile(r"\becdsa\.(GenerateKey|Sign|SignASN1|Verify|VerifyASN1)\s*\("),
+     "ECDSA", None),
+    ("crypto/ed25519", re.compile(r"\bed25519\.(GenerateKey|NewKeyFromSeed|Sign|Verify|VerifyWithOptions)\s*\("),
+     "Ed25519", None),
+    ("golang.org/x/crypto/ed25519", re.compile(r"\bed25519\.(GenerateKey|NewKeyFromSeed|Sign|Verify)\s*\("),
+     "Ed25519", None),
+    # DSA: the parameter size constant names the parameter set.
+    ("crypto/dsa", re.compile(r"\bdsa\.GenerateParameters\s*\((?:[^()]*\bdsa\.(L\d+N\d+))?"), "DSA", 1),
+    ("crypto/dsa", re.compile(r"\bdsa\.(GenerateKey|Sign|Verify)\s*\("), "DSA", None),
+    ("golang.org/x/crypto/curve25519", re.compile(r"\bcurve25519\.(X25519|ScalarMult|ScalarBaseMult)\s*\("),
+     "X25519", None),
+    ("crypto/md5", re.compile(r"\bmd5\.(Sum|New)\s*\("), "MD5", None),
+    ("crypto/sha1", re.compile(r"\bsha1\.(Sum|New)\s*\("), "SHA-1", None),
+    ("crypto/sha256", re.compile(r"\bsha256\.(Sum256|New)\s*\("), "SHA-256", None),
+    ("crypto/rc4", re.compile(r"\brc4\.NewCipher\s*\("), "RC4", None),
+    ("crypto/aes", re.compile(r"\baes\.NewCipher\s*\("), "AES", None),
 ]
 
 # Packages that serve more than one algorithm. The call says which, and the
@@ -925,7 +945,9 @@ def scan_go(path):
     # Patterns run on code only, so calls in comments and strings never match.
     # The finding still shows the original line.
     for i, (line, text) in enumerate(zip(lines, code), start=1):
-        for pattern, algo, group in GO_CALL_PATTERNS:
+        for import_path, pattern, algo, group in GO_CALL_PATTERNS:
+            if import_path not in imports:
+                continue
             m = pattern.search(text)
             if m:
                 params = m.group(group) if group else None
