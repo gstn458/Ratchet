@@ -62,3 +62,16 @@ def test_bom_refs_are_unique(root):
 def test_example_cbom_is_valid(cbom_validator):
     doc = json.loads((REPO_ROOT / "paramiko-cbom.json").read_text())
     assert errors(cbom_validator, doc) == []
+
+
+@pytest.mark.parametrize("root", fixture_dirs(), ids=fixture_id)
+def test_every_occurrence_is_listed(root):
+    # The CBOM is evidence: each component lists every location it counts,
+    # with the import and call-site counts adding up to the total.
+    doc = json.loads((root / "expected.cbom.json").read_text())
+    for c in doc["components"]:
+        props = {p["name"]: int(p["value"]) for p in c["properties"]
+                 if p["name"].endswith("_count")}
+        assert len(c["evidence"]["occurrences"]) == props["ratchet:occurrence_count"], c["name"]
+        assert props["ratchet:call_site_count"] + props["ratchet:import_count"] \
+            == props["ratchet:occurrence_count"], c["name"]

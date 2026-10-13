@@ -150,10 +150,8 @@ shows up through its import alone.
 
 Files that cannot be parsed contribute no findings. A Python 2 file, or anything else
 `ast.parse` rejects, is listed with the reason in every report and every CBOM, but the
-cryptography in it is not detected.
-
-The CBOM lists at most 50 occurrence locations per component. The rest are dropped,
-though `ratchet:occurrence_count` still gives the full number.
+cryptography in it is not detected. A low-confidence fallback for such files is planned
+for Phase 2.
 
 Parameter sets are read only from literal values in calls whose signature Ratchet
 knows: `cryptography`'s RSA, DSA, DH and EC key generation and PyCryptodome's RSA and

@@ -1099,7 +1099,7 @@ def build_cbom(scan, root, tool_version=VERSION):
             "evidence": {
                 "occurrences": [
                     {"location": f"{f.path}#L{f.line}", "additionalContext": f.kind}
-                    for f in group[:50]
+                    for f in group
                 ]
             },
             "properties": sorted([

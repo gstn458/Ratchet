@@ -265,6 +265,10 @@
           {
             "location": "many.py#L55",
             "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L56",
+            "additionalContext": "call site"
           }
         ]
       },
