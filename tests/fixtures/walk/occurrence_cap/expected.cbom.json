@@ -1,0 +1,315 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "occurrence_cap"
+    },
+    "properties": [
+      {
+        "name": "ratchet:ignored_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
+        "name": "ratchet:scan_registry_sha256",
+        "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
+      },
+      {
+        "name": "ratchet:scan_registry_version",
+        "value": "2026.10.2"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:unparsed_file_count",
+        "value": "0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/md5",
+      "name": "MD5",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.2.5"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "many.py#L6",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L7",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L8",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L9",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L10",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L11",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L12",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L13",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L14",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L15",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L16",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L17",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L18",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L19",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L20",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L21",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L22",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L23",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L24",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L25",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L26",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L27",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L28",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L29",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L30",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L31",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L32",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L33",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L34",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L35",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L36",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L37",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L38",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L39",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L40",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L41",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L42",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L43",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L44",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L45",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L46",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L47",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L48",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L49",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L50",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L51",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L52",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L53",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L54",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L55",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "many.py#L56",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "51"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "51"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Collisions are practical today. Quantum is not the problem here."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "SHA-256 or SHA-3, or BLAKE2 for non-compliance use"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (2 call sites, 1 import)
+    key sizes: 2048: 1, not stated: 1
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.go:9   return rsa.GenerateKey(rand.Reader, 2048)
+      keys.go:13   return rsa.GenerateKey(rand.Reader, bits)
+      keys.go:5   "crypto/rsa"
+
+========================================================================
+2 quantum-vulnerable call sites and 1 import across 1 file.
+

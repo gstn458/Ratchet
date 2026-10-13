@@ -1,0 +1,20 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  DSA  (1 call site, 1 import)
+    key sizes: 1024: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      keys.py:3   key = dsa.generate_private_key(key_size=1024)
+      keys.py:1   from cryptography.hazmat.primitives.asymmetric import dsa
+
+========================================================================
+1 quantum-vulnerable call site and 1 import across 1 file.
+

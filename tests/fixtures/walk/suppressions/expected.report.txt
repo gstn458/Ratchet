@@ -1,0 +1,23 @@
+
+ratchet 0.1.0  scanned 4 files in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 4 files
+.ratchetignore: ignored no files, suppressed 5 findings
+  suppressed MD5 at src/cache/** (2 findings, not affected): cache keys and ETags, never compared against stored secrets
+  suppressed RSA at tools/** (2 findings, not affected): generates throwaway keys for the test suite; never shipped
+  suppressed MD5 at legacy/local.py (1 finding, false positive): project function named md5, not hashlib
+  suppressed SHA-1 at vendor-old/** (no findings, not affected): directory was removed; this rule matches nothing
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (1 call site)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      src/auth/legacy.py:6   return hashlib.md5(password).hexdigest()
+
+========================================================================
+No unsuppressed quantum-vulnerable primitives found.
+2 quantum-vulnerable findings suppressed by .ratchetignore are not counted here; the rules are listed above.
+

@@ -1,0 +1,20 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  DH  (1 call site, 1 import)
+    key sizes: 2048: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-KEM-768 (FIPS 203)
+      params.py:3   parameters = dh.generate_parameters(generator=2, key_size=2048)
+      params.py:1   from cryptography.hazmat.primitives.asymmetric import dh
+
+========================================================================
+1 quantum-vulnerable call site and 1 import across 1 file.
+

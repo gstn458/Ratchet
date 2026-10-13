@@ -1,0 +1,4 @@
+suppress MD5 src/cache/** -- cache keys and ETags, never compared against stored secrets
+suppress RSA tools/** -- generates throwaway keys for the test suite; never shipped
+false-positive MD5 legacy/local.py -- project function named md5, not hashlib
+suppress SHA-1 vendor-old/** -- directory was removed; this rule matches nothing

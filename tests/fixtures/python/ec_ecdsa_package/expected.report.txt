@@ -1,0 +1,28 @@
+
+ratchet 0.1.0  scanned 2 files in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 2 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDH  (2 call sites, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      agree.py:3   local = SigningKey.generate(curve=NIST256p)
+      agree.py:4   ecdh = ECDH(curve=NIST256p, private_key=local)
+      agree.py:1   from ecdsa import ECDH, NIST256p, SigningKey
+
+  ECDSA  (1 call site, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      sign.py:3   sk = SigningKey.generate(curve=NIST256p)
+      sign.py:1   from ecdsa import NIST256p, SigningKey
+
+========================================================================
+3 quantum-vulnerable call sites and 2 imports across 2 files.
+

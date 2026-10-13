@@ -1,0 +1,33 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (2 call sites)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      hashes.py:3   hashlib.md5(b"data")
+      hashes.py:5   hashlib.new("md5")
+
+  SHA-1  (2 call sites)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      hashes.py:4   hashlib.sha1(b"data")
+      hashes.py:6   hashlib.new("SHA1")
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (1 call site)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      hashes.py:7   hashlib.new("sha256")
+
+========================================================================
+No quantum-vulnerable primitives found.
+

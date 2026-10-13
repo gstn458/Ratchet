@@ -1,0 +1,19 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  3DES  (1 call site, 1 import)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      cipher.go:6   _, _ = des.NewTripleDESCipher(key)
+      cipher.go:3   import "crypto/des"
+
+========================================================================
+No quantum-vulnerable primitives found.
+

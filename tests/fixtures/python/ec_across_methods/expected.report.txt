@@ -1,0 +1,30 @@
+
+ratchet 0.1.0  scanned 2 files in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 2 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (3 call sites, 1 import)
+    parameter sets: SECP256R1: 1, not stated: 2
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      signing.py:10   return cls(ec.generate_private_key(ec.SECP256R1()))
+      signing.py:13   return self.signing_key.sign(data, ec.ECDSA(hashes.SHA256()))
+      signing.py:16   self.verifying_key.verify(sig, data, ec.ECDSA(hashes.SHA256()))
+      ... and 1 more
+
+  ECDH  (2 call sites, 1 import)
+    parameter sets: SECP256R1: 1, not stated: 1
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      kex.py:8   self.P = ec.generate_private_key(ec.SECP256R1())
+      kex.py:12   return self.P.exchange(ec.ECDH(), server_key)
+      kex.py:3   from cryptography.hazmat.primitives.asymmetric import ec
+
+========================================================================
+5 quantum-vulnerable call sites and 2 imports across 2 files.
+

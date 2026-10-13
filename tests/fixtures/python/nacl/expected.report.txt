@@ -1,0 +1,25 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  Ed25519  (1 call site, 1 import)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      keys.py:4   signing_key = SigningKey.generate()
+      keys.py:2   from nacl.signing import SigningKey
+
+  X25519  (1 call site, 1 import)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      keys.py:5   box_key = PrivateKey.generate()
+      keys.py:1   from nacl.public import PrivateKey
+
+========================================================================
+2 quantum-vulnerable call sites and 2 imports across 1 file.
+

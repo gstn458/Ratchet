@@ -1,0 +1,289 @@
+{
+  "schema_version": 2,
+  "registry_version": "2026.10.2",
+  "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
+  "field_notes": {
+    "quantum": {
+      "broken": "Shor's algorithm breaks it outright. Must migrate.",
+      "reduced": "Grover halves the effective security. Usually fine at higher parameter sizes, but worth recording.",
+      "safe": "A NIST post-quantum standard."
+    },
+    "classical": {
+      "broken": "Already broken today, independent of quantum.",
+      "ok": "Not broken classically."
+    },
+    "nist_quantum_security_level": "NIST PQC security category written to CycloneDX nistQuantumSecurityLevel: 0 meets no category, 1 to 5 as defined by NIST's PQC evaluation criteria. The entry's value applies when the parameter set is unknown and is the lowest category any common parameter set reaches; parameter_sets overrides it when the parameter set is known.",
+    "oid": "OID of the algorithm. null when no single OID identifies it without information Ratchet does not detect; oid_note says why.",
+    "parameter_sets": "Optional. Keyed by the parameterSetIdentifier Ratchet records; each may set its own oid and nist_quantum_security_level."
+  },
+  "algorithms": {
+    "RSA": {
+      "primitive": "pke",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.2.840.113549.1.1.1",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "encrypt",
+        "decrypt",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures",
+      "why": "Shor's algorithm factors the modulus in polynomial time."
+    },
+    "ECDSA": {
+      "primitive": "signature",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "An ECDSA signature OID names the hash as well as the algorithm (for example ecdsa-with-SHA256, 1.2.840.10045.4.3.2, RFC 5758). The hash is not detected, so no OID is claimed. 1.2.840.10045.4 is the parent arc, not an algorithm.",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based",
+      "why": "Shor's algorithm solves the discrete log on the curve."
+    },
+    "ECDH": {
+      "primitive": "key-agree",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.3.132.1.12",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "keyderive"
+      ],
+      "replacement": "ML-KEM-768, ideally hybrid X25519+ML-KEM during transition",
+      "why": "Shor's algorithm solves the discrete log on the curve."
+    },
+    "EC": {
+      "primitive": "unknown",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.2.840.10045.2.1",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "unknown"
+      ],
+      "replacement": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement",
+      "why": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+    },
+    "Ed25519": {
+      "primitive": "signature",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.3.101.112",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "why": "Edwards-curve discrete log falls to Shor's algorithm."
+    },
+    "X25519": {
+      "primitive": "key-agree",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.3.101.110",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "keyderive"
+      ],
+      "replacement": "hybrid X25519+ML-KEM-768, then ML-KEM alone",
+      "why": "Curve25519 discrete log falls to Shor's algorithm."
+    },
+    "DH": {
+      "primitive": "key-agree",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.2.840.113549.1.3.1",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "keyderive"
+      ],
+      "replacement": "ML-KEM-768 (FIPS 203)",
+      "why": "Shor's algorithm solves the finite-field discrete log."
+    },
+    "DSA": {
+      "primitive": "signature",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.2.840.10040.4.1",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "why": "Shor's algorithm solves the finite-field discrete log."
+    },
+    "MD5": {
+      "primitive": "hash",
+      "quantum": "reduced",
+      "classical": "broken",
+      "oid": "1.2.840.113549.2.5",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "digest"
+      ],
+      "replacement": "SHA-256 or SHA-3, or BLAKE2 for non-compliance use",
+      "why": "Collisions are practical today. Quantum is not the problem here."
+    },
+    "SHA-1": {
+      "primitive": "hash",
+      "quantum": "reduced",
+      "classical": "broken",
+      "oid": "1.3.14.3.2.26",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "digest"
+      ],
+      "replacement": "SHA-256 or SHA-3",
+      "why": "Chosen-prefix collisions demonstrated in 2020. Retire it."
+    },
+    "DES": {
+      "primitive": "block-cipher",
+      "quantum": "reduced",
+      "classical": "broken",
+      "oid": "1.3.14.3.2.7",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "encrypt",
+        "decrypt"
+      ],
+      "replacement": "AES-256-GCM",
+      "why": "56-bit key. Brute-forced on commodity hardware."
+    },
+    "3DES": {
+      "primitive": "block-cipher",
+      "quantum": "reduced",
+      "classical": "broken",
+      "oid": "1.2.840.113549.3.7",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "encrypt",
+        "decrypt"
+      ],
+      "replacement": "AES-256-GCM",
+      "why": "Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023."
+    },
+    "RC4": {
+      "primitive": "stream-cipher",
+      "quantum": "reduced",
+      "classical": "broken",
+      "oid": "1.2.840.113549.3.4",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "encrypt",
+        "decrypt"
+      ],
+      "replacement": "AES-256-GCM or ChaCha20-Poly1305",
+      "why": "Biased keystream. Prohibited in TLS since RFC 7465."
+    },
+    "AES": {
+      "primitive": "block-cipher",
+      "quantum": "reduced",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "An AES OID names key size and mode together (for example aes128-GCM, 2.16.840.1.101.3.4.1.6). Mode is not detected, so no OID is claimed. 2.16.840.1.101.3.4.1 is the parent arc.",
+      "nist_quantum_security_level": 1,
+      "parameter_sets": {
+        "128": {
+          "nist_quantum_security_level": 1
+        },
+        "192": {
+          "nist_quantum_security_level": 3
+        },
+        "256": {
+          "nist_quantum_security_level": 5
+        }
+      },
+      "functions": [
+        "encrypt",
+        "decrypt"
+      ],
+      "replacement": "AES-256 if currently AES-128",
+      "why": "Grover halves effective key length. AES-256 stays at 128-bit margin."
+    },
+    "SHA-256": {
+      "primitive": "hash",
+      "quantum": "reduced",
+      "classical": "ok",
+      "oid": "2.16.840.1.101.3.4.2.1",
+      "nist_quantum_security_level": 2,
+      "functions": [
+        "digest"
+      ],
+      "replacement": "no action needed",
+      "why": "Grover gives a quadratic speedup only. Still acceptable."
+    },
+    "ML-KEM": {
+      "primitive": "kem",
+      "quantum": "safe",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "Each ML-KEM parameter set has its own OID, listed under parameter_sets. 2.16.840.1.101.3.4.4 is the parent arc.",
+      "nist_quantum_security_level": 1,
+      "parameter_sets": {
+        "512": {
+          "oid": "2.16.840.1.101.3.4.4.1",
+          "nist_quantum_security_level": 1
+        },
+        "768": {
+          "oid": "2.16.840.1.101.3.4.4.2",
+          "nist_quantum_security_level": 3
+        },
+        "1024": {
+          "oid": "2.16.840.1.101.3.4.4.3",
+          "nist_quantum_security_level": 5
+        }
+      },
+      "functions": [
+        "keygen",
+        "encapsulate",
+        "decapsulate"
+      ],
+      "replacement": "none",
+      "why": "FIPS 203. Module-lattice KEM."
+    },
+    "ML-DSA": {
+      "primitive": "signature",
+      "quantum": "safe",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "Each ML-DSA parameter set has its own OID, listed under parameter_sets. 2.16.840.1.101.3.4.3 is NIST's signature-algorithms arc, shared with DSA, ECDSA and RSA variants and with SLH-DSA.",
+      "nist_quantum_security_level": 2,
+      "parameter_sets": {
+        "44": {
+          "oid": "2.16.840.1.101.3.4.3.17",
+          "nist_quantum_security_level": 2
+        },
+        "65": {
+          "oid": "2.16.840.1.101.3.4.3.18",
+          "nist_quantum_security_level": 3
+        },
+        "87": {
+          "oid": "2.16.840.1.101.3.4.3.19",
+          "nist_quantum_security_level": 5
+        }
+      },
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "none",
+      "why": "FIPS 204. Module-lattice signature."
+    }
+  }
+}

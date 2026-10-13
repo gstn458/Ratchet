@@ -32,6 +32,18 @@ exactly the people whose opinion matters.
 If you are not sure which bucket something belongs in, open an issue rather than a PR.
 Being unsure is useful information and I would rather discuss it than review a guess.
 
+The registry lives in `registry.json`. To change it:
+
+1. Edit `registry.json`.
+2. Bump `registry_version`, and add the new version's content hash to
+   `REGISTRY_CONTENT` in `tests/test_registry.py`. The test prints a failure until you
+   do, so a CBOM's recorded registry version always names exactly one set of claims.
+3. Run `python3 tools/embed_registry.py` to refresh the copy embedded in `ratchet.py`.
+   CI fails if the two differ.
+
+Record each change, with its claim and source, in `REGISTRY_CHANGELOG.md`. Do not edit
+the embedded copy in `ratchet.py` by hand.
+
 ## Changing detection rules
 
 Every detection change needs a fixture in `tests/fixtures` that would have caught the
