@@ -161,9 +161,10 @@ Source code only. Certificates, TLS configuration, hardware security modules, an
 anything on the network are out of scope. A complete cryptographic inventory needs
 all of those, which is why the incumbent tools use network probes.
 
-RSA and RSA-2048 are reported as separate components when key size is known for some
-call sites and not others. Correct per the spec, since they are different parameter
-sets, and noisy in the report.
+The CBOM keeps RSA, RSA-2048 and RSA-4096 as separate components, because the spec
+treats them as different parameter sets. The terminal report groups them into one
+entry per algorithm with the distribution of key sizes, so the two views count the
+same occurrences differently by design.
 
 Imports are reported, and kept in the CBOM marked as imports, because a library that
 is present matters for the inventory even when no call is visible. They are counted
