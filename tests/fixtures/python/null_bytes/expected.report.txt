@@ -4,7 +4,7 @@ registry 2026.10.2  from registry.json
 skipped no directories
 could not parse 1 of 2 files, so any cryptography in them is missing from this report:
   binary.py: contains null bytes
-no .ratchetignore
+no .ratchetignore; no findings suppressed
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue

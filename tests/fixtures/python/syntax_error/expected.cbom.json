@@ -41,6 +41,10 @@
         "value": "0"
       },
       {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
         "name": "ratchet:unparsed_file",
         "value": "legacy.py (not valid Python 3 syntax at line 3)"
       },

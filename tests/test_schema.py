@@ -75,3 +75,23 @@ def test_every_occurrence_is_listed(root):
         assert len(c["evidence"]["occurrences"]) == props["ratchet:occurrence_count"], c["name"]
         assert props["ratchet:call_site_count"] + props["ratchet:import_count"] \
             == props["ratchet:occurrence_count"], c["name"]
+
+
+@pytest.mark.parametrize("root", fixture_dirs(), ids=fixture_id)
+def test_suppression_analysis_covers_only_suppressed_components(root):
+    # A vulnerability analysis must never reach occurrences its rule did not
+    # match: each one affects exactly one component, and that component is a
+    # suppressed one carrying the same rule.
+    doc = json.loads((root / "expected.cbom.json").read_text())
+    components = {c["bom-ref"]: c for c in doc["components"]}
+    for v in doc.get("vulnerabilities", []):
+        assert v["id"].startswith(("ratchet-pqc-", "ratchet-classical-")), v["id"]
+        assert len(v["affects"]) == 1
+        target = components[v["affects"][0]["ref"]]
+        props = {p["name"]: p["value"] for p in target["properties"]}
+        assert "/suppressed/" in target["bom-ref"]
+        assert props["ratchet:suppression_state"] == v["analysis"]["state"]
+        assert props["ratchet:suppression_reason"] == v["analysis"]["detail"]
+    for ref, c in components.items():
+        suppressed = any(p["name"] == "ratchet:suppressed_by" for p in c["properties"])
+        assert suppressed == ("/suppressed/" in ref)

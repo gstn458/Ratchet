@@ -102,6 +102,33 @@ quantum has nothing to do with it, which is usually the more urgent finding. Red
 means Grover halves the effective security margin, which at AES-256 and SHA-256 is
 acceptable and is recorded rather than flagged.
 
+## Excluding and suppressing
+
+A `.ratchetignore` at the root of the scanned directory excludes paths and suppresses
+findings. Every rule needs a reason after ` -- `; a rule without one stops the scan.
+
+```
+# Exclude paths from the scan (gitignore-style globs)
+docs/examples/ -- sample code shown in the documentation, not shipped
+
+# Findings that are not a problem here: recorded as not_affected
+suppress MD5 src/cache/** -- cache keys and ETags, never compared against secrets
+
+# Findings that are scanner mistakes: recorded as false_positive
+false-positive MD5 legacy/local.py -- project function named md5, not hashlib
+```
+
+Nothing excluded or suppressed disappears. Every report lists each rule, its reason and
+what it matched, and prints the number of suppressed findings on every run. In the
+CBOM, suppressed occurrences move to a component of their own for each rule, and a
+CycloneDX vulnerability entry, with an ID such as `ratchet-pqc-rsa` or
+`ratchet-classical-md5` and the rule's analysis state and reason, points at that
+component only. Occurrences of the same algorithm that the rule did not match stay in
+the main component with no analysis, so a suppression never reads as covering code it
+was not written for. Suppressed findings do not count toward `--fail-on-vulnerable`.
+
+Negated rules (`!`) are not supported. Only a `.ratchetignore` at the scan root is read.
+
 ## Output
 
 CycloneDX 1.6, `cryptographic-asset` components with `cryptoProperties`, OIDs, and

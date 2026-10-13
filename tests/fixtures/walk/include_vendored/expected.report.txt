@@ -5,7 +5,7 @@ vendored directories included (--include-vendored)
 skipped 1 directory:
   tooling or hidden: .hidden
 parsed all 9 files
-no .ratchetignore
+no .ratchetignore; no findings suppressed
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue

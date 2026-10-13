@@ -123,3 +123,16 @@ def test_invalid_ratchetignore_stops_the_scan(tmp_path):
     assert r.returncode == 2
     assert ".ratchetignore line 1: every rule needs a reason" in r.stderr
     assert r.stdout == ""
+
+
+def test_suppressed_findings_do_not_fail_ci(tmp_path):
+    (tmp_path / "tools").mkdir()
+    (tmp_path / "tools" / "gen.py").write_text(
+        "from cryptography.hazmat.primitives.asymmetric import rsa\n"
+        "rsa.generate_private_key(65537, 2048)\n")
+    assert run(str(tmp_path), "--fail-on-vulnerable").returncode == 1
+    (tmp_path / ".ratchetignore").write_text("suppress RSA tools/** -- test keys only\n")
+    for args in ((), ("--json",)):
+        r = run(str(tmp_path), "--fail-on-vulnerable", *args)
+        assert r.returncode == 0, r.stdout
+    assert "2 quantum-vulnerable findings suppressed" in run(str(tmp_path)).stdout

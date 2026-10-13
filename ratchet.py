@@ -596,6 +596,7 @@ class Finding:
         self.snippet = snippet.strip()[:160]
         self.params = params
         self.kind = kind
+        self.suppressed_by = None  # the SuppressRule that matched, if any
 
     @property
     def label(self):
@@ -1009,7 +1010,14 @@ def scan_go(path):
 #
 # Lines, each with a required reason after " -- ":
 #
-#     <glob> -- <reason>                  exclude matching paths from the scan
+#     <glob> -- <reason>                          exclude matching paths from the scan
+#     suppress <ALGORITHM> <glob> -- <reason>     findings are not affected
+#     false-positive <ALGORITHM> <glob> -- <reason>   findings are scanner mistakes
+#
+# A suppressed finding is never dropped. Its occurrences move to a component
+# of their own, one per rule, and a CycloneDX vulnerability entry with that
+# analysis points at that component only, so the analysis never covers
+# occurrences the rule did not match.
 #
 # Globs are gitignore-style: * stays within a directory, ** crosses them, a
 # pattern with no slash matches at any depth, a leading / anchors it to the
@@ -1027,6 +1035,8 @@ class IgnoreFileError(Exception):
 
 
 class IgnoreRule:
+    """A path rule. Its matched list holds what it excluded."""
+
     def __init__(self, line, pattern, reason):
         self.line = line
         self.pattern = pattern
@@ -1043,6 +1053,31 @@ class IgnoreRule:
         if not self.directory_only:
             candidates.append(path)
         return any(self.regex.fullmatch(c) for c in candidates)
+
+
+SUPPRESS_STATES = {"suppress": "not_affected", "false-positive": "false_positive"}
+
+
+class SuppressRule(IgnoreRule):
+    """Suppresses findings of one algorithm under a path. Its matched list
+    holds the findings it suppressed."""
+
+    def __init__(self, line, verb, algorithm, pattern, reason):
+        super().__init__(line, pattern, reason)
+        self.verb = verb
+        self.algorithm = algorithm
+        self.state = SUPPRESS_STATES[verb]
+
+    @property
+    def text(self):
+        return f"{self.verb} {self.algorithm} {self.pattern}"
+
+
+def vulnerability_id(algorithm):
+    """Namespaced so no one mistakes it for a CVE: ratchet-pqc-rsa for what
+    Shor's algorithm breaks, ratchet-classical-md5 for what is weak today."""
+    kind = "pqc" if ALGORITHMS[algorithm]["quantum"] == "broken" else "classical"
+    return f"ratchet-{kind}-" + re.sub(r"[^a-z0-9]+", "-", algorithm.lower()).strip("-")
 
 
 def glob_regex(pattern):
@@ -1069,7 +1104,8 @@ def glob_regex(pattern):
 
 
 def parse_ignore_file(text):
-    rules = []
+    """Returns (path rules, suppression rules)."""
+    rules, suppressions = [], []
     for number, raw in enumerate(text.splitlines(), start=1):
         line = raw.strip()
         if not line or line.startswith("#"):
@@ -1080,18 +1116,35 @@ def parse_ignore_file(text):
         rule, reason = (part.strip() for part in line.split(" -- ", 1))
         if not reason:
             raise IgnoreFileError(f"{where}: the reason after ' -- ' is empty")
+        words = rule.split()
+        if words and words[0] in SUPPRESS_STATES:
+            if len(words) != 3:
+                raise IgnoreFileError(f"{where}: expected '{words[0]} <ALGORITHM> <glob> -- <reason>'")
+            verb, algorithm, pattern = words
+            known = {name.lower(): name for name in ALGORITHMS}
+            if algorithm.lower() not in known:
+                raise IgnoreFileError(f"{where}: {algorithm} is not an algorithm in the registry")
+            algorithm = known[algorithm.lower()]
+            spec = ALGORITHMS[algorithm]
+            if spec["quantum"] != "broken" and spec["classical"] != "broken":
+                raise IgnoreFileError(f"{where}: Ratchet does not flag {algorithm}, "
+                                      f"so there is nothing to suppress")
+            if pattern.startswith("!"):
+                raise IgnoreFileError(f"{where}: negation (!) is not supported")
+            suppressions.append(SuppressRule(number, verb, algorithm, pattern, reason))
+            continue
         if rule.startswith("!"):
             raise IgnoreFileError(f"{where}: negation (!) is not supported")
-        if not rule or len(rule.split()) != 1:
+        if len(words) != 1:
             raise IgnoreFileError(f"{where}: expected '<glob> -- <reason>'")
         rules.append(IgnoreRule(number, rule, reason))
-    return rules
+    return rules, suppressions
 
 
 def load_ignore_file(root):
     path = os.path.join(root, IGNORE_FILE)
     if not os.path.isfile(path):
-        return None
+        return None, None
     with open(path, encoding="utf-8") as fh:
         return parse_ignore_file(fh.read())
 
@@ -1100,15 +1153,23 @@ class Scan:
     """Everything one scan produced: findings, the number of source files
     attempted, the directories skipped and the files that could not be parsed
     as (relative path, reason), whether vendored directories were included,
-    and the .ratchetignore rules (None when there is no such file)."""
+    and the .ratchetignore path and suppression rules (None when there is no
+    such file)."""
 
-    def __init__(self, findings, files, skipped, include_vendored, unparsed=(), ignore_rules=None):
+    def __init__(self, findings, files, skipped, include_vendored, unparsed=(),
+                 ignore_rules=None, suppress_rules=None):
         self.findings = findings
         self.files = files
         self.skipped = skipped
         self.include_vendored = include_vendored
         self.unparsed = list(unparsed)
         self.ignore_rules = ignore_rules
+        self.suppress_rules = suppress_rules
+
+    @property
+    def active(self):
+        """Findings not suppressed: the ones the report and CI gate act on."""
+        return [f for f in self.findings if f.suppressed_by is None]
 
 
 def skip_reason(name, include_vendored):
@@ -1123,7 +1184,7 @@ SCANNERS = {".py": scan_python, ".go": scan_go}
 
 
 def walk(root, include_vendored=False):
-    ignore_rules = load_ignore_file(root)
+    ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
@@ -1156,7 +1217,16 @@ def walk(root, include_vendored=False):
             for f in found:
                 f.path = rel
                 findings.append(f)
-    return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed), ignore_rules)
+    # First matching rule wins, in file order.
+    for f in findings:
+        path = f.path.replace(os.sep, "/")
+        for rule in suppress_rules or ():
+            if rule.algorithm == f.algorithm and rule.matches(path):
+                f.suppressed_by = rule
+                rule.matched.append(f)
+                break
+    return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed),
+                ignore_rules, suppress_rules)
 
 
 # ---------------------------------------------------------------------------
@@ -1164,13 +1234,16 @@ def walk(root, include_vendored=False):
 # ---------------------------------------------------------------------------
 
 def build_cbom(scan, root, tool_version=VERSION):
+    # Suppressed occurrences form their own component per rule, so the
+    # vulnerability analysis attached to it covers only what the rule matched.
     grouped = defaultdict(list)
     for f in scan.findings:
-        grouped[f.label].append(f)
+        grouped[(f.label, f.suppressed_by.line if f.suppressed_by else 0)].append(f)
 
-    components = []
-    for label, group in sorted(grouped.items()):
+    components, vulnerabilities = [], []
+    for (label, rule_line), group in sorted(grouped.items()):
         group = sorted(group, key=lambda f: (f.path, f.line))
+        rule = group[0].suppressed_by
         algo = group[0].algorithm
         spec = ALGORITHMS[algo]
         params = group[0].params
@@ -1189,9 +1262,29 @@ def build_cbom(scan, root, tool_version=VERSION):
         }
         if oid is not None:
             crypto_properties["oid"] = oid
+        ref = f"crypto/algorithm/{label.lower()}"
+        suppression = []
+        if rule:
+            ref += f"/suppressed/line-{rule.line}"
+            suppression = [
+                {"name": "ratchet:suppressed_by", "value": f"{rule.text} ({IGNORE_FILE} line {rule.line})"},
+                {"name": "ratchet:suppression_reason", "value": rule.reason},
+                {"name": "ratchet:suppression_state", "value": rule.state},
+            ]
+            vulnerabilities.append({
+                "bom-ref": f"vulnerability/{label.lower()}/suppressed/line-{rule.line}",
+                "id": vulnerability_id(algo),
+                "source": {"name": "Ratchet"},
+                "description": spec["why"],
+                "recommendation": spec["replacement"],
+                "analysis": {"state": rule.state, "detail": rule.reason},
+                "affects": [{"ref": ref}],
+                "properties": [{"name": "ratchet:suppression_rule",
+                                "value": f"{rule.text} ({IGNORE_FILE} line {rule.line})"}],
+            })
         components.append({
             "type": "cryptographic-asset",
-            "bom-ref": f"crypto/algorithm/{label.lower()}",
+            "bom-ref": ref,
             "name": label,
             "cryptoProperties": crypto_properties,
             "evidence": {
@@ -1210,10 +1303,10 @@ def build_cbom(scan, root, tool_version=VERSION):
                  "value": str(sum(f.kind == CALL for f in group))},
                 {"name": "ratchet:import_count",
                  "value": str(sum(f.kind == IMPORT for f in group))},
-            ], key=lambda p: p["name"]),
+            ] + suppression, key=lambda p: p["name"]),
         })
 
-    return {
+    cbom = {
         "bomFormat": "CycloneDX",
         "specVersion": "1.6",
         "serialNumber": f"urn:uuid:{uuid.uuid4()}",
@@ -1244,6 +1337,13 @@ def build_cbom(scan, root, tool_version=VERSION):
                 {"name": "ratchet:unparsed_file_count", "value": str(len(scan.unparsed))},
                 {"name": "ratchet:ignored_file_count",
                  "value": str(sum(len(r.matched) for r in scan.ignore_rules or ()))},
+                {"name": "ratchet:suppressed_finding_count",
+                 "value": str(sum(f.suppressed_by is not None for f in scan.findings))},
+            ] + [
+                {"name": "ratchet:suppression_rule",
+                 "value": f"{r.text} -- {r.reason} ({IGNORE_FILE} line {r.line}, "
+                          f"{plural(len(r.matched), 'finding')})"}
+                for r in scan.suppress_rules or ()
             ] + [
                 {"name": "ratchet:ignore_rule",
                  "value": f"{r.pattern} -- {r.reason} ({IGNORE_FILE} line {r.line}, "
@@ -1262,6 +1362,9 @@ def build_cbom(scan, root, tool_version=VERSION):
         },
         "components": components,
     }
+    if vulnerabilities:
+        cbom["vulnerabilities"] = sorted(vulnerabilities, key=lambda v: v["bom-ref"])
+    return cbom
 
 
 # ---------------------------------------------------------------------------
@@ -1316,14 +1419,21 @@ def print_skipped(scan, shown=10):
 
 
 def print_ignored(scan):
-    """Say what .ratchetignore excluded, on every run."""
+    """Say what .ratchetignore excluded and suppressed, on every run, with the
+    suppression count even when it is zero."""
+    suppressed = sum(f.suppressed_by is not None for f in scan.findings)
     if scan.ignore_rules is None:
-        print(f"no {IGNORE_FILE}")
+        print(f"no {IGNORE_FILE}; {plural(suppressed, 'finding')} suppressed")
         return
-    total = sum(len(r.matched) for r in scan.ignore_rules)
-    print(f"{IGNORE_FILE}: ignored {plural(total, 'file')}")
+    ignored = sum(len(r.matched) for r in scan.ignore_rules)
+    print(f"{IGNORE_FILE}: ignored {plural(ignored, 'file')}, "
+          f"suppressed {plural(suppressed, 'finding')}")
     for r in scan.ignore_rules:
         print(f"  ignored {r.pattern} ({plural(len(r.matched), 'file')}): {r.reason}")
+    for r in scan.suppress_rules:
+        state = r.state.replace("_", " ")
+        print(f"  suppressed {r.algorithm} at {r.pattern} "
+              f"({plural(len(r.matched), 'finding')}, {state}): {r.reason}")
 
 
 def print_unparsed(scan, shown=10):
@@ -1349,7 +1459,7 @@ def report(scan, root):
     parameter set as the spec requires.
     """
     by_algorithm = defaultdict(list)
-    for f in scan.findings:
+    for f in scan.active:
         by_algorithm[f.algorithm].append(f)
 
     def bucket_of(algorithm):
@@ -1410,6 +1520,8 @@ def report(scan, root):
         return (sum(f.kind == CALL for f in flat), sum(f.kind == IMPORT for f in flat),
                 len({f.path for f in flat}))
 
+    suppressed = sum(1 for f in scan.findings
+                     if f.suppressed_by and ALGORITHMS[f.algorithm]["quantum"] == "broken")
     vulnerable = list(buckets["broken"].values()) + list(buckets["undetermined"].values())
     calls, imports, files = tally(vulnerable)
     u_calls, u_imports, _ = tally(buckets["undetermined"].values())
@@ -1422,11 +1534,16 @@ def report(scan, root):
             line = (f"{plural(u_calls, 'call site')} and {plural(u_imports, 'import')} with usage "
                     f"undetermined: review before choosing a migration target.")
             print(line[0].upper() + line[1:])
-    elif scan.unparsed:
-        print(f"No quantum-vulnerable primitives found in the files that could be parsed; "
-              f"{plural(len(scan.unparsed), 'file was', 'files were')} not.")
     else:
-        print("No quantum-vulnerable primitives found.")
+        which = "unsuppressed " if suppressed else ""
+        if scan.unparsed:
+            print(f"No {which}quantum-vulnerable primitives found in the files that could be "
+                  f"parsed; {plural(len(scan.unparsed), 'file was', 'files were')} not.")
+        else:
+            print(f"No {which}quantum-vulnerable primitives found.")
+    if suppressed:
+        print(f"{plural(suppressed, 'quantum-vulnerable finding')} suppressed by {IGNORE_FILE} "
+              f"{'is' if suppressed == 1 else 'are'} not counted here; the rules are listed above.")
     print()
     return calls + imports
 
@@ -1455,7 +1572,7 @@ def main():
 
     if args.json:
         print(json.dumps(build_cbom(scan, args.path), indent=2))
-        broken = sum(1 for f in scan.findings if ALGORITHMS[f.algorithm]["quantum"] == "broken")
+        broken = sum(1 for f in scan.active if ALGORITHMS[f.algorithm]["quantum"] == "broken")
     else:
         broken = report(scan, args.path)
 

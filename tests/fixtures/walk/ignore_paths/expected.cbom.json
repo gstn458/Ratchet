@@ -61,6 +61,10 @@
         "value": "0"
       },
       {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
         "name": "ratchet:unparsed_file_count",
         "value": "0"
       }

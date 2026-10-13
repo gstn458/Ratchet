@@ -5,7 +5,7 @@ skipped 8 directories:
   vendored, test data or build output (scan with --include-vendored): build, dist, node_modules, site-packages, testdata, vendor, venv
   tooling or hidden: .hidden
 parsed all 1 file
-no .ratchetignore
+no .ratchetignore; no findings suppressed
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue
