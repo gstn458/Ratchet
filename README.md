@@ -19,7 +19,7 @@ There is nothing to install. Python 3.9 or newer, standard library only.
 python3 ratchet.py /path/to/repo
 python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
-python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 for CI
+python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vulnerable call site
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 ```
 
@@ -169,6 +169,9 @@ same occurrences differently by design.
 Imports are reported, and kept in the CBOM marked as imports, because a library that
 is present matters for the inventory even when no call is visible. They are counted
 separately from call sites; v0 counted them together, which overstated its figures.
+`--fail-on-vulnerable` counts only unsuppressed quantum-vulnerable call sites, so a
+library that is imported but never called does not fail a build. That is deliberate:
+anything that gates CI favours precision, while the inventory favours recall.
 
 Go call sites are recognised for the package-level functions of the standard crypto
 packages: key generation, signing, verification, encryption and the hash and cipher

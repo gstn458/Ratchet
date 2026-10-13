@@ -1451,8 +1451,7 @@ def print_unparsed(scan, shown=10):
 
 
 def report(scan, root):
-    """Print the terminal report and return the number of quantum-vulnerable
-    occurrences, imports included, for --fail-on-vulnerable.
+    """Print the terminal report.
 
     The report groups by algorithm: RSA, RSA-2048 and RSA-4096 are one entry
     with the distribution of key sizes, while the CBOM keeps one component per
@@ -1545,7 +1544,15 @@ def report(scan, root):
         print(f"{plural(suppressed, 'quantum-vulnerable finding')} suppressed by {IGNORE_FILE} "
               f"{'is' if suppressed == 1 else 'are'} not counted here; the rules are listed above.")
     print()
-    return calls + imports
+
+
+def ci_gate_count(scan):
+    """What --fail-on-vulnerable counts: unsuppressed, quantum-vulnerable call
+    sites. This is the precision path. Imports, and the manifest and other
+    lower-confidence findings to come, belong to the inventory: they are
+    reported and recorded in the CBOM but never fail a build on their own."""
+    return sum(1 for f in scan.active
+               if f.kind == CALL and ALGORITHMS[f.algorithm]["quantum"] == "broken")
 
 
 def main():
@@ -1554,7 +1561,8 @@ def main():
     p.add_argument("--cbom", metavar="FILE", help="write a CycloneDX 1.6 CBOM to FILE")
     p.add_argument("--json", action="store_true", help="print the CBOM to stdout instead of a report")
     p.add_argument("--fail-on-vulnerable", action="store_true",
-                   help="exit 1 if quantum-vulnerable primitives are found (for CI)")
+                   help="exit 1 if any unsuppressed quantum-vulnerable call site is found (for CI); "
+                        "imports alone do not fail the build")
     p.add_argument("--include-vendored", action="store_true",
                    help="also scan vendored and test-data directories: "
                         + ", ".join(sorted(VENDORED_DIRS)))
@@ -1572,9 +1580,8 @@ def main():
 
     if args.json:
         print(json.dumps(build_cbom(scan, args.path), indent=2))
-        broken = sum(1 for f in scan.active if ALGORITHMS[f.algorithm]["quantum"] == "broken")
     else:
-        broken = report(scan, args.path)
+        report(scan, args.path)
 
     if args.cbom:
         with open(args.cbom, "w") as fh:
@@ -1582,7 +1589,7 @@ def main():
         if not args.json:
             print(f"CBOM written to {args.cbom}")
 
-    return 1 if (args.fail_on_vulnerable and broken) else 0
+    return 1 if (args.fail_on_vulnerable and ci_gate_count(scan)) else 0
 
 
 if __name__ == "__main__":
