@@ -1,0 +1,5 @@
+# Documentation samples are not shipped.
+docs/ -- sample code shown in the documentation, not shipped
+# No slash: matches at any depth.
+*_pb.go -- generated protobuf code, regenerated from .proto files
+tools/legacy/** -- removed tool; this rule matches nothing and says so

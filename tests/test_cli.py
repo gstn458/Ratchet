@@ -114,3 +114,12 @@ def test_unreadable_file_is_reported_not_dropped(tmp_path):
     props = [(p["name"], p["value"]) for p in json.loads(r.stdout)["metadata"]["properties"]]
     assert ("ratchet:unparsed_file", "gone.py (could not be read: No such file or directory)") in props
     assert "could not parse 1 of 2 files" in run(str(tmp_path)).stdout
+
+
+def test_invalid_ratchetignore_stops_the_scan(tmp_path):
+    (tmp_path / "app.py").write_text("import hashlib\nhashlib.md5(b'x')\n")
+    (tmp_path / ".ratchetignore").write_text("app.py\n")
+    r = run(str(tmp_path), "--json")
+    assert r.returncode == 2
+    assert ".ratchetignore line 1: every rule needs a reason" in r.stderr
+    assert r.stdout == ""

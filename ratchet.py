@@ -1004,18 +1004,111 @@ def scan_go(path):
 # Walk
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# .ratchetignore
+#
+# Lines, each with a required reason after " -- ":
+#
+#     <glob> -- <reason>                  exclude matching paths from the scan
+#
+# Globs are gitignore-style: * stays within a directory, ** crosses them, a
+# pattern with no slash matches at any depth, a leading / anchors it to the
+# scan root, and a trailing / matches a directory and everything under it.
+# Negation (!) is not supported: an audit file should say what it excludes,
+# not what it excludes except. Every rule, and every file it matched, is
+# listed in the report and the CBOM.
+# ---------------------------------------------------------------------------
+
+IGNORE_FILE = ".ratchetignore"
+
+
+class IgnoreFileError(Exception):
+    pass
+
+
+class IgnoreRule:
+    def __init__(self, line, pattern, reason):
+        self.line = line
+        self.pattern = pattern
+        self.reason = reason
+        self.directory_only = pattern.endswith("/")
+        self.regex = glob_regex(pattern)
+        self.matched = []
+
+    def matches(self, path):
+        """path is relative to the scan root, with / separators. A rule that
+        matches a directory matches everything under it."""
+        parts = path.split("/")
+        candidates = ["/".join(parts[:i]) for i in range(1, len(parts))]
+        if not self.directory_only:
+            candidates.append(path)
+        return any(self.regex.fullmatch(c) for c in candidates)
+
+
+def glob_regex(pattern):
+    body = pattern.strip("/")
+    anchored = pattern.startswith("/") or "/" in body
+    out, i = [], 0
+    while i < len(body):
+        if body.startswith("**/", i):
+            out.append("(?:.*/)?")
+            i += 3
+        elif body.startswith("**", i):
+            out.append(".*")
+            i += 2
+        elif body[i] == "*":
+            out.append("[^/]*")
+            i += 1
+        elif body[i] == "?":
+            out.append("[^/]")
+            i += 1
+        else:
+            out.append(re.escape(body[i]))
+            i += 1
+    return re.compile(("" if anchored else "(?:.*/)?") + "".join(out))
+
+
+def parse_ignore_file(text):
+    rules = []
+    for number, raw in enumerate(text.splitlines(), start=1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        where = f"{IGNORE_FILE} line {number}"
+        if " -- " not in line:
+            raise IgnoreFileError(f"{where}: every rule needs a reason after ' -- '")
+        rule, reason = (part.strip() for part in line.split(" -- ", 1))
+        if not reason:
+            raise IgnoreFileError(f"{where}: the reason after ' -- ' is empty")
+        if rule.startswith("!"):
+            raise IgnoreFileError(f"{where}: negation (!) is not supported")
+        if not rule or len(rule.split()) != 1:
+            raise IgnoreFileError(f"{where}: expected '<glob> -- <reason>'")
+        rules.append(IgnoreRule(number, rule, reason))
+    return rules
+
+
+def load_ignore_file(root):
+    path = os.path.join(root, IGNORE_FILE)
+    if not os.path.isfile(path):
+        return None
+    with open(path, encoding="utf-8") as fh:
+        return parse_ignore_file(fh.read())
+
+
 class Scan:
     """Everything one scan produced: findings, the number of source files
     attempted, the directories skipped and the files that could not be parsed
-    as (relative path, reason), and whether vendored directories were
-    included."""
+    as (relative path, reason), whether vendored directories were included,
+    and the .ratchetignore rules (None when there is no such file)."""
 
-    def __init__(self, findings, files, skipped, include_vendored, unparsed=()):
+    def __init__(self, findings, files, skipped, include_vendored, unparsed=(), ignore_rules=None):
         self.findings = findings
         self.files = files
         self.skipped = skipped
         self.include_vendored = include_vendored
         self.unparsed = list(unparsed)
+        self.ignore_rules = ignore_rules
 
 
 def skip_reason(name, include_vendored):
@@ -1030,6 +1123,7 @@ SCANNERS = {".py": scan_python, ".go": scan_go}
 
 
 def walk(root, include_vendored=False):
+    ignore_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
@@ -1049,6 +1143,10 @@ def walk(root, include_vendored=False):
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
+            rule = next((r for r in ignore_rules or () if r.matches(rel.replace(os.sep, "/"))), None)
+            if rule:
+                rule.matched.append(rel)
+                continue
             files += 1
             try:
                 found = scanner(full)
@@ -1058,7 +1156,7 @@ def walk(root, include_vendored=False):
             for f in found:
                 f.path = rel
                 findings.append(f)
-    return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed))
+    return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed), ignore_rules)
 
 
 # ---------------------------------------------------------------------------
@@ -1144,6 +1242,16 @@ def build_cbom(scan, root, tool_version=VERSION):
                 {"name": "ratchet:include_vendored", "value": str(scan.include_vendored).lower()},
                 {"name": "ratchet:skipped_directory_count", "value": str(len(scan.skipped))},
                 {"name": "ratchet:unparsed_file_count", "value": str(len(scan.unparsed))},
+                {"name": "ratchet:ignored_file_count",
+                 "value": str(sum(len(r.matched) for r in scan.ignore_rules or ()))},
+            ] + [
+                {"name": "ratchet:ignore_rule",
+                 "value": f"{r.pattern} -- {r.reason} ({IGNORE_FILE} line {r.line}, "
+                          f"{plural(len(r.matched), 'file')})"}
+                for r in scan.ignore_rules or ()
+            ] + [
+                {"name": "ratchet:ignored_file", "value": f"{path} ({r.pattern})"}
+                for r in scan.ignore_rules or () for path in r.matched
             ] + [
                 {"name": "ratchet:skipped_directory", "value": f"{path} ({reason})"}
                 for path, reason in scan.skipped
@@ -1207,6 +1315,17 @@ def print_skipped(scan, shown=10):
             print(f"  {reason}{hint}: {listed}{more}")
 
 
+def print_ignored(scan):
+    """Say what .ratchetignore excluded, on every run."""
+    if scan.ignore_rules is None:
+        print(f"no {IGNORE_FILE}")
+        return
+    total = sum(len(r.matched) for r in scan.ignore_rules)
+    print(f"{IGNORE_FILE}: ignored {plural(total, 'file')}")
+    for r in scan.ignore_rules:
+        print(f"  ignored {r.pattern} ({plural(len(r.matched), 'file')}): {r.reason}")
+
+
 def print_unparsed(scan, shown=10):
     """Say which files could not be parsed, on every run. Their cryptography,
     if any, is not in the findings."""
@@ -1253,6 +1372,7 @@ def report(scan, root):
     print(f"registry {REGISTRY['registry_version']}  from {source}")
     print_skipped(scan)
     print_unparsed(scan)
+    print_ignored(scan)
     print("=" * 72)
 
     def section(title, bucket):
@@ -1327,7 +1447,11 @@ def main():
         print(f"not a directory: {args.path}", file=sys.stderr)
         return 2
 
-    scan = walk(args.path, include_vendored=args.include_vendored)
+    try:
+        scan = walk(args.path, include_vendored=args.include_vendored)
+    except IgnoreFileError as e:
+        print(f"ratchet: {e}", file=sys.stderr)
+        return 2
 
     if args.json:
         print(json.dumps(build_cbom(scan, args.path), indent=2))

@@ -4,6 +4,7 @@ registry 2026.10.2  from registry.json
 skipped no directories
 could not parse 1 of 1 file, so any cryptography in them is missing from this report:
   legacy.py: not valid Python 3 syntax at line 3
+no .ratchetignore
 ========================================================================
 ========================================================================
 No quantum-vulnerable primitives found in the files that could be parsed; 1 file was not.

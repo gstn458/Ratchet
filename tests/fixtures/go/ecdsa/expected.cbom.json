@@ -21,6 +21,10 @@
     },
     "properties": [
       {
+        "name": "ratchet:ignored_file_count",
+        "value": "0"
+      },
+      {
         "name": "ratchet:include_vendored",
         "value": "false"
       },

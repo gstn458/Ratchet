@@ -3,6 +3,7 @@ ratchet 0.1.0  scanned 1 file in .
 registry 2026.10.2  from registry.json
 skipped no directories
 parsed all 1 file
+no .ratchetignore
 ========================================================================
 
 ALREADY BROKEN       weak today, quantum is not the issue
