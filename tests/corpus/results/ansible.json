@@ -1,0 +1,243 @@
+{
+  "name": "ansible",
+  "commit": "7769a0b59580f0448e8c399d6bde6cdbdca5375a",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 1853,
+  "unparsed": [],
+  "skipped_directories": 7,
+  "findings": [
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 17,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dsa import ("
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 23,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 31,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import ("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 35,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 61,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dsa import DSAPrivateNumbers"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 62,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateNumbers"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "lib/ansible/_internal/_ssh/_ssh_agent.py",
+      "line": 63,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateNumbers"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/assemble.py",
+      "line": 243,
+      "snippet": "path_hash = module.sha1(path)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "lib/ansible/modules/assemble.py",
+      "line": 248,
+      "snippet": "pathmd5 = module.md5(path)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/assemble.py",
+      "line": 254,
+      "snippet": "dest_hash = module.sha1(dest)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/copy.py",
+      "line": 524,
+      "snippet": "checksum_src = module.sha1(src)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "lib/ansible/modules/copy.py",
+      "line": 529,
+      "snippet": "md5sum_src = module.md5(src)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/copy.py",
+      "line": 582,
+      "snippet": "checksum_dest = module.sha1(dest)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/get_url.py",
+      "line": 656,
+      "snippet": "result['checksum_src'] = module.sha1(tmpsrc)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/get_url.py",
+      "line": 667,
+      "snippet": "result['checksum_dest'] = module.sha1(dest)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "lib/ansible/modules/get_url.py",
+      "line": 716,
+      "snippet": "result['md5sum'] = module.md5(dest)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/rpm_key.py",
+      "line": 317,
+      "snippet": "return hashlib.sha1(fp_data).hexdigest().upper()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/uri.py",
+      "line": 485,
+      "snippet": "checksum_src = module.sha1(tmpsrc)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/modules/uri.py",
+      "line": 486,
+      "snippet": "checksum_dest = module.sha1(dest)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "lib/ansible/plugins/action/fetch.py",
+      "line": 190,
+      "snippet": "new_md5 = md5(dest)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "lib/ansible/plugins/action/fetch.py",
+      "line": 205,
+      "snippet": "local_md5 = md5(dest)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/plugins/connection/psrp.py",
+      "line": 507,
+      "snippet": "sha1_hash = sha1()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/plugins/connection/ssh.py",
+      "line": 698,
+      "snippet": "m = hashlib.sha1()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "lib/ansible/plugins/lookup/password.py",
+      "line": 272,
+      "snippet": "lockfile_name = to_bytes(\"%s.ansible_lockfile\" % hashlib.sha1(b_path).hexdigest())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 9,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key as rsa_generate_private_key"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 10,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 11,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dsa import generate_private_key as dsa_generate_private_key"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 12,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1, generate_private_key as ecdsa_generate_private_key"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 22,
+      "snippet": "private_key = Ed25519PrivateKey.generate()"
+    }
+  ]
+}

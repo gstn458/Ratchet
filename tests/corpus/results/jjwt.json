@@ -1,0 +1,10 @@
+{
+  "name": "jjwt",
+  "commit": "fb71496164c71442d08adec4571d9616ed5e1b8d",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 0,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": []
+}

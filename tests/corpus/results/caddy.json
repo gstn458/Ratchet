@@ -1,0 +1,299 @@
+{
+  "name": "caddy",
+  "commit": "401582cccfb3d1b6de382d48929e4070ef6663f2",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 389,
+  "unparsed": [],
+  "skipped_directories": 7,
+  "findings": [
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "caddytest/integration/acme_test.go",
+      "line": 5,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acme_test.go",
+      "line": 61,
+      "snippet": "accountPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acme_test.go",
+      "line": 77,
+      "snippet": "certPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acme_test.go",
+      "line": 130,
+      "snippet": "accountPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acme_test.go",
+      "line": 146,
+      "snippet": "certPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "caddytest/integration/acmeserver_test.go",
+      "line": 5,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acmeserver_test.go",
+      "line": 89,
+      "snippet": "accountPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acmeserver_test.go",
+      "line": 105,
+      "snippet": "certPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acmeserver_test.go",
+      "line": 178,
+      "snippet": "accountPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/acmeserver_test.go",
+      "line": 194,
+      "snippet": "certPrivateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "caddytest/integration/ech_test.go",
+      "line": 18,
+      "snippet": "\"crypto/ecdh\""
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "path": "caddytest/integration/ech_test.go",
+      "line": 107,
+      "snippet": "key, err := ecdh.X25519().GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "caddytest/integration/webtransport_test.go",
+      "line": 19,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "caddytest/integration/webtransport_test.go",
+      "line": 1381,
+      "snippet": "priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "modules/caddyevents/handshake_bench_test.go",
+      "line": 19,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "modules/caddyevents/handshake_bench_test.go",
+      "line": 35,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 20,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 21,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 22,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 23,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 573,
+      "snippet": "return fmt.Sprintf(\"%x\", sha256.Sum256(cert.Raw)), true"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "path": "modules/caddyhttp/replacer.go",
+      "line": 583,
+      "snippet": "return fmt.Sprintf(\"%x\", sha256.Sum256(pubKeyBytes)), true"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 25,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 70,
+      "snippet": "h := md5.New()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 94,
+      "snippet": "h := md5.New()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 197,
+      "snippet": "h := md5.New()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 250,
+      "snippet": "h := md5.New()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/fastcgi/client_test.go",
+      "line": 267,
+      "snippet": "h := md5.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "path": "modules/caddyhttp/reverseproxy/selectionpolicies.go",
+      "line": 19,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "modules/caddyhttp/reverseproxy/webtransport_transport_test.go",
+      "line": 19,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "modules/caddyhttp/reverseproxy/webtransport_transport_test.go",
+      "line": 153,
+      "snippet": "priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "modules/caddypki/crypto.go",
+      "line": 20,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "modules/caddypki/crypto.go",
+      "line": 21,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "modules/caddypki/crypto.go",
+      "line": 22,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "path": "modules/logging/filters.go",
+      "line": 18,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "path": "modules/logging/filters.go",
+      "line": 80,
+      "snippet": "return fmt.Sprintf(\"%.4x\", sha256.Sum256([]byte(s)))"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "node-jsonwebtoken",
+  "commit": "b924272f29192e12926b5414546f7c5bfcc9579d",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 0,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": []
+}

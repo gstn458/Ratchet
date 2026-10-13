@@ -1,0 +1,179 @@
+{
+  "name": "golang-jwt",
+  "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 46,
+  "unparsed": [],
+  "skipped_directories": 2,
+  "findings": [
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "ecdsa.go",
+      "line": 5,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "ecdsa.go",
+      "line": 83,
+      "snippet": "if verifystatus := ecdsa.Verify(ecdsaKey, hasher.Sum(nil), r, s); verifystatus {"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "ecdsa.go",
+      "line": 111,
+      "snippet": "if r, s, err := ecdsa.Sign(rand.Reader, ecdsaKey, hasher.Sum(nil)); err == nil {"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "ecdsa_test.go",
+      "line": 4,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "ecdsa_utils.go",
+      "line": 4,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "ed25519.go",
+      "line": 5,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "path": "ed25519.go",
+      "line": 49,
+      "snippet": "if !ed25519.Verify(ed25519Key, []byte(signingString), sig) {"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "ed25519_utils.go",
+      "line": 5,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "http_example_test.go",
+      "line": 7,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "parser_test.go",
+      "line": 5,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "rsa.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "rsa.go",
+      "line": 65,
+      "snippet": "return rsa.VerifyPKCS1v15(rsaKey, m.Hash, hasher.Sum(nil), sig)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "rsa.go",
+      "line": 88,
+      "snippet": "if sigBytes, err := rsa.SignPKCS1v15(rand.Reader, rsaKey, m.Hash, hasher.Sum(nil)); err == nil {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "rsa_pss.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "rsa_pss.go",
+      "line": 103,
+      "snippet": "return rsa.VerifyPSS(rsaKey, m.Hash, hasher.Sum(nil), sig, opts)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "rsa_pss.go",
+      "line": 127,
+      "snippet": "if sigBytes, err := rsa.SignPSS(rand.Reader, rsaKey, m.Hash, hasher.Sum(nil), m.Options); err == nil {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "rsa_pss_test.go",
+      "line": 4,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "rsa_test.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "rsa_test.go",
+      "line": 123,
+      "snippet": "randomKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "rsa_utils.go",
+      "line": 4,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "test/helpers.go",
+      "line": 5,
+      "snippet": "\"crypto/rsa\""
+    }
+  ]
+}

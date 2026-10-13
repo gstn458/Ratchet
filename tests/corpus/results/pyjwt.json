@@ -1,0 +1,259 @@
+{
+  "name": "pyjwt",
+  "commit": "f97b3273d3db3ed7266ae009784d65f1877dba66",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 26,
+  "unparsed": [],
+  "skipped_directories": 2,
+  "findings": [
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "jwt/algorithms.py",
+      "line": 41,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "jwt/algorithms.py",
+      "line": 57,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import ("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "jwt/algorithms.py",
+      "line": 61,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "jwt/algorithms.py",
+      "line": 761,
+      "snippet": "der_sig = key.sign(msg, ECDSA(self.hash_alg()))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "jwt/algorithms.py",
+      "line": 777,
+      "snippet": "public_key.verify(der_sig, msg, ECDSA(self.hash_alg()))"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "jwt/utils.py",
+      "line": 7,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurve"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/keys/__init__.py",
+      "line": 24,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 24,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import ("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 28,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1470,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1485,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1500,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP521R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1515,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256K1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1530,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1541,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1552,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP521R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1563,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256K1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1574,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1610,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1643,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1753,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as rsa_module"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "tests/test_algorithms.py",
+      "line": 1755,
+      "snippet": "small_key = rsa_module.generate_private_key("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1767,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as rsa_module"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "tests/test_algorithms.py",
+      "line": 1769,
+      "snippet": "small_key = rsa_module.generate_private_key("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1786,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as rsa_module"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "tests/test_algorithms.py",
+      "line": 1788,
+      "snippet": "small_key = rsa_module.generate_private_key("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_algorithms.py",
+      "line": 1798,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as rsa_module"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "tests/test_algorithms.py",
+      "line": 1805,
+      "snippet": "small_key = rsa_module.generate_private_key("
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "tests/test_api_jws.py",
+      "line": 27,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "tests/test_api_jws.py",
+      "line": 31,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
+    }
+  ]
+}

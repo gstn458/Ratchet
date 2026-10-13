@@ -1,0 +1,443 @@
+{
+  "name": "certbot",
+  "commit": "0201ba5ce70ba8b7545380064abddd4bc3a10c15",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 366,
+  "unparsed": [],
+  "skipped_directories": 8,
+  "findings": [
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "acme/examples/http01_example.py",
+      "line": 33,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "acme/examples/http01_example.py",
+      "line": 72,
+      "snippet": "pkey = rsa.generate_private_key(public_exponent=65537, key_size=CERT_PKEY_BITS)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "acme/examples/http01_example.py",
+      "line": 161,
+      "snippet": "key=rsa.generate_private_key(public_exponent=65537,"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "acme/src/acme/_internal/tests/client_test.py",
+      "line": 647,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "acme/src/acme/_internal/tests/client_test.py",
+      "line": 652,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "acme/src/acme/_internal/tests/crypto_util_test.py",
+      "line": 12,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, x25519"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "acme/src/acme/_internal/tests/crypto_util_test.py",
+      "line": 12,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, x25519"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "acme/src/acme/_internal/tests/crypto_util_test.py",
+      "line": 120,
+      "snippet": "self.privkey = rsa.generate_private_key(public_exponent=65537, key_size=2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "acme/src/acme/_internal/tests/crypto_util_test.py",
+      "line": 206,
+      "snippet": "privkey = rsa.generate_private_key(public_exponent=65537, key_size=2048)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "path": "acme/src/acme/crypto_util.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "acme/src/acme/crypto_util.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "acme/src/acme/crypto_util.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "acme/src/acme/crypto_util.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/assertions.py",
+      "line": 6,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurve"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/assertions.py",
+      "line": 7,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/assertions.py",
+      "line": 8,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/test_main.py",
+      "line": 12,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurve"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/test_main.py",
+      "line": 13,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP256R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/test_main.py",
+      "line": 14,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/test_main.py",
+      "line": 15,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import SECP521R1"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/certbot_tests/test_main.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/misc.py",
+      "line": 30,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/misc.py",
+      "line": 31,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/misc.py",
+      "line": 218,
+      "snippet": "key = rsa.generate_private_key(public_exponent=65537, key_size=2048)"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/misc.py",
+      "line": 220,
+      "snippet": "key = ec.generate_private_key(ec.SECP384R1())"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py",
+      "line": 16,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py",
+      "line": 17,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/account.py",
+      "line": 70,
+      "snippet": "hasher = hashlib.md5()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/account.py",
+      "line": 75,
+      "snippet": "hasher = hashlib.new('md5', **cast(Mapping[str, Any], {\"usedforsecurity\": False}))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/client.py",
+      "line": 14,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/renewal.py",
+      "line": 18,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/renewal.py",
+      "line": 19,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/storage.py",
+      "line": 19,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/storage.py",
+      "line": 20,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/tests/crypto_util_test.py",
+      "line": 11,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/tests/renewal_test.py",
+      "line": 18,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/tests/renewal_test.py",
+      "line": 24,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "certbot/src/certbot/_internal/tests/san_test.py",
+      "line": 11,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/tests/san_test.py",
+      "line": 70,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/tests/san_test.py",
+      "line": 89,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/tests/san_test.py",
+      "line": 113,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "certbot/src/certbot/_internal/tests/san_test.py",
+      "line": 134,
+      "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 23,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 24,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 25,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dsa import DSAPublicKey"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 26,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ECDSA"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 27,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePublicKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 35,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 50,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 52,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 264,
+      "snippet": "key = rsa.generate_private_key(public_exponent=65537, key_size=bits)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 274,
+      "snippet": "key = ec.generate_private_key("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 377,
+      "snippet": "signature, payload, ECDSA(signature_hash_algorithm)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "certbot/src/certbot/tests/util.py",
+      "line": 27,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    }
+  ]
+}

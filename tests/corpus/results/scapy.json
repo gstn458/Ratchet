@@ -1,0 +1,307 @@
+{
+  "name": "scapy",
+  "commit": "5376fcc86aaba7c516fb4aa19576b03b387d217a",
+  "registry_version": "2026.10.2",
+  "go_backend": "regex",
+  "files_scanned": 411,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": [
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "scapy/config.py",
+      "line": 775,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey  # noqa: E501"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "path": "scapy/config.py",
+      "line": 776,
+      "snippet": "X25519PrivateKey.generate()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/contrib/tacacs.py",
+      "line": 46,
+      "snippet": "msg = hashlib.md5()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/layers/inet.py",
+      "line": 730,
+      "snippet": "h = hashlib.md5()  # nosec"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/layers/inet6.py",
+      "line": 2398,
+      "snippet": "h = md5(record.encode(\"utf8\"))"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "path": "scapy/layers/kerberos.py",
+      "line": 201,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dh"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/layers/radius.py",
+      "line": 1341,
+      "snippet": "radius_mac = hashlib.md5(data + shared_secret)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/layers/smbserver.py",
+      "line": 1051,
+      "snippet": "hash = hashlib.md5((fname or \"\").encode()).digest()"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "RSA-512",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 183,
+      "snippet": "rsa.generate_private_key(public_exponent=65537, key_size=512)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 188,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import rust_openssl"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 463,
+      "snippet": "private_key = rsa.generate_private_key("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 516,
+      "snippet": "private_key = ec.generate_private_key(curve(), default_backend())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 534,
+      "snippet": "self.pubkey.verify(sig, msg, ec.ECDSA(_get_hash(h)))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 823,
+      "snippet": "self.key = rsa.generate_private_key("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 899,
+      "snippet": "self.key = ec.generate_private_key(curve(), default_backend())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "path": "scapy/layers/tls/cert.py",
+      "line": 917,
+      "snippet": "return self.key.sign(data, ec.ECDSA(_get_hash(h)))"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 25,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 33,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dh import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 526,
+      "snippet": "return ec.generate_private_key(curve, default_backend())"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 47,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dh import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 52,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 858,
+      "snippet": "pms = s.client_kx_privkey.exchange(ec.ECDH(),"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 887,
+      "snippet": "ZZ = s.server_kx_privkey.exchange(ec.ECDH(), s.client_kx_pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 41,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ed25519"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 181,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 205,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 217,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "scapy/tools/UTscapy.py",
+      "line": 462,
+      "snippet": "return hashlib.sha1(x.encode(\"utf8\")).hexdigest().upper()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "scapy/tools/UTscapy.py",
+      "line": 477,
+      "snippet": "test_campaign.sha = sha1(fdesc.read())"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "path": "scapy/utils6.py",
+      "line": 431,
+      "snippet": "globalid = hashlib.sha1(btod + eui64).digest()[:5]"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "path": "scapy/utils6.py",
+      "line": 462,
+      "snippet": "s = hashlib.md5(s).digest()"
+    }
+  ]
+}

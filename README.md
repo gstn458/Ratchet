@@ -40,6 +40,12 @@ pytest
 Tests compare scans of small fixtures against committed golden output and validate
 every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`.
 
+`tests/corpus` measures Ratchet against 20 real repositories pinned to commits.
+`python3 tests/corpus/run.py` fetches them (the only network access anywhere in the
+project, and only in this test tool), scans them, writes results and prints the
+measurement to `tests/corpus/SUMMARY.md`. Precision is measured over hand-labelled call
+sites; see `tests/corpus/LABELLING.md`.
+
 ## What it found on real repositories
 
 Two libraries, scanned at the commits shown. Call sites are calls into a cryptographic
