@@ -44,7 +44,8 @@ every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`.
 `python3 tests/corpus/run.py` fetches them (the only network access anywhere in the
 project, and only in this test tool), scans them, writes results and prints the
 measurement to `tests/corpus/SUMMARY.md`. Precision is measured over hand-labelled call
-sites; see `tests/corpus/LABELLING.md`.
+sites; see `tests/corpus/LABELLING.md`. `tests/corpus/review.py` writes the review sheet,
+`tests/corpus/REVIEW.md`: every false positive and a fixed-seed 10% sample of the rest.
 
 ## What it found on real repositories
 
@@ -56,8 +57,8 @@ paramiko, the Python SSH library, at `d87f9c0` (2026-10-10), 70 files scanned:
 
 ```
 QUANTUM VULNERABLE
+  RSA       3 call sites, 4 imports
   X25519    4 call sites, 3 imports
-  RSA       1 call site,  4 imports
   ECDH      3 call sites, 1 import
   ECDSA     3 call sites, 1 import
   Ed25519   2 imports
@@ -67,7 +68,7 @@ ALREADY BROKEN
   SHA-1     3 call sites
   MD5       1 call site
 
-11 quantum-vulnerable call sites and 14 imports across 10 files.
+13 quantum-vulnerable call sites and 14 imports across 10 files.
 ```
 
 The ECDH and ECDSA lines are worth a second look. Both come from the same
@@ -202,10 +203,12 @@ Files that cannot be parsed contribute no findings. A Python 2 file, or anything
 cryptography in it is not detected. A low-confidence fallback for such files is planned
 for Phase 2.
 
-MD5 and SHA-1 are reported wherever they are used, including in HMAC and in the MGF1
-mask of RSA-OAEP and PSS, where collision resistance is not what the construction
-relies on. Those uses are not broken in the way a signature over a SHA-1 digest is.
-Ratchet does not tell them apart; a reviewer can record them with `suppress`.
+MD5 and SHA-1 are reported wherever they are used, including in HMAC, in PBKDF2, in
+OCSP certificate identifiers and in the MGF1 mask of RSA-OAEP and PSS, where collision
+resistance is not what the construction relies on. Those uses are not broken in the
+way a signature over a SHA-1 digest is, and the registry's rationale for both
+algorithms describes the signature case. Ratchet does not tell them apart; a reviewer
+can record them with `suppress`.
 
 Parameter sets are read only from literal values in calls whose signature Ratchet
 knows: `cryptography`'s RSA, DSA, DH and EC key generation and PyCryptodome's RSA and

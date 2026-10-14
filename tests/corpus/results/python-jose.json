@@ -44,6 +44,69 @@
       "snippet": "self.prepared_key.verify(signature, msg, ec.ECDSA(self.hash_alg()))"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 208,
+      "snippet": "RSA1_5 = padding.PKCS1v15()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 209,
+      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 209,
+      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 209,
+      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 210,
+      "snippet": "RSA_OAEP_256 = padding.OAEP(padding.MGF1(hashes.SHA256()), hashes.SHA256(), None)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 306,
+      "snippet": "signature = self.prepared_key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 316,
+      "snippet": "self.public_key().prepared_key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",

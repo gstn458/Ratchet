@@ -1,5 +1,13 @@
 {
   "findings": {
+    "jwt/algorithms.py:683:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jwt/algorithms.py:688:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
     "jwt/algorithms.py:761:ECDSA": {
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
@@ -7,6 +15,14 @@
     "jwt/algorithms.py:777:ECDSA": {
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jwt/algorithms.py:916:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jwt/algorithms.py:929:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
     },
     "tests/test_algorithms.py:1755:RSA-1024": {
       "verdict": "tp",
@@ -25,48 +41,7 @@
       "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
     }
   },
-  "missed": [
-    {
-      "path": "jwt/algorithms.py",
-      "line": 683,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "signature: bytes = key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
-    },
-    {
-      "path": "jwt/algorithms.py",
-      "line": 688,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
-    },
-    {
-      "path": "jwt/algorithms.py",
-      "line": 916,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "padding.PSS("
-    },
-    {
-      "path": "jwt/algorithms.py",
-      "line": 929,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "padding.PSS("
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

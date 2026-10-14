@@ -20,9 +20,25 @@
       "verdict": "tp",
       "note": "rule py-hashlib-import: md5 imported from hashlib"
     },
+    "src/twisted/conch/ssh/keys.py:1130:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "src/twisted/conch/ssh/keys.py:1133:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "src/twisted/conch/ssh/keys.py:1746:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
     "src/twisted/conch/ssh/keys.py:1759:ECDSA": {
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/keys.py:1813:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
     },
     "src/twisted/conch/ssh/keys.py:1837:ECDSA": {
       "verdict": "tp",
@@ -59,6 +75,22 @@
     "src/twisted/conch/test/sk_dummy.py:90:ECDSA-SECP256R1": {
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/test/test_keys.py:1502:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "src/twisted/conch/test/test_keys.py:1502:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "src/twisted/conch/test/test_keys.py:1520:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "src/twisted/conch/test/test_keys.py:1538:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
     },
     "src/twisted/conch/test/test_transport.py:1737:SHA-1": {
       "verdict": "tp",
@@ -184,6 +216,18 @@
       "verdict": "tp",
       "note": "rule py-hashlib-import: md5 imported from hashlib"
     },
+    "src/twisted/test/_ca_with_intermediate.py:40:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generate_private_key from-imported (parenthesised) from asymmetric.rsa, key_size=2048"
+    },
+    "src/twisted/test/test_sslverify.py:159:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generate_private_key from-imported (parenthesised, inside try) from asymmetric.rsa, key_size=2048"
+    },
+    "src/twisted/test/test_sslverify.py:181:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generate_private_key from-imported (parenthesised, inside try) from asymmetric.rsa, key_size=2048"
+    },
     "src/twisted/test/test_sslverify.py:3526:EC-SECP256R1": {
       "verdict": "tp",
       "note": "read by hand: EC, usage undetermined: signs a CSR (actual use: ECDSA)"
@@ -217,88 +261,7 @@
       "note": "rule py-hashlib-import: sha1 imported from hashlib"
     }
   },
-  "missed": [
-    {
-      "path": "src/twisted/conch/ssh/keys.py",
-      "line": 1130,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "(\"RSA\", b\"ssh-rsa\"): hashes.SHA1(),"
-    },
-    {
-      "path": "src/twisted/conch/ssh/keys.py",
-      "line": 1133,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "(\"DSA\", b\"ssh-dss\"): hashes.SHA1(),"
-    },
-    {
-      "path": "src/twisted/conch/ssh/keys.py",
-      "line": 1746,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "sig = self._keyObject.sign(data, padding.PKCS1v15(), hashAlgorithm)"
-    },
-    {
-      "path": "src/twisted/conch/ssh/keys.py",
-      "line": 1813,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "padding.PKCS1v15(),"
-    },
-    {
-      "path": "src/twisted/conch/test/test_keys.py",
-      "line": 1502,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": true,
-      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
-    },
-    {
-      "path": "src/twisted/conch/test/test_keys.py",
-      "line": 1502,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": true,
-      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
-    },
-    {
-      "path": "src/twisted/conch/test/test_keys.py",
-      "line": 1520,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": true,
-      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA256()"
-    },
-    {
-      "path": "src/twisted/conch/test/test_keys.py",
-      "line": 1538,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": true,
-      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA512()"
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

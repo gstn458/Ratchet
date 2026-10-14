@@ -6,14 +6,14 @@ found by reading the code, listed in `labels/<name>.json`.
 
 | Repository | Language | Call sites | In test code | Imports | Labelled | False positives | FP rate | Missed |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| paramiko | python | 15 | 0 | 14 | 15 | 0 | 0.0% | 10 |
-| pyjwt | python | 6 | 4 | 25 | 6 | 0 | 0.0% | 4 |
-| python-jose | python | 4 | 2 | 9 | 4 | 0 | 0.0% | 6 |
-| certbot | python | 17 | 8 | 37 | 17 | 0 | 0.0% | 4 |
-| twisted | python | 54 | 25 | 20 | 54 | 0 | 0.0% | 8 |
+| paramiko | python | 17 | 0 | 14 | 17 | 0 | 0.0% | 8 |
+| pyjwt | python | 10 | 4 | 25 | 10 | 0 | 0.0% | 0 |
+| python-jose | python | 11 | 2 | 9 | 11 | 0 | 0.0% | 0 |
+| certbot | python | 23 | 10 | 37 | 23 | 0 | 0.0% | 0 |
+| twisted | python | 65 | 32 | 20 | 65 | 0 | 0.0% | 0 |
 | django | python | 17 | 5 | 0 | 17 | 0 | 0.0% | 0 |
-| scapy | python | 23 | 0 | 14 | 23 | 0 | 0.0% | 16 |
-| ansible | python | 18 | 1 | 11 | 18 | 0 | 0.0% | 3 |
+| scapy | python | 49 | 0 | 14 | 49 | 0 | 0.0% | 0 |
+| ansible | python | 21 | 4 | 11 | 21 | 0 | 0.0% | 0 |
 | golang-jwt | go | 8 | 1 | 13 | 8 | 0 | 0.0% | 0 |
 | x-crypto | go | 144 | 55 | 96 | 144 | 0 | 0.0% | 30 |
 | go-jose | go | 87 | 49 | 53 | 87 | 1 | 1.1% | 0 |
@@ -26,6 +26,6 @@ found by reading the code, listed in `labels/<name>.json`.
 | jjwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 11 |
 | node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 6 |
 | forge | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 90 |
-| **total** | | 940 | 481 | 731 | 940 | 1 | 0.1% | 355 |
+| **total** | | 999 | 493 | 731 | 999 | 1 | 0.1% | 312 |
 
-Labelled 940 of 940 call sites (100.0%).
+Labelled 999 of 999 call sites (100.0%).

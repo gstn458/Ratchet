@@ -8,6 +8,30 @@
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
     },
+    "jose/backends/cryptography_backend.py:208:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:209:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.OAEP(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:209:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:210:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.OAEP(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:306:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:316:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
     "tests/algorithms/test_EC.py:111:EC": {
       "verdict": "tp",
       "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
@@ -17,68 +41,7 @@
       "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
     }
   },
-  "missed": [
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 208,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "RSA1_5 = padding.PKCS1v15()"
-    },
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 209,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
-    },
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 209,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
-    },
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 210,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "RSA_OAEP_256 = padding.OAEP(padding.MGF1(hashes.SHA256()), hashes.SHA256(), None)"
-    },
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 306,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "signature = self.prepared_key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
-    },
-    {
-      "path": "jose/backends/cryptography_backend.py",
-      "line": 316,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "self.public_key().prepared_key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

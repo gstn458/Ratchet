@@ -35,6 +35,24 @@
       "snippet": "msg = hashlib.md5()"
     },
     {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/dot11.py",
+      "line": 2333,
+      "snippet": "decrepit_algorithms.ARC4(self.iv + key.encode(\"utf8\")),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/dot11.py",
+      "line": 2358,
+      "snippet": "decrepit_algorithms.ARC4(self.iv + key.encode(\"utf8\")),"
+    },
+    {
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
@@ -53,6 +71,15 @@
       "snippet": "h = md5(record.encode(\"utf8\"))"
     },
     {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ipsec.py",
+      "line": 220,
+      "snippet": "DES = lambda key: decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
       "label": "DH",
       "algorithm": "DH",
       "kind": "import",
@@ -60,6 +87,96 @@
       "path": "scapy/layers/kerberos.py",
       "line": 201,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 151,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 155,
+      "snippet": "h = hmac.HMAC(M4SS, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 227,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 233,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 246,
+      "snippet": "h = hmac.HMAC(XorKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 248,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 255,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 257,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ntlm.py",
+      "line": 1111,
+      "snippet": "algorithm = decrepit_algorithms.ARC4(key)"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ntlm.py",
+      "line": 1136,
+      "snippet": "algorithm = decrepit_algorithms.ARC4(key)"
     },
     {
       "label": "MD5",
@@ -179,6 +296,24 @@
       "snippet": "return self.key.sign(data, ec.ECDSA(_get_hash(h)))"
     },
     {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1958,
+      "snippet": "hashes.SHA1(),"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/cipher_block.py",
+      "line": 37,
+      "snippet": "DES = lambda key: decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
@@ -213,6 +348,33 @@
       "path": "scapy/layers/tls/crypto/groups.py",
       "line": 526,
       "snippet": "return ec.generate_private_key(curve, default_backend())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 95,
+      "snippet": "return padding.PKCS1v15()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 99,
+      "snippet": "return padding.PSS(mgf=mgf(h), salt_length=h.digest_size)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 101,
+      "snippet": "return padding.OAEP(mgf=mgf(h), algorithm=h, label=label)"
     },
     {
       "label": "ECDH",
@@ -303,6 +465,78 @@
       "path": "scapy/layers/tls/keyexchange_tls13.py",
       "line": 217,
       "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 101,
+      "snippet": "return decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 888,
+      "snippet": "decrepit_algorithms.TripleDES(key), modes.CBC(b\"\\0\" * 8)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 897,
+      "snippet": "decrepit_algorithms.TripleDES(key), modes.CBC(b\"\\0\" * 8)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 926,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 1078,
+      "snippet": "rc4 = Cipher(algorithms.ARC4(ke), mode=None).encryptor()"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 1096,
+      "snippet": "rc4 = Cipher(decrepit_algorithms.ARC4(ke), mode=None).decryptor()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/modules/krack/automaton.py",
+      "line": 190,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/modules/krack/crypto.py",
+      "line": 24,
+      "snippet": "algorithm = algorithms.ARC4(key)"
     },
     {
       "label": "SHA-1",

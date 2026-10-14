@@ -39,12 +39,16 @@ can be seen, which measures how often the scanner could have resolved it.
    checked independently of the scanner: a Go package-level call whose package is
    imported under its own name with nothing in the file able to shadow that name, a
    recorded parameter set that appears literally in the call, a `hashlib` call, or a
-   hash function imported from `hashlib` or Django's wrapper. Go `ecdsa.GenerateKey`
+   hash function imported from `hashlib` or Django's wrapper, or a `cryptography`
+   object (`hashes.SHA1()`, `algorithms.ARC4()`, `padding.PKCS1v15()`) whose module is
+   imported once, unaliased, from `cryptography` and bound nowhere else. Go `ecdsa.GenerateKey`
    is never drafted in a file that mentions ECDH or does `ScalarMult`. Each draft's
-   note names its rule. A random sample of 40 drafts was read to confirm the rules.
+   note names its rule. A random sample of 40 drafts was read to confirm the rules,
+   and all 32 drafts of the `cryptography` object rule were read when it was added.
 2. Everything else was read in context and given a verdict by hand; those notes start
    with "read by hand".
-3. A reviewer checks every **fp** and a random 10% of the **tp** labels.
+3. A reviewer checks every **fp** and a random 10% of the **tp** labels, listed in
+   `REVIEW.md` by `review.py`.
 
 ## Missed findings
 

@@ -251,6 +251,15 @@
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
     },
     {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py",
+      "line": 71,
+      "snippet": "cert=cert, issuer=issuer_cert, algorithm=hashes.SHA1(),"
+    },
+    {
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
@@ -276,6 +285,24 @@
       "path": "certbot/src/certbot/_internal/client.py",
       "line": 14,
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "certbot/src/certbot/_internal/client.py",
+      "line": 199,
+      "snippet": "rsa_key = generate_private_key("
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "certbot/src/certbot/_internal/ocsp.py",
+      "line": 100,
+      "snippet": "builder = builder.add_certificate(cert, issuer, hashes.SHA1())"
     },
     {
       "label": "EC",
@@ -321,6 +348,24 @@
       "path": "certbot/src/certbot/_internal/tests/crypto_util_test.py",
       "line": 11,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "certbot/src/certbot/_internal/tests/ocsp_test.py",
+      "line": 230,
+      "snippet": "builder = builder.add_certificate(cert, issuer, hashes.SHA1())"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "certbot/src/certbot/_internal/tests/ocsp_test.py",
+      "line": 241,
+      "snippet": "hash_algorithm=hashes.SHA1(),"
     },
     {
       "label": "EC",
@@ -474,6 +519,15 @@
       "path": "certbot/src/certbot/crypto_util.py",
       "line": 274,
       "snippet": "key = ec.generate_private_key("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "certbot/src/certbot/crypto_util.py",
+      "line": 373,
+      "snippet": "signature, payload, PKCS1v15(), signature_hash_algorithm"
     },
     {
       "label": "ECDSA",

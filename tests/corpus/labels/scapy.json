@@ -8,6 +8,14 @@
       "verdict": "tp",
       "note": "rule py-hashlib: hashlib.md5() call"
     },
+    "scapy/layers/dot11.py:2333:RC4": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/layers/dot11.py:2358:RC4": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
     "scapy/layers/inet.py:730:MD5": {
       "verdict": "tp",
       "note": "rule py-hashlib: hashlib.md5() call"
@@ -15,6 +23,50 @@
     "scapy/layers/inet6.py:2398:MD5": {
       "verdict": "tp",
       "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "scapy/layers/ipsec.py:220:3DES": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/layers/msrpce/msnrpc.py:151:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing"
+    },
+    "scapy/layers/msrpce/msnrpc.py:155:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/msrpce/msnrpc.py:227:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing"
+    },
+    "scapy/layers/msrpce/msnrpc.py:233:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/msrpce/msnrpc.py:246:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/msrpce/msnrpc.py:248:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/msrpce/msnrpc.py:255:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/msrpce/msnrpc.py:257:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC"
+    },
+    "scapy/layers/ntlm.py:1111:RC4": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/layers/ntlm.py:1136:RC4": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
     },
     "scapy/layers/radius.py:1341:MD5": {
       "verdict": "tp",
@@ -27,6 +79,10 @@
     "scapy/layers/tls/cert.py:183:RSA-512": {
       "verdict": "tp",
       "note": "read by hand: capability probe for 512-bit RSA support"
+    },
+    "scapy/layers/tls/cert.py:1958:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
     },
     "scapy/layers/tls/cert.py:463:RSA": {
       "verdict": "tp",
@@ -52,9 +108,25 @@
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
     },
+    "scapy/layers/tls/crypto/cipher_block.py:37:3DES": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
     "scapy/layers/tls/crypto/groups.py:526:EC": {
       "verdict": "tp",
       "note": "read by hand: EC, usage undetermined: TLS key-exchange group key (actual use: ECDH)"
+    },
+    "scapy/layers/tls/crypto/pkcs1.py:101:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.OAEP(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "scapy/layers/tls/crypto/pkcs1.py:95:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "scapy/layers/tls/crypto/pkcs1.py:99:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
     },
     "scapy/layers/tls/keyexchange.py:858:ECDH": {
       "verdict": "tp",
@@ -76,6 +148,38 @@
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
     },
+    "scapy/libs/rfc3961.py:101:3DES": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/libs/rfc3961.py:1078:RC4": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: algorithms.ARC4(), algorithms imported once from cryptography.hazmat.primitives.ciphers, bound nowhere else"
+    },
+    "scapy/libs/rfc3961.py:1096:RC4": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/libs/rfc3961.py:888:3DES": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/libs/rfc3961.py:897:3DES": {
+      "verdict": "tp",
+      "note": "read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher"
+    },
+    "scapy/libs/rfc3961.py:926:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "scapy/modules/krack/automaton.py:190:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "scapy/modules/krack/crypto.py:24:RC4": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: algorithms.ARC4(), algorithms imported once from cryptography.hazmat.primitives.ciphers, bound nowhere else"
+    },
     "scapy/tools/UTscapy.py:462:SHA-1": {
       "verdict": "tp",
       "note": "rule py-hashlib: hashlib.sha1() call"
@@ -93,168 +197,7 @@
       "note": "rule py-hashlib: hashlib.md5() call"
     }
   },
-  "missed": [
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 151,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "digest = hashes.Hash(hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 155,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(M4SS, hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 227,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "digest = hashes.Hash(hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 233,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 246,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(XorKey, hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 248,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 255,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/msrpce/msnrpc.py",
-      "line": 257,
-      "algorithm": "MD5",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
-    },
-    {
-      "path": "scapy/layers/tls/cert.py",
-      "line": 1958,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "hashes.SHA1(),"
-    },
-    {
-      "path": "scapy/layers/tls/crypto/pkcs1.py",
-      "line": 95,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "return padding.PKCS1v15()"
-    },
-    {
-      "path": "scapy/layers/tls/crypto/pkcs1.py",
-      "line": 99,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "return padding.PSS(mgf=mgf(h), salt_length=h.digest_size)"
-    },
-    {
-      "path": "scapy/layers/tls/crypto/pkcs1.py",
-      "line": 101,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-rsa-padding",
-      "note": "RSA operation identified only by its padding object",
-      "test": false,
-      "snippet": "return padding.OAEP(mgf=mgf(h), algorithm=h, label=label)"
-    },
-    {
-      "path": "scapy/libs/rfc3961.py",
-      "line": 926,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "algorithm=hashes.SHA1(),"
-    },
-    {
-      "path": "scapy/libs/rfc3961.py",
-      "line": 1078,
-      "algorithm": "RC4",
-      "source": "search",
-      "search": "py-cryptography-cipher",
-      "note": "legacy cipher from cryptography.hazmat.primitives.ciphers is not recognised",
-      "test": false,
-      "snippet": "rc4 = Cipher(algorithms.ARC4(ke), mode=None).encryptor()"
-    },
-    {
-      "path": "scapy/modules/krack/automaton.py",
-      "line": 190,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "algorithm=hashes.SHA1(),"
-    },
-    {
-      "path": "scapy/modules/krack/crypto.py",
-      "line": 24,
-      "algorithm": "RC4",
-      "source": "search",
-      "search": "py-cryptography-cipher",
-      "note": "legacy cipher from cryptography.hazmat.primitives.ciphers is not recognised",
-      "test": false,
-      "snippet": "algorithm = algorithms.ARC4(key)"
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

@@ -35,6 +35,24 @@
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jwt/algorithms.py",
+      "line": 683,
+      "snippet": "signature: bytes = key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jwt/algorithms.py",
+      "line": 688,
+      "snippet": "key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -51,6 +69,24 @@
       "path": "jwt/algorithms.py",
       "line": 777,
       "snippet": "public_key.verify(der_sig, msg, ECDSA(self.hash_alg()))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jwt/algorithms.py",
+      "line": 916,
+      "snippet": "padding.PSS("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jwt/algorithms.py",
+      "line": 929,
+      "snippet": "padding.PSS("
     },
     {
       "label": "EC",

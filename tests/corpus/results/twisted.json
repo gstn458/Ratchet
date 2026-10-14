@@ -125,6 +125,33 @@
       "snippet": "[binascii.hexlify(x) for x in iterbytes(md5(self.blob()).digest())]"
     },
     {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1130,
+      "snippet": "(\"RSA\", b\"ssh-rsa\"): hashes.SHA1(),"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1133,
+      "snippet": "(\"DSA\", b\"ssh-dss\"): hashes.SHA1(),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1746,
+      "snippet": "sig = self._keyObject.sign(data, padding.PKCS1v15(), hashAlgorithm)"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -132,6 +159,15 @@
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1759,
       "snippet": "signature = self._keyObject.sign(data, ec.ECDSA(hashAlgorithm))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1813,
+      "snippet": "padding.PKCS1v15(),"
     },
     {
       "label": "ECDSA",
@@ -267,6 +303,42 @@
       "path": "src/twisted/conch/test/test_keys.py",
       "line": 1042,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1502,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1502,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1520,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA256()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1538,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA512()"
     },
     {
       "label": "DH",
@@ -584,6 +656,15 @@
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
     },
     {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/test/_ca_with_intermediate.py",
+      "line": 40,
+      "snippet": "pk = generate_private_key(key_size=2048, public_exponent=65537)"
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
@@ -600,6 +681,24 @@
       "path": "src/twisted/test/test_sslverify.py",
       "line": 54,
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/test/test_sslverify.py",
+      "line": 159,
+      "snippet": "privateKeyForCA = generate_private_key(public_exponent=65537, key_size=2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "src/twisted/test/test_sslverify.py",
+      "line": 181,
+      "snippet": "privateKeyForServer = generate_private_key(public_exponent=65537, key_size=2048)"
     },
     {
       "label": "EC-SECP256R1",

@@ -71,40 +71,21 @@
     "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py:22:Ed25519": {
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py:24:RSA-4096": {
+      "verdict": "tp",
+      "note": "read by hand: renamed from-import of asymmetric.rsa generate_private_key, 4096 at the key_size position"
+    },
+    "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py:26:DSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: renamed from-import of asymmetric.dsa generate_private_key, key size 1024"
+    },
+    "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py:28:EC-SECP384R1": {
+      "verdict": "tp",
+      "note": "read by hand: renamed from-import of asymmetric.ec generate_private_key; the key is handed to an SSH agent, usage not visible in the file (the task type says ecdsa)"
     }
   },
-  "missed": [
-    {
-      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
-      "line": 24,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "py-renamed-keygen",
-      "note": "key generation through a renamed from-import (generate_private_key as ...)",
-      "test": true,
-      "snippet": "private_key = rsa_generate_private_key(65537, 4096)"
-    },
-    {
-      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
-      "line": 26,
-      "algorithm": "DSA",
-      "source": "search",
-      "search": "py-renamed-keygen",
-      "note": "key generation through a renamed from-import (generate_private_key as ...)",
-      "test": true,
-      "snippet": "private_key = dsa_generate_private_key(1024)"
-    },
-    {
-      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
-      "line": 28,
-      "algorithm": "EC",
-      "source": "search",
-      "search": "py-renamed-keygen",
-      "note": "key generation through a renamed from-import (generate_private_key as ...)",
-      "test": true,
-      "snippet": "private_key = ecdsa_generate_private_key(SECP384R1())"
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

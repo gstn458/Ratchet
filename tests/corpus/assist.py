@@ -15,6 +15,7 @@ Checkouts come from the same cache as run.py ($RATCHET_CORPUS_DIR).
 """
 
 import argparse
+import ast
 import json
 import re
 import sys
@@ -101,8 +102,54 @@ WRAPPERS = {
 }
 
 
+# algorithm -> (module the object is imported as, its parent packages, object names)
+PY_OBJECTS = {
+    "MD5": ("hashes", r"cryptography\.hazmat\.primitives", "MD5"),
+    "SHA-1": ("hashes", r"cryptography\.hazmat\.primitives", "SHA1"),
+    "3DES": ("algorithms", r"cryptography\.hazmat\.(?:primitives|decrepit)\.ciphers", "TripleDES"),
+    "RC4": ("algorithms", r"cryptography\.hazmat\.(?:primitives|decrepit)\.ciphers", "ARC4"),
+    "RSA": ("padding", r"cryptography\.hazmat\.primitives\.asymmetric", "PKCS1v15|OAEP|PSS"),
+}
+
+
+def py_bindings(source, name):
+    """Every way the file binds a name: ("from", module) for each import of it,
+    ("other", None) for an assignment, parameter, loop target or plain import."""
+    found = []
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                if (alias.asname or alias.name) == name:
+                    found.append(("from", node.module if alias.asname is None else None))
+        elif isinstance(node, ast.Import):
+            found += [("other", None) for a in node.names if (a.asname or a.name.split(".")[0]) == name]
+        elif isinstance(node, ast.Name) and node.id == name and isinstance(node.ctx, ast.Store):
+            found.append(("other", None))
+        elif isinstance(node, ast.arg) and node.arg == name:
+            found.append(("other", None))
+    return found
+
+
+def draft_python_object(algo, source, line):
+    """hashes.SHA1(), algorithms.ARC4(...), padding.PKCS1v15(): the module is
+    imported once, unaliased, from cryptography, and bound nowhere else."""
+    module, parent, objects = PY_OBJECTS[algo]
+    m = re.search(rf"(?<![\w.]){module}\.({objects})\s*\(", line)
+    if not m:
+        return None
+    bindings = py_bindings(source, module)
+    if len(bindings) != 1 or bindings[0][0] != "from" or not re.fullmatch(parent, bindings[0][1] or ""):
+        return None
+    return (f"rule py-cryptography-object: {module}.{m.group(1)}(), {module} imported once from "
+            f"{bindings[0][1]}, bound nowhere else")
+
+
 def draft_python(finding, source, line):
     algo = finding["algorithm"]
+    if algo in PY_OBJECTS:
+        rule = draft_python_object(algo, source, line)
+        if rule or algo not in PY_HASH:
+            return rule  # anything else in Python: read it
     if algo not in PY_HASH:
         return None  # asymmetric findings in Python: read them
     name = PY_HASH[algo]

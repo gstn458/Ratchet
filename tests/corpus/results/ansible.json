@@ -267,6 +267,33 @@
       "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
       "line": 22,
       "snippet": "private_key = Ed25519PrivateKey.generate()"
+    },
+    {
+      "label": "RSA-4096",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 24,
+      "snippet": "private_key = rsa_generate_private_key(65537, 4096)"
+    },
+    {
+      "label": "DSA-1024",
+      "algorithm": "DSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 26,
+      "snippet": "private_key = dsa_generate_private_key(1024)"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": true,
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 28,
+      "snippet": "private_key = ecdsa_generate_private_key(SECP384R1())"
     }
   ]
 }

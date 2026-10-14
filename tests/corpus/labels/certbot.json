@@ -28,6 +28,10 @@
       "verdict": "tp",
       "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
     },
+    "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py:71:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
     "certbot/src/certbot/_internal/account.py:70:MD5": {
       "verdict": "tp",
       "note": "rule py-hashlib: hashlib.md5() call"
@@ -35,6 +39,22 @@
     "certbot/src/certbot/_internal/account.py:75:MD5": {
       "verdict": "tp",
       "note": "rule py-hashlib: hashlib.new('md5') call"
+    },
+    "certbot/src/certbot/_internal/client.py:199:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: generate_private_key from-imported from asymmetric.rsa; key size held in a variable"
+    },
+    "certbot/src/certbot/_internal/ocsp.py:100:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/tests/ocsp_test.py:230:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/tests/ocsp_test.py:241:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
     },
     "certbot/src/certbot/_internal/tests/renewal_test.py:24:EC-SECP256R1": {
       "verdict": "tp",
@@ -64,53 +84,16 @@
       "verdict": "tp",
       "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
     },
+    "certbot/src/certbot/crypto_util.py:373:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: PKCS1v15 from-imported from asymmetric.padding, verifying an RSA signature"
+    },
     "certbot/src/certbot/crypto_util.py:377:ECDSA": {
       "verdict": "tp",
       "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
     }
   },
-  "missed": [
-    {
-      "path": "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py",
-      "line": 71,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "cert=cert, issuer=issuer_cert, algorithm=hashes.SHA1(),"
-    },
-    {
-      "path": "certbot/src/certbot/_internal/ocsp.py",
-      "line": 100,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": false,
-      "snippet": "builder = builder.add_certificate(cert, issuer, hashes.SHA1())"
-    },
-    {
-      "path": "certbot/src/certbot/_internal/tests/ocsp_test.py",
-      "line": 230,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": true,
-      "snippet": "builder = builder.add_certificate(cert, issuer, hashes.SHA1())"
-    },
-    {
-      "path": "certbot/src/certbot/_internal/tests/ocsp_test.py",
-      "line": 241,
-      "algorithm": "SHA-1",
-      "source": "search",
-      "search": "py-cryptography-hash",
-      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
-      "test": true,
-      "snippet": "hash_algorithm=hashes.SHA1(),"
-    }
-  ],
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",
