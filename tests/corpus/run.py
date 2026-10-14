@@ -61,8 +61,8 @@ def checkout(repo):
     return dest
 
 
-def scan(repo, path):
-    result = ratchet.walk(str(path))
+def scan(repo, path, backend="regex"):
+    result = ratchet.walk(str(path), backend=backend)
     findings = sorted(
         ({"label": f.label, "algorithm": f.algorithm, "kind": f.kind, "test": f.in_test,
           "path": f.path.replace(os.sep, "/"), "line": f.line, "snippet": f.snippet}
@@ -73,12 +73,17 @@ def scan(repo, path):
         "name": repo["name"],
         "commit": repo["commit"],
         "registry_version": ratchet.REGISTRY["registry_version"],
-        "go_backend": "regex",
+        "go_backend": result.parsers["Go"],
         "files_scanned": result.files,
         "unparsed": [f"{p} ({r})" for p, r in result.unparsed],
         "skipped_directories": len(result.skipped),
         "findings": findings,
     }
+
+
+def comparable(result):
+    """A result without the backend that produced it, for --check."""
+    return {k: v for k, v in result.items() if k != "go_backend"}
 
 
 def load_labels(name):
@@ -135,6 +140,9 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--check", action="store_true", help="exit 1 if results differ from the committed ones")
     p.add_argument("--only", action="append", help="limit to these repository names")
+    p.add_argument("--backend", choices=ratchet.BACKENDS, default="regex",
+                   help="Go backend (default regex, so committed results reproduce anywhere); "
+                        "--check --backend tree-sitter checks the two backends agree")
     args = p.parse_args(argv)
 
     manifest = json.loads((HERE / "manifest.json").read_text())
@@ -142,13 +150,14 @@ def main(argv=None):
     rows, changed = [], []
     for repo in repos:
         print(f"{repo['name']} @ {repo['commit'][:12]}", file=sys.stderr)
-        result = scan(repo, checkout(repo))
+        result = scan(repo, checkout(repo), args.backend)
         out = HERE / "results" / f"{repo['name']}.json"
         text = json.dumps(result, indent=2) + "\n"
-        if not out.exists() or out.read_text() != text:
+        old = out.read_text() if out.exists() else None
+        if old is None or comparable(json.loads(old)) != comparable(result):
             changed.append(repo["name"])
-            if not args.check:
-                out.write_text(text)
+        if old != text and not args.check:
+            out.write_text(text)
         rows.append((repo, measure(result, load_labels(repo["name"]))))
 
     report = summary(rows)

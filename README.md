@@ -23,6 +23,15 @@ python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vu
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 ```
 
+Go can optionally be parsed with tree-sitter instead of the built-in regex backend:
+
+```
+pip install -r requirements-treesitter.txt
+python3 ratchet.py /path/to/repo                         # tree-sitter if installed
+python3 ratchet.py /path/to/repo --backend regex         # never load it
+python3 ratchet.py /path/to/repo --backend tree-sitter   # fail if it is missing
+```
+
 `ratchet.py` runs on its own. The algorithm registry, which holds every claim Ratchet
 makes about an algorithm, is maintained in `registry.json` and embedded in the script.
 If `registry.json` sits next to `ratchet.py` it is used instead of the embedded copy.
@@ -38,12 +47,17 @@ pytest
 ```
 
 Tests compare scans of small fixtures against committed golden output and validate
-every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`.
+every CBOM against the CycloneDX 1.6 schema vendored in `tests/schema`. Goldens are
+written with the regex Go backend; with `requirements-treesitter.txt` installed as
+well, `tests/test_backends.py` scans every Go fixture again with tree-sitter and
+requires identical output. CI runs the suite both ways.
 
 `tests/corpus` measures Ratchet against 20 real repositories pinned to commits.
 `python3 tests/corpus/run.py` fetches them (the only network access anywhere in the
 project, and only in this test tool), scans them, writes results and prints the
-measurement to `tests/corpus/SUMMARY.md`. Precision is measured over hand-labelled call
+measurement to `tests/corpus/SUMMARY.md`, using the regex Go backend unless `--backend`
+says otherwise; `run.py --check --backend tree-sitter` confirms tree-sitter finds the
+same. Precision is measured over hand-labelled call
 sites; see `tests/corpus/LABELLING.md`. `tests/corpus/review.py` writes the review sheet,
 `tests/corpus/REVIEW.md`: every false positive and a fixed-seed 10% sample of the rest.
 
@@ -107,8 +121,12 @@ it ECDH. A key whose use is not visible is reported as EC, usage undetermined, u
 its own heading. It still counts as quantum vulnerable, and it is never reported as
 confirmed ECDSA.
 
-Go is pattern matched on import declarations and call sites, after a small lexer has
-removed comments and string contents. There is no Go AST here yet.
+Go is pattern matched on import declarations and call sites, after comments and
+string contents have been removed. Two backends do that removal: tree-sitter, when it
+is installed, and a small lexer that needs nothing. They feed the same rules, and on
+the 26 Go fixtures and the eight Go repositories in the corpus they produce identical
+findings. Every report and CBOM names the backend that ran, with tree-sitter's
+version, and says why when it fell back to the lexer.
 
 Every finding is classified three ways. Quantum broken means Shor's algorithm defeats
 it outright and it has to be migrated. Already broken means it is weak today and
@@ -218,10 +236,10 @@ knows: `cryptography`'s RSA, DSA, DH and EC key generation and PyCryptodome's RS
 DSA. A key size or curve held in a variable is not resolved. See
 `tests/fixtures/README.md` for the full list of known gaps.
 
-Go is read by a small lexer and regular expressions, not a parser. It separates code
-from comments and strings and recognises import declarations, but a call through an
-aliased import (`gorsa.GenerateKey`) is not matched, and a key size held in a variable
-is not captured. Because pre-1.20 Go code generated ECDH keys with
+Go rules are regular expressions over code with comments and strings removed, with
+either backend. Tree-sitter makes that separation exact but does not yet change what
+the rules match: a call through an aliased import (`gorsa.GenerateKey`) is not
+matched, and a key size held in a variable is not captured. Because pre-1.20 Go code generated ECDH keys with
 `ecdsa.GenerateKey`, often doing the key agreement in another file,
 `crypto/ecdsa` findings in a file that never signs are reported as usage
 undetermined when that file shows ECDH, or when another production file in the

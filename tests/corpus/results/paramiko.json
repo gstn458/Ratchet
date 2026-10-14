@@ -2,7 +2,7 @@
   "name": "paramiko",
   "commit": "d87f9c01c158588fe3ecb635ca7c0d7c0c1a26cc",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 70,
   "unparsed": [],
   "skipped_directories": 3,

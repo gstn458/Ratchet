@@ -56,12 +56,14 @@ def fixture_options(root):
     return json.loads(path.read_text()) if path.exists() else {}
 
 
-def scan(root):
+def scan(root, backend="regex"):
     """Scan a fixture the way the CLI does, from inside it, so paths are relative.
 
+    Goldens are written with the regex Go backend, which runs everywhere;
+    tests/test_backends.py checks that tree-sitter gives the same output.
     Returns (normalised CBOM dict, terminal report text).
     """
-    options = fixture_options(root)
+    options = {"backend": backend, **fixture_options(root)}
     old = os.getcwd()
     os.chdir(root)
     try:

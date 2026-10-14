@@ -2,7 +2,7 @@
   "name": "pyjwt",
   "commit": "f97b3273d3db3ed7266ae009784d65f1877dba66",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 26,
   "unparsed": [],
   "skipped_directories": 2,

@@ -2,7 +2,7 @@
   "name": "go-jose",
   "commit": "13b7118f01278681667af05e054c6dc852f3db49",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 73,
   "unparsed": [],
   "skipped_directories": 3,

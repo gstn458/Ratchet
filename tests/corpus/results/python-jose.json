@@ -2,7 +2,7 @@
   "name": "python-jose",
   "commit": "018b310ddb8b50dcfd09a0c152117835a21dd656",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 38,
   "unparsed": [],
   "skipped_directories": 2,

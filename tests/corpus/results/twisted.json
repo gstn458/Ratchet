@@ -2,7 +2,7 @@
   "name": "twisted",
   "commit": "bfa1ce9cd66e9b168f127fe3d764c83b841bb669",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 1115,
   "unparsed": [],
   "skipped_directories": 2,

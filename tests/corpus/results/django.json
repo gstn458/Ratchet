@@ -2,7 +2,7 @@
   "name": "django",
   "commit": "f1d11117c6a3e227ce7cdd263cf0743f0eb73070",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 2926,
   "unparsed": [
     "tests/test_runner_apps/tagged/tests_syntax_error.py (not valid Python 3 syntax at line 11)"

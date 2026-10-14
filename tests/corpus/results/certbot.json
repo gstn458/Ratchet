@@ -2,7 +2,7 @@
   "name": "certbot",
   "commit": "0201ba5ce70ba8b7545380064abddd4bc3a10c15",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 366,
   "unparsed": [],
   "skipped_directories": 8,

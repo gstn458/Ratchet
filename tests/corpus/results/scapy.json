@@ -2,7 +2,7 @@
   "name": "scapy",
   "commit": "5376fcc86aaba7c516fb4aa19576b03b387d217a",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 411,
   "unparsed": [],
   "skipped_directories": 3,

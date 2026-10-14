@@ -2,7 +2,7 @@
   "name": "cfssl",
   "commit": "ab47f0d984778865b3f5b5adf6ba336a15b96c31",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 254,
   "unparsed": [],
   "skipped_directories": 28,

@@ -530,7 +530,7 @@ GO_IMPORTS = {
 # Call sites, as (import path, pattern, algorithm, parameter group). A pattern
 # applies only when the file imports that path, so a third-party package that
 # happens to be called rsa does not match. Calls through an aliased import are
-# not matched (the tree-sitter backend in Phase 1 resolves aliases).
+# not matched by either backend yet.
 GO_CALL_PATTERNS = [
     # RSA: key generation, with the key size when it is a literal.
     ("crypto/rsa", re.compile(r"\brsa\.GenerateKey\s*\((?:[^,()]*,\s*(\d+)\s*\))?"), "RSA", 1),
@@ -1017,6 +1017,96 @@ def go_imports(code, strings):
     return {k: v for k, v in imports.items() if v}
 
 
+# ---------------------------------------------------------------------------
+# Go via tree-sitter (optional)
+#
+# When the tree-sitter package and its Go grammar are installed, they replace
+# go_lex and go_imports: the parse tree says exactly which bytes are comments,
+# which are string literals and which strings are import paths. The output has
+# the same shape, so every Go rule above applies unchanged and the two backends
+# can be compared finding for finding. Nothing here is imported unless
+# tree-sitter is installed; the regex backend needs only the standard library.
+# ---------------------------------------------------------------------------
+
+GO_TREE_SITTER_QUERY = """
+(comment) @comment
+(interpreted_string_literal) @string
+(raw_string_literal) @string
+(rune_literal) @rune
+(import_spec path: (_) @import)
+"""
+
+
+class TreeSitterGo:
+    """The tree-sitter Go grammar, loaded once. Raises ImportError when
+    tree-sitter or the grammar is not installed, and RuntimeError when they are
+    installed but cannot load (a grammar built for another tree-sitter ABI)."""
+
+    def __init__(self):
+        import tree_sitter
+        import tree_sitter_go
+        from importlib.metadata import version
+        try:
+            language = tree_sitter.Language(tree_sitter_go.language())
+            self.parser = tree_sitter.Parser(language)
+            self.query = tree_sitter.Query(language, GO_TREE_SITTER_QUERY)
+        except (TypeError, ValueError) as e:
+            raise RuntimeError("tree-sitter could not load the Go grammar") from e
+        # tree-sitter 0.25 moved query execution to QueryCursor; 0.23 and 0.24
+        # run it on the query. Both return {capture name: [nodes]}.
+        cursor = getattr(tree_sitter, "QueryCursor", None)
+        self.captures = (lambda node: cursor(self.query).captures(node)) if cursor \
+            else self.query.captures
+        self.description = (f"tree-sitter {version('tree-sitter')} "
+                            f"with tree-sitter-go {version('tree-sitter-go')}")
+
+    def lex(self, text):
+        """(code, strings, imports) for Go source, in the shapes go_lex and
+        go_imports return: code lines with comments removed and literals
+        reduced to empty quotes, string contents by the line they open on, and
+        {line index: [import paths]}."""
+        source = text.encode("utf-8")
+        tree = self.parser.parse(source)
+        captures = self.captures(tree.root_node)
+        edits = []  # (start byte, end byte, replacement)
+        strings = defaultdict(list)
+        for node in captures.get("comment", ()):
+            # A line comment goes; a block comment leaves a space, as go_lex
+            # does, and keeps its line breaks so line numbers hold.
+            if source.startswith(b"/*", node.start_byte):
+                newlines = source.count(b"\n", node.start_byte, node.end_byte)
+                edits.append((node.start_byte, node.end_byte, b"\n" * newlines + b" "))
+            else:
+                edits.append((node.start_byte, node.end_byte, b""))
+        for node in captures.get("string", ()):
+            quote = source[node.start_byte:node.start_byte + 1]
+            content = source[node.start_byte + 1:node.end_byte - 1]
+            strings[node.start_point[0]].append(content.decode("utf-8", "replace"))
+            edits.append((node.start_byte, node.end_byte, b"\n" * content.count(b"\n") + quote * 2))
+        for node in captures.get("rune", ()):
+            edits.append((node.start_byte, node.end_byte, b"''"))
+        out, pos = [], 0
+        for start, end, replacement in sorted(edits):
+            if start < pos:
+                continue  # nested inside an edit already made
+            out += [source[pos:start], replacement]
+            pos = end
+        out.append(source[pos:])
+        code = [line.decode("utf-8", "replace") for line in b"".join(out).split(b"\n")]
+        lines = len(code)
+        strings = [strings.get(i, []) for i in range(lines)]
+        imports = defaultdict(list)
+        for node in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
+            imports[node.start_point[0]].append(
+                source[node.start_byte + 1:node.end_byte - 1].decode("utf-8", "replace"))
+        return code, strings, dict(imports)
+
+
+def regex_go_lex(text):
+    code, strings = go_lex(text)
+    return code, strings, go_imports(code, strings)
+
+
 class GoFindings(list):
     """scan_go's findings, plus facts about the file that the package-level
     ECDSA/ECDH rule in walk() needs: whether it shows key agreement and
@@ -1042,12 +1132,11 @@ def go_package_ecdh(scanned):
                         f.algorithm = "EC"
 
 
-def scan_go(path):
+def scan_go(path, lex=regex_go_lex):
     findings = []
     lines = read_source(path).splitlines()
 
-    code, strings = go_lex("\n".join(lines))
-    import_lines = go_imports(code, strings)
+    code, strings, import_lines = lex("\n".join(lines))
     imports = {p for paths in import_lines.values() for p in paths}
 
     import_findings = defaultdict(list)  # import path -> its findings
@@ -1274,6 +1363,34 @@ SCANNERS = {".py": scan_python, ".go": scan_go}
 # has to say so.
 PARSERS = {"Python": "ast", "Go": "regex"}
 
+# Go backends: "auto" uses tree-sitter when it is installed and the regex
+# backend otherwise; "tree-sitter" requires it; "regex" never loads it.
+BACKENDS = ("auto", "tree-sitter", "regex")
+
+
+class BackendError(Exception):
+    """A backend was requested that cannot run here."""
+
+
+def go_backend(backend="auto"):
+    """(lexer function, description) for the requested Go backend."""
+    if backend not in BACKENDS:
+        raise BackendError(f"unknown backend {backend!r}; choose from {', '.join(BACKENDS)}")
+    if backend == "regex":
+        return regex_go_lex, "regex (requested)"
+    try:
+        grammar = TreeSitterGo()
+    except ImportError:
+        if backend == "tree-sitter":
+            raise BackendError("--backend tree-sitter: tree-sitter and tree-sitter-go are not installed "
+                               "(pip install -r requirements-treesitter.txt)")
+        return regex_go_lex, "regex (tree-sitter not installed)"
+    except RuntimeError as e:
+        if backend == "tree-sitter":
+            raise BackendError(f"--backend tree-sitter: {e}")
+        return regex_go_lex, f"regex ({e})"
+    return grammar.lex, grammar.description
+
 # Test code, by convention of each language. Findings there are real, but
 # test-only cryptography is not what a migration plan is about, so they are
 # counted apart in the report, the CBOM and the corpus measurement.
@@ -1286,7 +1403,9 @@ def is_test_path(path):
     return bool(TEST_FILE.search(parts[-1])) or any(p in TEST_DIRS for p in parts[:-1])
 
 
-def walk(root, include_vendored=False):
+def walk(root, include_vendored=False, backend="auto"):
+    go_lex_fn, go_parser = go_backend(backend)
+    scanners = dict(SCANNERS, **{".go": lambda path: scan_go(path, go_lex_fn)})
     ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
     go_packages = defaultdict(list)  # directory -> GoFindings of its files
@@ -1303,7 +1422,7 @@ def walk(root, include_vendored=False):
         # depend on the filesystem's directory ordering.
         dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
-            scanner = SCANNERS.get(os.path.splitext(fn)[1])
+            scanner = scanners.get(os.path.splitext(fn)[1])
             if not scanner:
                 continue
             full = os.path.join(dirpath, fn)
@@ -1336,7 +1455,7 @@ def walk(root, include_vendored=False):
                 rule.matched.append(f)
                 break
     return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed),
-                ignore_rules, suppress_rules)
+                ignore_rules, suppress_rules, dict(PARSERS, Go=go_parser))
 
 
 # ---------------------------------------------------------------------------
@@ -1688,6 +1807,9 @@ def main():
     p.add_argument("--include-vendored", action="store_true",
                    help="also scan vendored and test-data directories: "
                         + ", ".join(sorted(VENDORED_DIRS)))
+    p.add_argument("--backend", choices=BACKENDS, default="auto",
+                   help="Go parser: tree-sitter if installed (auto, the default), "
+                        "tree-sitter (required), or the dependency-free regex backend")
     args = p.parse_args()
 
     if not os.path.isdir(args.path):
@@ -1695,8 +1817,8 @@ def main():
         return 2
 
     try:
-        scan = walk(args.path, include_vendored=args.include_vendored)
-    except IgnoreFileError as e:
+        scan = walk(args.path, include_vendored=args.include_vendored, backend=args.backend)
+    except (IgnoreFileError, BackendError) as e:
         print(f"ratchet: {e}", file=sys.stderr)
         return 2
 

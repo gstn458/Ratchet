@@ -2,7 +2,7 @@
   "name": "golang-jwt",
   "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 46,
   "unparsed": [],
   "skipped_directories": 2,

@@ -2,7 +2,7 @@
   "name": "caddy",
   "commit": "401582cccfb3d1b6de382d48929e4070ef6663f2",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 389,
   "unparsed": [],
   "skipped_directories": 7,

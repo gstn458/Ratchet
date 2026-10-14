@@ -1,7 +1,7 @@
 
 ratchet 0.1.0  scanned 1 file in .
 registry 2026.10.2  from registry.json
-parsers  Go regex, Python ast
+parsers  Go regex (requested), Python ast
 skipped 8 directories:
   vendored, test data or build output (scan with --include-vendored): build, dist, node_modules, site-packages, testdata, vendor, venv
   tooling or hidden: .hidden

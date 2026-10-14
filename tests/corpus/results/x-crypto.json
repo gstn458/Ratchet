@@ -2,7 +2,7 @@
   "name": "x-crypto",
   "commit": "3b414e3e8284a71c817c4d1009acdd5d3a464ff9",
   "registry_version": "2026.10.2",
-  "go_backend": "regex",
+  "go_backend": "regex (requested)",
   "files_scanned": 275,
   "unparsed": [],
   "skipped_directories": 3,
