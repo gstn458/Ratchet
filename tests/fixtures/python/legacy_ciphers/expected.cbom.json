@@ -199,6 +199,10 @@
           {
             "location": "ciphers.py#L1",
             "additionalContext": "import"
+          },
+          {
+            "location": "ciphers.py#L11",
+            "additionalContext": "import"
           }
         ]
       },
@@ -213,11 +217,11 @@
         },
         {
           "name": "ratchet:import_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -259,6 +263,10 @@
           {
             "location": "ciphers.py#L2",
             "additionalContext": "import"
+          },
+          {
+            "location": "ciphers.py#L12",
+            "additionalContext": "import"
           }
         ]
       },
@@ -273,11 +281,11 @@
         },
         {
           "name": "ratchet:import_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -351,6 +359,70 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "AES-256-GCM or ChaCha20-Poly1305"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ciphers.py#L13",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
         }
       ]
     },
