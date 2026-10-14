@@ -64,7 +64,7 @@ def checkout(repo):
 def scan(repo, path):
     result = ratchet.walk(str(path))
     findings = sorted(
-        ({"label": f.label, "algorithm": f.algorithm, "kind": f.kind,
+        ({"label": f.label, "algorithm": f.algorithm, "kind": f.kind, "test": f.in_test,
           "path": f.path.replace(os.sep, "/"), "line": f.line, "snippet": f.snippet}
          for f in result.findings),
         key=lambda f: (f["path"], f["line"], f["label"], f["kind"]),
@@ -94,6 +94,7 @@ def measure(result, labels):
     verdicts = [labels["findings"].get(finding_key(f), {}).get("verdict") for f in calls]
     return {
         "call_sites": len(calls),
+        "in_test": sum(f["test"] for f in calls),
         "imports": len(imports),
         "labelled": sum(v in VERDICTS for v in verdicts),
         "tp": verdicts.count("tp"),
@@ -114,16 +115,16 @@ def summary(rows):
         "imports are counted but not labelled. Missed findings are false negatives",
         "found by reading the code, listed in `labels/<name>.json`.",
         "",
-        "| Repository | Language | Call sites | Imports | Labelled | False positives | FP rate | Missed |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Repository | Language | Call sites | In test code | Imports | Labelled | False positives | FP rate | Missed |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
-    total = {k: 0 for k in ("call_sites", "imports", "labelled", "tp", "fp", "missed")}
+    total = {k: 0 for k in ("call_sites", "in_test", "imports", "labelled", "tp", "fp", "missed")}
     for repo, m in rows:
         for k in total:
             total[k] += m[k]
-        lines.append(f"| {repo['name']} | {repo['language']} | {m['call_sites']} | {m['imports']} | "
+        lines.append(f"| {repo['name']} | {repo['language']} | {m['call_sites']} | {m['in_test']} | {m['imports']} | "
                      f"{m['labelled']} | {m['fp']} | {percent(m['fp'], m['labelled'])} | {m['missed']} |")
-    lines.append(f"| **total** | | {total['call_sites']} | {total['imports']} | {total['labelled']} | "
+    lines.append(f"| **total** | | {total['call_sites']} | {total['in_test']} | {total['imports']} | {total['labelled']} | "
                  f"{total['fp']} | {percent(total['fp'], total['labelled'])} | {total['missed']} |")
     lines += ["", f"Labelled {total['labelled']} of {total['call_sites']} call sites "
                   f"({percent(total['labelled'], total['call_sites'])})."]

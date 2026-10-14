@@ -10,7 +10,7 @@ no .ratchetignore; no findings suppressed
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (7 call sites)
+  MD5  (7 call sites, 1 in test code)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
       build/lib.py:3   hashlib.md5(b"scanned only with --include-vendored")

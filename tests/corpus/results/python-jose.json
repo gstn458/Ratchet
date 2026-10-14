@@ -11,6 +11,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "jose/backends/cryptography_backend.py",
       "line": 7,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa"
@@ -19,6 +20,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "jose/backends/cryptography_backend.py",
       "line": 7,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec, padding, rsa"
@@ -27,6 +29,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose/backends/cryptography_backend.py",
       "line": 139,
       "snippet": "signature = self.prepared_key.sign(msg, ec.ECDSA(self.hash_alg()))"
@@ -35,6 +38,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose/backends/cryptography_backend.py",
       "line": 145,
       "snippet": "self.prepared_key.verify(signature, msg, ec.ECDSA(self.hash_alg()))"
@@ -43,6 +47,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": false,
       "path": "jose/backends/ecdsa_backend.py",
       "line": 3,
       "snippet": "import ecdsa"
@@ -51,6 +56,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "jose/backends/rsa_backend.py",
       "line": 4,
       "snippet": "import rsa as pyrsa"
@@ -59,6 +65,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "jose/backends/rsa_backend.py",
       "line": 7,
       "snippet": "from rsa import DecryptionError"
@@ -67,6 +74,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": true,
       "path": "tests/algorithms/test_EC.py",
       "line": 11,
       "snippet": "import ecdsa"
@@ -75,6 +83,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": true,
       "path": "tests/algorithms/test_EC.py",
       "line": 20,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec as CryptographyEc"
@@ -83,6 +92,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "tests/algorithms/test_EC.py",
       "line": 111,
       "snippet": "CryptographyEc.generate_private_key(mapping[algorithm](), backend=CryptographyBackend()), algorithm"
@@ -91,6 +101,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "tests/algorithms/test_EC.py",
       "line": 238,
       "snippet": "KEY = CryptographyEc.generate_private_key(CryptographyEc.SECP256R1)"
@@ -99,6 +110,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "tests/algorithms/test_RSA.py",
       "line": 11,
       "snippet": "from Crypto.PublicKey import RSA as PyCryptoRSA"
@@ -107,6 +119,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "tests/algorithms/test_RSA.py",
       "line": 17,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as pyca_rsa"

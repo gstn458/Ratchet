@@ -11,6 +11,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 17,
       "snippet": "\"crypto/ed25519\""
@@ -19,6 +20,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 19,
       "snippet": "\"crypto/rsa\""
@@ -27,6 +29,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 20,
       "snippet": "\"crypto/sha256\""
@@ -35,6 +38,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 30,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -43,6 +47,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 36,
       "snippet": "h := sha256.Sum256(pk.Marshal())"
@@ -51,6 +56,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 81,
       "snippet": "wrappedKey, err := rsa.EncryptOAEP(sha256.New(), rand.Reader,"
@@ -59,6 +65,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 81,
       "snippet": "wrappedKey, err := rsa.EncryptOAEP(sha256.New(), rand.Reader,"
@@ -67,6 +74,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 132,
       "snippet": "fileKey, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, i.k,"
@@ -75,6 +83,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 132,
       "snippet": "fileKey, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, i.k,"
@@ -83,6 +92,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 212,
       "snippet": "ourPublicKey, err := curve25519.X25519(ephemeral, curve25519.Basepoint)"
@@ -91,6 +101,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 217,
       "snippet": "sharedSecret, err := curve25519.X25519(ephemeral, r.theirPublicKey)"
@@ -99,6 +110,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 227,
       "snippet": "sharedSecret, _ = curve25519.X25519(tweak, sharedSecret)"
@@ -107,6 +119,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 269,
       "snippet": "i.ourPublicKey, _ = curve25519.X25519(i.secretKey, curve25519.Basepoint)"
@@ -115,6 +128,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 329,
       "snippet": "sharedSecret, err := curve25519.X25519(i.secretKey, publicKey)"
@@ -123,6 +137,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "agessh/agessh.go",
       "line": 339,
       "snippet": "sharedSecret, _ = curve25519.X25519(tweak, sharedSecret)"
@@ -131,6 +146,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 9,
       "snippet": "\"crypto/ed25519\""
@@ -139,6 +155,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 11,
       "snippet": "\"crypto/rsa\""
@@ -147,6 +164,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 35,
       "snippet": "key, err := rsa.GenerateKey(rand.Reader, 1024)"
@@ -155,6 +173,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 49,
       "snippet": "pk, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -163,6 +182,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 92,
       "snippet": "targetKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -171,6 +191,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 101,
       "snippet": "otherKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -179,6 +200,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 134,
       "snippet": "pub, priv, err := ed25519.GenerateKey(rand.Reader)"
@@ -187,6 +209,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 177,
       "snippet": "_, targetKey, err := ed25519.GenerateKey(rand.Reader)"
@@ -195,6 +218,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 186,
       "snippet": "_, otherKey, err := ed25519.GenerateKey(rand.Reader)"
@@ -203,6 +227,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 219,
       "snippet": "announcedPub, _, err := ed25519.GenerateKey(rand.Reader)"
@@ -211,6 +236,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "agessh/agessh_test.go",
       "line": 223,
       "snippet": "embeddedPub, embeddedPriv, err := ed25519.GenerateKey(rand.Reader)"
@@ -219,6 +245,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "agessh/encrypted_keys.go",
       "line": 9,
       "snippet": "\"crypto/ed25519\""
@@ -227,6 +254,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "agessh/encrypted_keys.go",
       "line": 10,
       "snippet": "\"crypto/rsa\""
@@ -235,6 +263,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "cmd/age/parse.go",
       "line": 10,
       "snippet": "\"crypto/rsa\""
@@ -243,6 +272,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "plugin/encode.go",
       "line": 8,
       "snippet": "\"crypto/ecdh\""
@@ -251,6 +281,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "plugin/encode.go",
       "line": 89,
       "snippet": "if pk.Curve() != ecdh.X25519() {"
@@ -259,6 +290,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "plugin/encode.go",
       "line": 100,
       "snippet": "if t.Curve() != ecdh.X25519() {"
@@ -267,6 +299,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "primitives.go",
       "line": 9,
       "snippet": "\"crypto/sha256\""
@@ -275,6 +308,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "import",
+      "test": false,
       "path": "tag/internal/tagtest/tagtest.go",
       "line": 8,
       "snippet": "\"crypto/ecdh\""
@@ -283,6 +317,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "call site",
+      "test": false,
       "path": "tag/internal/tagtest/tagtest.go",
       "line": 26,
       "snippet": "k, err := hpke.DHKEM(ecdh.P256()).DeriveKeyPair([]byte(seed))"
@@ -291,6 +326,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "import",
+      "test": false,
       "path": "tag/tag.go",
       "line": 16,
       "snippet": "\"crypto/ecdh\""
@@ -299,6 +335,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "tag/tag.go",
       "line": 19,
       "snippet": "\"crypto/sha256\""
@@ -307,6 +344,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "call site",
+      "test": false,
       "path": "tag/tag.go",
       "line": 78,
       "snippet": "k, err := hpke.DHKEM(ecdh.P256()).NewPublicKey(p.Bytes())"
@@ -315,6 +353,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "tag/tag.go",
       "line": 121,
       "snippet": "rh := sha256.Sum256(tagRecipient)"
@@ -323,6 +362,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "testkit_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
@@ -331,6 +371,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "testkit_test.go",
       "line": 196,
       "snippet": "if v.payloadHash != nil && sha256.Sum256(out) != *v.payloadHash {"
@@ -339,6 +380,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "testkit_test.go",
       "line": 203,
       "snippet": "if sha256.Sum256(out) != *v.payloadHash {"
@@ -347,6 +389,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "testkit_test.go",
       "line": 259,
       "snippet": "if sha256.Sum256(out) != *v.payloadHash {"
@@ -355,6 +398,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "x25519.go",
       "line": 9,
       "snippet": "\"crypto/sha256\""
@@ -363,6 +407,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "x25519.go",
       "line": 18,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -371,6 +416,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "x25519.go",
       "line": 70,
       "snippet": "ourPublicKey, err := curve25519.X25519(ephemeral, curve25519.Basepoint)"
@@ -379,6 +425,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "x25519.go",
       "line": 75,
       "snippet": "sharedSecret, err := curve25519.X25519(ephemeral, r.theirPublicKey)"
@@ -387,6 +434,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "x25519.go",
       "line": 127,
       "snippet": "i.ourPublicKey, _ = curve25519.X25519(i.secretKey, curve25519.Basepoint)"
@@ -395,6 +443,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "x25519.go",
       "line": 176,
       "snippet": "sharedSecret, err := curve25519.X25519(i.secretKey, publicKey)"

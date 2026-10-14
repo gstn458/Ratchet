@@ -11,6 +11,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "acme/acme.go",
       "line": 25,
       "snippet": "\"crypto/ecdsa\""
@@ -19,6 +20,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "acme/acme.go",
       "line": 28,
       "snippet": "\"crypto/sha256\""
@@ -27,6 +29,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "acme/acme.go",
       "line": 552,
       "snippet": "b := sha256.Sum256([]byte(ka))"
@@ -35,6 +38,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "acme/acme.go",
       "line": 616,
       "snippet": "shasum := sha256.Sum256([]byte(ka))"
@@ -43,6 +47,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/acme.go",
       "line": 787,
       "snippet": "if key, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader); err != nil {"
@@ -51,6 +56,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "acme/acme_test.go",
       "line": 11,
       "snippet": "\"crypto/rsa\""
@@ -59,6 +65,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/acme_test.go",
       "line": 744,
       "snippet": "key, err := rsa.GenerateKey(rand.Reader, 1024)"
@@ -67,6 +74,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "acme/autocert/autocert.go",
       "line": 15,
       "snippet": "\"crypto/ecdsa\""
@@ -75,6 +83,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "acme/autocert/autocert.go",
       "line": 18,
       "snippet": "\"crypto/rsa\""
@@ -83,6 +92,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/autocert.go",
       "line": 636,
       "snippet": "key, err = rsa.GenerateKey(rand.Reader, 2048)"
@@ -91,6 +101,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/autocert.go",
       "line": 638,
       "snippet": "key, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -99,6 +110,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/autocert.go",
       "line": 940,
       "snippet": "return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -107,6 +119,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 11,
       "snippet": "\"crypto/ecdsa\""
@@ -115,6 +128,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 14,
       "snippet": "\"crypto/rsa\""
@@ -123,6 +137,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 121,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -131,6 +146,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 636,
       "snippet": "ecdsaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -139,6 +155,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 649,
       "snippet": "rsaKey, err := rsa.GenerateKey(rand.Reader, 1024)"
@@ -147,6 +164,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 716,
       "snippet": "key1, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -155,6 +173,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 720,
       "snippet": "key2, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -163,6 +182,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 724,
       "snippet": "key3, err := rsa.GenerateKey(rand.Reader, 1024)"
@@ -171,6 +191,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/autocert/autocert_test.go",
       "line": 830,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -179,6 +200,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "acme/autocert/internal/acmetest/ca.go",
       "line": 13,
       "snippet": "\"crypto/ecdsa\""
@@ -187,6 +209,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "acme/autocert/internal/acmetest/ca.go",
       "line": 16,
       "snippet": "\"crypto/rsa\""
@@ -195,6 +218,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/internal/acmetest/ca.go",
       "line": 94,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -203,6 +227,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/internal/acmetest/ca.go",
       "line": 556,
       "snippet": "pk, err = rsa.GenerateKey(rand.Reader, 1024)"
@@ -211,6 +236,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/autocert/internal/acmetest/ca.go",
       "line": 562,
       "snippet": "pk, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -219,6 +245,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "acme/autocert/renewal_test.go",
       "line": 10,
       "snippet": "\"crypto/ecdsa\""
@@ -227,6 +254,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "acme/internal/acmeprobe/prober.go",
       "line": 31,
       "snippet": "\"crypto/ecdsa\""
@@ -235,6 +263,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/internal/acmeprobe/prober.go",
       "line": 107,
       "snippet": "akey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -243,6 +272,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "acme/internal/acmeprobe/prober.go",
       "line": 424,
       "snippet": "k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -251,6 +281,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "acme/jws.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -259,6 +290,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "acme/jws.go",
       "line": 12,
       "snippet": "\"crypto/rsa\""
@@ -267,6 +299,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "acme/jws.go",
       "line": 13,
       "snippet": "\"crypto/sha256\""
@@ -275,6 +308,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "acme/jws.go",
       "line": 252,
       "snippet": "b := sha256.Sum256([]byte(jwk))"
@@ -283,6 +317,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -291,6 +326,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 11,
       "snippet": "\"crypto/rsa\""
@@ -299,6 +335,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
@@ -307,6 +344,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 231,
       "snippet": "h := sha256.Sum256([]byte(protected + \".\" + payload))"
@@ -315,6 +353,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 232,
       "snippet": "if !ecdsa.Verify(testKeyEC.Public().(*ecdsa.PublicKey), h[:], r, s) {"
@@ -323,6 +362,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 271,
       "snippet": "h := sha256.Sum256([]byte(protected + \".\" + payload))"
@@ -331,6 +371,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/jws_test.go",
       "line": 272,
       "snippet": "if !ecdsa.Verify(testKeyEC.Public().(*ecdsa.PublicKey), h[:], r, s) {"
@@ -339,6 +380,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "acme/pebble_test.go",
       "line": 10,
       "snippet": "\"crypto/ecdsa\""
@@ -347,6 +389,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/pebble_test.go",
       "line": 473,
       "snippet": "certKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -355,6 +398,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "acme/pebble_test.go",
       "line": 752,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -363,6 +407,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "acme/rfc8555_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
@@ -371,6 +416,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "curve25519/curve25519.go",
       "line": 16,
       "snippet": "import \"crypto/ecdh\""
@@ -379,6 +425,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "curve25519/curve25519.go",
       "line": 39,
       "snippet": "curve := ecdh.X25519()"
@@ -387,6 +434,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "curve25519/curve25519.go",
       "line": 78,
       "snippet": "curve := ecdh.X25519()"
@@ -395,6 +443,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 13,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -403,6 +452,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 24,
       "snippet": "x, err = curve25519.X25519(x, curve25519.Basepoint)"
@@ -411,6 +461,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 42,
       "snippet": "out, err := curve25519.X25519(scalar, p)"
@@ -419,6 +470,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 56,
       "snippet": "out, err := curve25519.X25519(scalar[:], point[:])"
@@ -427,6 +479,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 93,
       "snippet": "curve25519.ScalarMult(&hi0, &s, &u)"
@@ -435,6 +488,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 96,
       "snippet": "curve25519.ScalarMult(&hi1, &s, &u)"
@@ -443,6 +497,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 113,
       "snippet": "out, err := curve25519.X25519(scalar, curve25519.Basepoint)"
@@ -451,6 +506,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 126,
       "snippet": "point, err := curve25519.X25519(scalar, curve25519.Basepoint)"
@@ -459,6 +515,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "curve25519/curve25519_test.go",
       "line": 136,
       "snippet": "out, err := curve25519.X25519(scalar, point)"
@@ -467,6 +524,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "ed25519/ed25519.go",
       "line": 21,
       "snippet": "\"crypto/ed25519\""
@@ -475,6 +533,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ed25519/ed25519.go",
       "line": 51,
       "snippet": "return ed25519.GenerateKey(rand)"
@@ -483,6 +542,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ed25519/ed25519.go",
       "line": 59,
       "snippet": "return ed25519.NewKeyFromSeed(seed)"
@@ -491,6 +551,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ed25519/ed25519.go",
       "line": 65,
       "snippet": "return ed25519.Sign(privateKey, message)"
@@ -499,6 +560,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ed25519/ed25519.go",
       "line": 71,
       "snippet": "return ed25519.Verify(publicKey, message, sig)"
@@ -507,6 +569,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 8,
       "snippet": "ed25519std \"crypto/ed25519\""
@@ -515,6 +578,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 11,
       "snippet": "\"golang.org/x/crypto/ed25519\""
@@ -523,6 +587,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 18,
       "snippet": "sig := ed25519.Sign(private, message)"
@@ -531,6 +596,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 18,
       "snippet": "sig := ed25519.Sign(private, message)"
@@ -539,6 +605,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 19,
       "snippet": "if !ed25519.Verify(public, message, sig) {"
@@ -547,6 +614,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ed25519/ed25519_test.go",
       "line": 19,
       "snippet": "if !ed25519.Verify(public, message, sig) {"
@@ -555,6 +623,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "hkdf/example_test.go",
       "line": 10,
       "snippet": "\"crypto/sha256\""
@@ -563,6 +632,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "import",
+      "test": true,
       "path": "hkdf/hkdf_test.go",
       "line": 8,
       "snippet": "\"crypto/md5\""
@@ -571,6 +641,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": true,
       "path": "hkdf/hkdf_test.go",
       "line": 9,
       "snippet": "\"crypto/sha1\""
@@ -579,6 +650,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "hkdf/hkdf_test.go",
       "line": 10,
       "snippet": "\"crypto/sha256\""
@@ -587,6 +659,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "nacl/box/box.go",
       "line": 45,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -595,6 +668,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "nacl/box/box.go",
       "line": 71,
       "snippet": "curve25519.ScalarBaseMult(publicKey, privateKey)"
@@ -603,6 +677,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "nacl/box/box.go",
       "line": 82,
       "snippet": "curve25519.ScalarMult(sharedKey, privateKey, peersPublicKey)"
@@ -611,6 +686,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": true,
       "path": "nacl/box/box_test.go",
       "line": 13,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -619,6 +695,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "nacl/box/box_test.go",
       "line": 59,
       "snippet": "curve25519.ScalarBaseMult(&publicKey1, &privateKey1)"
@@ -627,6 +704,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": true,
       "path": "nacl/box/box_test.go",
       "line": 150,
       "snippet": "curve25519.ScalarBaseMult(&publicKey, &privateKey)"
@@ -635,6 +713,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "nacl/sign/sign.go",
       "line": 19,
       "snippet": "\"crypto/ed25519\""
@@ -643,6 +722,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "nacl/sign/sign.go",
       "line": 31,
       "snippet": "pub, priv, err := ed25519.GenerateKey(rand)"
@@ -651,6 +731,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "nacl/sign/sign.go",
       "line": 44,
       "snippet": "sig := ed25519.Sign(ed25519.PrivateKey((*privateKey)[:]), message)"
@@ -659,6 +740,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "nacl/sign/sign.go",
       "line": 61,
       "snippet": "if !ed25519.Verify(ed25519.PublicKey((*publicKey)[:]), signedMessage[Overhead:], signedMessage[:Overhead]) {"
@@ -667,6 +749,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "ocsp/ocsp.go",
       "line": 12,
       "snippet": "\"crypto/ecdsa\""
@@ -675,6 +758,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "ocsp/ocsp.go",
       "line": 15,
       "snippet": "\"crypto/rsa\""
@@ -683,6 +767,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "ocsp/ocsp.go",
       "line": 16,
       "snippet": "_ \"crypto/sha1\""
@@ -691,6 +776,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "ocsp/ocsp.go",
       "line": 17,
       "snippet": "_ \"crypto/sha256\""
@@ -699,6 +785,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "ocsp/ocsp_test.go",
       "line": 11,
       "snippet": "\"crypto/rsa\""
@@ -707,6 +794,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": true,
       "path": "ocsp/ocsp_test.go",
       "line": 12,
       "snippet": "\"crypto/sha1\""
@@ -715,6 +803,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "ocsp/ocsp_test.go",
       "line": 173,
       "snippet": "h := sha1.New()"
@@ -723,6 +812,7 @@
       "label": "RSA-1024",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "ocsp/ocsp_test.go",
       "line": 498,
       "snippet": "k, err := rsa.GenerateKey(rand.Reader, 1024)"
@@ -731,6 +821,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": false,
       "path": "otr/otr.go",
       "line": 19,
       "snippet": "\"crypto/aes\""
@@ -739,6 +830,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "otr/otr.go",
       "line": 21,
       "snippet": "\"crypto/dsa\""
@@ -747,6 +839,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "otr/otr.go",
       "line": 24,
       "snippet": "\"crypto/sha1\""
@@ -755,6 +848,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "otr/otr.go",
       "line": 25,
       "snippet": "\"crypto/sha256\""
@@ -763,6 +857,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 587,
       "snippet": "h := sha256.New()"
@@ -771,6 +866,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 591,
       "snippet": "aesCipher, err := aes.NewCipher(c.r[:])"
@@ -779,6 +875,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 687,
       "snippet": "aesCipher, err := aes.NewCipher(keys.c[:])"
@@ -787,6 +884,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 732,
       "snippet": "aesCipher, err := aes.NewCipher(keys.c[:])"
@@ -795,6 +893,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 783,
       "snippet": "aesCipher, err := aes.NewCipher(r)"
@@ -803,6 +902,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 790,
       "snippet": "h := sha256.New()"
@@ -811,6 +911,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 916,
       "snippet": "aesCipher, err := aes.NewCipher(slot.recvAESKey)"
@@ -819,6 +920,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 992,
       "snippet": "aesCipher, err := aes.NewCipher(slot.sendAESKey)"
@@ -827,6 +929,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1086,
       "snippet": "h := sha1.New()"
@@ -835,6 +938,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1114,
       "snippet": "h := sha256.New()"
@@ -843,6 +947,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1221,
       "snippet": "h := sha1.New()"
@@ -851,6 +956,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1232,
       "snippet": "ok := dsa.Verify(&pk.PublicKey, hashed, r, s)"
@@ -859,6 +965,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1242,
       "snippet": "r, s, err := dsa.Sign(rand, &priv.PrivateKey, hashed)"
@@ -867,6 +974,7 @@
       "label": "DSA-L1024N160",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1275,
       "snippet": "if err := dsa.GenerateParameters(&priv.PrivateKey.PublicKey.Parameters, rand, dsa.L1024N160); err != nil {"
@@ -875,6 +983,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "otr/otr.go",
       "line": 1278,
       "snippet": "if err := dsa.GenerateKey(&priv.PrivateKey, rand); err != nil {"
@@ -883,6 +992,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "otr/smp.go",
       "line": 14,
       "snippet": "\"crypto/sha256\""
@@ -891,6 +1001,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 162,
       "snippet": "h := sha256.New()"
@@ -899,6 +1010,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 182,
       "snippet": "h := sha256.New()"
@@ -907,6 +1019,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 227,
       "snippet": "h := sha256.New()"
@@ -915,6 +1028,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 265,
       "snippet": "h := sha256.New()"
@@ -923,6 +1037,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 338,
       "snippet": "h := sha256.New()"
@@ -931,6 +1046,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 457,
       "snippet": "h := sha256.New()"
@@ -939,6 +1055,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 532,
       "snippet": "h := sha256.New()"
@@ -947,6 +1064,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "otr/smp.go",
       "line": 564,
       "snippet": "h = sha256.New()"
@@ -955,6 +1073,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": true,
       "path": "pbkdf2/pbkdf2_test.go",
       "line": 9,
       "snippet": "\"crypto/sha1\""
@@ -963,6 +1082,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "pbkdf2/pbkdf2_test.go",
       "line": 10,
       "snippet": "\"crypto/sha256\""
@@ -971,6 +1091,7 @@
       "label": "3DES",
       "algorithm": "3DES",
       "kind": "import",
+      "test": false,
       "path": "pkcs12/crypto.go",
       "line": 10,
       "snippet": "\"crypto/des\""
@@ -979,6 +1100,7 @@
       "label": "3DES",
       "algorithm": "3DES",
       "kind": "call site",
+      "test": false,
       "path": "pkcs12/crypto.go",
       "line": 36,
       "snippet": "return des.NewTripleDESCipher(key)"
@@ -987,6 +1109,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "pkcs12/mac.go",
       "line": 9,
       "snippet": "\"crypto/sha1\""
@@ -995,6 +1118,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "pkcs12/pbkdf.go",
       "line": 9,
       "snippet": "\"crypto/sha1\""
@@ -1003,6 +1127,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "pkcs12/pbkdf.go",
       "line": 19,
       "snippet": "sum := sha1.Sum(in)"
@@ -1011,6 +1136,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "pkcs12/pkcs12.go",
       "line": 20,
       "snippet": "\"crypto/ecdsa\""
@@ -1019,6 +1145,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "pkcs12/pkcs12.go",
       "line": 21,
       "snippet": "\"crypto/rsa\""
@@ -1027,6 +1154,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "pkcs12/pkcs12_test.go",
       "line": 8,
       "snippet": "\"crypto/rsa\""
@@ -1035,6 +1163,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "scrypt/scrypt.go",
       "line": 11,
       "snippet": "\"crypto/sha256\""
@@ -1043,6 +1172,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/client.go",
       "line": 17,
       "snippet": "\"crypto/dsa\""
@@ -1051,6 +1181,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/client.go",
       "line": 18,
       "snippet": "\"crypto/ecdsa\""
@@ -1059,6 +1190,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/client.go",
       "line": 19,
       "snippet": "\"crypto/ed25519\""
@@ -1067,6 +1199,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/client.go",
       "line": 21,
       "snippet": "\"crypto/rsa\""
@@ -1075,6 +1208,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/agent/client.go",
       "line": 618,
       "snippet": "KeyBytes:    elliptic.Marshal(k.Curve, k.X, k.Y),"
@@ -1083,6 +1217,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "ssh/agent/client_test.go",
       "line": 9,
       "snippet": "\"crypto/ed25519\""
@@ -1091,6 +1226,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/server.go",
       "line": 8,
       "snippet": "\"crypto/dsa\""
@@ -1099,6 +1235,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/server.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -1107,6 +1244,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/server.go",
       "line": 10,
       "snippet": "\"crypto/ed25519\""
@@ -1115,6 +1253,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/agent/server.go",
       "line": 12,
       "snippet": "\"crypto/rsa\""
@@ -1123,6 +1262,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/agent/server.go",
       "line": 388,
       "snippet": "priv.X, priv.Y = elliptic.Unmarshal(priv.Curve, keyBytes)"
@@ -1131,6 +1271,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -1139,6 +1280,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
@@ -1147,6 +1289,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 178,
       "snippet": "h := sha256.New()"
@@ -1155,6 +1298,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 196,
       "snippet": "r, s, err := ecdsa.Sign(rand.Reader, caKey, digest)"
@@ -1163,6 +1307,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 218,
       "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1171,6 +1316,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 222,
       "snippet": "userKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1179,6 +1325,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/certs_test.go",
       "line": 507,
       "snippet": "k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1187,6 +1334,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 8,
       "snippet": "\"crypto/aes\""
@@ -1195,6 +1343,7 @@
       "label": "3DES",
       "algorithm": "3DES",
       "kind": "import",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 10,
       "snippet": "\"crypto/des\""
@@ -1203,6 +1352,7 @@
       "label": "RC4",
       "algorithm": "RC4",
       "kind": "import",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 12,
       "snippet": "\"crypto/rc4\""
@@ -1211,6 +1361,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 49,
       "snippet": "c, err := aes.NewCipher(key)"
@@ -1219,6 +1370,7 @@
       "label": "RC4",
       "algorithm": "RC4",
       "kind": "call site",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 57,
       "snippet": "return rc4.NewCipher(key)"
@@ -1227,6 +1379,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 313,
       "snippet": "c, err := aes.NewCipher(key)"
@@ -1235,6 +1388,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 477,
       "snippet": "c, err := aes.NewCipher(key)"
@@ -1243,6 +1397,7 @@
       "label": "3DES",
       "algorithm": "3DES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/cipher.go",
       "line": 491,
       "snippet": "c, err := des.NewTripleDESCipher(key)"
@@ -1251,6 +1406,7 @@
       "label": "DES",
       "algorithm": "DES",
       "kind": "import",
+      "test": true,
       "path": "ssh/cipher_test.go",
       "line": 10,
       "snippet": "\"crypto/des\""
@@ -1259,6 +1415,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/client_auth_test.go",
       "line": 10,
       "snippet": "\"crypto/rsa\""
@@ -1267,6 +1424,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "ssh/common.go",
       "line": 17,
       "snippet": "_ \"crypto/sha1\""
@@ -1275,6 +1433,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "ssh/common.go",
       "line": 18,
       "snippet": "_ \"crypto/sha256\""
@@ -1283,6 +1442,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/example_test.go",
       "line": 11,
       "snippet": "\"crypto/rsa\""
@@ -1291,6 +1451,7 @@
       "label": "RSA-3072",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/example_test.go",
       "line": 479,
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 3072)"
@@ -1299,6 +1460,7 @@
       "label": "RSA-3072",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/example_test.go",
       "line": 487,
       "snippet": "caKey, err := rsa.GenerateKey(rand.Reader, 3072)"
@@ -1307,6 +1469,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -1315,6 +1478,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 21,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -1323,6 +1487,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 226,
       "snippet": "ephKey, err := ecdsa.GenerateKey(kex.curve, rand)"
@@ -1331,6 +1496,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 232,
       "snippet": "ClientPubKey: elliptic.Marshal(kex.curve, ephKey.PublicKey.X, ephKey.PublicKey.Y),"
@@ -1339,6 +1505,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 256,
       "snippet": "secret, _ := kex.curve.ScalarMult(x, y, ephKey.D.Bytes())"
@@ -1347,6 +1514,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 278,
       "snippet": "x, y = elliptic.Unmarshal(curve, pubkey)"
@@ -1355,6 +1523,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 337,
       "snippet": "ephKey, err := ecdsa.GenerateKey(kex.curve, rand)"
@@ -1363,6 +1532,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 344,
       "snippet": "serializedEphKey := elliptic.Marshal(kex.curve, ephKey.PublicKey.X, ephKey.PublicKey.Y)"
@@ -1371,6 +1541,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 347,
       "snippet": "secret, _ := kex.curve.ScalarMult(clientX, clientY, ephKey.D.Bytes())"
@@ -1379,6 +1550,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 474,
       "snippet": "p, err := curve25519.X25519(kp.priv[:], curve25519.Basepoint)"
@@ -1387,6 +1559,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 507,
       "snippet": "secret, err := curve25519.X25519(kp.priv[:], reply.EphemeralPubKey)"
@@ -1395,6 +1568,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/kex.go",
       "line": 551,
       "snippet": "secret, err := curve25519.X25519(kp.priv[:], kexInit.ClientPubKey)"
@@ -1403,6 +1577,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 10,
       "snippet": "\"crypto/aes\""
@@ -1411,6 +1586,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 12,
       "snippet": "\"crypto/dsa\""
@@ -1419,6 +1595,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 13,
       "snippet": "\"crypto/ecdsa\""
@@ -1427,6 +1604,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 14,
       "snippet": "\"crypto/ed25519\""
@@ -1435,6 +1613,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 16,
       "snippet": "\"crypto/md5\""
@@ -1443,6 +1622,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 18,
       "snippet": "\"crypto/rsa\""
@@ -1451,6 +1631,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 19,
       "snippet": "\"crypto/sha256\""
@@ -1459,6 +1640,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 604,
       "snippet": "return rsa.VerifyPKCS1v15((*rsa.PublicKey)(r), hash, digest, blob)"
@@ -1467,6 +1649,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 719,
       "snippet": "if dsa.Verify((*dsa.PublicKey)(k), digest, r, s) {"
@@ -1475,6 +1658,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 757,
       "snippet": "r, s, err := dsa.Sign(rand, k.PrivateKey, digest)"
@@ -1483,6 +1667,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 835,
       "snippet": "if ok := ed25519.Verify(ed25519.PublicKey(k), b, sig.Blob); !ok {"
@@ -1491,6 +1676,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 881,
       "snippet": "key.X, key.Y = elliptic.Unmarshal(key.Curve, w.KeyBytes)"
@@ -1499,6 +1685,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 890,
       "snippet": "keyBytes := elliptic.Marshal(k.Curve, k.X, k.Y)"
@@ -1507,6 +1694,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 931,
       "snippet": "if ecdsa.Verify((*ecdsa.PublicKey)(k), digest, ecSig.R, ecSig.S) {"
@@ -1515,6 +1703,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1001,
       "snippet": "key.X, key.Y = elliptic.Unmarshal(key.Curve, w.KeyBytes)"
@@ -1523,6 +1712,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1011,
       "snippet": "keyBytes := elliptic.Marshal(k.Curve, k.X, k.Y)"
@@ -1531,6 +1721,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1078,
       "snippet": "if ecdsa.Verify((*ecdsa.PublicKey)(&k.PublicKey), digest, ecSig.R, ecSig.S) {"
@@ -1539,6 +1730,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1189,
       "snippet": "if ok := ed25519.Verify(k.PublicKey, original, edSig.Signature); !ok {"
@@ -1547,6 +1739,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1540,
       "snippet": "c, err := aes.NewCipher(key)"
@@ -1555,6 +1748,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1592,
       "snippet": "block, err := aes.NewCipher(key)"
@@ -1563,6 +1757,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1776,
       "snippet": "X, Y := elliptic.Unmarshal(curve, key.Pub)"
@@ -1571,6 +1766,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1785,
       "snippet": "x, y := curve.ScalarBaseMult(key.D.Bytes())"
@@ -1579,6 +1775,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1888,
       "snippet": "pub := elliptic.Marshal(k.Curve, k.PublicKey.X, k.PublicKey.Y)"
@@ -1587,6 +1784,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1947,
       "snippet": "md5sum := md5.Sum(pubKey.Marshal())"
@@ -1595,6 +1793,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "ssh/keys.go",
       "line": 1961,
       "snippet": "sha256sum := sha256.Sum256(pubKey.Marshal())"
@@ -1603,6 +1802,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 9,
       "snippet": "\"crypto/dsa\""
@@ -1611,6 +1811,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 10,
       "snippet": "\"crypto/ecdsa\""
@@ -1619,6 +1820,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 11,
       "snippet": "\"crypto/ed25519\""
@@ -1627,6 +1829,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 14,
       "snippet": "\"crypto/rsa\""
@@ -1635,6 +1838,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 15,
       "snippet": "\"crypto/sha256\""
@@ -1643,6 +1847,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 76,
       "snippet": "raw, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)"
@@ -1651,6 +1856,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1255,
       "snippet": "hsh := sha256.New()"
@@ -1659,6 +1865,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1292,
       "snippet": "ecKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1667,6 +1874,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1302,
       "snippet": "r, s, err := ecdsa.Sign(rand.Reader, ecKey, digest)"
@@ -1675,6 +1883,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1342,
       "snippet": "ecKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1683,6 +1892,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1346,
       "snippet": "edPub, _, err := ed25519.GenerateKey(rand.Reader)"
@@ -1691,6 +1901,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1355,
       "snippet": "rsaKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -1699,6 +1910,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1442,
       "snippet": "ecKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1707,6 +1919,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1497,
       "snippet": "pub, priv, err := ed25519.GenerateKey(rand.Reader)"
@@ -1715,6 +1928,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/keys_test.go",
       "line": 1506,
       "snippet": "return ed25519.Sign(priv, blob)"
@@ -1723,6 +1937,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "ssh/knownhosts/knownhosts.go",
       "line": 15,
       "snippet": "\"crypto/sha1\""
@@ -1731,6 +1946,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "ssh/knownhosts/knownhosts_test.go",
       "line": 9,
       "snippet": "\"crypto/ed25519\""
@@ -1739,6 +1955,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/knownhosts/knownhosts_test.go",
       "line": 280,
       "snippet": "_, caPriv, err := ed25519.GenerateKey(rand.Reader)"
@@ -1747,6 +1964,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/knownhosts/knownhosts_test.go",
       "line": 290,
       "snippet": "_, hostPriv, err := ed25519.GenerateKey(rand.Reader)"
@@ -1755,6 +1973,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/knownhosts/knownhosts_test.go",
       "line": 320,
       "snippet": "_, caPriv, err := ed25519.GenerateKey(rand.Reader)"
@@ -1763,6 +1982,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "ssh/knownhosts/knownhosts_test.go",
       "line": 329,
       "snippet": "_, hostPriv, err := ed25519.GenerateKey(rand.Reader)"
@@ -1771,6 +1991,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "ssh/mac.go",
       "line": 12,
       "snippet": "\"crypto/sha1\""
@@ -1779,6 +2000,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "ssh/mac.go",
       "line": 13,
       "snippet": "\"crypto/sha256\""
@@ -1787,6 +2009,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 10,
       "snippet": "\"crypto/sha256\""
@@ -1795,6 +2018,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 15,
       "snippet": "\"golang.org/x/crypto/curve25519\""
@@ -1803,6 +2027,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 65,
       "snippet": "c25519Secret, err := curve25519.X25519(c25519kp.priv[:], reply.EphemeralPubKey[mlkem.CiphertextSize768:])"
@@ -1811,6 +2036,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 70,
       "snippet": "h := sha256.New()"
@@ -1819,6 +2045,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "call site",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 122,
       "snippet": "c25519Secret, err := curve25519.X25519(c25519kp.priv[:], kexInit.ClientPubKey[mlkem.EncapsulationKeySize768:])"
@@ -1827,6 +2054,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "ssh/mlkem.go",
       "line": 129,
       "snippet": "h := sha256.New()"
@@ -1835,6 +2063,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "ssh/server_test.go",
       "line": 9,
       "snippet": "\"crypto/ecdsa\""
@@ -1843,6 +2072,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "ssh/server_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
@@ -1851,6 +2081,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "ssh/server_test.go",
       "line": 1176,
       "snippet": "h := sha256.New()"
@@ -1859,6 +2090,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/server_test.go",
       "line": 1192,
       "snippet": "x, y, err := ecdsa.Sign(r, s.priv, digest)"
@@ -1867,6 +2099,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "ssh/server_test.go",
       "line": 1212,
       "snippet": "userKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1875,6 +2108,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "x509roots/fallback/bundle/bundle_test.go",
       "line": 8,
       "snippet": "\"crypto/sha256\""
@@ -1883,6 +2117,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "x509roots/fallback/bundle/bundle_test.go",
       "line": 26,
       "snippet": "sum := sha256.Sum256(cert.Raw)"
@@ -1891,6 +2126,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "x509roots/gen_fallback_bundle.go",
       "line": 13,
       "snippet": "\"crypto/sha256\""
@@ -1899,6 +2135,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "x509roots/gen_fallback_bundle.go",
       "line": 120,
       "snippet": "sha256.Sum256(c.X509.Raw),"
@@ -1907,6 +2144,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "x509roots/nss/parser.go",
       "line": 15,
       "snippet": "\"crypto/sha1\""
@@ -1915,6 +2153,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "x509roots/nss/parser.go",
       "line": 99,
       "snippet": "h = sha1.Sum(b)"
@@ -1923,6 +2162,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": true,
       "path": "xts/xts_test.go",
       "line": 9,
       "snippet": "\"crypto/aes\""

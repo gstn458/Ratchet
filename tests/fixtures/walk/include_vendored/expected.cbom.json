@@ -161,7 +161,7 @@
           },
           {
             "location": "testdata/lib.py#L3",
-            "additionalContext": "call site"
+            "additionalContext": "call site (test code)"
           },
           {
             "location": "vendor/lib.py#L3",

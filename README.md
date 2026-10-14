@@ -179,6 +179,13 @@ separately from call sites; v0 counted them together, which overstated its figur
 library that is imported but never called does not fail a build. That is deliberate:
 anything that gates CI favours precision, while the inventory favours recall.
 
+Findings in test code are marked as such, by each language's convention: Go `_test.go`
+files, Python `test_*.py`, `*_test.py` and `conftest.py`, and anything under a `test`,
+`tests`, `testing` or `testdata` directory. The report counts them apart and the CBOM
+says so in each occurrence's `additionalContext`. They still count toward
+`--fail-on-vulnerable`; a helper package outside those conventions is not recognised
+as test code.
+
 Go call sites are recognised for the package-level functions of the standard crypto
 packages: key generation, signing, verification, encryption and the hash and cipher
 constructors. Methods called on a key value, such as `key.Sign(...)` through the

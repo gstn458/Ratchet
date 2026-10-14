@@ -597,6 +597,12 @@ class Finding:
         self.params = params
         self.kind = kind
         self.suppressed_by = None  # the SuppressRule that matched, if any
+        self.in_test = False       # set by walk() from the file's path
+
+    @property
+    def context(self):
+        """CycloneDX additionalContext for this occurrence."""
+        return f"{self.kind} (test code)" if self.in_test else self.kind
 
     @property
     def label(self):
@@ -1182,6 +1188,17 @@ def skip_reason(name, include_vendored):
 
 SCANNERS = {".py": scan_python, ".go": scan_go}
 
+# Test code, by convention of each language. Findings there are real, but
+# test-only cryptography is not what a migration plan is about, so they are
+# counted apart in the report, the CBOM and the corpus measurement.
+TEST_DIRS = {"test", "tests", "testing", "testdata"}
+TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py)$")
+
+
+def is_test_path(path):
+    parts = path.replace(os.sep, "/").split("/")
+    return bool(TEST_FILE.search(parts[-1])) or any(p in TEST_DIRS for p in parts[:-1])
+
 
 def walk(root, include_vendored=False):
     ignore_rules, suppress_rules = load_ignore_file(root)
@@ -1214,8 +1231,10 @@ def walk(root, include_vendored=False):
             except Unparsed as e:
                 unparsed.append((rel, str(e)))
                 continue
+            in_test = is_test_path(rel)
             for f in found:
                 f.path = rel
+                f.in_test = in_test
                 findings.append(f)
     # First matching rule wins, in file order.
     for f in findings:
@@ -1289,7 +1308,7 @@ def build_cbom(scan, root, tool_version=VERSION):
             "cryptoProperties": crypto_properties,
             "evidence": {
                 "occurrences": [
-                    {"location": f"{f.path}#L{f.line}", "additionalContext": f.kind}
+                    {"location": f"{f.path}#L{f.line}", "additionalContext": f.context}
                     for f in group
                 ]
             },
@@ -1493,6 +1512,9 @@ def report(scan, root):
             calls = sorted((f for f in group if f.kind == CALL), key=lambda f: (f.path, f.line))
             imports = sorted((f for f in group if f.kind == IMPORT), key=lambda f: (f.path, f.line))
             counts = [plural(len(calls), "call site")]
+            in_test = sum(f.in_test for f in calls)
+            if in_test:
+                counts.append(f"{in_test} in test code")
             if imports:
                 counts.append(plural(len(imports), "import"))
             print(f"  {algorithm}  ({', '.join(counts)})")
@@ -1519,6 +1541,9 @@ def report(scan, root):
         return (sum(f.kind == CALL for f in flat), sum(f.kind == IMPORT for f in flat),
                 len({f.path for f in flat}))
 
+    calls_in_test = sum(f.kind == CALL and f.in_test
+                        for g in list(buckets["broken"].values()) + list(buckets["undetermined"].values())
+                        for f in g)
     suppressed = sum(1 for f in scan.findings
                      if f.suppressed_by and ALGORITHMS[f.algorithm]["quantum"] == "broken")
     vulnerable = list(buckets["broken"].values()) + list(buckets["undetermined"].values())
@@ -1526,7 +1551,8 @@ def report(scan, root):
     u_calls, u_imports, _ = tally(buckets["undetermined"].values())
     print("=" * 72)
     if calls or imports:
-        line = (f"{plural(calls, 'quantum-vulnerable call site')} and "
+        in_test = f" ({calls_in_test} in test code)" if calls_in_test else ""
+        line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test} and "
                 f"{plural(imports, 'import')} across {plural(files, 'file')}.")
         print(line[0].upper() + line[1:])
         if u_calls or u_imports:

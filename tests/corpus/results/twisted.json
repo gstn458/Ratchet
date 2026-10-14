@@ -11,6 +11,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 137,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa"
@@ -19,6 +20,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 141,
       "snippet": "keyPrimitive = rsa.generate_private_key("
@@ -27,6 +29,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 150,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa"
@@ -35,6 +38,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 154,
       "snippet": "keyPrimitive = dsa.generate_private_key(key_size=int(options[\"bits\"]))"
@@ -43,6 +47,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 161,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
@@ -51,6 +56,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/scripts/ckeygen.py",
       "line": 168,
       "snippet": "keyPrimitive = ec.generate_private_key(curve=keys._curveTable[curve])"
@@ -59,6 +65,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/_kex.py",
       "line": 353,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
@@ -67,6 +74,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/_kex.py",
       "line": 363,
       "snippet": "ec.ECDH(), _curveTable[keyAlgorithmDsa]"
@@ -75,6 +83,7 @@
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 23,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, ec, ed25519, padding, rsa"
@@ -83,6 +92,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 23,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, ec, ed25519, padding, rsa"
@@ -91,6 +101,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 23,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, ec, ed25519, padding, rsa"
@@ -99,6 +110,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 23,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, ec, ed25519, padding, rsa"
@@ -107,6 +119,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1033,
       "snippet": "[binascii.hexlify(x) for x in iterbytes(md5(self.blob()).digest())]"
@@ -115,6 +128,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1759,
       "snippet": "signature = self._keyObject.sign(data, ec.ECDSA(hashAlgorithm))"
@@ -123,6 +137,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1837,
       "snippet": "args = (signature, data, ec.ECDSA(hashAlgorithm))"
@@ -131,6 +146,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1897,
       "snippet": "privateKey = rsa.generate_private_key(public_exponent=65537, key_size=keySize)"
@@ -139,6 +155,7 @@
       "label": "DH",
       "algorithm": "DH",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 25,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh, ec, x25519"
@@ -147,6 +164,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 25,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh, ec, x25519"
@@ -155,6 +173,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 25,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh, ec, x25519"
@@ -163,6 +182,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 1361,
       "snippet": "return ec.generate_private_key(curve)"
@@ -171,6 +191,7 @@
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 1421,
       "snippet": "sharedSecret = ecPriv.exchange(ec.ECDH(), theirECPub)"
@@ -179,6 +200,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 2007,
       "snippet": "[binascii.hexlify(ch) for ch in iterbytes(md5(hostKey).digest())]"
@@ -187,6 +209,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 2046,
       "snippet": "[binascii.hexlify(ch) for ch in iterbytes(md5(pubKey).digest())]"
@@ -195,6 +218,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/conch/ssh/transport.py",
       "line": 2131,
       "snippet": "[binascii.hexlify(c) for c in iterbytes(md5(pubKey).digest())]"
@@ -203,6 +227,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/sk_dummy.py",
       "line": 17,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec, ed25519, utils"
@@ -211,6 +236,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/sk_dummy.py",
       "line": 17,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec, ed25519, utils"
@@ -219,6 +245,7 @@
       "label": "ECDSA-SECP256R1",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/sk_dummy.py",
       "line": 90,
       "snippet": "ec_private_key = ec.generate_private_key(ec.SECP256R1())"
@@ -227,6 +254,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/sk_dummy.py",
       "line": 164,
       "snippet": "der_signature = private_key.sign(payload_to_sign, ec.ECDSA(hashes.SHA256()))"
@@ -235,6 +263,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/test_keys.py",
       "line": 1042,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
@@ -243,6 +272,7 @@
       "label": "DH",
       "algorithm": "DH",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 38,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh, ec"
@@ -251,6 +281,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 38,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dh, ec"
@@ -259,6 +290,7 @@
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 77,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
@@ -267,6 +299,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 1737,
       "snippet": "h = sha1()"
@@ -275,6 +308,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2335,
       "snippet": "fingerprint.replace(b\":\", b\"\"), binascii.hexlify(md5(pubKey).digest())"
@@ -283,6 +317,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2481,
       "snippet": "h = sha1()"
@@ -291,6 +326,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2614,
       "snippet": "self.proto.ecPriv = ec.generate_private_key(ec.SECP256R1())"
@@ -299,6 +335,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2618,
       "snippet": "thisPriv = ec.generate_private_key(ec.SECP256R1())"
@@ -307,6 +344,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2803,
       "snippet": "self.proto.ecPriv = ec.generate_private_key(ec.SECP256R1())"
@@ -315,6 +353,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/conch/test/test_transport.py",
       "line": 2807,
       "snippet": "thisPriv = ec.generate_private_key(ec.SECP256R1())"
@@ -323,6 +362,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/cred/credentials.py",
       "line": 302,
       "snippet": "digest = hexlify(md5(key + self.privateKey).digest())"
@@ -331,6 +371,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/cred/credentials.py",
       "line": 364,
       "snippet": "digest = hexlify(md5(key + self.privateKey).digest())"
@@ -339,6 +380,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/cred/test/test_digestauth.py",
       "line": 101,
       "snippet": "ha1 = hexlify(md5(a1).digest())"
@@ -347,6 +389,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/cred/test/test_digestauth.py",
       "line": 103,
       "snippet": "expected = hexlify(md5(a1).digest())"
@@ -355,6 +398,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/cred/test/test_digestauth.py",
       "line": 505,
       "snippet": "hash = md5(cleartext)"
@@ -363,6 +407,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/cred/test/test_digestauth.py",
       "line": 627,
       "snippet": "digest = hexlify(md5(key + credentialFactory.privateKey).digest())"
@@ -371,6 +416,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/cred/test/test_digestauth.py",
       "line": 652,
       "snippet": "digest = hexlify(md5(key + b\"this is not the right pkey\").digest())"
@@ -379,6 +425,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/internet/_sslverify.py",
       "line": 680,
       "snippet": "h = md5()"
@@ -387,6 +434,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/internet/test/test_unix.py",
       "line": 100,
       "snippet": "return md5(urandom(100)).hexdigest()"
@@ -395,6 +443,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/mail/_pop3client.py",
       "line": 884,
       "snippet": "digest = md5(challenge + password).hexdigest().encode(\"ascii\")"
@@ -403,6 +452,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/mail/maildir.py",
       "line": 589,
       "snippet": "return md5(base).hexdigest()"
@@ -411,6 +461,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/mail/maildir.py",
       "line": 719,
       "snippet": "return md5(self.msgs[i]).hexdigest()"
@@ -419,6 +470,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/mail/pop3.py",
       "line": 75,
       "snippet": "myDigest = md5(seed).hexdigest()"
@@ -427,6 +479,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/mail/pop3.py",
       "line": 1603,
       "snippet": "digest = md5(magic + password).hexdigest().encode(\"ascii\")"
@@ -435,6 +488,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/mail/test/test_mail.py",
       "line": 983,
       "snippet": "resp = md5(self.P.magic + \"password\").hexdigest()"
@@ -443,6 +497,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/mail/test/test_mail.py",
       "line": 996,
       "snippet": "resp = md5(self.P.magic + \"password\").hexdigest()"
@@ -451,6 +506,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/mail/test/test_mail.py",
       "line": 1003,
       "snippet": "resp = md5(\"wrong digest\").hexdigest()"
@@ -459,6 +515,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/python/test/test_zipstream.py",
       "line": 289,
       "snippet": "junkmd5 = md5(junk).hexdigest()"
@@ -467,6 +524,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/python/test/test_zipstream.py",
       "line": 306,
       "snippet": "newmd5 = md5(f.read()).hexdigest()"
@@ -475,6 +533,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/spread/pb.py",
       "line": 1260,
       "snippet": "m = md5()"
@@ -483,6 +542,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/spread/pb.py",
       "line": 1263,
       "snippet": "m = md5()"
@@ -491,6 +551,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/spread/pb.py",
       "line": 1276,
       "snippet": "crap = md5(crap).digest()"
@@ -499,6 +560,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/spread/pb.py",
       "line": 1623,
       "snippet": "return self.checkMD5Password(md5(password).digest())"
@@ -507,6 +569,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/spread/pb.py",
       "line": 1633,
       "snippet": "md = md5()"
@@ -515,6 +578,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/test/_ca_with_intermediate.py",
       "line": 5,
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
@@ -523,6 +587,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/test/test_sslverify.py",
       "line": 53,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
@@ -531,6 +596,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "src/twisted/test/test_sslverify.py",
       "line": 54,
       "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import ("
@@ -539,6 +605,7 @@
       "label": "EC-SECP256R1",
       "algorithm": "EC",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/test/test_sslverify.py",
       "line": 3526,
       "snippet": "key = ec.generate_private_key(ec.SECP256R1())"
@@ -547,6 +614,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/trial/test/test_loader.py",
       "line": 647,
       "snippet": "d = md5(n.encode(\"utf8\")).hexdigest()"
@@ -555,6 +623,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/words/protocols/jabber/sasl_mechanisms.py",
       "line": 246,
       "snippet": "return md5(s).digest()"
@@ -563,6 +632,7 @@
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/words/protocols/jabber/sasl_mechanisms.py",
       "line": 307,
       "snippet": "return md5(nonceBytes).hexdigest().encode(\"ascii\")"
@@ -571,6 +641,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "src/twisted/words/protocols/jabber/xmlstream.py",
       "line": 77,
       "snippet": "return sha1(input.encode(\"utf-8\")).hexdigest()"
@@ -579,6 +650,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/words/test/test_jabberclient.py",
       "line": 201,
       "snippet": "self.assertEqual(sha1(b\"12345secret\").hexdigest(), str(iq.query.digest))"
@@ -587,6 +659,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/words/test/test_jabbercomponent.py",
       "line": 57,
       "snippet": "self.assertEqual(sha1(b\"12345\" + b\"secret\").hexdigest(), str(handshake))"
@@ -595,6 +668,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "src/twisted/words/test/test_jabbercomponent.py",
       "line": 88,
       "snippet": "hv = sha1(b\"12345\" + b\"secret\").hexdigest().encode(\"ascii\")"

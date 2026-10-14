@@ -11,6 +11,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 21,
       "snippet": "\"crypto/aes\""
@@ -19,6 +20,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 22,
       "snippet": "\"crypto/ecdsa\""
@@ -27,6 +29,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 23,
       "snippet": "\"crypto/ed25519\""
@@ -35,6 +38,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 26,
       "snippet": "\"crypto/rsa\""
@@ -43,6 +47,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 27,
       "snippet": "\"crypto/sha1\""
@@ -51,6 +56,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "asymmetric.go",
       "line": 28,
       "snippet": "\"crypto/sha256\""
@@ -59,6 +65,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 199,
       "snippet": "return rsa.EncryptPKCS1v15(randReader, ctx.publicKey, cek)"
@@ -67,6 +74,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 201,
       "snippet": "return rsa.EncryptOAEP(sha1.New(), randReader, ctx.publicKey, cek, []byte{})"
@@ -75,6 +83,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 201,
       "snippet": "return rsa.EncryptOAEP(sha1.New(), randReader, ctx.publicKey, cek, []byte{})"
@@ -83,6 +92,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 203,
       "snippet": "return rsa.EncryptOAEP(sha256.New(), randReader, ctx.publicKey, cek, []byte{})"
@@ -91,6 +101,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 203,
       "snippet": "return rsa.EncryptOAEP(sha256.New(), randReader, ctx.publicKey, cek, []byte{})"
@@ -99,6 +110,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 249,
       "snippet": "_ = rsa.DecryptPKCS1v15SessionKey(rand.Reader, ctx.privateKey, jek, cek)"
@@ -107,6 +119,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 254,
       "snippet": "return rsa.DecryptOAEP(sha1.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
@@ -115,6 +128,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 254,
       "snippet": "return rsa.DecryptOAEP(sha1.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
@@ -123,6 +137,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 257,
       "snippet": "return rsa.DecryptOAEP(sha256.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
@@ -131,6 +146,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 257,
       "snippet": "return rsa.DecryptOAEP(sha256.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
@@ -139,6 +155,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 292,
       "snippet": "out, err = rsa.SignPKCS1v15(randReader, ctx.privateKey, hash, hashed)"
@@ -147,6 +164,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 294,
       "snippet": "out, err = rsa.SignPSS(randReader, ctx.privateKey, hash, hashed, &rsa.PSSOptions{"
@@ -155,6 +173,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 332,
       "snippet": "return rsa.VerifyPKCS1v15(ctx.publicKey, hash, hashed, signature)"
@@ -163,6 +182,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 334,
       "snippet": "return rsa.VerifyPSS(ctx.publicKey, hash, hashed, signature, nil)"
@@ -171,6 +191,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 372,
       "snippet": "block, err := aes.NewCipher(kek)"
@@ -179,6 +200,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 395,
       "snippet": "priv, err := ecdsa.GenerateKey(ctx.publicKey.Curve, randReader)"
@@ -187,6 +209,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 474,
       "snippet": "block, err := aes.NewCipher(key)"
@@ -195,6 +218,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 502,
       "snippet": "ok := ed25519.Verify(ctx.publicKey, payload, signature)"
@@ -203,6 +227,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 537,
       "snippet": "r, s, err := ecdsa.Sign(randReader, ctx.privateKey, hashed)"
@@ -211,6 +236,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "asymmetric.go",
       "line": 607,
       "snippet": "match := ecdsa.Verify(ctx.publicKey, hashed, r, s)"
@@ -219,6 +245,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 20,
       "snippet": "\"crypto/ecdsa\""
@@ -227,6 +254,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 23,
       "snippet": "\"crypto/rsa\""
@@ -235,6 +263,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 203,
       "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -243,6 +272,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 233,
       "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -251,6 +281,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 263,
       "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -259,6 +290,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 302,
       "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -267,6 +299,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 381,
       "snippet": "r, s, err := ecdsa.Sign(rand.Reader, ecTestKey256, hash384[:])"
@@ -275,6 +308,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "asymmetric_test.go",
       "line": 403,
       "snippet": "r, s, err = ecdsa.Sign(rand.Reader, ecTestKey384, hash512[:])"
@@ -283,6 +317,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "cipher/cbc_hmac.go",
       "line": 23,
       "snippet": "\"crypto/sha256\""
@@ -291,6 +326,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": true,
       "path": "cipher/cbc_hmac_test.go",
       "line": 21,
       "snippet": "\"crypto/aes\""
@@ -299,6 +335,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/cbc_hmac_test.go",
       "line": 345,
       "snippet": "block, err := aes.NewCipher(key[len(key)/2:])"
@@ -307,6 +344,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
+      "test": false,
       "path": "cipher/ecdh_es.go",
       "line": 22,
       "snippet": "\"crypto/ecdsa\""
@@ -315,6 +353,7 @@
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
+      "test": false,
       "path": "cipher/ecdh_es.go",
       "line": 49,
       "snippet": "z, _ := priv.Curve.ScalarMult(pub.X, pub.Y, priv.D.Bytes())"
@@ -323,6 +362,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "cipher/ecdh_es_test.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -331,6 +371,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 21,
       "snippet": "\"crypto/aes\""
@@ -339,6 +380,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 29,
       "snippet": "block0, _ := aes.NewCipher(kek0)"
@@ -347,6 +389,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 84,
       "snippet": "block0, _ := aes.NewCipher(kek0)"
@@ -355,6 +398,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 85,
       "snippet": "block1, _ := aes.NewCipher(kek1)"
@@ -363,6 +407,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 86,
       "snippet": "block2, _ := aes.NewCipher(kek2)"
@@ -371,6 +416,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 127,
       "snippet": "block, _ := aes.NewCipher(kek)"
@@ -379,6 +425,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 156,
       "snippet": "block, _ := aes.NewCipher(kek)"
@@ -387,6 +434,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": true,
       "path": "cipher/key_wrap_test.go",
       "line": 170,
       "snippet": "block, _ := aes.NewCipher(kek)"
@@ -395,6 +443,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "crypter.go",
       "line": 20,
       "snippet": "\"crypto/ecdsa\""
@@ -403,6 +452,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "crypter.go",
       "line": 21,
       "snippet": "\"crypto/rsa\""
@@ -411,6 +461,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "crypter_test.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -419,6 +470,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "crypter_test.go",
       "line": 22,
       "snippet": "\"crypto/ed25519\""
@@ -427,6 +479,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "crypter_test.go",
       "line": 25,
       "snippet": "\"crypto/rsa\""
@@ -435,6 +488,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "crypter_test.go",
       "line": 37,
       "snippet": "var rsaTestKey, _ = rsa.GenerateKey(rand.Reader, 2048)"
@@ -443,6 +497,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "crypter_test.go",
       "line": 39,
       "snippet": "var ecTestKey256, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -451,6 +506,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "crypter_test.go",
       "line": 40,
       "snippet": "var ecTestKey384, _ = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
@@ -459,6 +515,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "crypter_test.go",
       "line": 41,
       "snippet": "var ecTestKey521, _ = ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
@@ -467,6 +524,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "crypter_test.go",
       "line": 43,
       "snippet": "var ed25519PublicKey, ed25519PrivateKey, _ = ed25519.GenerateKey(rand.Reader)"
@@ -475,6 +533,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "cryptosigner/cryptosigner.go",
       "line": 24,
       "snippet": "\"crypto/ecdsa\""
@@ -483,6 +542,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "cryptosigner/cryptosigner.go",
       "line": 25,
       "snippet": "\"crypto/ed25519\""
@@ -491,6 +551,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "cryptosigner/cryptosigner.go",
       "line": 28,
       "snippet": "\"crypto/rsa\""
@@ -499,6 +560,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 22,
       "snippet": "\"crypto/ecdsa\""
@@ -507,6 +569,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 23,
       "snippet": "\"crypto/ed25519\""
@@ -515,6 +578,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 26,
       "snippet": "\"crypto/rsa\""
@@ -523,6 +587,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 119,
       "snippet": "ver, sig, _ = ed25519.GenerateKey(rand.Reader)"
@@ -531,6 +596,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 121,
       "snippet": "rsaTestKey, _ := rsa.GenerateKey(rand.Reader, 2048)"
@@ -539,6 +605,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 125,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -547,6 +614,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 129,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
@@ -555,6 +623,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 133,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
@@ -563,6 +632,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 153,
       "snippet": "_, edKey, err := ed25519.GenerateKey(rand.Reader)"
@@ -571,6 +641,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 158,
       "snippet": "rsaKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -579,6 +650,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 163,
       "snippet": "p224, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)"
@@ -587,6 +659,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 168,
       "snippet": "p256, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -595,6 +668,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 173,
       "snippet": "p384, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
@@ -603,6 +677,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "cryptosigner/cryptosigner_test.go",
       "line": 178,
       "snippet": "p521, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
@@ -611,6 +686,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "doc_test.go",
       "line": 20,
       "snippet": "\"crypto/ecdsa\""
@@ -619,6 +695,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "doc_test.go",
       "line": 22,
       "snippet": "\"crypto/rsa\""
@@ -627,6 +704,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "doc_test.go",
       "line": 31,
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -635,6 +713,7 @@
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": true,
       "path": "doc_test.go",
       "line": 79,
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
@@ -643,6 +722,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -651,6 +731,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 22,
       "snippet": "\"crypto/ed25519\""
@@ -659,6 +740,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 25,
       "snippet": "\"crypto/rsa\""
@@ -667,6 +749,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 55,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -675,6 +758,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 61,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
@@ -683,6 +767,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 67,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
@@ -691,6 +776,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 73,
       "snippet": "pub, key, err := ed25519.GenerateKey(rand.Reader)"
@@ -699,6 +785,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 76,
       "snippet": "key, err := rsa.GenerateKey(rand.Reader, bits)"
@@ -707,6 +794,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 96,
       "snippet": "key, err := rsa.GenerateKey(rand.Reader, bits)"
@@ -715,6 +803,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": false,
       "path": "jose-util/generator/generate.go",
       "line": 113,
       "snippet": "key, err := ecdsa.GenerateKey(crv, rand.Reader)"
@@ -723,6 +812,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "jwe_test.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -731,6 +821,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "jwe_test.go",
       "line": 23,
       "snippet": "\"crypto/rsa\""
@@ -739,6 +830,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "jwk.go",
       "line": 22,
       "snippet": "\"crypto/ecdsa\""
@@ -747,6 +839,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "jwk.go",
       "line": 23,
       "snippet": "\"crypto/ed25519\""
@@ -755,6 +848,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "jwk.go",
       "line": 25,
       "snippet": "\"crypto/rsa\""
@@ -763,6 +857,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": false,
       "path": "jwk.go",
       "line": 26,
       "snippet": "\"crypto/sha1\""
@@ -771,6 +866,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "jwk.go",
       "line": 27,
       "snippet": "\"crypto/sha256\""
@@ -779,6 +875,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "jwk.go",
       "line": 159,
       "snippet": "expectedSHA1 := sha1.Sum(k.Certificates[0].Raw)"
@@ -787,6 +884,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "jwk.go",
       "line": 160,
       "snippet": "expectedSHA256 := sha256.Sum256(k.Certificates[0].Raw)"
@@ -795,6 +893,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": false,
       "path": "jwk.go",
       "line": 339,
       "snippet": "sha1sum := sha1.Sum(leaf.Raw)"
@@ -803,6 +902,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": false,
       "path": "jwk.go",
       "line": 340,
       "snippet": "sha256sum := sha256.Sum256(leaf.Raw)"
@@ -811,6 +911,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": false,
       "path": "jwk.go",
       "line": 634,
       "snippet": "privateKey := ed25519.NewKeyFromSeed(seed)"
@@ -819,6 +920,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "jwk_test.go",
       "line": 22,
       "snippet": "\"crypto/ecdsa\""
@@ -827,6 +929,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "jwk_test.go",
       "line": 23,
       "snippet": "\"crypto/ed25519\""
@@ -835,6 +938,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "jwk_test.go",
       "line": 26,
       "snippet": "\"crypto/rsa\""
@@ -843,6 +947,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "import",
+      "test": true,
       "path": "jwk_test.go",
       "line": 27,
       "snippet": "\"crypto/sha1\""
@@ -851,6 +956,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "jwk_test.go",
       "line": 28,
       "snippet": "\"crypto/sha256\""
@@ -859,6 +965,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 256,
       "snippet": "x5tSHA1 := sha1.Sum(testCertificates[0].Raw)"
@@ -867,6 +974,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 257,
       "snippet": "x5tSHA256 := sha256.Sum256(testCertificates[0].Raw)"
@@ -875,6 +983,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 423,
       "snippet": "sha1sum := sha1.Sum(nil)"
@@ -883,6 +992,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 425,
       "snippet": "sha256sum := sha256.Sum256(nil)"
@@ -891,6 +1001,7 @@
       "label": "SHA-1",
       "algorithm": "SHA-1",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 486,
       "snippet": "x5tSHA1 := sha1.Sum(testCertificates[0].Raw)"
@@ -899,6 +1010,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 487,
       "snippet": "x5tSHA256 := sha256.Sum256(testCertificates[0].Raw)"
@@ -907,6 +1019,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
+      "test": true,
       "path": "jwk_test.go",
       "line": 913,
       "snippet": "_, otherPrivateKey, err := ed25519.GenerateKey(rand.Reader)"
@@ -915,6 +1028,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "jwt/builder_test.go",
       "line": 22,
       "snippet": "\"crypto/rsa\""
@@ -923,6 +1037,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "jwt/example_test.go",
       "line": 25,
       "snippet": "\"crypto/rsa\""
@@ -931,6 +1046,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "opaque_test.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -939,6 +1055,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "opaque_test.go",
       "line": 376,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -947,6 +1064,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": false,
       "path": "signing.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -955,6 +1073,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": false,
       "path": "signing.go",
       "line": 22,
       "snippet": "\"crypto/ed25519\""
@@ -963,6 +1082,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": false,
       "path": "signing.go",
       "line": 23,
       "snippet": "\"crypto/rsa\""
@@ -971,6 +1091,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
+      "test": true,
       "path": "signing_test.go",
       "line": 21,
       "snippet": "\"crypto/ecdsa\""
@@ -979,6 +1100,7 @@
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "import",
+      "test": true,
       "path": "signing_test.go",
       "line": 22,
       "snippet": "\"crypto/ed25519\""
@@ -987,6 +1109,7 @@
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
+      "test": true,
       "path": "signing_test.go",
       "line": 25,
       "snippet": "\"crypto/rsa\""
@@ -995,6 +1118,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 341,
       "snippet": "keyBar, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1003,6 +1127,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 345,
       "snippet": "keyFoo, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader) // only its public key goes in the JWKS"
@@ -1011,6 +1136,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 394,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1019,6 +1145,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 446,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1027,6 +1154,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 450,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
@@ -1035,6 +1163,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 454,
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
@@ -1043,6 +1172,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 524,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1051,6 +1181,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 589,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1059,6 +1190,7 @@
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
+      "test": true,
       "path": "signing_test.go",
       "line": 677,
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
@@ -1067,6 +1199,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "import",
+      "test": false,
       "path": "symmetric.go",
       "line": 21,
       "snippet": "\"crypto/aes\""
@@ -1075,6 +1208,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": false,
       "path": "symmetric.go",
       "line": 26,
       "snippet": "\"crypto/sha256\""
@@ -1083,6 +1217,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "symmetric.go",
       "line": 97,
       "snippet": "aes, err := aes.NewCipher(key)"
@@ -1091,6 +1226,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "symmetric.go",
       "line": 300,
       "snippet": "block, err := aes.NewCipher(ctx.key)"
@@ -1099,6 +1235,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "symmetric.go",
       "line": 338,
       "snippet": "block, err := aes.NewCipher(key)"
@@ -1107,6 +1244,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "symmetric.go",
       "line": 409,
       "snippet": "block, err := aes.NewCipher(ctx.key)"
@@ -1115,6 +1253,7 @@
       "label": "AES",
       "algorithm": "AES",
       "kind": "call site",
+      "test": false,
       "path": "symmetric.go",
       "line": 453,
       "snippet": "block, err := aes.NewCipher(key)"
@@ -1123,6 +1262,7 @@
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
+      "test": true,
       "path": "symmetric_test.go",
       "line": 24,
       "snippet": "\"crypto/sha256\""

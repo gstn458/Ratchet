@@ -104,6 +104,7 @@ after the fixtures were first written:
 | `include_vendored` | The same tree with `--include-vendored` (via `options.json`): vendored, test-data and build-output code is scanned, and dot-directories are still skipped and listed | ok |
 | `ignore_paths` | `.ratchetignore` path rules with required reasons: a directory rule, a no-slash rule matching at any depth, and a rule that matches nothing; each rule and each ignored file is listed in the report and the CBOM | ok |
 | `suppressions` | MD5 suppressed under `src/cache/**` while MD5 in `src/auth/legacy.py` stays unsuppressed in its own component; a `false-positive` rule; an RSA rule covering two parameter sets; a rule matching nothing; vulnerability entries point only at the suppressed components, and the closing line says what was suppressed | ok |
+| `test_code` | Test code by convention (`tests/`, `test_*.py`, `conftest.py`, `_test.go`) is counted apart and marked in each occurrence's context; `latest.py`, `contest.py` and Go's `testutil.go` are not test code | ok |
 | `occurrence_cap` | 51 MD5 call sites in one file: the CBOM lists all 51 locations, matching `occurrence_count` | ok (50 listed before step 10) |
 | `mixed` | Python and Go in one tree, relative paths, the report sections, RSA grouped across both languages, and a summary counting call sites and imports apart | ok |
 
