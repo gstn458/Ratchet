@@ -16,39 +16,47 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  DES  (no call sites, 2 imports)
+  DES  (2 call sites, 2 imports)
     56-bit key. Brute-forced on commodity hardware.
     migrate to: AES-256-GCM
+      ciphers.py:4   des = DES.new(b"8bytekey", DES.MODE_ECB)
+      ciphers.py:15   renamed = SingleDES.new(b"8bytekey", SingleDES.MODE_ECB)
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
-      ciphers.py:11   from Crypto.Cipher import DES as SingleDES
+      ... and 1 more
 
-  MD5  (no call sites, 2 imports)
+  MD5  (2 call sites, 2 imports)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      ciphers.py:8   md5 = MD5.new(b"data")
+      ciphers.py:16   digest = md5_new(b"data")
       ciphers.py:2   from Crypto.Hash import MD5, SHA1
-      ciphers.py:12   from Crypto.Hash.MD5 import new as md5_new
+      ... and 1 more
 
-  3DES  (no call sites, 1 import)
+  3DES  (1 call site, 1 import)
     Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
     migrate to: AES-256-GCM
+      ciphers.py:5   tdes = DES3.new(b"0123456789abcdef01234567", DES3.MODE_CBC)
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  RC4  (no call sites, 1 import)
+  RC4  (1 call site, 1 import)
     Biased keystream. Prohibited in TLS since RFC 7465.
     migrate to: AES-256-GCM or ChaCha20-Poly1305
+      ciphers.py:6   rc4 = ARC4.new(b"key")
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
-  SHA-1  (no call sites, 1 import)
+  SHA-1  (1 call site, 1 import)
     Chosen-prefix collisions demonstrated in 2020. Retire it.
     migrate to: SHA-256 or SHA-3
+      ciphers.py:9   sha1 = SHA1.new(b"data")
       ciphers.py:2   from Crypto.Hash import MD5, SHA1
 
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  AES  (no call sites, 1 import)
+  AES  (1 call site, 1 import)
     Grover halves effective key length. AES-256 stays at 128-bit margin.
     migrate to: AES-256 if currently AES-128
+      ciphers.py:7   aes = AES.new(b"0123456789abcdef", AES.MODE_GCM)
       ciphers.py:1   from Crypto.Cipher import AES, ARC4, DES, DES3
 
 ========================================================================

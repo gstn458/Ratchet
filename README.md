@@ -97,7 +97,9 @@ algorithm family.
 Objects from `cryptography` that name one algorithm are call sites too: `hashes.MD5()`
 and `hashes.SHA1()`, `algorithms.TripleDES` and `ARC4` (including the `decrepit`
 module), and the RSA padding schemes `PKCS1v15`, `OAEP` and `PSS`, which exist only for
-RSA operations.
+RSA operations. So is PyCryptodome's `.new(...)` on a cipher or hash module, such as
+`DES.new(key, DES.MODE_CBC)` or `MD5.new(data)`, which is how every one of them is
+instantiated.
 
 Elliptic-curve keys are classified by what they are used for, because the migration
 target depends on it: `.sign()` or `.verify()` makes a key ECDSA, `.exchange()` makes

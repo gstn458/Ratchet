@@ -494,6 +494,12 @@ PY_CALL_OBJECTS = {
     "cryptography.hazmat.primitives.asymmetric.padding.PSS": "RSA",
 }
 
+# PyCryptodome cipher and hash modules each implement one algorithm, and
+# Module.new(...) is how every one of them is instantiated: DES.new(key, mode),
+# MD5.new(data). A .new call on a module in PY_MODULES under these packages is a
+# call site of that module's algorithm.
+PY_NEW_PACKAGES = ("Crypto.Cipher.", "Crypto.Hash.")
+
 PY_HASH_NAMES = {
     "md5": "MD5",
     "sha1": "SHA-1",
@@ -846,6 +852,7 @@ class PyVisitor(ast.NodeVisitor):
                         self.ec_uses.append((peer, kind))
 
         keygen = self._keygen_algorithm(name, owner, qualified)
+        new_module = qualified[:-len(".new")] if qualified and qualified.endswith(".new") else None
 
         if usage_object:
             self.ec_markers.add(usage_object)
@@ -854,6 +861,10 @@ class PyVisitor(ast.NodeVisitor):
         # hashes.SHA1(), algorithms.TripleDES(key), padding.PKCS1v15()
         elif qualified in PY_CALL_OBJECTS:
             self._add(PY_CALL_OBJECTS[qualified], node)
+
+        # PyCryptodome DES.new(key, DES.MODE_CBC), MD5.new(data)
+        elif new_module in PY_MODULES and new_module.startswith(PY_NEW_PACKAGES):
+            self._add(PY_MODULES[new_module], node)
 
         # hashlib.md5(), hashlib.sha1()
         elif name in ("md5", "sha1"):
