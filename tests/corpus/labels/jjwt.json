@@ -1,0 +1,129 @@
+{
+  "findings": {},
+  "missed": [
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 65,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "RS256(\"RS256\", \"RSASSA-PKCS-v1_5 using SHA-256\", \"RSA\", \"SHA256withRSA\", true, 256, 2048),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 70,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "RS384(\"RS384\", \"RSASSA-PKCS-v1_5 using SHA-384\", \"RSA\", \"SHA384withRSA\", true, 384, 2048),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 75,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "RS512(\"RS512\", \"RSASSA-PKCS-v1_5 using SHA-512\", \"RSA\", \"SHA512withRSA\", true, 512, 2048),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 80,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 85,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "ES384(\"ES384\", \"ECDSA using P-384 and SHA-384\", \"ECDSA\", \"SHA384withECDSA\", true, 384, 384),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 90,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "ES512(\"ES512\", \"ECDSA using P-521 and SHA-512\", \"ECDSA\", \"SHA512withECDSA\", true, 512, 521),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 97,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "PS256(\"PS256\", \"RSASSA-PSS using SHA-256 and MGF1 with SHA-256\", \"RSA\", \"RSASSA-PSS\", false, 256, 2048),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 104,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "PS384(\"PS384\", \"RSASSA-PSS using SHA-384 and MGF1 with SHA-384\", \"RSA\", \"RSASSA-PSS\", false, 384, 2048),"
+    },
+    {
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 111,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "PS512(\"PS512\", \"RSASSA-PSS using SHA-512 and MGF1 with SHA-512\", \"RSA\", \"RSASSA-PSS\", false, 512, 2048);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaSignatureAlgorithm.java",
+      "line": 51,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "static final String PSS_JCA_NAME = \"RSASSA-PSS\";"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 37,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "private static final String RSA1_5_TRANSFORMATION = \"RSA/ECB/PKCS1Padding\";"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

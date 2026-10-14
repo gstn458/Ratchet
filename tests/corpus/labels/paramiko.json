@@ -1,0 +1,172 @@
+{
+  "findings": {
+    "paramiko/config.py:449:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "paramiko/ecdsakey.py:224:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDSA host and user keys"
+    },
+    "paramiko/ecdsakey.py:242:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDSA host and user keys"
+    },
+    "paramiko/ecdsakey.py:268:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDSA host and user keys"
+    },
+    "paramiko/hostkeys.py:294:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "paramiko/hostkeys.py:299:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "paramiko/kex_curve25519.py:30:X25519": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "paramiko/kex_curve25519.py:45:X25519": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "paramiko/kex_ecdh_nist.py:117:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDH key exchange"
+    },
+    "paramiko/kex_ecdh_nist.py:59:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDH key exchange"
+    },
+    "paramiko/kex_ecdh_nist.py:71:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: SSH ECDH key exchange"
+    },
+    "paramiko/kex_mlkem.py:76:X25519": {
+      "verdict": "tp",
+      "note": "read by hand: X25519 half of the hybrid mlkem768x25519 key exchange; the ML-KEM half is not recorded (inventory gap, not a false negative)"
+    },
+    "paramiko/kex_mlkem.py:84:X25519": {
+      "verdict": "tp",
+      "note": "read by hand: X25519 half of the hybrid mlkem768x25519 key exchange; the ML-KEM half is not recorded (inventory gap, not a false negative)"
+    },
+    "paramiko/pkey.py:390:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "paramiko/rsakey.py:188:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    }
+  },
+  "missed": [
+    {
+      "path": "paramiko/kex_gex.py",
+      "line": 201,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "self.e = pow(self.g, self.x, self.p)"
+    },
+    {
+      "path": "paramiko/kex_gex.py",
+      "line": 213,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "self.f = pow(self.g, self.x, self.p)"
+    },
+    {
+      "path": "paramiko/kex_gex.py",
+      "line": 214,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "K = pow(self.e, self.x, self.p)"
+    },
+    {
+      "path": "paramiko/kex_gex.py",
+      "line": 257,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "K = pow(self.f, self.x, self.p)"
+    },
+    {
+      "path": "paramiko/kex_group14.py",
+      "line": 58,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "self.f = pow(self.G, self.x, self.P)"
+    },
+    {
+      "path": "paramiko/kex_group14.py",
+      "line": 62,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "self.e = pow(self.G, self.x, self.P)"
+    },
+    {
+      "path": "paramiko/kex_group14.py",
+      "line": 103,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "K = pow(self.f, self.x, self.P)"
+    },
+    {
+      "path": "paramiko/kex_group14.py",
+      "line": 126,
+      "algorithm": "DH",
+      "source": "read",
+      "note": "hand-rolled finite-field Diffie-Hellman: pow(g, x, p) with an SSH group prime; no library call to detect",
+      "test": false,
+      "snippet": "K = pow(self.e, self.x, self.P)"
+    },
+    {
+      "path": "paramiko/rsakey.py",
+      "line": 143,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "padding=padding.PKCS1v15(),"
+    },
+    {
+      "path": "paramiko/rsakey.py",
+      "line": 171,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "sign, data, padding.PKCS1v15(), self.HASHES[sig_algorithm]()"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

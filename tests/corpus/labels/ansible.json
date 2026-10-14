@@ -1,0 +1,122 @@
+{
+  "findings": {
+    "lib/ansible/modules/assemble.py:243:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/assemble.py:248:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/assemble.py:254:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/copy.py:524:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/copy.py:529:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/copy.py:582:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/get_url.py:656:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/get_url.py:667:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/get_url.py:716:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/rpm_key.py:317:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "lib/ansible/modules/uri.py:485:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/modules/uri.py:486:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: AnsibleModule.md5/sha1, thin wrappers over hashlib, for file checksums"
+    },
+    "lib/ansible/plugins/action/fetch.py:190:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: ansible.utils.hashing wrapper over hashlib"
+    },
+    "lib/ansible/plugins/action/fetch.py:205:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: ansible.utils.hashing wrapper over hashlib"
+    },
+    "lib/ansible/plugins/connection/psrp.py:507:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: ansible.utils.hashing wrapper over hashlib"
+    },
+    "lib/ansible/plugins/connection/ssh.py:698:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "lib/ansible/plugins/lookup/password.py:272:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py:22:Ed25519": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    }
+  },
+  "missed": [
+    {
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 24,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-renamed-keygen",
+      "note": "key generation through a renamed from-import (generate_private_key as ...)",
+      "test": true,
+      "snippet": "private_key = rsa_generate_private_key(65537, 4096)"
+    },
+    {
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 26,
+      "algorithm": "DSA",
+      "source": "search",
+      "search": "py-renamed-keygen",
+      "note": "key generation through a renamed from-import (generate_private_key as ...)",
+      "test": true,
+      "snippet": "private_key = dsa_generate_private_key(1024)"
+    },
+    {
+      "path": "test/integration/targets/ssh_agent/action_plugins/ssh_keygen.py",
+      "line": 28,
+      "algorithm": "EC",
+      "source": "search",
+      "search": "py-renamed-keygen",
+      "note": "key generation through a renamed from-import (generate_private_key as ...)",
+      "test": true,
+      "snippet": "private_key = ecdsa_generate_private_key(SECP384R1())"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

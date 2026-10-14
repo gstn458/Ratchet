@@ -1,0 +1,84 @@
+{
+  "findings": {
+    "jwt/algorithms.py:761:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jwt/algorithms.py:777:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "tests/test_algorithms.py:1755:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1769:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1788:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1805:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    }
+  },
+  "missed": [
+    {
+      "path": "jwt/algorithms.py",
+      "line": 683,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "signature: bytes = key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
+      "path": "jwt/algorithms.py",
+      "line": 688,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
+      "path": "jwt/algorithms.py",
+      "line": 916,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "padding.PSS("
+    },
+    {
+      "path": "jwt/algorithms.py",
+      "line": 929,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "padding.PSS("
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

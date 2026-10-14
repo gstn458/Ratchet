@@ -1,0 +1,272 @@
+{
+  "findings": {
+    "scapy/config.py:776:X25519": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/contrib/tacacs.py:46:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "scapy/layers/inet.py:730:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "scapy/layers/inet6.py:2398:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "scapy/layers/radius.py:1341:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "scapy/layers/smbserver.py:1051:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "scapy/layers/tls/cert.py:183:RSA-512": {
+      "verdict": "tp",
+      "note": "read by hand: capability probe for 512-bit RSA support"
+    },
+    "scapy/layers/tls/cert.py:463:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/cert.py:516:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/cert.py:534:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/cert.py:823:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/cert.py:899:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/cert.py:917:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/crypto/groups.py:526:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: TLS key-exchange group key (actual use: ECDH)"
+    },
+    "scapy/layers/tls/keyexchange.py:858:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/keyexchange.py:887:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/keyexchange_tls13.py:181:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/keyexchange_tls13.py:205:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/layers/tls/keyexchange_tls13.py:217:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "scapy/tools/UTscapy.py:462:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "scapy/tools/UTscapy.py:477:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: local sha1() wrapper over hashlib.sha1"
+    },
+    "scapy/utils6.py:431:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "scapy/utils6.py:462:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    }
+  },
+  "missed": [
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 151,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 155,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(M4SS, hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 227,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 233,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 246,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(XorKey, hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 248,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 255,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 257,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1958,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "hashes.SHA1(),"
+    },
+    {
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 95,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "return padding.PKCS1v15()"
+    },
+    {
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 99,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "return padding.PSS(mgf=mgf(h), salt_length=h.digest_size)"
+    },
+    {
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 101,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "return padding.OAEP(mgf=mgf(h), algorithm=h, label=label)"
+    },
+    {
+      "path": "scapy/libs/rfc3961.py",
+      "line": 926,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "path": "scapy/libs/rfc3961.py",
+      "line": 1078,
+      "algorithm": "RC4",
+      "source": "search",
+      "search": "py-cryptography-cipher",
+      "note": "legacy cipher from cryptography.hazmat.primitives.ciphers is not recognised",
+      "test": false,
+      "snippet": "rc4 = Cipher(algorithms.ARC4(ke), mode=None).encryptor()"
+    },
+    {
+      "path": "scapy/modules/krack/automaton.py",
+      "line": 190,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "path": "scapy/modules/krack/crypto.py",
+      "line": 24,
+      "algorithm": "RC4",
+      "source": "search",
+      "search": "py-cryptography-cipher",
+      "note": "legacy cipher from cryptography.hazmat.primitives.ciphers is not recognised",
+      "test": false,
+      "snippet": "algorithm = algorithms.ARC4(key)"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

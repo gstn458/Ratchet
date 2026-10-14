@@ -6,26 +6,26 @@ found by reading the code, listed in `labels/<name>.json`.
 
 | Repository | Language | Call sites | In test code | Imports | Labelled | False positives | FP rate | Missed |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| paramiko | python | 15 | 0 | 14 | 0 | 0 | n/a | 0 |
-| pyjwt | python | 6 | 4 | 25 | 0 | 0 | n/a | 0 |
-| python-jose | python | 4 | 2 | 9 | 0 | 0 | n/a | 0 |
-| certbot | python | 17 | 8 | 37 | 0 | 0 | n/a | 0 |
-| twisted | python | 54 | 25 | 20 | 0 | 0 | n/a | 0 |
-| django | python | 17 | 5 | 0 | 0 | 0 | n/a | 0 |
-| scapy | python | 23 | 0 | 14 | 0 | 0 | n/a | 0 |
-| ansible | python | 18 | 1 | 11 | 0 | 0 | n/a | 0 |
-| golang-jwt | go | 8 | 1 | 13 | 0 | 0 | n/a | 0 |
-| x-crypto | go | 144 | 55 | 96 | 0 | 0 | n/a | 0 |
-| go-jose | go | 87 | 49 | 53 | 0 | 0 | n/a | 0 |
-| step-ca | go | 156 | 131 | 100 | 0 | 0 | n/a | 0 |
-| cfssl | go | 87 | 33 | 100 | 0 | 0 | n/a | 0 |
-| age | go | 32 | 12 | 17 | 0 | 0 | n/a | 0 |
-| caddy | go | 20 | 17 | 16 | 0 | 0 | n/a | 0 |
-| vault | go | 252 | 138 | 206 | 0 | 0 | n/a | 0 |
-| java-jwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 0 |
-| jjwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 0 |
-| node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 0 |
-| forge | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 0 |
-| **total** | | 940 | 481 | 731 | 0 | 0 | n/a | 0 |
+| paramiko | python | 15 | 0 | 14 | 15 | 0 | 0.0% | 10 |
+| pyjwt | python | 6 | 4 | 25 | 6 | 0 | 0.0% | 4 |
+| python-jose | python | 4 | 2 | 9 | 4 | 0 | 0.0% | 6 |
+| certbot | python | 17 | 8 | 37 | 17 | 0 | 0.0% | 4 |
+| twisted | python | 54 | 25 | 20 | 54 | 0 | 0.0% | 8 |
+| django | python | 17 | 5 | 0 | 17 | 0 | 0.0% | 0 |
+| scapy | python | 23 | 0 | 14 | 23 | 0 | 0.0% | 16 |
+| ansible | python | 18 | 1 | 11 | 18 | 0 | 0.0% | 3 |
+| golang-jwt | go | 8 | 1 | 13 | 8 | 0 | 0.0% | 0 |
+| x-crypto | go | 144 | 55 | 96 | 144 | 0 | 0.0% | 30 |
+| go-jose | go | 87 | 49 | 53 | 87 | 5 | 5.7% | 0 |
+| step-ca | go | 156 | 131 | 100 | 156 | 0 | 0.0% | 27 |
+| cfssl | go | 87 | 33 | 100 | 87 | 0 | 0.0% | 51 |
+| age | go | 32 | 12 | 17 | 32 | 0 | 0.0% | 0 |
+| caddy | go | 20 | 17 | 16 | 20 | 0 | 0.0% | 0 |
+| vault | go | 252 | 138 | 206 | 252 | 4 | 1.6% | 48 |
+| java-jwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 41 |
+| jjwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 11 |
+| node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 6 |
+| forge | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 90 |
+| **total** | | 940 | 481 | 731 | 940 | 9 | 1.0% | 355 |
 
-Labelled 0 of 940 call sites (0.0%).
+Labelled 940 of 940 call sites (100.0%).

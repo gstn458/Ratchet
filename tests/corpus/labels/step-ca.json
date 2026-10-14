@@ -1,0 +1,914 @@
+{
+  "findings": {
+    "acme/api/revoke_test.go:175:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.Sign, crypto/ecdsa imported, name not shadowed"
+    },
+    "acme/api/wire_integration_test.go:600:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "acme/challenge.go:1176:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge.go:1799:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge.go:1800:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.VerifyASN1, crypto/ecdsa imported, name not shadowed"
+    },
+    "acme/challenge.go:1804:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge.go:1805:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "acme/challenge.go:1809:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed"
+    },
+    "acme/challenge.go:312:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge.go:378:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge.go:891:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:146:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:149:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:203:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:206:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2188:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2232:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2338:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "acme/challenge_test.go:246:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:248:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:2645:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2689:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2734:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2778:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2822:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2930:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:2974:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:300:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:302:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:3100:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3101:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3147:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3148:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3195:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3240:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3286:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3324:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3524:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:3673:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:3691:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:3698:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:3917:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:3935:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:4678:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:4685:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:4813:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:4820:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:5110:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:5195:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:5277:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "acme/challenge_test.go:842:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_test.go:888:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_tpmsimulator_test.go:121:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_tpmsimulator_test.go:492:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "acme/challenge_tpmsimulator_test.go:62:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "api/api_test.go:1469:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "api/api_test.go:1473:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "api/api_test.go:1477:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "api/api_test.go:1482:DSA-L2048N256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: dsa.GenerateParameters, crypto/dsa imported, name not shadowed"
+    },
+    "api/api_test.go:1485:DSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: dsa.GenerateKey, crypto/dsa imported, name not shadowed"
+    },
+    "api/api_test.go:977:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "api/api_test.go:981:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "api/ssh_test.go:39:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/authority.go:486:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/authority.go:507:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/authority_test.go:174:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/authorize.go:213:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/authorize_test.go:1435:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "authority/authorize_test.go:1443:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "authority/linkedca.go:518:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws.go:204:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws.go:210:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws.go:266:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:319:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:582:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:62:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:67:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:752:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/aws_test.go:755:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/azure.go:165:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/azure_test.go:62:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/azure_test.go:664:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/azure_test.go:667:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/collection.go:325:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "authority/provisioner/gcp.go:143:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/gcp.go:157:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/gcp_test.go:646:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/gcp_test.go:649:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/gcp_test.go:74:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/gcp_test.go:76:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/jwk_test.go:420:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/jwk_test.go:423:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/nebula_test.go:139:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: converted with .ECDH() only to encode the public key; the key signs (Nebula CA certificate, or returned as crypto.Signer)"
+    },
+    "authority/provisioner/nebula_test.go:38:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "authority/provisioner/nebula_test.go:60:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "authority/provisioner/nebula_test.go:83:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: converted with .ECDH() only to encode the public key; the key signs (Nebula CA certificate, or returned as crypto.Signer)"
+    },
+    "authority/provisioner/oidc_test.go:556:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/oidc_test.go:559:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/scep_test.go:35:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/scep_test.go:522:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/scep_test.go:524:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "authority/provisioner/sign_options.go:531:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/utils_test.go:1000:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/utils_test.go:1020:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/utils_test.go:454:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/provisioner/utils_test.go:562:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "authority/ssh_test.go:139:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:143:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:321:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:325:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:413:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:418:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:455:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:460:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:497:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:505:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:883:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/ssh_test.go:887:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "authority/tls_test.go:114:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "authority/tls_test.go:132:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "authority/tls_test.go:224:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "authority/tls_test.go:86:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "ca/ca_test.go:70:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "ca/client.go:1461:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "ca/client.go:761:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "ca/client_test.go:113:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "ca/tls_test.go:132:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "cas/cloudcas/certificate_test.go:111:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "cas/cloudcas/certificate_test.go:118:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/cloudcas/cloudcas_test.go:228:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "cas/softcas/softcas_test.go:414:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "cas/softcas/softcas_test.go:475:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/softcas/softcas_test.go:480:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "cas/stepcas/stepcas_test.go:56:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "cas/stepcas/x5c_issuer_test.go:245:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/stepcas/x5c_issuer_test.go:246:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/stepcas/x5c_issuer_test.go:247:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/stepcas/x5c_issuer_test.go:248:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "cas/stepcas/x5c_issuer_test.go:249:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "cas/stepcas/x5c_issuer_test.go:250:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "cas/vaultcas/vaultcas.go:165:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "internal/cryptoutil/cryptoutil_test.go:74:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "internal/cryptoutil/cryptoutil_test.go:76:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "internal/cryptoutil/cryptoutil_test.go:78:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "pki/helm_test.go:225:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "pki/pki.go:569:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "scep/authority_test.go:140:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "templates/templates_test.go:220:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "templates/templates_test.go:226:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "templates/templates_test.go:291:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "templates/templates_test.go:297:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "test/integration/scep/common_test.go:305:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "test/integration/scep/common_test.go:456:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "test/integration/scep/internal/x509/parser.go:279:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: parses an EC public key from a certificate"
+    },
+    "test/integration/scep/windows_go1.23_test.go:47:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "test/integration/scep/windows_test.go:33:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    }
+  },
+  "missed": [
+    {
+      "path": "acme/challenge.go",
+      "line": 1146,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "hash = crypto.SHA1"
+    },
+    {
+      "path": "api/ssh_test.go",
+      "line": 207,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "badCSR.SignatureAlgorithm = x509.SHA1WithRSA"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 121,
+      "algorithm": "RC4",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_RC4_128_SHA\":                      tls.TLS_RSA_WITH_RC4_128_SHA, // lgtm[go/insecure-tls]"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 122,
+      "algorithm": "3DES",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_3DES_EDE_CBC_SHA\":                 tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 123,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_AES_128_CBC_SHA\":                  tls.TLS_RSA_WITH_AES_128_CBC_SHA,"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 124,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_AES_256_CBC_SHA\":                  tls.TLS_RSA_WITH_AES_256_CBC_SHA,"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 125,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_AES_128_CBC_SHA256\":               tls.TLS_RSA_WITH_AES_128_CBC_SHA256, // lgtm[go/insecure-tls]"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 126,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_AES_128_GCM_SHA256\":               tls.TLS_RSA_WITH_AES_128_GCM_SHA256,"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 127,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_RSA_WITH_AES_256_GCM_SHA384\":               tls.TLS_RSA_WITH_AES_256_GCM_SHA384,"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 128,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA\":              tls.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA, // lgtm[go/insecure-tls]"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 131,
+      "algorithm": "RC4",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_ECDHE_RSA_WITH_RC4_128_SHA\":                tls.TLS_ECDHE_RSA_WITH_RC4_128_SHA, // lgtm[go/insecure-tls]"
+    },
+    {
+      "path": "authority/config/tls_options.go",
+      "line": 132,
+      "algorithm": "3DES",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": false,
+      "snippet": "\"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA\":           tls.TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 98,
+      "algorithm": "RC4",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_RC4_128_SHA\", CipherSuites{\"TLS_RSA_WITH_RC4_128_SHA\"}, []uint16{tls.TLS_RSA_WITH_RC4_128_SHA}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 99,
+      "algorithm": "3DES",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_3DES_EDE_CBC_SHA\", CipherSuites{\"TLS_RSA_WITH_3DES_EDE_CBC_SHA\"}, []uint16{tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 100,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_AES_128_CBC_SHA\", CipherSuites{\"TLS_RSA_WITH_AES_128_CBC_SHA\"}, []uint16{tls.TLS_RSA_WITH_AES_128_CBC_SHA}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 101,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_AES_256_CBC_SHA\", CipherSuites{\"TLS_RSA_WITH_AES_256_CBC_SHA\"}, []uint16{tls.TLS_RSA_WITH_AES_256_CBC_SHA}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 102,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_AES_128_CBC_SHA256\", CipherSuites{\"TLS_RSA_WITH_AES_128_CBC_SHA256\"}, []uint16{tls.TLS_RSA_WITH_AES_128_CBC_SHA256}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 103,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_AES_128_GCM_SHA256\", CipherSuites{\"TLS_RSA_WITH_AES_128_GCM_SHA256\"}, []uint16{tls.TLS_RSA_WITH_AES_128_GCM_SHA256}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 104,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_RSA_WITH_AES_256_GCM_SHA384\", CipherSuites{\"TLS_RSA_WITH_AES_256_GCM_SHA384\"}, []uint16{tls.TLS_RSA_WITH_AES_256_GCM_SHA384}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 105,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA\", CipherSuites{\"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA\"}, []uint16{tls.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA}},"
+    },
+    {
+      "path": "authority/config/tls_options_test.go",
+      "line": 112,
+      "algorithm": "3DES",
+      "source": "search",
+      "search": "go-tls-cipher-suite",
+      "note": "TLS cipher suite constant (configuration scanning is a later Phase 1 step)",
+      "test": true,
+      "snippet": "{\"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA\", CipherSuites{\"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA\"}, []uint16{tls.TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA}},"
+    },
+    {
+      "path": "test/integration/scep/common_test.go",
+      "line": 470,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "SignatureAlgorithm: x509.SHA1WithRSA,"
+    },
+    {
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 189,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "{MD5WithRSA, \"MD5-RSA\", oidSignatureMD5WithRSA, asn1.NullRawValue, RSA, crypto.MD5, false},"
+    },
+    {
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 190,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "{SHA1WithRSA, \"SHA1-RSA\", oidSignatureSHA1WithRSA, asn1.NullRawValue, RSA, crypto.SHA1, false},"
+    },
+    {
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 191,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "{SHA1WithRSA, \"SHA1-RSA\", oidISOSignatureSHA1WithRSA, asn1.NullRawValue, RSA, crypto.SHA1, false},"
+    },
+    {
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 198,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "{DSAWithSHA1, \"DSA-SHA1\", oidSignatureDSAWithSHA1, emptyRawValue, DSA, crypto.SHA1, false},"
+    },
+    {
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 200,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "{ECDSAWithSHA1, \"ECDSA-SHA1\", oidSignatureECDSAWithSHA1, emptyRawValue, ECDSA, crypto.SHA1, false},"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

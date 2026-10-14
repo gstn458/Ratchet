@@ -1,0 +1,316 @@
+{
+  "findings": {
+    "src/twisted/conch/scripts/ckeygen.py:141:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: SSH key generation (EC actual use: ECDSA)"
+    },
+    "src/twisted/conch/scripts/ckeygen.py:154:DSA": {
+      "verdict": "tp",
+      "note": "read by hand: SSH key generation (EC actual use: ECDSA)"
+    },
+    "src/twisted/conch/scripts/ckeygen.py:168:EC": {
+      "verdict": "tp",
+      "note": "read by hand: SSH key generation (EC actual use: ECDSA)"
+    },
+    "src/twisted/conch/ssh/_kex.py:363:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: ec.ECDH() in a backend capability check, not an exchange"
+    },
+    "src/twisted/conch/ssh/keys.py:1033:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/conch/ssh/keys.py:1759:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/keys.py:1837:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/keys.py:1897:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/transport.py:1361:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/transport.py:1421:ECDH": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/ssh/transport.py:2007:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/conch/ssh/transport.py:2046:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/conch/ssh/transport.py:2131:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/conch/test/sk_dummy.py:164:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/test/sk_dummy.py:90:ECDSA-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "src/twisted/conch/test/test_transport.py:1737:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "src/twisted/conch/test/test_transport.py:2335:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/conch/test/test_transport.py:2481:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "src/twisted/conch/test/test_transport.py:2614:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: ephemeral keys for the SSH ECDH exchange under test (actual use: ECDH)"
+    },
+    "src/twisted/conch/test/test_transport.py:2618:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: ephemeral keys for the SSH ECDH exchange under test (actual use: ECDH)"
+    },
+    "src/twisted/conch/test/test_transport.py:2803:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: ephemeral keys for the SSH ECDH exchange under test (actual use: ECDH)"
+    },
+    "src/twisted/conch/test/test_transport.py:2807:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: ephemeral keys for the SSH ECDH exchange under test (actual use: ECDH)"
+    },
+    "src/twisted/cred/credentials.py:302:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/credentials.py:364:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/test/test_digestauth.py:101:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/test/test_digestauth.py:103:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/test/test_digestauth.py:505:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/test/test_digestauth.py:627:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/cred/test/test_digestauth.py:652:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/internet/_sslverify.py:680:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/internet/test/test_unix.py:100:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/_pop3client.py:884:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/maildir.py:589:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/maildir.py:719:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/pop3.py:1603:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/pop3.py:75:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/test/test_mail.py:1003:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/test/test_mail.py:983:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/mail/test/test_mail.py:996:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/python/test/test_zipstream.py:289:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/python/test/test_zipstream.py:306:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/spread/pb.py:1260:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/spread/pb.py:1263:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/spread/pb.py:1276:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/spread/pb.py:1623:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/spread/pb.py:1633:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/test/test_sslverify.py:3526:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: signs a CSR (actual use: ECDSA)"
+    },
+    "src/twisted/trial/test/test_loader.py:647:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/words/protocols/jabber/sasl_mechanisms.py:246:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/words/protocols/jabber/sasl_mechanisms.py:307:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "src/twisted/words/protocols/jabber/xmlstream.py:77:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "src/twisted/words/test/test_jabberclient.py:201:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "src/twisted/words/test/test_jabbercomponent.py:57:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "src/twisted/words/test/test_jabbercomponent.py:88:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    }
+  },
+  "missed": [
+    {
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1130,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "(\"RSA\", b\"ssh-rsa\"): hashes.SHA1(),"
+    },
+    {
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1133,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "(\"DSA\", b\"ssh-dss\"): hashes.SHA1(),"
+    },
+    {
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1746,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "sig = self._keyObject.sign(data, padding.PKCS1v15(), hashAlgorithm)"
+    },
+    {
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1813,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "padding.PKCS1v15(),"
+    },
+    {
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1502,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": true,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
+    },
+    {
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1502,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": true,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()"
+    },
+    {
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1520,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": true,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA256()"
+    },
+    {
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 1538,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": true,
+      "snippet": "common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA512()"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

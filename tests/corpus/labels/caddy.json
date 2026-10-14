@@ -1,0 +1,99 @@
+{
+  "findings": {
+    "caddytest/integration/acme_test.go:130:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acme_test.go:146:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acme_test.go:61:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acme_test.go:77:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acmeserver_test.go:105:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acmeserver_test.go:178:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acmeserver_test.go:194:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/acmeserver_test.go:89:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "caddytest/integration/ech_test.go:107:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdh.X25519-family call, crypto/ecdh imported, name not shadowed"
+    },
+    "caddytest/integration/webtransport_test.go:1381:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "modules/caddyevents/handshake_bench_test.go:35:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/replacer.go:573:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "modules/caddyhttp/replacer.go:583:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:197:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:250:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:267:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:70:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:94:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: read by hand: crypto package call with the package imported; TLS certificate key or MD5 checksum in a test"
+    },
+    "modules/caddyhttp/reverseproxy/webtransport_transport_test.go:153:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "modules/logging/filters.go:80:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

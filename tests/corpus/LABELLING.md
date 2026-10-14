@@ -27,14 +27,34 @@ labelled; imports are true by construction and are counted separately.
   to be called `md5`.
 
 A finding with the right algorithm but the wrong usage label (ECDSA where the key
-does ECDH) is **fp**: the migration target it implies is wrong.
+does ECDH) is **fp**: the migration target it implies is wrong. An ECDSA or ECDH label
+whose usage cannot be confirmed from the code is also **fp**, because it claims a
+migration target without evidence. "EC, usage undetermined" claims no usage, so it
+is **tp** when the primitive is right; the note records the actual usage where it
+can be seen, which measures how often the scanner could have resolved it.
+
+## How the labels were made
+
+1. `assist.py` drafts a verdict only where the source gives unambiguous evidence,
+   checked independently of the scanner: a Go package-level call whose package is
+   imported under its own name with nothing in the file able to shadow that name, a
+   recorded parameter set that appears literally in the call, a `hashlib` call, or a
+   hash function imported from `hashlib` or Django's wrapper. Go `ecdsa.GenerateKey`
+   is never drafted in a file that mentions ECDH or does `ScalarMult`. Each draft's
+   note names its rule. A random sample of 40 drafts was read to confirm the rules.
+2. Everything else was read in context and given a verdict by hand; those notes start
+   with "read by hand".
+3. A reviewer checks every **fp** and a random 10% of the **tp** labels.
 
 ## Missed findings
 
-`missed` lists false negatives found by reading the code: cryptographic use of a
-quantum-broken or classically broken primitive that Ratchet does not report. Note why,
-for example a call through an aliased import, a key passed between functions, or
-hand-rolled arithmetic.
+`missed` lists false negatives: uses of a quantum-broken or classically broken
+primitive that Ratchet does not report at that line. Entries with `"source":
+"search"` come from `find_missed.py`, a fixed list of precise searches for known
+blind spots, recorded in each file's `searched` list; they are regenerated on every
+run. Entries with `"source": "read"` were found by reading code and are kept. The
+searches are not exhaustive, so anything outside them is unmeasured. Where a constant
+names two algorithms (`x509.ECDSAWithSHA1`), the entry carries the first one matched.
 
 Labels are claims, like registry entries. A change to a verdict says why in its
 commit message.

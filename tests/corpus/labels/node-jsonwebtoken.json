@@ -1,0 +1,79 @@
+{
+  "findings": {},
+  "missed": [
+    {
+      "path": "test/async_sign.tests.js",
+      "line": 64,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "path": "test/async_sign.tests.js",
+      "line": 73,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "path": "test/jwt.hs.tests.js",
+      "line": 12,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });"
+    },
+    {
+      "path": "test/jwt.malicious.tests.js",
+      "line": 19,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "} = crypto.generateKeyPairSync('rsa', {modulusLength: 2048});"
+    },
+    {
+      "path": "test/rsa-public-key.tests.js",
+      "line": 19,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "path": "test/rsa-public-key.tests.js",
+      "line": 29,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

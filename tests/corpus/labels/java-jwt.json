@@ -1,0 +1,429 @@
+{
+  "findings": {},
+  "missed": [
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 32,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"RS256\", \"SHA256withRSA\", keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 68,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"RS384\", \"SHA384withRSA\", keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 104,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"RS512\", \"SHA512withRSA\", keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 143,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"PS256\", \"RSASSA-PSS\", pssParams(\"SHA-256\", MGF1ParameterSpec.SHA256, 32), keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 183,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"PS384\", \"RSASSA-PSS\", pssParams(\"SHA-384\", MGF1ParameterSpec.SHA384, 48), keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 223,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new RSAAlgorithm(\"PS512\", \"RSASSA-PSS\", pssParams(\"SHA-512\", MGF1ParameterSpec.SHA512, 64), keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 339,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 32, keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 375,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new ECDSAAlgorithm(\"ES384\", \"SHA384withECDSA\", 48, keyProvider);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 411,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": false,
+      "snippet": "return new ECDSAAlgorithm(\"ES512\", \"SHA512withECDSA\", 66, keyProvider);"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 349,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 360,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 372,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 383,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 394,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 405,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 417,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 428,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 439,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 450,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 462,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 473,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 485,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 496,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 508,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 519,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 531,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 542,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 553,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 564,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 576,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 587,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 598,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 609,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 621,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 632,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 643,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 654,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 666,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 677,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/ECDSAAlgorithmTest.java",
+      "line": 453,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "Algorithm algorithm = new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 128, provider);"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/ECDSABouncyCastleProviderTests.java",
+      "line": 470,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "java-jca-name",
+      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "test": true,
+      "snippet": "Algorithm algorithm = new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 128, provider);"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

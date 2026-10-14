@@ -1,0 +1,96 @@
+{
+  "findings": {
+    "jose/backends/cryptography_backend.py:139:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jose/backends/cryptography_backend.py:145:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "tests/algorithms/test_EC.py:111:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
+    },
+    "tests/algorithms/test_EC.py:238:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
+    }
+  },
+  "missed": [
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 208,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "RSA1_5 = padding.PKCS1v15()"
+    },
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 209,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
+    },
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 209,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "py-cryptography-hash",
+      "note": "hash object from cryptography.hazmat.primitives.hashes is not recognised",
+      "test": false,
+      "snippet": "RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)"
+    },
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 210,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "RSA_OAEP_256 = padding.OAEP(padding.MGF1(hashes.SHA256()), hashes.SHA256(), None)"
+    },
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 306,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "signature = self.prepared_key.sign(msg, padding.PKCS1v15(), self.hash_alg())"
+    },
+    {
+      "path": "jose/backends/cryptography_backend.py",
+      "line": 316,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "py-rsa-padding",
+      "note": "RSA operation identified only by its padding object",
+      "test": false,
+      "snippet": "self.public_key().prepared_key.verify(sig, msg, padding.PKCS1v15(), self.hash_alg())"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

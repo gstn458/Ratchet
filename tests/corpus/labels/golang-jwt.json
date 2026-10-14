@@ -1,0 +1,51 @@
+{
+  "findings": {
+    "ecdsa.go:111:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.Sign, crypto/ecdsa imported, name not shadowed"
+    },
+    "ecdsa.go:83:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.Verify, crypto/ecdsa imported, name not shadowed"
+    },
+    "ed25519.go:49:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed"
+    },
+    "rsa.go:65:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "rsa.go:88:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.SignPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "rsa_pss.go:103:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.VerifyPSS, crypto/rsa imported, name not shadowed"
+    },
+    "rsa_pss.go:127:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.SignPSS, crypto/rsa imported, name not shadowed"
+    },
+    "rsa_test.go:123:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

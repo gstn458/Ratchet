@@ -1,0 +1,87 @@
+{
+  "findings": {
+    "django/contrib/auth/hashers.py:665:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "django/contrib/staticfiles/storage.py:161:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/core/cache/backends/filebased.py:136:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/core/cache/utils.py:7:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/db/backends/sqlite3/_functions.py:414:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/db/backends/sqlite3/_functions.py:460:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: sha1 imported from hashlib"
+    },
+    "django/db/backends/utils.py:309:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/template/loaders/cached.py:96:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "django/utils/cache.py:125:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/utils/cache.py:356:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/utils/cache.py:364:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "django/utils/cache.py:376:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib-import: md5 imported from hashlib"
+    },
+    "tests/file_uploads/tests.py:116:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "tests/file_uploads/tests.py:121:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "tests/file_uploads/views.py:50:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "tests/file_uploads/views.py:52:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    },
+    "tests/utils_tests/test_crypto.py:45:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.sha1() call"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}
