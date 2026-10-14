@@ -890,8 +890,8 @@
       "snippet": "aes, err := aes.NewCipher(key)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "scan/crypto/tls/generate_cert.go",
@@ -935,8 +935,8 @@
       "snippet": "_, priv, err = ed25519.GenerateKey(rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "scan/crypto/tls/generate_cert.go",
@@ -944,8 +944,8 @@
       "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P224(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "scan/crypto/tls/generate_cert.go",
@@ -953,8 +953,8 @@
       "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "scan/crypto/tls/generate_cert.go",
@@ -962,8 +962,8 @@
       "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "scan/crypto/tls/generate_cert.go",
@@ -989,8 +989,8 @@
       "snippet": "\"crypto/rsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "scan/crypto/tls/handshake_client_test.go",
@@ -1043,8 +1043,8 @@
       "snippet": "err = rsa.VerifyPKCS1v15(key, hashFunc, digest, certVerify.signature)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "scan/crypto/tls/handshake_server_test.go",
@@ -1367,8 +1367,8 @@
       "snippet": "block, err := aes.NewCipher(key.aesKey[:])"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "scan/crypto/tls/tls.go",

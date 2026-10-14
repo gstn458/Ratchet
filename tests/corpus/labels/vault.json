@@ -224,13 +224,13 @@
       "verdict": "tp",
       "note": "read by hand: call into the named algorithm confirmed in context"
     },
-    "builtin/logical/pki/export_crypto.go:102:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: as line 96: export key with no visible use; ECDSA claims signing without evidence. Judgement call"
+    "builtin/logical/pki/export_crypto.go:102:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: as line 96: export key with no visible use; ECDSA claims signing without evidence. Judgement call"
     },
-    "builtin/logical/pki/export_crypto.go:108:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: as line 96: export key with no visible use; ECDSA claims signing without evidence. Judgement call"
+    "builtin/logical/pki/export_crypto.go:108:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: as line 96: export key with no visible use; ECDSA claims signing without evidence. Judgement call"
     },
     "builtin/logical/pki/export_crypto.go:240:RSA": {
       "verdict": "tp",
@@ -268,9 +268,9 @@
       "verdict": "tp",
       "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
     },
-    "builtin/logical/pki/export_crypto.go:96:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: EC key generated for export with no visible use; ECDSA claims signing without evidence (EC, usage undetermined, would be right). Judgement call"
+    "builtin/logical/pki/export_crypto.go:96:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: EC key generated for export with no visible use; ECDSA claims signing without evidence (EC, usage undetermined, would be right). Judgement call"
     },
     "builtin/logical/pki/export_crypto_test.go:27:ECDSA": {
       "verdict": "tp",
@@ -364,9 +364,9 @@
       "verdict": "tp",
       "note": "rule go-package-call: ecdh.P384, crypto/ecdh imported, name not shadowed"
     },
-    "builtin/logical/pki/path_secure_export_key_test.go:48:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: generateECWrapKey: recipient key for ECDH-ES wrapping; ECDSA usage label is wrong"
+    "builtin/logical/pki/path_secure_export_key_test.go:48:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: generateECWrapKey: recipient key for ECDH-ES wrapping; ECDSA usage label is wrong"
     },
     "builtin/logical/pki/path_secure_export_key_test.go:73:RSA": {
       "verdict": "tp",

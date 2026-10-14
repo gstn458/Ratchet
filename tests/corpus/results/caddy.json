@@ -152,8 +152,8 @@
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "modules/caddyhttp/replacer.go",

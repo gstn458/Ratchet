@@ -710,8 +710,8 @@
       "snippet": "_, edk, err := ed25519.GenerateKey(rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "builtin/logical/pki/ca_util.go",
@@ -791,8 +791,8 @@
       "snippet": "\"crypto/ecdh\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "builtin/logical/pki/export_crypto.go",
@@ -818,8 +818,8 @@
       "snippet": "\"crypto/sha256\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "builtin/logical/pki/export_crypto.go",
@@ -827,8 +827,8 @@
       "snippet": "k, genErr := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "builtin/logical/pki/export_crypto.go",
@@ -836,8 +836,8 @@
       "snippet": "k, genErr := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "builtin/logical/pki/export_crypto.go",
@@ -1250,8 +1250,8 @@
       "snippet": "\"crypto/ecdsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "builtin/logical/pki/path_revoke.go",
@@ -1277,8 +1277,8 @@
       "snippet": "\"crypto/rsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "builtin/logical/pki/path_root.go",
@@ -1322,8 +1322,8 @@
       "snippet": "\"crypto/ecdh\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "builtin/logical/pki/path_secure_export_key_test.go",
@@ -1358,8 +1358,8 @@
       "snippet": "priv, err := rsa.GenerateKey(rand.Reader, bits)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": true,
       "path": "builtin/logical/pki/path_secure_export_key_test.go",
@@ -1439,8 +1439,8 @@
       "snippet": "hasher := sha256.New()"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "builtin/logical/pki/test_helpers.go",

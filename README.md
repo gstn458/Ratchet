@@ -205,10 +205,12 @@ DSA. A key size or curve held in a variable is not resolved. See
 Go is read by a small lexer and regular expressions, not a parser. It separates code
 from comments and strings and recognises import declarations, but a call through an
 aliased import (`gorsa.GenerateKey`) is not matched, and a key size held in a variable
-is not captured. In a Go file that does a raw `ScalarMult` and never signs,
-`crypto/ecdsa` findings are reported as usage undetermined, because pre-1.20 code
-generated ECDH keys with `ecdsa.GenerateKey`. A file that both signs and does
-key agreement with such keys is reported as ECDSA.
+is not captured. Because pre-1.20 Go code generated ECDH keys with
+`ecdsa.GenerateKey`, often doing the key agreement in another file,
+`crypto/ecdsa` findings in a file that never signs are reported as usage
+undetermined when that file shows ECDH, or when another production file in the
+same package does. Test files do not lend their evidence to the rest of the
+package. A file that both signs and does key agreement is reported as ECDSA.
 
 Elliptic-curve usage is followed within one file and by name only. A key is tracked
 through the variable or attribute it is assigned to and through `.public_key()`, but

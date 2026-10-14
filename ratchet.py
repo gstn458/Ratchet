@@ -558,12 +558,24 @@ GO_ELLIPTIC_DIRECT = [
 ]
 
 # Before crypto/ecdh (Go 1.20), ECDH was commonly done with keys from
-# ecdsa.GenerateKey and a raw curve.ScalarMult (golang.org/x/crypto/ssh still
-# does), so the crypto/ecdsa import alone does not prove signing. In a file
-# that multiplies a point by a scalar and never signs, crypto/ecdsa findings
-# are EC, usage undetermined. ScalarBaseMult only derives a public key, and
-# x.Sign() with no arguments is big.Int's sign function, so neither counts.
+# ecdsa.GenerateKey (golang.org/x/crypto/ssh and go-jose still do), often with
+# the key agreement in a different file of the same package. So the
+# crypto/ecdsa import does not prove signing. crypto/ecdsa findings in a file
+# that never signs are EC, usage undetermined, when that file shows ECDH, or
+# when it is production code and another production file in its package (its
+# directory) does. Test files do not lend their evidence to the package: one
+# key-agreement test would otherwise relabel every signing key in a test
+# suite (on the corpus, 52 correct labels for no extra false positive
+# removed, against 7 for this rule). Evidence is read from code, not comments
+# or strings:
+# ScalarMult with crypto/elliptic imported, a crypto/ecdh call or .ECDH()
+# conversion, or an identifier naming ECDH (ECDH_ES, DeriveECDHES).
+# TLS_ECDHE_* cipher-suite constants are configuration and do not count.
+# ScalarBaseMult only derives a public key, and x.Sign() with no arguments is
+# big.Int's sign function, so neither counts.
 GO_SCALAR_MULT = re.compile(r"(?:\)|\b(?!curve25519\b)\w+)\.ScalarMult\s*\(")
+GO_ECDH_NAME = re.compile(r"ECDH|\becdh\.")
+GO_TLS_SUITE = re.compile(r"\bTLS_ECDHE\w*")
 GO_ECDSA_SIGNING = re.compile(
     r"\becdsa\.(Sign|SignASN1|Verify|VerifyASN1)\s*\(|\.Sign\s*\(\s*[^\s)]"
 )
@@ -958,6 +970,31 @@ def go_imports(code, strings):
     return {k: v for k, v in imports.items() if v}
 
 
+class GoFindings(list):
+    """scan_go's findings, plus facts about the file that the package-level
+    ECDSA/ECDH rule in walk() needs: whether it shows key agreement and
+    whether it signs."""
+
+    def __init__(self, findings=(), ecdh=False, signs=False):
+        super().__init__(findings)
+        self.ecdh = ecdh
+        self.signs = signs
+        self.in_test = False  # set by walk() from the path relative to the scan root
+
+
+def go_package_ecdh(scanned):
+    """Apply the ECDSA/ECDH rule to {directory: [GoFindings, ...]}."""
+    for files in scanned.values():
+        production_ecdh = any(f.ecdh and not f.in_test for f in files)
+        for found in files:
+            if found.signs:
+                continue
+            if found.ecdh or (production_ecdh and not found.in_test):
+                for f in found:
+                    if f.algorithm == "ECDSA":
+                        f.algorithm = "EC"
+
+
 def scan_go(path):
     findings = []
     lines = read_source(path).splitlines()
@@ -992,19 +1029,15 @@ def scan_go(path):
         if GO_ELLIPTIC_IMPORT in imports and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
             findings.append(Finding("EC", path, i, line))
 
-    if GO_ELLIPTIC_IMPORT in imports:
-        multiplies = any(GO_SCALAR_MULT.search(text) for text in code)
-        signs = any(GO_ECDSA_SIGNING.search(text) for text in code)
-        if multiplies and not signs:
-            for f in findings:
-                if f.algorithm == "ECDSA":
-                    f.algorithm = "EC"
-
     for import_path, used in variants.items():
         if len(used) == 1:
             for f in import_findings[import_path]:
                 f.algorithm = next(iter(used))
-    return findings
+
+    ecdh = any(GO_ECDH_NAME.search(GO_TLS_SUITE.sub("", text)) for text in code) or (
+        GO_ELLIPTIC_IMPORT in imports and any(GO_SCALAR_MULT.search(text) for text in code))
+    signs = any(GO_ECDSA_SIGNING.search(text) for text in code)
+    return GoFindings(findings, ecdh=ecdh, signs=signs)
 
 
 # ---------------------------------------------------------------------------
@@ -1203,6 +1236,7 @@ def is_test_path(path):
 def walk(root, include_vendored=False):
     ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
+    go_packages = defaultdict(list)  # directory -> GoFindings of its files
     files = 0
     for dirpath, dirnames, filenames in os.walk(root):
         keep = []
@@ -1232,10 +1266,14 @@ def walk(root, include_vendored=False):
                 unparsed.append((rel, str(e)))
                 continue
             in_test = is_test_path(rel)
+            if isinstance(found, GoFindings):
+                found.in_test = in_test
+                go_packages[dirpath].append(found)
             for f in found:
                 f.path = rel
                 f.in_test = in_test
                 findings.append(f)
+    go_package_ecdh(go_packages)
     # First matching rule wins, in file order.
     for f in findings:
         path = f.path.replace(os.sep, "/")

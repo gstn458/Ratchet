@@ -359,8 +359,8 @@
       "snippet": "z, _ := priv.Curve.ScalarMult(pub.X, pub.Y, priv.D.Bytes())"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "cipher/ecdh_es_test.go",
@@ -440,8 +440,8 @@
       "snippet": "block, _ := aes.NewCipher(kek)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "crypter.go",
@@ -458,8 +458,8 @@
       "snippet": "\"crypto/rsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "crypter_test.go",
@@ -494,8 +494,8 @@
       "snippet": "var rsaTestKey, _ = rsa.GenerateKey(rand.Reader, 2048)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": true,
       "path": "crypter_test.go",
@@ -503,8 +503,8 @@
       "snippet": "var ecTestKey256, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": true,
       "path": "crypter_test.go",
@@ -512,8 +512,8 @@
       "snippet": "var ecTestKey384, _ = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": true,
       "path": "crypter_test.go",
@@ -719,8 +719,8 @@
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "jose-util/generator/generate.go",
@@ -746,8 +746,8 @@
       "snippet": "\"crypto/rsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "jose-util/generator/generate.go",
@@ -755,8 +755,8 @@
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "jose-util/generator/generate.go",
@@ -764,8 +764,8 @@
       "snippet": "key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "jose-util/generator/generate.go",
@@ -800,8 +800,8 @@
       "snippet": "key, err := rsa.GenerateKey(rand.Reader, bits)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "call site",
       "test": false,
       "path": "jose-util/generator/generate.go",
@@ -809,8 +809,8 @@
       "snippet": "key, err := ecdsa.GenerateKey(crv, rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": true,
       "path": "jwe_test.go",
@@ -827,8 +827,8 @@
       "snippet": "\"crypto/rsa\""
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "jwk.go",
@@ -1061,8 +1061,8 @@
       "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
-      "label": "ECDSA",
-      "algorithm": "ECDSA",
+      "label": "EC",
+      "algorithm": "EC",
       "kind": "import",
       "test": false,
       "path": "signing.go",

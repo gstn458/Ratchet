@@ -144,17 +144,17 @@
       "verdict": "tp",
       "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
     },
-    "crypter_test.go:39:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: shared test key used for ECDH-ES encryption in crypter tests (and JWK round-trips); ECDSA usage label is wrong"
+    "crypter_test.go:39:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: shared test key used for ECDH-ES encryption in crypter tests (and JWK round-trips); ECDSA usage label is wrong"
     },
-    "crypter_test.go:40:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: shared test key used for ECDH-ES encryption in crypter tests; ECDSA usage label is wrong"
+    "crypter_test.go:40:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: shared test key used for ECDH-ES encryption in crypter tests; ECDSA usage label is wrong"
     },
-    "crypter_test.go:41:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: shared test key used for ECDH-ES encryption in crypter tests; ECDSA usage label is wrong"
+    "crypter_test.go:41:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: shared test key used for ECDH-ES encryption in crypter tests; ECDSA usage label is wrong"
     },
     "crypter_test.go:43:Ed25519": {
       "verdict": "tp",
@@ -212,21 +212,21 @@
       "verdict": "tp",
       "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
     },
-    "jose-util/generator/generate.go:113:ECDSA": {
-      "verdict": "fp",
-      "note": "read by hand: key generated for the ECDH_ES* algorithms; ECDSA usage label is wrong"
-    },
-    "jose-util/generator/generate.go:55:ECDSA": {
+    "jose-util/generator/generate.go:113:EC": {
       "verdict": "tp",
-      "note": "read by hand: ES256/384/512 signing keys"
+      "note": "EC, usage undetermined, after the Go ECDH package rule; previously a false ECDSA label: key generated for the ECDH_ES* algorithms; ECDSA usage label is wrong"
     },
-    "jose-util/generator/generate.go:61:ECDSA": {
+    "jose-util/generator/generate.go:55:EC": {
       "verdict": "tp",
-      "note": "read by hand: ES256/384/512 signing keys"
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: read by hand: ES256/384/512 signing keys"
     },
-    "jose-util/generator/generate.go:67:ECDSA": {
+    "jose-util/generator/generate.go:61:EC": {
       "verdict": "tp",
-      "note": "read by hand: ES256/384/512 signing keys"
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: read by hand: ES256/384/512 signing keys"
+    },
+    "jose-util/generator/generate.go:67:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: read by hand: ES256/384/512 signing keys"
     },
     "jose-util/generator/generate.go:73:Ed25519": {
       "verdict": "tp",

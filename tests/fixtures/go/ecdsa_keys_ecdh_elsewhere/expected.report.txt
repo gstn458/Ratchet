@@ -1,22 +1,34 @@
 
-ratchet 0.1.0  scanned 4 files in .
+ratchet 0.1.0  scanned 5 files in .
 registry 2026.10.2  from registry.json
 skipped no directories
-parsed all 4 files
+parsed all 5 files
 no .ratchetignore; no findings suppressed
 ========================================================================
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDSA  (4 call sites, 4 imports)
+  ECDSA  (4 call sites, 1 in test code, 3 imports)
     parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      keys.go:12   return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+      keys_test.go:13   if _, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader); err != nil {
       sign.go:11   key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)
       sign.go:15   return ecdsa.SignASN1(rand.Reader, key, digest)
-      ... and 5 more
+      ... and 4 more
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (1 call site, 2 imports)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      keys.go:12   return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+      agree.go:3   import "crypto/ecdsa"
+      keys.go:4   "crypto/ecdsa"
 
 ========================================================================
-4 quantum-vulnerable call sites and 4 imports across 4 files.
+5 quantum-vulnerable call sites (1 in test code) and 5 imports across 5 files.
+1 call site and 2 imports with usage undetermined: review before choosing a migration target.
 

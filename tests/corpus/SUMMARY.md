@@ -16,16 +16,16 @@ found by reading the code, listed in `labels/<name>.json`.
 | ansible | python | 18 | 1 | 11 | 18 | 0 | 0.0% | 3 |
 | golang-jwt | go | 8 | 1 | 13 | 8 | 0 | 0.0% | 0 |
 | x-crypto | go | 144 | 55 | 96 | 144 | 0 | 0.0% | 30 |
-| go-jose | go | 87 | 49 | 53 | 87 | 5 | 5.7% | 0 |
+| go-jose | go | 87 | 49 | 53 | 87 | 1 | 1.1% | 0 |
 | step-ca | go | 156 | 131 | 100 | 156 | 0 | 0.0% | 27 |
 | cfssl | go | 87 | 33 | 100 | 87 | 0 | 0.0% | 51 |
 | age | go | 32 | 12 | 17 | 32 | 0 | 0.0% | 0 |
 | caddy | go | 20 | 17 | 16 | 20 | 0 | 0.0% | 0 |
-| vault | go | 252 | 138 | 206 | 252 | 4 | 1.6% | 48 |
+| vault | go | 252 | 138 | 206 | 252 | 0 | 0.0% | 48 |
 | java-jwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 41 |
 | jjwt | java | 0 | 0 | 0 | 0 | 0 | n/a | 11 |
 | node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 6 |
 | forge | javascript | 0 | 0 | 0 | 0 | 0 | n/a | 90 |
-| **total** | | 940 | 481 | 731 | 940 | 9 | 1.0% | 355 |
+| **total** | | 940 | 481 | 731 | 940 | 1 | 0.1% | 355 |
 
 Labelled 940 of 940 call sites (100.0%).
