@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:041f2443-713f-4b95-a926-477fe8329731",
+  "serialNumber": "urn:uuid:7e8bfa80-6c89-4dc8-9228-ebb98fcf1d73",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-14T12:25:43.693226+00:00",
+    "timestamp": "2026-10-14T16:23:59.501088+00:00",
     "tools": {
       "components": [
         {
@@ -27,6 +27,14 @@
       {
         "name": "ratchet:include_vendored",
         "value": "false"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Go: regex (tree-sitter not installed)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
       },
       {
         "name": "ratchet:scan_registry_sha256",
