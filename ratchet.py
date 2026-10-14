@@ -464,6 +464,8 @@ PY_EC_DERIVE_METHODS = {"public_key", "get_verifying_key"}
 # From each library's documented signature. Reading "the first argument" for
 # every call recorded the public exponent as an RSA key size and the DH
 # generator as a DH key size.
+PY_KEYGEN_FUNCTIONS = {"generate_private_key", "generate_parameters", "generate"}
+
 PY_KEYGEN_PARAMS = {
     # cryptography
     "cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key": (1, "key_size"),
@@ -701,6 +703,19 @@ class PyVisitor(ast.NodeVisitor):
                 return name[len(module) + 1:]
         return None
 
+    def _keygen_algorithm(self, name, owner, qualified):
+        """The algorithm a key-generation call generates for, or None. The
+        qualified name covers a from-imported function, renamed or not; the
+        owner covers a class imported from an algorithm module, such as
+        Ed25519PrivateKey.generate()."""
+        if qualified:
+            module, _, function = qualified.rpartition(".")
+            if function in PY_KEYGEN_FUNCTIONS and module in PY_MODULES:
+                return PY_MODULES[module]
+        if name in PY_KEYGEN_FUNCTIONS:
+            return self.aliases.get(owner)
+        return None
+
     def _key_arguments(self, node):
         """Bindings of every argument and keyword value of a call."""
         values = list(node.args) + [kw.value for kw in node.keywords]
@@ -830,6 +845,8 @@ class PyVisitor(ast.NodeVisitor):
                     if peer:
                         self.ec_uses.append((peer, kind))
 
+        keygen = self._keygen_algorithm(name, owner, qualified)
+
         if usage_object:
             self.ec_markers.add(usage_object)
             self._add(usage_object, node)
@@ -850,13 +867,12 @@ class PyVisitor(ast.NodeVisitor):
                 if algo:
                     self._add(algo, node)
 
-        # rsa.generate_private_key(key_size=2048)
-        elif name in ("generate_private_key", "generate_parameters", "generate"):
-            algo = self.aliases.get(owner)
-            if algo:
-                finding = self._add(algo, node, self._keygen_params(node, qualified))
-                if algo == "EC":
-                    self._keygen[id(node)] = finding
+        # rsa.generate_private_key(key_size=2048), or generate_private_key
+        # from-imported under any name
+        elif keygen:
+            finding = self._add(keygen, node, self._keygen_params(node, qualified))
+            if keygen == "EC":
+                self._keygen[id(node)] = finding
 
         self.generic_visit(node)
 

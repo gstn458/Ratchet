@@ -66,7 +66,7 @@ after the fixtures were first written:
 | `nacl` | PyNaCl `SigningKey` → Ed25519, `PrivateKey` → X25519 | ok |
 | `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports; `.new(...)` calls add nothing | ok |
 | `cryptography_objects` | `cryptography` hash, cipher and RSA padding objects: `hashes.MD5()`, a from-imported `SHA1()`, `algorithms.TripleDES`/`ARC4` from `primitives` and `decrepit`, `padding.PKCS1v15()`/`PSS()`/`OAEP()`; `hashes.SHA256()` and symmetric `padding.PKCS7` are not flagged | ok (only imports of other modules were seen before) |
-| `keygen_from_import` | `generate_private_key` from-imported, plain or renamed (`as rsa_generate_private_key`), from `rsa`, `dsa` and `ec` | gap: only the imports are recorded |
+| `keygen_from_import` | `generate_private_key` from-imported, plain or renamed (`as rsa_generate_private_key`), from `rsa`, `dsa` and `ec`, is a key-generation call site with its key size or curve | ok (only the imports were recorded before) |
 | `import_only` | Importing `rsa` and `ec` with no calls yields two imports and no call sites; the `ec` import is EC, usage undetermined | ok (counted as call sites before step 7) |
 | `name_collision` | A project's own function named `md5()` is reported as MD5 | wrong, unscheduled (precision, Phase 1) |
 | `syntax_error` | A Python 2 file is listed as `not valid Python 3 syntax at line 3` in the report and the CBOM, and the closing line says the result covers only parsed files; the `RSA.generate(1024)` in it is still not detected | ok, gap on the file's contents (skipped silently before step 9) |
