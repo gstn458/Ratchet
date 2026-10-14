@@ -1,0 +1,22 @@
+
+ratchet 0.1.0  scanned 4 files in .
+registry 2026.10.2  from registry.json
+skipped no directories
+parsed all 4 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (4 call sites, 4 imports)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      keys.go:12   return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+      sign.go:11   key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)
+      sign.go:15   return ecdsa.SignASN1(rand.Reader, key, digest)
+      ... and 5 more
+
+========================================================================
+4 quantum-vulnerable call sites and 4 imports across 4 files.
+
