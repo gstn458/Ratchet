@@ -93,6 +93,11 @@ key sizes and curves from each call's documented argument position or keyword, s
 `rsa.generate_private_key(65537, 2048)` records RSA-2048 rather than just the
 algorithm family.
 
+Objects from `cryptography` that name one algorithm are call sites too: `hashes.MD5()`
+and `hashes.SHA1()`, `algorithms.TripleDES` and `ARC4` (including the `decrepit`
+module), and the RSA padding schemes `PKCS1v15`, `OAEP` and `PSS`, which exist only for
+RSA operations.
+
 Elliptic-curve keys are classified by what they are used for, because the migration
 target depends on it: `.sign()` or `.verify()` makes a key ECDSA, `.exchange()` makes
 it ECDH. A key whose use is not visible is reported as EC, usage undetermined, under
@@ -196,6 +201,11 @@ Files that cannot be parsed contribute no findings. A Python 2 file, or anything
 `ast.parse` rejects, is listed with the reason in every report and every CBOM, but the
 cryptography in it is not detected. A low-confidence fallback for such files is planned
 for Phase 2.
+
+MD5 and SHA-1 are reported wherever they are used, including in HMAC and in the MGF1
+mask of RSA-OAEP and PSS, where collision resistance is not what the construction
+relies on. Those uses are not broken in the way a signature over a SHA-1 digest is.
+Ratchet does not tell them apart; a reviewer can record them with `suppress`.
 
 Parameter sets are read only from literal values in calls whose signature Ratchet
 knows: `cryptography`'s RSA, DSA, DH and EC key generation and PyCryptodome's RSA and

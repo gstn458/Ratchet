@@ -476,6 +476,22 @@ PY_KEYGEN_PARAMS = {
     "Crypto.PublicKey.DSA.generate": (0, "bits"),
 }
 
+# Objects from cryptography that name one algorithm. Each construction is a
+# call site. RSA padding schemes exist only for RSA operations, so a padding
+# object is an RSA call site even where the key it is used with is not visible.
+# MGF1 is left out: it only ever appears inside OAEP or PSS, which are counted.
+PY_CALL_OBJECTS = {
+    "cryptography.hazmat.primitives.hashes.MD5": "MD5",
+    "cryptography.hazmat.primitives.hashes.SHA1": "SHA-1",
+    "cryptography.hazmat.primitives.ciphers.algorithms.TripleDES": "3DES",
+    "cryptography.hazmat.primitives.ciphers.algorithms.ARC4": "RC4",
+    "cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES": "3DES",
+    "cryptography.hazmat.decrepit.ciphers.algorithms.ARC4": "RC4",
+    "cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15": "RSA",
+    "cryptography.hazmat.primitives.asymmetric.padding.OAEP": "RSA",
+    "cryptography.hazmat.primitives.asymmetric.padding.PSS": "RSA",
+}
+
 PY_HASH_NAMES = {
     "md5": "MD5",
     "sha1": "SHA-1",
@@ -817,6 +833,10 @@ class PyVisitor(ast.NodeVisitor):
         if usage_object:
             self.ec_markers.add(usage_object)
             self._add(usage_object, node)
+
+        # hashes.SHA1(), algorithms.TripleDES(key), padding.PKCS1v15()
+        elif qualified in PY_CALL_OBJECTS:
+            self._add(PY_CALL_OBJECTS[qualified], node)
 
         # hashlib.md5(), hashlib.sha1()
         elif name in ("md5", "sha1"):

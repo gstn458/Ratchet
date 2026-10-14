@@ -5,6 +5,44 @@ skipped no directories
 parsed all 1 file
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (3 call sites)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      objects.py:18   return key.sign(data, padding.PKCS1v15(), hashes.SHA256())
+      objects.py:24   padding.PSS(mgf=padding.MGF1(hashes.SHA256()), salt_length=padding.PSS.MAX_LENGTH),
+      objects.py:29   OAEP_SHA1 = padding.OAEP(mgf=padding.MGF1(hashes.SHA1()), algorithm=hashes.SHA1(), label=None)
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (3 call sites)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      objects.py:8   mac = hmac.HMAC(b"key", SHA1())
+      objects.py:29   OAEP_SHA1 = padding.OAEP(mgf=padding.MGF1(hashes.SHA1()), algorithm=hashes.SHA1(), label=None)
+      objects.py:29   OAEP_SHA1 = padding.OAEP(mgf=padding.MGF1(hashes.SHA1()), algorithm=hashes.SHA1(), label=None)
+
+  3DES  (2 call sites)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      objects.py:11   tdes = Cipher(algorithms.TripleDES(b"k" * 24), mode=None)
+      objects.py:13   tdes_decrepit = Cipher(decrepit.TripleDES(b"k" * 24), mode=None)
+
+  RC4  (2 call sites)
+    Biased keystream. Prohibited in TLS since RFC 7465.
+    migrate to: AES-256-GCM or ChaCha20-Poly1305
+      objects.py:12   rc4 = Cipher(algorithms.ARC4(b"key"), mode=None)
+      objects.py:14   rc4_decrepit = Cipher(decrepit.ARC4(b"key"), mode=None)
+
+  MD5  (1 call site)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      objects.py:7   digest = hashes.Hash(hashes.MD5())
+
 ========================================================================
-No quantum-vulnerable primitives found.
+3 quantum-vulnerable call sites and no imports across 1 file.
 
