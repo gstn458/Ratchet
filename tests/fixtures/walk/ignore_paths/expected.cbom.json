@@ -49,6 +49,14 @@
         "value": "false"
       },
       {
+        "name": "ratchet:parser",
+        "value": "Go: regex"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
         "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
       },

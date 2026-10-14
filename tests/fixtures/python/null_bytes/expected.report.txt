@@ -1,6 +1,7 @@
 
 ratchet 0.1.0  scanned 2 files in .
 registry 2026.10.2  from registry.json
+parsers  Go regex, Python ast
 skipped no directories
 could not parse 1 of 2 files, so any cryptography in them is missing from this report:
   binary.py: contains null bytes

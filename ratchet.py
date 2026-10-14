@@ -1239,12 +1239,13 @@ class Scan:
     """Everything one scan produced: findings, the number of source files
     attempted, the directories skipped and the files that could not be parsed
     as (relative path, reason), whether vendored directories were included,
-    and the .ratchetignore path and suppression rules (None when there is no
-    such file)."""
+    the .ratchetignore path and suppression rules (None when there is no such
+    file), and the parser that ran for each language."""
 
     def __init__(self, findings, files, skipped, include_vendored, unparsed=(),
-                 ignore_rules=None, suppress_rules=None):
+                 ignore_rules=None, suppress_rules=None, parsers=None):
         self.findings = findings
+        self.parsers = dict(parsers or PARSERS)
         self.files = files
         self.skipped = skipped
         self.include_vendored = include_vendored
@@ -1267,6 +1268,11 @@ def skip_reason(name, include_vendored):
 
 
 SCANNERS = {".py": scan_python, ".go": scan_go}
+
+# The parser behind each language, recorded in every report and CBOM. Two
+# runs that used different parsers can find different things, and the output
+# has to say so.
+PARSERS = {"Python": "ast", "Go": "regex"}
 
 # Test code, by convention of each language. Findings there are real, but
 # test-only cryptography is not what a migration plan is about, so they are
@@ -1437,6 +1443,10 @@ def build_cbom(scan, root, tool_version=VERSION):
                 {"name": "ratchet:scan_registry_version", "value": REGISTRY["registry_version"]},
                 {"name": "ratchet:scan_registry_sha256", "value": REGISTRY_DIGEST},
                 {"name": "ratchet:include_vendored", "value": str(scan.include_vendored).lower()},
+            ] + [
+                {"name": "ratchet:parser", "value": f"{language}: {parser}"}
+                for language, parser in scan.parsers.items()
+            ] + [
                 {"name": "ratchet:skipped_directory_count", "value": str(len(scan.skipped))},
                 {"name": "ratchet:unparsed_file_count", "value": str(len(scan.unparsed))},
                 {"name": "ratchet:ignored_file_count",
@@ -1583,6 +1593,7 @@ def report(scan, root):
     print(f"ratchet {VERSION}  scanned {plural(scan.files, 'file')} in {root}")
     source = "embedded copy" if REGISTRY_SOURCE == "embedded" else "registry.json"
     print(f"registry {REGISTRY['registry_version']}  from {source}")
+    print("parsers  " + ", ".join(f"{lang} {parser}" for lang, parser in sorted(scan.parsers.items())))
     print_skipped(scan)
     print_unparsed(scan)
     print_ignored(scan)
