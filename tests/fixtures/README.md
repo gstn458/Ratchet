@@ -98,6 +98,7 @@ after the fixtures were first written:
 | `string_literal` | `"crypto/rsa"` and `"crypto/md5"` in ordinary strings are not imports | ok (were reported before step 5) |
 | `import_forms` | Single-line, aliased, grouped, blank and raw-string imports are found; a commented-out import, an import path in a block comment, a raw string, a struct tag and an escaped string are not | ok |
 | `aliased_import` | `gorsa "crypto/rsa"` import is seen, but `gorsa.GenerateKey(..., 2048)` is not, so the key size is lost | gap (tree-sitter, Phase 1) |
+| `import_names` | Calls are matched through the name each import binds: `gorsa.SignPKCS1v15` (aliased crypto/rsa), `ell.Marshal` (aliased crypto/elliptic) and `ec.GenerateKey`/`ec.SignASN1` (aliased crypto/ecdsa) are missed, and a project package bound to the name `rsa` beside an aliased crypto/rsa is reported as RSA-1024; a blank import is an import finding with no calls; a dot import's bare `Sum(...)` is missed | wrong: false positive and false negatives |
 | `comments` | Calls inside `//` comments, `/* */` blocks and after a trailing `//` are not matched | ok (block and trailing comments matched before step 5) |
 
 ## walk/
