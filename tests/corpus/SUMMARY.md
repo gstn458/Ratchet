@@ -24,8 +24,8 @@ found by reading the code, listed in `labels/<name>.json`.
 | vault | go | 251 | 138 | 206 | 0 | 251 | 0 | 0.0% | 48 |
 | java-jwt | java | 0 | 0 | 29 | 57 | 0 | 0 | n/a | 7 |
 | jjwt | java | 0 | 0 | 83 | 46 | 0 | 0 | n/a | 9 |
-| node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | 0 | n/a | 6 |
-| forge | javascript | 0 | 0 | 0 | 0 | 0 | 0 | n/a | 90 |
-| **total** | | 997 | 492 | 843 | 103 | 997 | 1 | 0.1% | 276 |
+| node-jsonwebtoken | javascript | 6 | 6 | 0 | 0 | 6 | 0 | 0.0% | 0 |
+| forge | javascript | 36 | 7 | 0 | 0 | 36 | 0 | 0.0% | 51 |
+| **total** | | 1039 | 505 | 843 | 103 | 1039 | 1 | 0.1% | 231 |
 
-Labelled 997 of 997 call sites (100.0%).
+Labelled 1039 of 1039 call sites (100.0%).

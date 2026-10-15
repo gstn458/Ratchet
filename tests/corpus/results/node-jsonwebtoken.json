@@ -5,11 +5,67 @@
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
-    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1"
   },
   "not_scanned": {},
-  "files_scanned": 0,
+  "files_scanned": 46,
   "unparsed": [],
   "skipped_directories": 3,
-  "findings": []
+  "findings": [
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 64,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 73,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 12,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/jwt.malicious.tests.js",
+      "line": 19,
+      "snippet": "} = crypto.generateKeyPairSync('rsa', {modulusLength: 2048});"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 19,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 29,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    }
+  ]
 }

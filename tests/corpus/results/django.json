@@ -5,10 +5,11 @@
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
-    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1"
   },
   "not_scanned": {},
-  "files_scanned": 2926,
+  "files_scanned": 2971,
   "unparsed": [
     "tests/test_runner_apps/tagged/tests_syntax_error.py (not valid Python 3 syntax at line 11)"
   ],

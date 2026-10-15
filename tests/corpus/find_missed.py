@@ -85,6 +85,10 @@ def algorithm_of(text, fixed):
     return "unknown"
 
 
+# A line that defines a forge member (forge.des.createEncryptionCipher =
+# function ...) is the library's implementation, not a use of it.
+FORGE_DEFINITION = re.compile(r"^\s*(?:forge\.[\w.]+\s*=(?!=)\s*)+")
+
 RENAMED = re.compile(r"from\s+cryptography\.hazmat\.primitives\.asymmetric\.(rsa|dsa|ec)\s+import\s+[^\n]*"
                      r"\bgenerate_private_key\s+as\s+(\w+)")
 RENAMED_ALGO = {"rsa": "RSA", "dsa": "DSA", "ec": "EC"}
@@ -122,6 +126,8 @@ def search(repo):
                 if stripped.startswith(("//", "#", "*", "/*")):
                     continue
                 m = re.search(pattern, line)
+                if m and sid == "js-forge" and FORGE_DEFINITION.match(line):
+                    continue
                 if m:
                     hits.append((rel, i, algorithm_of(m.group(0), fixed), sid, why, line))
     missed = []

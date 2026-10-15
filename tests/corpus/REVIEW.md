@@ -10,14 +10,20 @@ regenerated from the committed labels by `review.py`). Change a verdict in
   `priv, err := ecdsa.GenerateKey(ctx.publicKey.Curve, randReader)`
   fp: read by hand: ecdsa.GenerateKey makes the ephemeral key for ECDH-ES in genKey(); the agreement is in cipher/ecdh_es.go. ECDSA usage label is wrong
 
-## True positives, random sample (100 of 995)
+## True positives, random sample (104 of 1037)
 
 - **age** `agessh/agessh.go:212:X25519`
   `ourPublicKey, err := curve25519.X25519(ephemeral, curve25519.Basepoint)`
   tp: rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed
+- **age** `agessh/agessh.go:217:X25519`
+  `sharedSecret, err := curve25519.X25519(ephemeral, r.theirPublicKey)`
+  tp: rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed
 - **age** `agessh/agessh.go:329:X25519`
   `sharedSecret, err := curve25519.X25519(i.secretKey, publicKey)`
   tp: rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed
+- **age** `agessh/agessh.go:36:SHA-256`
+  `h := sha256.Sum256(pk.Marshal())`
+  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
 - **age** `agessh/agessh.go:81:RSA`
   `wrappedKey, err := rsa.EncryptOAEP(sha256.New(), rand.Reader,`
   tp: rule go-package-call: rsa.EncryptOAEP, crypto/rsa imported, name not shadowed
@@ -48,6 +54,9 @@ regenerated from the committed labels by `review.py`). Change a verdict in
 - **cfssl** `ocsp/responder.go:405:SHA-256`
   `responseHash := sha256.Sum256(ocspResponse)`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **cfssl** `scan/crypto/md5/example_test.go:23:MD5`
+  `fmt.Printf("%x", md5.Sum(data))`
+  tp: rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed
 - **cfssl** `scan/crypto/rsa/pss_test.go:60:SHA-1`
   `hash := sha1.New()`
   tp: rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed
@@ -60,255 +69,258 @@ regenerated from the committed labels by `review.py`). Change a verdict in
 - **cfssl** `scan/crypto/tls/key_agreement.go:101:MD5`
   `hmd5 := md5.New()`
   tp: rule go-package-call: md5.New, crypto/md5 imported, name not shadowed
-- **cfssl** `scan/crypto/tls/key_agreement.go:374:RSA`
-  `if err := rsa.VerifyPKCS1v15(pubKey, hashFunc, digest, sig); err != nil {`
-  tp: rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed
-- **cfssl** `scan/crypto/tls/key_agreement.go:392:EC`
-  `x, _ := ka.curve.ScalarMult(ka.x, ka.y, priv)`
-  tp: read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)
-- **cfssl** `transport/kp/key_provider.go:230:ECDSA`
-  `priv, err = ecdsa.GenerateKey(curve, rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **go-jose** `asymmetric.go:249:RSA`
-  `_ = rsa.DecryptPKCS1v15SessionKey(rand.Reader, ctx.privateKey, jek, cek)`
-  tp: rule go-package-call: rsa.DecryptPKCS1v15SessionKey, crypto/rsa imported, name not shadowed
-- **go-jose** `asymmetric.go:257:RSA`
-  `return rsa.DecryptOAEP(sha256.New(), rand.Reader, ctx.privateKey, jek, []byte{})`
-  tp: rule go-package-call: rsa.DecryptOAEP, crypto/rsa imported, name not shadowed
-- **go-jose** `asymmetric_test.go:233:RSA-2048`
-  `priv, err := rsa.GenerateKey(rand.Reader, 2048)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **forge** `lib/pkcs1.js:194:SHA-1`
+  `md = forge.md.sha1.create();`
+  tp: read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library
+- **forge** `lib/pkcs12.js:445:SHA-256`
+  `md = forge.md.sha256.create();`
+  tp: read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library
+- **forge** `lib/x509.js:709:SHA-256`
+  `return forge.md.sha256.create();`
+  tp: read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library
+- **go-jose** `cipher/key_wrap_test.go:156:AES`
+  `block, _ := aes.NewCipher(kek)`
+  tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
+- **go-jose** `cipher/key_wrap_test.go:170:AES`
+  `block, _ := aes.NewCipher(kek)`
+  tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
+- **go-jose** `cryptosigner/cryptosigner_test.go:119:Ed25519`
+  `ver, sig, _ = ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed
 - **go-jose** `cryptosigner/cryptosigner_test.go:129:ECDSA`
   `key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **go-jose** `jwk_test.go:487:SHA-256`
-  `x5tSHA256 := sha256.Sum256(testCertificates[0].Raw)`
+- **go-jose** `cryptosigner/cryptosigner_test.go:168:ECDSA`
+  `p256, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **go-jose** `jwk_test.go:425:SHA-256`
+  `sha256sum := sha256.Sum256(nil)`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **go-jose** `jwk_test.go:913:Ed25519`
+  `_, otherPrivateKey, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed
 - **go-jose** `signing_test.go:446:ECDSA`
   `key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **go-jose** `signing_test.go:450:ECDSA`
-  `key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **go-jose** `signing_test.go:524:ECDSA`
-  `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **go-jose** `symmetric.go:338:AES`
+- **go-jose** `symmetric.go:453:AES`
   `block, err := aes.NewCipher(key)`
   tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
-- **paramiko** `paramiko/kex_ecdh_nist.py:71:ECDH`
-  `K = self.P.exchange(ec.ECDH(), self.Q_C)`
-  tp: read by hand: SSH ECDH key exchange
-- **pyjwt** `tests/test_algorithms.py:1755:RSA-1024`
-  `small_key = rsa_module.generate_private_key(`
-  tp: read by hand: deliberately undersized RSA key in a test of key-size rejection
-- **python-jose** `jose/backends/cryptography_backend.py:139:ECDSA`
-  `signature = self.prepared_key.sign(msg, ec.ECDSA(self.hash_alg()))`
+- **golang-jwt** `ecdsa.go:83:ECDSA`
+  `if verifystatus := ecdsa.Verify(ecdsaKey, hasher.Sum(nil), r, s); verifystatus {`
+  tp: rule go-package-call: ecdsa.Verify, crypto/ecdsa imported, name not shadowed
+- **paramiko** `paramiko/kex_curve25519.py:45:X25519`
+  `self.key = X25519PrivateKey.generate()`
   tp: read by hand: call into the named algorithm confirmed in context
-- **python-jose** `jose/backends/cryptography_backend.py:145:ECDSA`
-  `self.prepared_key.verify(signature, msg, ec.ECDSA(self.hash_alg()))`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **python-jose** `jose/backends/cryptography_backend.py:306:RSA`
-  `signature = self.prepared_key.sign(msg, padding.PKCS1v15(), self.hash_alg())`
-  tp: rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else
-- **scapy** `scapy/layers/msrpce/msnrpc.py:151:MD5`
-  `digest = hashes.Hash(hashes.MD5())`
-  tp: read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing
-- **scapy** `scapy/layers/msrpce/msnrpc.py:248:MD5`
-  `h = hmac.HMAC(h.finalize(), hashes.MD5())`
-  tp: read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC
-- **scapy** `scapy/layers/tls/keyexchange.py:858:ECDH`
-  `pms = s.client_kx_privkey.exchange(ec.ECDH(),`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **scapy** `scapy/layers/tls/keyexchange_tls13.py:205:ECDH`
-  `pms = privkey.exchange(ec.ECDH(), pubkey)`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **scapy** `scapy/libs/rfc3961.py:926:SHA-1`
-  `algorithm=hashes.SHA1(),`
+- **pyjwt** `jwt/algorithms.py:929:RSA`
+  `padding.PSS(`
+  tp: rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else
+- **python-jose** `jose/backends/cryptography_backend.py:209:SHA-1`
+  `RSA_OAEP = padding.OAEP(padding.MGF1(hashes.SHA1()), hashes.SHA1(), None)`
   tp: rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else
-- **scapy** `scapy/utils6.py:431:SHA-1`
-  `globalid = hashlib.sha1(btod + eui64).digest()[:5]`
-  tp: rule py-hashlib: hashlib.sha1() call
+- **python-jose** `tests/algorithms/test_EC.py:111:EC`
+  `CryptographyEc.generate_private_key(mapping[algorithm](), backend=CryptographyBackend()), algorithm`
+  tp: read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere
+- **scapy** `scapy/layers/inet6.py:2398:MD5`
+  `h = md5(record.encode("utf8"))`
+  tp: rule py-hashlib-import: md5 imported from hashlib
+- **scapy** `scapy/layers/msrpce/msnrpc.py:233:MD5`
+  `h = hmac.HMAC(SessionKey, hashes.MD5())`
+  tp: read by hand: hashes from cryptography.hazmat.primitives, rebound only to None when cryptography is missing; used in HMAC
+- **scapy** `scapy/layers/radius.py:1341:MD5`
+  `radius_mac = hashlib.md5(data + shared_secret)`
+  tp: rule py-hashlib: hashlib.md5() call
+- **scapy** `scapy/layers/tls/crypto/groups.py:526:EC`
+  `return ec.generate_private_key(curve, default_backend())`
+  tp: read by hand: EC, usage undetermined: TLS key-exchange group key (actual use: ECDH)
+- **scapy** `scapy/libs/rfc3961.py:897:3DES`
+  `decrepit_algorithms.TripleDES(key), modes.CBC(b"\0" * 8)`
+  tp: read by hand: decrepit_algorithms is cryptography's decrepit ciphers.algorithms, falling back to primitives algorithms on older versions; either way the named cipher
 - **step-ca** `acme/challenge.go:1809:Ed25519`
   `if !ed25519.Verify(pub, []byte(keyAuth), sig) {`
   tp: rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed
-- **step-ca** `acme/challenge.go:378:SHA-256`
-  `h := sha256.Sum256([]byte(expectedKeyAuth))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `acme/challenge_test.go:2188:SHA-256`
+- **step-ca** `acme/challenge_test.go:2232:SHA-256`
   `h := sha256.Sum256([]byte(expKeyAuth))`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `acme/challenge_test.go:3101:SHA-256`
-  `incorrectTokenHash := sha256.Sum256([]byte("mismatched"))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `acme/challenge_tpmsimulator_test.go:62:SHA-256`
-  `hash := sha256.Sum256(b)`
+- **step-ca** `acme/challenge_test.go:3240:SHA-256`
+  `expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
 - **step-ca** `api/ssh_test.go:39:ECDSA`
   `priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **step-ca** `authority/authority.go:507:SHA-256`
-  `sum := sha256.Sum256(crt.Raw)`
+- **step-ca** `authority/authorize_test.go:1443:Ed25519`
+  `_, otherSigner, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed
+- **step-ca** `authority/provisioner/azure_test.go:62:SHA-256`
+  `sum := sha256.Sum256([]byte("/subscriptions/subscriptionID/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/virtualM`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `authority/authorize.go:213:SHA-256`
-  `sum := sha256.Sum256([]byte(token))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `authority/provisioner/aws_test.go:62:SHA-256`
-  `sum := sha256.Sum256([]byte(fmt.Sprintf("%s.%s", p1.GetID(), claims.document.InstanceID)))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `authority/provisioner/aws_test.go:755:RSA-1024`
-  `rsa1024, err := rsa.GenerateKey(rand.Reader, 1024)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **step-ca** `authority/ssh_test.go:460:ECDSA`
-  `key, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+- **step-ca** `authority/provisioner/nebula_test.go:60:Ed25519`
+  `pub, priv, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed
+- **step-ca** `authority/ssh_test.go:325:ECDSA`
+  `signKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **step-ca** `cas/stepcas/x5c_issuer_test.go:246:ECDSA`
-  `p256 := mustSigner(ecdsa.GenerateKey(elliptic.P256(), rand.Reader))`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **step-ca** `cas/vaultcas/vaultcas.go:165:SHA-256`
-  `sum := sha256.Sum256(cert.root.Raw)`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **step-ca** `test/integration/scep/common_test.go:305:RSA-2048`
-  `signer, err = rsa.GenerateKey(rand.Reader, 2048)`
+- **step-ca** `cas/softcas/softcas_test.go:414:RSA-2048`
+  `signer, err := rsa.GenerateKey(rand.Reader, 2048)`
   tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **twisted** `src/twisted/conch/scripts/ckeygen.py:168:EC`
-  `keyPrimitive = ec.generate_private_key(curve=keys._curveTable[curve])`
-  tp: read by hand: SSH key generation (EC actual use: ECDSA)
-- **twisted** `src/twisted/conch/ssh/transport.py:2131:MD5`
-  `[binascii.hexlify(c) for c in iterbytes(md5(pubKey).digest())]`
+- **step-ca** `cas/softcas/softcas_test.go:475:ECDSA`
+  `rootSigner, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **step-ca** `scep/authority_test.go:140:RSA-2048`
+  `return rsa.GenerateKey(rand.Reader, 2048)`
+  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **twisted** `src/twisted/conch/ssh/keys.py:1033:MD5`
+  `[binascii.hexlify(x) for x in iterbytes(md5(self.blob()).digest())]`
   tp: rule py-hashlib-import: md5 imported from hashlib
-- **twisted** `src/twisted/conch/test/test_keys.py:1538:RSA`
-  `common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA512()`
+- **twisted** `src/twisted/conch/ssh/keys.py:1897:RSA`
+  `privateKey = rsa.generate_private_key(public_exponent=65537, key_size=keySize)`
+  tp: read by hand: call into the named algorithm confirmed in context
+- **twisted** `src/twisted/conch/test/test_keys.py:1502:RSA`
+  `common.getNS(signature)[0], data, padding.PKCS1v15(), hashes.SHA1()`
   tp: rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else
-- **twisted** `src/twisted/cred/test/test_digestauth.py:101:MD5`
-  `ha1 = hexlify(md5(a1).digest())`
-  tp: rule py-hashlib-import: md5 imported from hashlib
-- **twisted** `src/twisted/mail/test/test_mail.py:1003:MD5`
-  `resp = md5("wrong digest").hexdigest()`
-  tp: rule py-hashlib-import: md5 imported from hashlib
-- **twisted** `src/twisted/words/protocols/jabber/xmlstream.py:77:SHA-1`
-  `return sha1(input.encode("utf-8")).hexdigest()`
+- **twisted** `src/twisted/test/test_sslverify.py:3526:EC-SECP256R1`
+  `key = ec.generate_private_key(ec.SECP256R1())`
+  tp: read by hand: EC, usage undetermined: signs a CSR (actual use: ECDSA)
+- **twisted** `src/twisted/words/test/test_jabberclient.py:201:SHA-1`
+  `self.assertEqual(sha1(b"12345secret").hexdigest(), str(iq.query.digest))`
   tp: rule py-hashlib-import: sha1 imported from hashlib
-- **vault** `builtin/credential/cert/backend_test.go:95:ECDSA`
-  `caKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+- **twisted** `src/twisted/words/test/test_jabbercomponent.py:57:SHA-1`
+  `self.assertEqual(sha1(b"12345" + b"secret").hexdigest(), str(handshake))`
+  tp: rule py-hashlib-import: sha1 imported from hashlib
+- **vault** `builtin/credential/cert/backend_test.go:1604:ECDSA`
+  `caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `builtin/logical/pki/acme_challenges_test.go:677:ECDSA`
+- **vault** `builtin/logical/pki/acme_challenges_test.go:529:ECDSA`
   `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `builtin/logical/pki/acme_challenges_test.go:717:ECDSA`
-  `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `builtin/logical/pki/backend_test.go:1341:ECDSA`
-  `privKey, _ = ecdsa.GenerateKey(curve, rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `builtin/logical/pki/path_acme_test.go:456:ECDSA`
-  `accountKey2, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `builtin/logical/pki/path_secure_export_key_test.go:117:AES`
+- **vault** `builtin/logical/pki/acme_challenges_test.go:573:SHA-256`
+  `checksum := sha256.Sum256([]byte("valid.valid"))`
+  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **vault** `builtin/logical/pki/export_crypto.go:272:ECDH`
+  `ephPriv, err = ecdh.P384().GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ecdh.P384, crypto/ecdh imported, name not shadowed
+- **vault** `builtin/logical/pki/export_crypto.go:354:AES`
   `block, err := aes.NewCipher(key)`
   tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
-- **vault** `builtin/logical/transit/path_import_test.go:1135:Ed25519`
-  `_, priv, err := ed25519.GenerateKey(rand.Reader)`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **vault** `command/server/server.go:2213:SHA-256`
-  `hasher := sha256.New()`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **vault** `helper/pkcs7/decrypt.go:197:DES`
-  `block, err = des.NewCipher(key)`
-  tp: rule go-package-call: des.NewCipher, crypto/des imported, name not shadowed
-- **vault** `helper/pkcs7/encrypt.go:115:AES`
-  `block, err := aes.NewCipher(key)`
-  tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
-- **vault** `helper/storagepacker/storagepacker.go:119:MD5`
-  `hf := md5.New()`
-  tp: rule go-package-call: md5.New, crypto/md5 imported, name not shadowed
-- **vault** `internalshared/dhutil/dhutil.go:150:AES`
-  `block, err := aes.NewCipher(key)`
-  tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
-- **vault** `internalshared/listenerutil/tls_reload.go:53:SHA-256`
-  `key:   sha256.Sum256(keyPEM),`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `sdk/helper/certutil/certutil_test.go:1367:ECDSA`
-  `key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)`
+- **vault** `builtin/logical/pki/path_acme_test.go:1946:ECDSA`
+  `csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `sdk/helper/certutil/certutil_test.go:706:ECDSA`
-  `intKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+- **vault** `builtin/logical/pki/path_acme_test.go:251:ECDSA`
+  `csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `sdk/helper/certutil/types_test.go:29:Ed25519`
-  `publicKey, _, err := ed25519.GenerateKey(rand.Reader)`
-  tp: read by hand: call into the named algorithm confirmed in context
-- **vault** `sdk/helper/keysutil/policy.go:1400:RSA`
-  `sig, err = rsa.SignPSS(rand.Reader, key, algo, input, &rsa.PSSOptions{SaltLength: saltLength})`
-  tp: rule go-package-call: rsa.SignPSS, crypto/rsa imported, name not shadowed
-- **vault** `sdk/helper/keysutil/policy.go:2822:RSA`
-  `ephKeyWrapped, err := rsa.EncryptOAEP(hash, rand.Reader, wrappingKey, ephKey, []byte{} /* label */)`
-  tp: rule go-package-call: rsa.EncryptOAEP, crypto/rsa imported, name not shadowed
-- **vault** `sdk/helper/keysutil/policy_test.go:938:Ed25519`
-  `_, ed25519Key, err := ed25519.GenerateKey(rand.Reader)`
-  tp: rule go-package-call: ed25519.GenerateKey, golang.org/x/crypto/ed25519 imported, name not shadowed
-- **vault** `sdk/helper/salt/salt.go:196:SHA-256`
-  `hashed := sha256.Sum256(inp)`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `sdk/logical/token_test.go:62:SHA-256`
-  `hashed := sha256.Sum256([]byte(expectedIDPlaintext))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `tools/pipeline/internal/pkg/golang/check_generate.go:255:SHA-256`
+- **vault** `builtin/logical/pki/path_acme_test.go:754:RSA-2048`
+  `accountKey, err := rsa.GenerateKey(rand.Reader, 2048)`
+  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **vault** `builtin/logical/pki/path_acme_test.go:932:ECDSA`
+  `csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `builtin/logical/pki/path_secure_export_key_test.go:73:RSA`
+  `cek, err := rsa.DecryptOAEP(sha256.New(), nil, priv, blob.WrappedCEK, nil)`
+  tp: rule go-package-call: rsa.DecryptOAEP, crypto/rsa imported, name not shadowed
+- **vault** `builtin/logical/pki/path_secure_export_key_test.go:73:SHA-256`
+  `cek, err := rsa.DecryptOAEP(sha256.New(), nil, priv, blob.WrappedCEK, nil)`
+  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
+- **vault** `builtin/logical/transit/path_import.go:472:SHA-1`
+  `return sha1.New(), nil`
+  tp: rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed
+- **vault** `command/server/operator_raft_snapshot_inspect.go:426:SHA-256`
   `h := sha256.New()`
   tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
-- **vault** `vault/external_tests/exactdeny/case_insensitive_bypass_test.go:97:RSA-2048`
-  `key, err := rsa.GenerateKey(rand.Reader, 2048)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **vault** `vault/plugincatalog/testing.go:72:SHA-256`
-  `hash := sha256.New()`
-  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
-- **x-crypto** `acme/acme.go:616:SHA-256`
-  `shasum := sha256.Sum256([]byte(ka))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **x-crypto** `acme/autocert/autocert.go:636:RSA-2048`
-  `key, err = rsa.GenerateKey(rand.Reader, 2048)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **x-crypto** `acme/autocert/autocert_test.go:636:ECDSA`
+- **vault** `helper/pkcs7/encrypt.go:193:3DES`
+  `block, err = des.NewTripleDESCipher(key)`
+  tp: rule go-package-call: des.NewTripleDESCipher, crypto/des imported, name not shadowed
+- **vault** `helper/pkcs7/verify.go:159:DSA`
+  `if !dsa.Verify(dsaKey, signed, dsaSig.R, dsaSig.S) {`
+  tp: rule go-package-call: dsa.Verify, crypto/dsa imported, name not shadowed
+- **vault** `helper/testhelpers/pki/pkihelper.go:183:ECDSA`
+  `caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `physical/raft/raft_test.go:994:MD5`
+  `pe.Key = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s-%d", testName, i))))`
+  tp: rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed
+- **vault** `sdk/helper/certutil/cert_verification_test.go:231:ECDSA`
+  `subIntKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `sdk/helper/certutil/cert_verification_test.go:343:ECDSA`
+  `rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `sdk/helper/certutil/certutil_test.go:878:Ed25519`
+  `pubkey, privkey, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed
+- **vault** `sdk/helper/certutil/helpers.go:429:Ed25519`
+  `_, privateKey, err = ed25519.GenerateKey(randReader)`
+  tp: read by hand: call into the named algorithm confirmed in context
+- **vault** `sdk/helper/keysutil/policy.go:1631:RSA`
+  `err = rsa.VerifyPKCS1v15(publicKey, algo, input, sigBytes)`
+  tp: rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed
+- **vault** `sdk/helper/keysutil/policy_test.go:881:ECDSA`
   `ecdsaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
-  tp: read by hand: TLS certificate keys (signing)
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `sdk/helper/ocsp/ocsp_test.go:569:ECDSA`
+  `leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `sdk/helper/salt/salt.go:190:SHA-1`
+  `hashed := sha1.Sum(inp)`
+  tp: rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed
+- **vault** `sdk/helper/testcluster/blackbox/session_plugin.go:26:SHA-256`
+  `hasher := sha256.New()`
+  tp: read by hand: call into the named algorithm confirmed in context
+- **vault** `sdk/helper/tpm/attestation.go:557:SHA-256`
+  `appPubSum := sha256.Sum256(appPubDER)`
+  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **vault** `vault/bench/smoke_bench_test.go:58:MD5`
+  `key := fmt.Sprintf("%s/%x", secretPath, md5.Sum([]byte(fmt.Sprintf("%s-%d", testName, i))))`
+  tp: rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed
+- **vault** `vault/identity_store_oidc.go:1822:Ed25519`
+  `_, key, err = ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, golang.org/x/crypto/ed25519 imported, name not shadowed
+- **vault** `vault/testing.go:1350:ECDSA`
+  `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
+- **vault** `vault/wrapping.go:41:ECDSA`
+  `key, err := ecdsa.GenerateKey(elliptic.P521(), c.secureRandomReader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
 - **x-crypto** `acme/autocert/autocert_test.go:830:ECDSA`
   `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: read by hand: TLS certificate keys (signing)
-- **x-crypto** `acme/jws_test.go:271:SHA-256`
-  `h := sha256.Sum256([]byte(protected + "." + payload))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **x-crypto** `ed25519/ed25519_test.go:15:Ed25519`
-  `public, private, _ := ed25519std.GenerateKey(nil)`
-  tp: read by hand: ed25519std is crypto/ed25519 imported under an alias; GenerateKey makes an Ed25519 key
-- **x-crypto** `otr/otr.go:1232:DSA`
-  `ok := dsa.Verify(&pk.PublicKey, hashed, r, s)`
-  tp: rule go-package-call: dsa.Verify, crypto/dsa imported, name not shadowed
-- **x-crypto** `otr/otr.go:1278:DSA`
-  `if err := dsa.GenerateKey(&priv.PrivateKey, rand); err != nil {`
-  tp: rule go-package-call: dsa.GenerateKey, crypto/dsa imported, name not shadowed
-- **x-crypto** `otr/otr.go:732:AES`
-  `aesCipher, err := aes.NewCipher(keys.c[:])`
-  tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
+- **x-crypto** `acme/autocert/internal/acmetest/ca.go:556:RSA-1024`
+  `pk, err = rsa.GenerateKey(rand.Reader, 1024)`
+  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **x-crypto** `acme/pebble_test.go:473:ECDSA`
+  `certKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
 - **x-crypto** `otr/otr.go:790:SHA-256`
   `h := sha256.New()`
   tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
-- **x-crypto** `ssh/certs_test.go:507:ECDSA`
-  `k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+- **x-crypto** `otr/smp.go:532:SHA-256`
+  `h := sha256.New()`
+  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
+- **x-crypto** `ssh/agent/client.go:618:EC`
+  `KeyBytes:    elliptic.Marshal(k.Curve, k.X, k.Y),`
+  tp: read by hand: EC, usage undetermined: SSH agent ECDSA key encoding (actual use: ECDSA)
+- **x-crypto** `ssh/certs_test.go:222:ECDSA`
+  `userKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **x-crypto** `ssh/cipher.go:57:RC4`
-  `return rc4.NewCipher(key)`
-  tp: rule go-package-call: rc4.NewCipher, crypto/rc4 imported, name not shadowed
-- **x-crypto** `ssh/example_test.go:479:RSA-3072`
-  `privateKey, err := rsa.GenerateKey(rand.Reader, 3072)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **x-crypto** `ssh/kex.go:232:EC`
+  `ClientPubKey: elliptic.Marshal(kex.curve, ephKey.PublicKey.X, ephKey.PublicKey.Y),`
+  tp: read by hand: EC, usage undetermined: SSH ECDH done with ecdsa.GenerateKey keys and ScalarMult (actual use: ECDH)
+- **x-crypto** `ssh/kex.go:256:EC`
+  `secret, _ := kex.curve.ScalarMult(x, y, ephKey.D.Bytes())`
+  tp: read by hand: EC, usage undetermined: SSH ECDH done with ecdsa.GenerateKey keys and ScalarMult (actual use: ECDH)
+- **x-crypto** `ssh/kex.go:337:EC`
+  `ephKey, err := ecdsa.GenerateKey(kex.curve, rand)`
+  tp: read by hand: EC, usage undetermined: SSH ECDH done with ecdsa.GenerateKey keys and ScalarMult (actual use: ECDH)
+- **x-crypto** `ssh/kex.go:347:EC`
+  `secret, _ := kex.curve.ScalarMult(clientX, clientY, ephKey.D.Bytes())`
+  tp: read by hand: EC, usage undetermined: SSH ECDH done with ecdsa.GenerateKey keys and ScalarMult (actual use: ECDH)
+- **x-crypto** `ssh/kex.go:551:X25519`
+  `secret, err := curve25519.X25519(kp.priv[:], kexInit.ClientPubKey)`
+  tp: rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed
+- **x-crypto** `ssh/keys.go:604:RSA`
+  `return rsa.VerifyPKCS1v15((*rsa.PublicKey)(r), hash, digest, blob)`
+  tp: rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed
 - **x-crypto** `ssh/keys.go:835:Ed25519`
   `if ok := ed25519.Verify(ed25519.PublicKey(k), b, sig.Blob); !ok {`
   tp: rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed
-- **x-crypto** `ssh/keys_test.go:76:ECDSA`
-  `raw, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **x-crypto** `ssh/mlkem.go:129:SHA-256`
-  `h := sha256.New()`
-  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
-- **x-crypto** `x509roots/gen_fallback_bundle.go:120:SHA-256`
-  `sha256.Sum256(c.X509.Raw),`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **x-crypto** `ssh/knownhosts/knownhosts_test.go:329:Ed25519`
+  `_, hostPriv, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed

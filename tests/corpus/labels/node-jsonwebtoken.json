@@ -1,67 +1,31 @@
 {
-  "findings": {},
-  "missed": [
-    {
-      "path": "test/async_sign.tests.js",
-      "line": 64,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+  "findings": {
+    "test/async_sign.tests.js:64:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     },
-    {
-      "path": "test/async_sign.tests.js",
-      "line": 73,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    "test/async_sign.tests.js:73:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     },
-    {
-      "path": "test/jwt.hs.tests.js",
-      "line": 12,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });"
+    "test/jwt.hs.tests.js:12:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     },
-    {
-      "path": "test/jwt.malicious.tests.js",
-      "line": 19,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "} = crypto.generateKeyPairSync('rsa', {modulusLength: 2048});"
+    "test/jwt.malicious.tests.js:19:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     },
-    {
-      "path": "test/rsa-public-key.tests.js",
-      "line": 19,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    "test/rsa-public-key.tests.js:19:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     },
-    {
-      "path": "test/rsa-public-key.tests.js",
-      "line": 29,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "js-node-crypto",
-      "note": "JavaScript is not scanned yet",
-      "test": true,
-      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    "test/rsa-public-key.tests.js:29:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
     }
-  ],
+  },
+  "missed": [],
   "searched": [
     "py-cryptography-hash",
     "py-cryptography-cipher",

@@ -5,11 +5,337 @@
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
-    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1"
   },
   "not_scanned": {},
-  "files_scanned": 1,
+  "files_scanned": 114,
   "unparsed": [],
   "skipped_directories": 2,
-  "findings": []
+  "findings": [
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/aesCipherSuites.js",
+      "line": 57,
+      "snippet": "cipher: forge.cipher.createDecipher('AES-CBC', client ?"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/aesCipherSuites.js",
+      "line": 63,
+      "snippet": "cipher: forge.cipher.createCipher('AES-CBC', client ?"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pbe.js",
+      "line": 649,
+      "snippet": "md = forge.md.sha1.create();"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pbe.js",
+      "line": 938,
+      "snippet": "md = forge.md.md5.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs1.js",
+      "line": 94,
+      "snippet": "md = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs1.js",
+      "line": 194,
+      "snippet": "md = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs1.js",
+      "line": 264,
+      "snippet": "hash = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs12.js",
+      "line": 441,
+      "snippet": "md = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs12.js",
+      "line": 445,
+      "snippet": "md = forge.md.sha256.create();"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs12.js",
+      "line": 457,
+      "snippet": "md = forge.md.md5.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs12.js",
+      "line": 827,
+      "snippet": "var sha1 = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/pkcs12.js",
+      "line": 1007,
+      "snippet": "var sha1 = forge.md.sha1.create();"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/ssh.js",
+      "line": 170,
+      "snippet": "var md = options.md || forge.md.md5.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/ssh.js",
+      "line": 230,
+      "snippet": "var sha = forge.md.sha1.create();"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/tls.js",
+      "line": 2046,
+      "snippet": "md5: forge.md.md5.create(),"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/tls.js",
+      "line": 2047,
+      "snippet": "sha1: forge.md.sha1.create()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/tls.js",
+      "line": 3995,
+      "snippet": "md5: forge.md.md5.create(),"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/tls.js",
+      "line": 3996,
+      "snippet": "sha1: forge.md.sha1.create()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 705,
+      "snippet": "return forge.md.sha1.create();"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 707,
+      "snippet": "return forge.md.md5.create();"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 709,
+      "snippet": "return forge.md.sha256.create();"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 715,
+      "snippet": "return forge.md.sha256.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 918,
+      "snippet": "var md = options.md || forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 1130,
+      "snippet": "cert.md = md || forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 1375,
+      "snippet": "var imd = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 1392,
+      "snippet": "var smd = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 1697,
+      "snippet": "var smd = forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 1794,
+      "snippet": "csr.md = md || forge.md.sha1.create();"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "lib/x509.js",
+      "line": 2823,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/benchmarks/so-44303784.js",
+      "line": 72,
+      "snippet": "const decipher = crypto.createDecipheriv('aes-128-cbc', keyb, ivb);"
+    },
+    {
+      "label": "RSA-4096",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
+      "line": 80,
+      "snippet": "const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
+      "line": 94,
+      "snippet": "const digest = crypto.createHash('sha256').update(msg).digest();"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
+      "line": 141,
+      "snippet": "const controlSig = crypto.sign('sha256', controlMsg, {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
+      "line": 151,
+      "snippet": "const controlNode = crypto.verify('sha256', controlMsg, {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
+      "line": 155,
+      "snippet": "const forgedNode = crypto.verify('sha256', msg, {"
+    },
+    {
+      "label": "RSA-512",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/unit/tls.js",
+      "line": 121,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(512);"
+    }
+  ]
 }

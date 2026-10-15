@@ -5,7 +5,8 @@
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
-    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1"
   },
   "not_scanned": {},
   "files_scanned": 46,
