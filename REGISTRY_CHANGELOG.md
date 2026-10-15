@@ -4,6 +4,41 @@ Every change to `registry.json`, with the claim it makes and the primary source 
 it, as `CONTRIBUTING.md` requires. Each CBOM records the `registry_version` and
 content hash it was produced with, so this file says what any given CBOM was built on.
 
+## 2026.10.3 (registry schema 2)
+
+**Four new entries: Ed448, X448, and EdDSA and XDH with the curve not visible.** Java's
+JCA names these (`Ed448`, `X448`, and the generic `EdDSA` and `XDH`, which take
+Ed25519 or Ed448 and X25519 or X448 keys). Until this version they recorded nothing.
+
+All four are quantum broken: their security rests on an elliptic-curve discrete
+logarithm, which Shor's algorithm solves. None is broken classically, and each has
+security level 0, as every Shor-broken entry does.
+
+| Entry | Primitive | OID | Migration target |
+| --- | --- | --- | --- |
+| Ed448 | signature | 1.3.101.113, id-Ed448 | ML-DSA-87 (FIPS 204) |
+| X448 | key agreement | 1.3.101.111, id-X448 | hybrid X448+ML-KEM-1024, then ML-KEM-1024 alone |
+| EdDSA | signature | none: Ed25519 1.3.101.112 or Ed448 1.3.101.113 | ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448 |
+| XDH | key agreement | none: X25519 1.3.101.110 or X448 1.3.101.111 | ML-KEM-768 (FIPS 203), or ML-KEM-1024 if the curve is X448 |
+
+Sources:
+
+- Ed448: RFC 8032, *Edwards-Curve Digital Signature Algorithm (EdDSA)*, section 5.2;
+  approved for signatures in NIST FIPS 186-5 (2023), section 7.
+- X448: RFC 7748, *Elliptic Curves for Security*, section 5.
+- OIDs: RFC 8410, *Algorithm Identifiers for Ed25519, Ed448, X25519, and X448*,
+  section 3.
+- Migration targets: ML-DSA from FIPS 204 and ML-KEM from FIPS 203. Ed448 and X448
+  are chosen for a security margin above Ed25519 and X25519 (RFC 7748 section 1
+  puts Curve448 near 224-bit classical security), so they map to the highest NIST
+  category, 5: ML-DSA-87 (FIPS 204, section 4, Table 1) and ML-KEM-1024 (FIPS 203,
+  section 8). This is a judgement, matching the 2026.10.1 practice of tying targets
+  to categories; the generic entries name both targets because the curve decides.
+
+EdDSA and XDH are separate entries with `oid` null, like EC, usage undetermined, so a
+CBOM never claims a curve the scanner did not see. Their primitive is known, so
+they report under quantum vulnerable, not usage undetermined.
+
 ## 2026.10.2 (registry schema 2)
 
 **New entry: EC, usage undetermined.** An elliptic-curve key whose use the scanner

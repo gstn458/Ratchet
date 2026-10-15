@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
   "field_notes": {
     "quantum": {
@@ -99,6 +99,62 @@
       ],
       "replacement": "hybrid X25519+ML-KEM-768, then ML-KEM alone",
       "why": "Curve25519 discrete log falls to Shor's algorithm."
+    },
+    "Ed448": {
+      "primitive": "signature",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.3.101.113",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-DSA-87 (FIPS 204)",
+      "why": "Edwards448 discrete log falls to Shor's algorithm."
+    },
+    "X448": {
+      "primitive": "key-agree",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": "1.3.101.111",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "keyderive"
+      ],
+      "replacement": "hybrid X448+ML-KEM-1024, then ML-KEM-1024 alone",
+      "why": "Curve448 discrete log falls to Shor's algorithm."
+    },
+    "EdDSA": {
+      "primitive": "signature",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "Ed25519 is 1.3.101.112 and Ed448 is 1.3.101.113 (RFC 8410); the curve was not visible to the scanner.",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "sign",
+        "verify"
+      ],
+      "replacement": "ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448",
+      "why": "Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner."
+    },
+    "XDH": {
+      "primitive": "key-agree",
+      "quantum": "broken",
+      "classical": "ok",
+      "oid": null,
+      "oid_note": "X25519 is 1.3.101.110 and X448 is 1.3.101.111 (RFC 8410); the curve was not visible to the scanner.",
+      "nist_quantum_security_level": 0,
+      "functions": [
+        "keygen",
+        "keyderive"
+      ],
+      "replacement": "ML-KEM-768 (FIPS 203), or ML-KEM-1024 if the curve is X448",
+      "why": "Montgomery-curve discrete log falls to Shor's algorithm. The curve, X25519 or X448, was not visible to the scanner."
     },
     "DH": {
       "primitive": "key-agree",
