@@ -50,6 +50,14 @@ can be seen, which measures how often the scanner could have resolved it.
 3. A reviewer checks every **fp** and a random 10% of the **tp** labels, listed in
    `REVIEW.md` by `review.py`.
 
+## Algorithm names
+
+Java's algorithm-name occurrences (an unambiguous JCA name in a string literal) are not
+labelled one by one, because they never gate a build. When the kind was added, all 95 in
+the corpus were read: three were `"HmacSHA" + bits` and `"PBKDF2WithHmacSHA" + bits`, the
+start of a name built at run time, wrongly read as SHA-1. That was fixed before the
+measurement, leaving 92, all naming the algorithm they claim.
+
 ## Missed findings
 
 `missed` lists false negatives: uses of a quantum-broken or classically broken

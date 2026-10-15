@@ -2,7 +2,12 @@
   "name": "python-jose",
   "commit": "018b310ddb8b50dcfd09a0c152117835a21dd656",
   "registry_version": "2026.10.2",
-  "go_backend": "regex (requested)",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+  },
+  "not_scanned": {},
   "files_scanned": 38,
   "unparsed": [],
   "skipped_directories": 2,

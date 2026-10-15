@@ -2,114 +2,94 @@
   "findings": {},
   "missed": [
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 65,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 440,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "RS256(\"RS256\", \"RSASSA-PKCS-v1_5 using SHA-256\", \"RSA\", \"SHA256withRSA\", true, 256, 2048),"
+      "snippet": "return provider != null ? Cipher.getInstance(jcaName, provider) : Cipher.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 70,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 451,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "RS384(\"RS384\", \"RSASSA-PKCS-v1_5 using SHA-384\", \"RSA\", \"SHA384withRSA\", true, 384, 2048),"
+      "snippet": "return provider != null ? KeyFactory.getInstance(jcaName, provider) : KeyFactory.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 75,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 462,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "RS512(\"RS512\", \"RSASSA-PKCS-v1_5 using SHA-512\", \"RSA\", \"SHA512withRSA\", true, 512, 2048),"
+      "snippet": "return provider != null ? SecretKeyFactory.getInstance(jcaName, provider) : SecretKeyFactory.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 80,
-      "algorithm": "ECDSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 473,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
+      "snippet": "return provider != null ? KeyGenerator.getInstance(jcaName, provider) : KeyGenerator.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 85,
-      "algorithm": "ECDSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 484,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "ES384(\"ES384\", \"ECDSA using P-384 and SHA-384\", \"ECDSA\", \"SHA384withECDSA\", true, 384, 384),"
+      "snippet": "return provider != null ? KeyPairGenerator.getInstance(jcaName, provider) : KeyPairGenerator.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 90,
-      "algorithm": "ECDSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 495,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "ES512(\"ES512\", \"ECDSA using P-521 and SHA-512\", \"ECDSA\", \"SHA512withECDSA\", true, 512, 521),"
+      "snippet": "return provider != null ? KeyAgreement.getInstance(jcaName, provider) : KeyAgreement.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 97,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 506,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "PS256(\"PS256\", \"RSASSA-PSS using SHA-256 and MGF1 with SHA-256\", \"RSA\", \"RSASSA-PSS\", false, 256, 2048),"
+      "snippet": "return provider != null ? MessageDigest.getInstance(jcaName, provider) : MessageDigest.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 104,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 517,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "PS384(\"PS384\", \"RSASSA-PSS using SHA-384 and MGF1 with SHA-384\", \"RSA\", \"RSASSA-PSS\", false, 384, 2048),"
+      "snippet": "return provider != null ? Signature.getInstance(jcaName, provider) : Signature.getInstance(jcaName);"
     },
     {
-      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
-      "line": 111,
-      "algorithm": "RSA",
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 528,
+      "algorithm": "unresolved",
       "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
       "test": false,
-      "snippet": "PS512(\"PS512\", \"RSASSA-PSS using SHA-512 and MGF1 with SHA-512\", \"RSA\", \"RSASSA-PSS\", false, 512, 2048);"
-    },
-    {
-      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaSignatureAlgorithm.java",
-      "line": 51,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
-      "test": false,
-      "snippet": "static final String PSS_JCA_NAME = \"RSASSA-PSS\";"
-    },
-    {
-      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
-      "line": 37,
-      "algorithm": "RSA",
-      "source": "search",
-      "search": "java-jca-name",
-      "note": "JCA signature or cipher name held as a string constant; Java is not scanned yet",
-      "test": false,
-      "snippet": "private static final String RSA1_5_TRANSFORMATION = \"RSA/ECB/PKCS1Padding\";"
+      "snippet": "return provider != null ? Mac.getInstance(jcaName, provider) : Mac.getInstance(jcaName);"
     }
   ],
   "searched": [
@@ -123,6 +103,7 @@
     "go-ecdh-method",
     "java-jca",
     "java-jca-name",
+    "java-jca-unresolved",
     "js-node-crypto",
     "js-forge"
   ]

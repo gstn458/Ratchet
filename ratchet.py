@@ -1283,6 +1283,10 @@ JCA_NAMES = {
     "md5": "MD5", "sha1": "SHA-1", "sha-1": "SHA-1", "sha": "SHA-1",
     "sha256": "SHA-256", "sha-256": "SHA-256",
 }
+# Inside a compound name the hash is spelled in full (HmacSHA1, SHA1withRSA);
+# bare "SHA" is SHA-1's alias only as a MessageDigest name, and "HmacSHA" is
+# the start of a name built at run time ("HmacSHA" + bits), not SHA-1.
+JCA_COMPOUND_HASHES = {k: v for k, v in JCA_NAMES.items() if k != "sha"}
 JCA_SIGNATURE = re.compile(r"(?P<hash>[a-z0-9/-]+?)with(?P<key>rsa|ecdsa|dsa)(?:andmgf1|/pss|inp1363format)?")
 JCA_PREFIXED = re.compile(r"(?:hmac|pbkdf2withhmac)(?P<hash>.+)")
 JCA_PBE = re.compile(r"pbewith(?P<hash>[a-z0-9-]+?)and(?P<cipher>.+)")
@@ -1327,22 +1331,23 @@ def jca_algorithms(name):
     m = JCA_SIGNATURE.fullmatch(n)
     if m:
         key = JCA_NAMES[m.group("key")]
-        digest = JCA_NAMES.get(m.group("hash"))
+        digest = JCA_COMPOUND_HASHES.get(m.group("hash"))
         return [key] + ([digest] if digest else [])
     if "/" in n:  # Cipher transformation: algorithm/mode/padding
         cipher, _, rest = n.partition("/")
         found = [JCA_NAMES[jca_name(cipher)]] if jca_name(cipher) in JCA_NAMES else []
         oaep = JCA_OAEP.search(rest)
-        if oaep and JCA_NAMES.get(oaep.group("hash")):
-            found.append(JCA_NAMES[oaep.group("hash")])
+        if oaep and JCA_COMPOUND_HASHES.get(oaep.group("hash")):
+            found.append(JCA_COMPOUND_HASHES[oaep.group("hash")])
         return found
     m = JCA_PBE.fullmatch(n)
     if m:
-        digest = re.sub(r"^hmac", "", m.group("hash"))
-        return [JCA_NAMES[x] for x in (digest, jca_name(m.group("cipher"))) if x in JCA_NAMES]
+        digest = JCA_COMPOUND_HASHES.get(re.sub(r"^hmac", "", m.group("hash")))
+        cipher = JCA_NAMES.get(jca_name(m.group("cipher")))
+        return [x for x in (digest, cipher) if x]
     m = JCA_PREFIXED.fullmatch(n)
     if m:
-        return [JCA_NAMES[m.group("hash")]] if m.group("hash") in JCA_NAMES else []
+        return [JCA_COMPOUND_HASHES[m.group("hash")]] if m.group("hash") in JCA_COMPOUND_HASHES else []
     return [JCA_NAMES[jca_name(n)]] if jca_name(n) in JCA_NAMES else []
 
 

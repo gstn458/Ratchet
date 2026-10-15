@@ -58,9 +58,9 @@ requires identical output. CI runs the suite both ways.
 `tests/corpus` measures Ratchet against 20 real repositories pinned to commits.
 `python3 tests/corpus/run.py` fetches them (the only network access anywhere in the
 project, and only in this test tool), scans them, writes results and prints the
-measurement to `tests/corpus/SUMMARY.md`, using the regex Go backend unless `--backend`
-says otherwise; `run.py --check --backend tree-sitter` confirms tree-sitter finds the
-same. Precision is measured over hand-labelled call
+measurement to `tests/corpus/SUMMARY.md`. It uses tree-sitter at the versions pinned in
+`requirements-treesitter.txt`, which Java needs; `run.py --check --backend regex`
+confirms the regex Go backend finds the same in Go. Precision is measured over hand-labelled call
 sites; see `tests/corpus/LABELLING.md`. `tests/corpus/review.py` writes the review sheet,
 `tests/corpus/REVIEW.md`: every false positive and a fixed-seed 10% sample of the rest.
 

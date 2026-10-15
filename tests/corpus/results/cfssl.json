@@ -2,7 +2,12 @@
   "name": "cfssl",
   "commit": "ab47f0d984778865b3f5b5adf6ba336a15b96c31",
   "registry_version": "2026.10.2",
-  "go_backend": "regex (requested)",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+  },
+  "not_scanned": {},
   "files_scanned": 254,
   "unparsed": [],
   "skipped_directories": 28,

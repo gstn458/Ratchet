@@ -61,7 +61,7 @@ def checkout(repo):
     return dest
 
 
-def scan(repo, path, backend="regex"):
+def scan(repo, path, backend="tree-sitter"):
     result = ratchet.walk(str(path), backend=backend)
     findings = sorted(
         ({"label": f.label, "algorithm": f.algorithm, "kind": f.kind, "test": f.in_test,
@@ -73,7 +73,8 @@ def scan(repo, path, backend="regex"):
         "name": repo["name"],
         "commit": repo["commit"],
         "registry_version": ratchet.REGISTRY["registry_version"],
-        "go_backend": result.parsers["Go"],
+        "parsers": result.parsers,
+        "not_scanned": {language: len(paths) for language, paths in result.not_scanned.items()},
         "files_scanned": result.files,
         "unparsed": [f"{p} ({r})" for p, r in result.unparsed],
         "skipped_directories": len(result.skipped),
@@ -82,8 +83,8 @@ def scan(repo, path, backend="regex"):
 
 
 def comparable(result):
-    """A result without the backend that produced it, for --check."""
-    return {k: v for k, v in result.items() if k != "go_backend"}
+    """A result without the parsers that produced it, for --check."""
+    return {k: v for k, v in result.items() if k not in ("go_backend", "parsers")}
 
 
 def load_labels(name):
@@ -96,11 +97,13 @@ def load_labels(name):
 def measure(result, labels):
     calls = [f for f in result["findings"] if f["kind"] == ratchet.CALL]
     imports = [f for f in result["findings"] if f["kind"] == ratchet.IMPORT]
+    names = [f for f in result["findings"] if f["kind"] == ratchet.NAME]
     verdicts = [labels["findings"].get(finding_key(f), {}).get("verdict") for f in calls]
     return {
         "call_sites": len(calls),
         "in_test": sum(f["test"] for f in calls),
         "imports": len(imports),
+        "names": len(names),
         "labelled": sum(v in VERDICTS for v in verdicts),
         "tp": verdicts.count("tp"),
         "fp": verdicts.count("fp"),
@@ -120,16 +123,16 @@ def summary(rows):
         "imports are counted but not labelled. Missed findings are false negatives",
         "found by reading the code, listed in `labels/<name>.json`.",
         "",
-        "| Repository | Language | Call sites | In test code | Imports | Labelled | False positives | FP rate | Missed |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Repository | Language | Call sites | In test code | Imports | Algorithm names | Labelled | False positives | FP rate | Missed |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
-    total = {k: 0 for k in ("call_sites", "in_test", "imports", "labelled", "tp", "fp", "missed")}
+    total = {k: 0 for k in ("call_sites", "in_test", "imports", "names", "labelled", "tp", "fp", "missed")}
     for repo, m in rows:
         for k in total:
             total[k] += m[k]
-        lines.append(f"| {repo['name']} | {repo['language']} | {m['call_sites']} | {m['in_test']} | {m['imports']} | "
+        lines.append(f"| {repo['name']} | {repo['language']} | {m['call_sites']} | {m['in_test']} | {m['imports']} | {m['names']} | "
                      f"{m['labelled']} | {m['fp']} | {percent(m['fp'], m['labelled'])} | {m['missed']} |")
-    lines.append(f"| **total** | | {total['call_sites']} | {total['in_test']} | {total['imports']} | {total['labelled']} | "
+    lines.append(f"| **total** | | {total['call_sites']} | {total['in_test']} | {total['imports']} | {total['names']} | {total['labelled']} | "
                  f"{total['fp']} | {percent(total['fp'], total['labelled'])} | {total['missed']} |")
     lines += ["", f"Labelled {total['labelled']} of {total['call_sites']} call sites "
                   f"({percent(total['labelled'], total['call_sites'])})."]
@@ -140,9 +143,9 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--check", action="store_true", help="exit 1 if results differ from the committed ones")
     p.add_argument("--only", action="append", help="limit to these repository names")
-    p.add_argument("--backend", choices=ratchet.BACKENDS, default="regex",
-                   help="Go backend (default regex, so committed results reproduce anywhere); "
-                        "--check --backend tree-sitter checks the two backends agree")
+    p.add_argument("--backend", choices=ratchet.BACKENDS, default="tree-sitter",
+                   help="parsers (default tree-sitter, at the versions in requirements-treesitter.txt, "
+                        "which Java needs); --check --backend regex checks Go agrees without it")
     args = p.parse_args(argv)
 
     manifest = json.loads((HERE / "manifest.json").read_text())

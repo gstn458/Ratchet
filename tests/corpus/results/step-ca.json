@@ -2,7 +2,12 @@
   "name": "step-ca",
   "commit": "69d3c36fa1e1fccbac5138a45fa3367122b89a11",
   "registry_version": "2026.10.2",
-  "go_backend": "regex (requested)",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+  },
+  "not_scanned": {},
   "files_scanned": 341,
   "unparsed": [],
   "skipped_directories": 7,

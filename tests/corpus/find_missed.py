@@ -47,10 +47,14 @@ SEARCHES = [
      "key agreement through the ecdh.PrivateKey.ECDH method"),
     ("java-jca", (".java",),
      r'getInstance\(\s*"(RSA|EC|DSA|DH|DiffieHellman|ECDH|ECDSA|MD5|SHA-?1|DES|DESede|TripleDES|RC4|ARCFOUR|'
-     r'\w*with(RSA|ECDSA|DSA)\w*)[/"]', None, "Java is not scanned yet"),
+     r'\w*with(RSA|ECDSA|DSA)\w*)[/"]', None, "JCA call with a literal algorithm name that Ratchet does not report"),
     ("java-jca-name", (".java",),
      r'"(MD5|SHA1|SHA224|SHA256|SHA384|SHA512)with(RSA|ECDSA|DSA)(andMGF1)?"|"RSASSA-PSS"|"RSA/ECB/\w+"', None,
-     "JCA signature or cipher name held as a string constant; Java is not scanned yet"),
+     "JCA signature or cipher name held as a string constant that Ratchet does not report"),
+    ("java-jca-unresolved", (".java",),
+     r"\b(KeyPairGenerator|KeyFactory|Signature|Cipher|KeyAgreement|MessageDigest|Mac|KeyGenerator|"
+     r"SecretKeyFactory)\.getInstance\(\s*[A-Za-z_][\w.]*\s*[,)]", "unresolved",
+     "JCA call whose algorithm name is a variable or parameter, resolved only at run time"),
     ("js-node-crypto", (".js", ".ts", ".mjs", ".cjs"),
      r"\b(createHash|createHmac)\(\s*['\"](md5|sha1)['\"]|\bcreate(Sign|Verify)\(\s*['\"](RSA-)?SHA|"
      r"\bgenerateKeyPair(Sync)?\(\s*['\"](rsa|rsa-pss|ec|dsa|dh|ed25519|x25519)['\"]|"
@@ -124,7 +128,7 @@ def search(repo):
     for rel, i, algo, sid, why, line in hits:
         if (rel, i, algo) in reported:
             continue
-        if sid == "py-rsa-padding" and (rel, i) in reported_lines:
+        if sid in ("py-rsa-padding", "java-jca-unresolved") and (rel, i) in reported_lines:
             continue
         missed.append({"path": rel, "line": i, "algorithm": algo, "source": "search", "search": sid,
                        "note": why, "test": ratchet.is_test_path(rel), "snippet": line.strip()[:160]})

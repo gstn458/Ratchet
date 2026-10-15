@@ -2,9 +2,1077 @@
   "name": "jjwt",
   "commit": "fb71496164c71442d08adec4571d9616ed5e1b8d",
   "registry_version": "2026.10.2",
-  "go_backend": "regex (requested)",
-  "files_scanned": 0,
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+  },
+  "not_scanned": {},
+  "files_scanned": 407,
   "unparsed": [],
   "skipped_directories": 3,
-  "findings": []
+  "findings": [
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/JwtBuilder.java",
+      "line": 41,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/JwtBuilder.java",
+      "line": 42,
+      "snippet": "import java.security.interfaces.RSAKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.RSAKey;"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 50,
+      "snippet": "HS256(\"HS256\", \"HMAC using SHA-256\", \"HMAC\", \"HmacSHA256\", true, 256, 256, \"1.2.840.113549.2.9\"),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 65,
+      "snippet": "RS256(\"RS256\", \"RSASSA-PKCS-v1_5 using SHA-256\", \"RSA\", \"SHA256withRSA\", true, 256, 2048),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 65,
+      "snippet": "RS256(\"RS256\", \"RSASSA-PKCS-v1_5 using SHA-256\", \"RSA\", \"SHA256withRSA\", true, 256, 2048),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 70,
+      "snippet": "RS384(\"RS384\", \"RSASSA-PKCS-v1_5 using SHA-384\", \"RSA\", \"SHA384withRSA\", true, 384, 2048),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 75,
+      "snippet": "RS512(\"RS512\", \"RSASSA-PKCS-v1_5 using SHA-512\", \"RSA\", \"SHA512withRSA\", true, 512, 2048),"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 80,
+      "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 80,
+      "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 85,
+      "snippet": "ES384(\"ES384\", \"ECDSA using P-384 and SHA-384\", \"ECDSA\", \"SHA384withECDSA\", true, 384, 384),"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 90,
+      "snippet": "ES512(\"ES512\", \"ECDSA using P-521 and SHA-512\", \"ECDSA\", \"SHA512withECDSA\", true, 512, 521),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 97,
+      "snippet": "PS256(\"PS256\", \"RSASSA-PSS using SHA-256 and MGF1 with SHA-256\", \"RSA\", \"RSASSA-PSS\", false, 256, 2048),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 104,
+      "snippet": "PS384(\"PS384\", \"RSASSA-PSS using SHA-384 and MGF1 with SHA-384\", \"RSA\", \"RSASSA-PSS\", false, 384, 2048),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 111,
+      "snippet": "PS512(\"PS512\", \"RSASSA-PSS using SHA-512 and MGF1 with SHA-512\", \"RSA\", \"RSASSA-PSS\", false, 512, 2048);"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 294,
+      "snippet": "return familyName.equals(\"ECDSA\");"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/DynamicJwkBuilder.java",
+      "line": 24,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/DynamicJwkBuilder.java",
+      "line": 25,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/DynamicJwkBuilder.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/DynamicJwkBuilder.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPrivateJwk.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPrivateJwk.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPrivateJwkBuilder.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPrivateJwkBuilder.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPublicJwk.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPublicJwkBuilder.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/EcPublicJwkBuilder.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/Jwks.java",
+      "line": 217,
+      "snippet": "public static final Curve Ed25519 = get().forKey(\"Ed25519\");"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/Jwks.java",
+      "line": 243,
+      "snippet": "public static final Curve X25519 = get().forKey(\"X25519\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/Keys.java",
+      "line": 73,
+      "snippet": "return new SecretKeySpec(bytes, \"HmacSHA256\");"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/OctetPrivateJwk.java",
+      "line": 20,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/OctetPublicJwk.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPrivateJwk.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPrivateJwk.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPrivateJwkBuilder.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPrivateJwkBuilder.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPublicJwk.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPublicJwkBuilder.java",
+      "line": 18,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/RsaPublicJwkBuilder.java",
+      "line": 19,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AbstractAsymmetricJwkBuilder.java",
+      "line": 45,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AbstractAsymmetricJwkBuilder.java",
+      "line": 46,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AbstractAsymmetricJwkBuilder.java",
+      "line": 47,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AbstractAsymmetricJwkBuilder.java",
+      "line": 48,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AbstractEcJwkFactory.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/AesGcmKeyAlgorithm.java",
+      "line": 42,
+      "snippet": "public static final String TRANSFORMATION = \"AES/GCM/NoPadding\";"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultDynamicJwkBuilder.java",
+      "line": 39,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultDynamicJwkBuilder.java",
+      "line": 40,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultDynamicJwkBuilder.java",
+      "line": 41,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultDynamicJwkBuilder.java",
+      "line": 42,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultEcPrivateJwk.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultEcPrivateJwk.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultEcPublicJwk.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultRsaPrivateJwk.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultRsaPrivateJwk.java",
+      "line": 28,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultRsaPrivateJwk.java",
+      "line": 29,
+      "snippet": "import java.security.spec.RSAOtherPrimeInfo;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultRsaPublicJwk.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 26,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 28,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 29,
+      "snippet": "import java.security.spec.ECFieldFp;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 30,
+      "snippet": "import java.security.spec.ECGenParameterSpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 31,
+      "snippet": "import java.security.spec.ECParameterSpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 32,
+      "snippet": "import java.security.spec.ECPoint;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 33,
+      "snippet": "import java.security.spec.ECPublicKeySpec;"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 46,
+      "snippet": "public static final ECCurve P256 = new ECCurve(\"P-256\", \"secp256r1\"); // JDK standard"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 47,
+      "snippet": "public static final ECCurve P384 = new ECCurve(\"P-384\", \"secp384r1\"); // JDK standard"
+    },
+    {
+      "label": "EC-SECP521R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ECCurve.java",
+      "line": 48,
+      "snippet": "public static final ECCurve P521 = new ECCurve(\"P-521\", \"secp521r1\"); // JDK standard"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPrivateJwkFactory.java",
+      "line": 30,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPrivateJwkFactory.java",
+      "line": 31,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPrivateJwkFactory.java",
+      "line": 32,
+      "snippet": "import java.security.spec.ECPrivateKeySpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPrivateJwkFactory.java",
+      "line": 33,
+      "snippet": "import java.security.spec.ECPublicKeySpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPublicJwkFactory.java",
+      "line": 27,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPublicJwkFactory.java",
+      "line": 28,
+      "snippet": "import java.security.spec.ECParameterSpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPublicJwkFactory.java",
+      "line": 29,
+      "snippet": "import java.security.spec.ECPoint;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcPublicJwkFactory.java",
+      "line": 30,
+      "snippet": "import java.security.spec.ECPublicKeySpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcSignatureAlgorithm.java",
+      "line": 37,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcSignatureAlgorithm.java",
+      "line": 38,
+      "snippet": "import java.security.spec.ECGenParameterSpec;"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcSignatureAlgorithm.java",
+      "line": 56,
+      "snippet": "private static final Set<String> KEY_ALG_NAMES = Collections.setOf(\"EC\", \"ECDSA\", ES256_OID, ES384_OID, ES512_OID);"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcSignatureAlgorithm.java",
+      "line": 112,
+      "snippet": "if (\"EC\".equalsIgnoreCase(algName) || \"ECDSA\".equalsIgnoreCase(algName)) {"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcdhKeyAlgorithm.java",
+      "line": 52,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcdhKeyAlgorithm.java",
+      "line": 59,
+      "snippet": "protected static final String JCA_NAME = \"ECDH\";"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 50,
+      "snippet": "public static final EdwardsCurve X25519 = new EdwardsCurve(\"X25519\", 110); // Requires JDK >= 11 or BC"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 52,
+      "snippet": "public static final EdwardsCurve Ed25519 = new EdwardsCurve(\"Ed25519\", 112); // Requires JDK >= 15 or BC"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/GcmAesAeadAlgorithm.java",
+      "line": 39,
+      "snippet": "private static final String TRANSFORMATION_STRING = \"AES/GCM/NoPadding\";"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/HmacAesAeadAlgorithm.java",
+      "line": 50,
+      "snippet": "private static final String TRANSFORMATION_STRING = \"AES/CBC/PKCS5Padding\";"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 254,
+      "snippet": "(\"XDH\".equals(this.jcaName) || \"X25519\".equals(this.jcaName) || \"X448\".equals(this.jcaName)) &&"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/KeyPairs.java",
+      "line": 24,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/KeyPairs.java",
+      "line": 25,
+      "snippet": "import java.security.interfaces.RSAKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/KeysBridge.java",
+      "line": 31,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/KeysBridge.java",
+      "line": 32,
+      "snippet": "import java.security.interfaces.RSAKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/PrivateECKey.java",
+      "line": 22,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/PrivateECKey.java",
+      "line": 23,
+      "snippet": "import java.security.spec.ECParameterSpec;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ProvidedPrivateKeyBuilder.java",
+      "line": 23,
+      "snippet": "import java.security.interfaces.ECKey;"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/ProvidedPrivateKeyBuilder.java",
+      "line": 50,
+      "snippet": "if (!(key instanceof ECKey) && (\"EC\".equalsIgnoreCase(privAlg) || \"ECDSA\".equalsIgnoreCase(privAlg)) &&"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RSAOtherPrimeInfoConverter.java",
+      "line": 27,
+      "snippet": "import java.security.spec.RSAOtherPrimeInfo;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 34,
+      "snippet": "import java.security.interfaces.RSAMultiPrimePrivateCrtKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 35,
+      "snippet": "import java.security.interfaces.RSAPrivateCrtKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 36,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 37,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 39,
+      "snippet": "import java.security.spec.RSAMultiPrimePrivateCrtKeySpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 40,
+      "snippet": "import java.security.spec.RSAOtherPrimeInfo;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 41,
+      "snippet": "import java.security.spec.RSAPrivateCrtKeySpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 42,
+      "snippet": "import java.security.spec.RSAPrivateKeySpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPrivateJwkFactory.java",
+      "line": 43,
+      "snippet": "import java.security.spec.RSAPublicKeySpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPublicJwkFactory.java",
+      "line": 25,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaPublicJwkFactory.java",
+      "line": 26,
+      "snippet": "import java.security.spec.RSAPublicKeySpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaSignatureAlgorithm.java",
+      "line": 36,
+      "snippet": "import java.security.spec.PSSParameterSpec;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/RsaSignatureAlgorithm.java",
+      "line": 51,
+      "snippet": "static final String PSS_JCA_NAME = \"RSASSA-PSS\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 37,
+      "snippet": "private static final String RSA1_5_TRANSFORMATION = \"RSA/ECB/PKCS1Padding\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 39,
+      "snippet": "private static final String RSA_OAEP_TRANSFORMATION = \"RSA/ECB/OAEPWithSHA-1AndMGF1Padding\";"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 39,
+      "snippet": "private static final String RSA_OAEP_TRANSFORMATION = \"RSA/ECB/OAEPWithSHA-1AndMGF1Padding\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 41,
+      "snippet": "private static final String RSA_OAEP_256_TRANSFORMATION = \"RSA/ECB/OAEPWithSHA-256AndMGF1Padding\";"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 41,
+      "snippet": "private static final String RSA_OAEP_256_TRANSFORMATION = \"RSA/ECB/OAEPWithSHA-256AndMGF1Padding\";"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "tdjar/src/test/java/io/jsonwebtoken/all/JavaReadmeTest.java",
+      "line": 45,
+      "snippet": "import java.security.interfaces.ECPrivateKey;"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "tdjar/src/test/java/io/jsonwebtoken/all/JavaReadmeTest.java",
+      "line": 46,
+      "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "tdjar/src/test/java/io/jsonwebtoken/all/JavaReadmeTest.java",
+      "line": 47,
+      "snippet": "import java.security.interfaces.RSAPrivateKey;"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "tdjar/src/test/java/io/jsonwebtoken/all/JavaReadmeTest.java",
+      "line": 48,
+      "snippet": "import java.security.interfaces.RSAPublicKey;"
+    }
+  ]
 }

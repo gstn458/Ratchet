@@ -872,6 +872,7 @@
     "go-ecdh-method",
     "java-jca",
     "java-jca-name",
+    "java-jca-unresolved",
     "js-node-crypto",
     "js-forge"
   ]

@@ -34,6 +34,8 @@ CASES = [
     ("HmacSHA256", ["SHA-256"]), ("PBKDF2WithHmacSHA1", ["SHA-1"]),
     ("PBEWithMD5AndDES", ["MD5", "DES"]), ("PBEWithSHA1AndDESede", ["SHA-1", "3DES"]),
     ("PBEWithHmacSHA256AndAES_256", ["SHA-256", "AES"]),
+    # the start of a name built at run time ("HmacSHA" + bits), not SHA-1
+    ("HmacSHA", []), ("PBKDF2WithHmacSHA", []), ("SHAwithRSA", ["RSA"]),
     # not in the registry yet, or not an algorithm name
     ("EdDSA", []), ("XDH", []), ("Ed448", []), ("X448", []), ("", []), ("Banana", []),
 ]
