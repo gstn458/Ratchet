@@ -6,6 +6,39 @@ skipped no directories
 parsed all 1 file
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (no call sites, 2 algorithm names)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      tokens.go:3   var supported = []string{"RS256", "ES512", "PS384"}
+      tokens.go:9   return map[string]string{"alg": "RSA1_5", "enc": "A256GCM", "note": "use RS256"}
+
+  ECDH  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      tokens.go:5   const wrapping = "ECDH-ES+A256KW"
+
+  ECDSA  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      tokens.go:3   var supported = []string{"RS256", "ES512", "PS384"}
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  AES  (no call sites, 2 algorithm names)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      tokens.go:5   const wrapping = "ECDH-ES+A256KW"
+      tokens.go:9   return map[string]string{"alg": "RSA1_5", "enc": "A256GCM", "note": "use RS256"}
+
+  SHA-256  (no call sites, 1 algorithm name)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      tokens.go:3   var supported = []string{"RS256", "ES512", "PS384"}
+
 ========================================================================
-No quantum-vulnerable primitives found.
+No quantum-vulnerable call sites, 4 algorithm names and no imports across 1 file.
 

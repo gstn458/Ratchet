@@ -229,9 +229,16 @@ JavaScript is likewise scanned only with `tree-sitter-javascript` (`.js`, `.mjs`
 node-forge. Key sizes and curves are read from literal options (`modulusLength`,
 `namedCurve`, `bits`) and cipher names (`aes-256-gcm`). Node's `crypto.sign` and
 `createSign('sha256')` name only the hash, so the key algorithm is not claimed;
-forge's `forge.des` does DES or 3DES by key length and is not claimed; a `subtle`
-object held in a variable is not followed; and JWT algorithm names (`RS256`) are not
-read in any language yet. TypeScript (`.ts`, `.mts`, `.cts`, `.tsx`) is scanned with the same
+forge's `forge.des` does DES or 3DES by key length and is not claimed; and a `subtle`
+object held in a variable is not followed.
+
+JOSE algorithm names, the `alg` and `enc` values of JWT, JWS and JWE (`RS256`, `ES256`,
+`PS256`, `EdDSA`, `RSA-OAEP`, `ECDH-ES`, `A256GCM` and the rest of RFC 7518, 8037 and
+8812), are algorithm-name occurrences in every language when a string literal is exactly
+one of them, case and all. Each records the primitives it fixes: `ES256` is ECDSA on
+P-256 with SHA-256, `RSA-OAEP` is RSA with SHA-1. A JWT library that accepts a name
+from configuration or a token header at run time is not seen, which is also why a
+verifier's `algorithms=` allow-list shows what it accepts, not what any token uses. TypeScript (`.ts`, `.mts`, `.cts`, `.tsx`) is scanned with the same
 rules through `tree-sitter-typescript`, including `import x = require(...)` and receivers
 wrapped in `as`, `!` or `satisfies`; types themselves are not followed, so a variable
 typed as Node's `Hash` but assigned elsewhere is not traced. In the corpus only vault's

@@ -77,6 +77,71 @@
   "components": [
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa-secp256r1",
+      "name": "ECDSA-SECP256R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "SECP256R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Tokens.java#L5",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/algorithm/ed25519",
       "name": "Ed25519",
       "cryptoProperties": {
@@ -138,6 +203,154 @@
         {
           "name": "ratchet:recommended_replacement",
           "value": "ML-DSA-65 (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Tokens.java#L4",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "Tokens.java#L5",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "Tokens.java#L6",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 2
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Tokens.java#L4",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "Tokens.java#L5",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "Tokens.java#L6",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Grover gives a quadratic speedup only. Still acceptable."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "no action needed"
         }
       ]
     }

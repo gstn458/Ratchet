@@ -6,6 +6,33 @@ skipped no directories
 parsed all 1 file
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      sign.js:8   return jwt.verify(token, key, { algorithms: ['ES256', `HS256`] });
+
+  RSA  (no call sites, 1 algorithm name)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      sign.js:4   return jwt.sign(payload, key, { algorithm: 'RS512' });
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (no call sites, 2 algorithm names)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      sign.js:8   return jwt.verify(token, key, { algorithms: ['ES256', `HS256`] });
+      sign.js:11   const header = { alg: 'PBES2-HS256+A128KW', enc: 'A192GCM' };
+
+  AES  (no call sites, 1 algorithm name)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      sign.js:11   const header = { alg: 'PBES2-HS256+A128KW', enc: 'A192GCM' };
+
 ========================================================================
-No quantum-vulnerable primitives found.
+No quantum-vulnerable call sites, 2 algorithm names and no imports across 1 file.
 

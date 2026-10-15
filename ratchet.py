@@ -461,6 +461,50 @@ def registry_digest(registry):
 REGISTRY_DIGEST = registry_digest(REGISTRY)
 
 # ---------------------------------------------------------------------------
+# JOSE algorithm names (JWT, JWS, JWE), in every language
+#
+# A string literal that is exactly a registered JOSE "alg" or "enc" value is
+# an algorithm-name occurrence: counted apart, never gating a build, never
+# evidence of EC usage. JOSE names are case-sensitive (RFC 7515, section
+# 4.1.1). Each fixes its primitives: ES256 is ECDSA on P-256 with SHA-256,
+# RSA-OAEP is RSA with SHA-1 (RFC 7518, section 4.3). Hashes and curves the
+# registry lacks (SHA-384, SHA-512) record nothing beyond the key algorithm.
+# Sources: RFC 7518 sections 3.1, 4.1 and 5.1; RFC 8037 (EdDSA); RFC 8812
+# (ES256K); RFC 9864 (Ed25519, Ed448).
+# ---------------------------------------------------------------------------
+
+def _jose_table():
+    table = {
+        "HS256": [("SHA-256", None)],
+        "RS256": [("RSA", None), ("SHA-256", None)], "RS384": [("RSA", None)], "RS512": [("RSA", None)],
+        "PS256": [("RSA", None), ("SHA-256", None)], "PS384": [("RSA", None)], "PS512": [("RSA", None)],
+        "ES256": [("ECDSA", "SECP256R1"), ("SHA-256", None)], "ES384": [("ECDSA", "SECP384R1")],
+        "ES512": [("ECDSA", "SECP521R1")], "ES256K": [("ECDSA", "SECP256K1"), ("SHA-256", None)],
+        "EdDSA": [("EdDSA", None)], "Ed25519": [("Ed25519", None)], "Ed448": [("Ed448", None)],
+        "RSA1_5": [("RSA", None)], "RSA-OAEP": [("RSA", None), ("SHA-1", None)],
+        "RSA-OAEP-256": [("RSA", None), ("SHA-256", None)], "RSA-OAEP-384": [("RSA", None)],
+        "RSA-OAEP-512": [("RSA", None)], "ECDH-ES": [("ECDH", None)],
+        "A128CBC-HS256": [("AES", "128"), ("SHA-256", None)], "A192CBC-HS384": [("AES", "192")],
+        "A256CBC-HS512": [("AES", "256")],
+        "PBES2-HS256+A128KW": [("SHA-256", None), ("AES", "128")],
+        "PBES2-HS384+A192KW": [("AES", "192")], "PBES2-HS512+A256KW": [("AES", "256")],
+    }
+    for size in ("128", "192", "256"):
+        for suffix in ("KW", "GCMKW", "GCM"):
+            table[f"A{size}{suffix}"] = [("AES", size)]
+        table[f"ECDH-ES+A{size}KW"] = [("ECDH", None), ("AES", size)]
+    return table
+
+
+JOSE_NAMES = _jose_table()
+
+
+def jose_named(value):
+    """[(algorithm, parameter set)] for a string that is exactly a JOSE name."""
+    return JOSE_NAMES.get(value, [])
+
+
+# ---------------------------------------------------------------------------
 # Python detection: module paths and attribute names
 # ---------------------------------------------------------------------------
 
@@ -580,12 +624,14 @@ PY_TRIGGER_PACKAGES = {
     for name in table
 } | {package.split(".")[0] for package in PY_NEW_PACKAGES}
 PY_TRIGGER = re.compile(
+    r"(?<![\w+-])(?:" + "|".join(sorted(map(re.escape, JOSE_NAMES), key=lambda n: (-len(n), n))) + r")(?![\w+-])|"
     r"\b(?:" + "|".join(sorted(map(re.escape, PY_TRIGGER_PACKAGES))) + r")\b"
     r"|(?i:\b(?:" + "|".join(sorted(map(re.escape, set(PY_HASH_FUNCTIONS) | set(PY_HASH_NAMES)))) + r")\b)")
 # The same words in lower case, without the word boundaries: a looser test
 # that plain substring search answers much faster than the expression, so the
 # expression only runs on files that pass it.
-PY_TRIGGER_WORDS = tuple(sorted({w.lower() for w in PY_TRIGGER_PACKAGES | set(PY_HASH_FUNCTIONS) | set(PY_HASH_NAMES)}))
+PY_TRIGGER_WORDS = tuple(sorted({w.lower() for w in PY_TRIGGER_PACKAGES | set(PY_HASH_FUNCTIONS)
+                                  | set(PY_HASH_NAMES) | set(JOSE_NAMES)}))
 
 
 def py_triggered(source):
@@ -758,6 +804,18 @@ class Finding:
         return f"{self.algorithm}-{self.params}" if self.params else self.algorithm
 
 
+def add_names(findings, path, lines, named):
+    """Append algorithm-name findings for [(line, value, names)], one per line
+    and algorithm, skipping any a call site on the same line already counts."""
+    seen = {(f.line, f.algorithm) for f in findings if f.kind == CALL}
+    for line, names in named:
+        for algo, params in names:
+            if (line, algo) not in seen:
+                seen.add((line, algo))
+                snippet = lines[line - 1] if 0 < line <= len(lines) else ""
+                findings.append(Finding(algo, path, line, snippet, params, kind=NAME))
+
+
 # ---------------------------------------------------------------------------
 # Python scanning via AST
 # ---------------------------------------------------------------------------
@@ -775,6 +833,7 @@ class PyVisitor(ast.NodeVisitor):
         self.ec_uses = []                 # (binding, usage)
         self.ec_markers = set()           # usages proven by usage objects
         self._keygen = {}                 # id(call node) -> keygen finding
+        self.named = []                   # (line, JOSE names) from string constants
 
     def _line(self, node):
         idx = node.lineno - 1
@@ -851,6 +910,10 @@ class PyVisitor(ast.NodeVisitor):
         if isinstance(expr, (ast.Name, ast.Attribute)):
             return ast.unparse(expr)
         return None
+
+    def visit_Constant(self, node):
+        if isinstance(node.value, str) and node.value in JOSE_NAMES:
+            self.named.append((node.lineno, jose_named(node.value)))
 
     def visit_Assign(self, node):
         self.generic_visit(node)
@@ -1032,6 +1095,7 @@ def scan_python(path):
     visitor = PyVisitor(path, source.splitlines())
     visitor.visit(tree)
     visitor.resolve_ec()
+    add_names(visitor.findings, path, visitor.lines, visitor.named)
     return visitor.findings
 
 
@@ -1568,7 +1632,7 @@ class TreeSitterJava(TreeSitterGrammar):
             if node.start_byte in call_names:
                 continue
             line, snippet = line_of(node)
-            for algo, params in jca_named(text(node)[1:-1]):
+            for algo, params in jca_named(text(node)[1:-1]) or jose_named(text(node)[1:-1]):
                 if (line, algo, params) not in named:
                     named.add((line, algo, params))
                     findings.append(Finding(algo, path, line, snippet, params, kind=NAME))
@@ -1608,6 +1672,8 @@ JS_TREE_SITTER_QUERY = """
 (import_statement) @import
 (call_expression) @call
 (assignment_expression) @assignment
+(string) @string
+(template_string) @string
 """
 
 # Packages that implement one algorithm. Importing Node's crypto or
@@ -1915,6 +1981,13 @@ class TreeSitterJavaScript(TreeSitterGrammar):
             line, snippet = line_of(node)
             for algo, params in found:
                 findings.append(Finding(algo, path, line, snippet, params))
+
+        named = []
+        for node in sorted(captures.get("string", ()), key=lambda n: n.start_byte):
+            value = string_value(node)
+            if value in JOSE_NAMES:
+                named.append((node.start_point[0] + 1, jose_named(value)))
+        add_names(findings, path, lines, named)
         return findings
 
 
@@ -2029,6 +2102,8 @@ def scan_go(path, lex=regex_go_lex):
     signing = [go_bind(GO_ECDSA_SIGNING, "crypto/ecdsa", name) for name in ecdsa_names if name != "_"]
     signs = (".Sign" in joined or "." in ecdsa_names or any(name + "." in joined for name in ecdsa_names)) \
         and any(p.search(text) for p in signing for text in code)
+    add_names(findings, path, lines, [(i, jose_named(value)) for i, values in enumerate(strings, start=1)
+                                      for value in values if value in JOSE_NAMES])
     return GoFindings(findings, ecdh=ecdh, signs=signs)
 
 

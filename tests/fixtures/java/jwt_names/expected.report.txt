@@ -9,11 +9,33 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
+  RSA  (no call sites, 3 algorithm names)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      Tokens.java:4   static final String DEFAULT = "RS256";
+      Tokens.java:5   String[] allowed = {"ES256", "PS512", "Ed25519"};
+      Tokens.java:6   String wrap = "RSA-OAEP-256";
+
+  ECDSA  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      Tokens.java:5   String[] allowed = {"ES256", "PS512", "Ed25519"};
+
   Ed25519  (no call sites, 1 algorithm name)
     Edwards-curve discrete log falls to Shor's algorithm.
     migrate to: ML-DSA-65 (FIPS 204)
       Tokens.java:5   String[] allowed = {"ES256", "PS512", "Ed25519"};
 
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (no call sites, 3 algorithm names)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      Tokens.java:4   static final String DEFAULT = "RS256";
+      Tokens.java:5   String[] allowed = {"ES256", "PS512", "Ed25519"};
+      Tokens.java:6   String wrap = "RSA-OAEP-256";
+
 ========================================================================
-No quantum-vulnerable call sites, 1 algorithm name and no imports across 1 file.
+No quantum-vulnerable call sites, 5 algorithm names and no imports across 1 file.
 

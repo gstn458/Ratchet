@@ -6,6 +6,50 @@ skipped no directories
 parsed all 1 file
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (no call sites, 3 algorithm names)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      tokens.py:3   ALGORITHMS = {"RS256": "rsa", "ES256K": "secp256k1", "HS512": "hmac"}
+      tokens.py:7   return jwt.encode(payload, key, algorithm="PS256")
+      tokens.py:15   return {"alg": "RSA-OAEP", "enc": "A128CBC-HS256"}
+
+  ECDSA  (no call sites, 2 algorithm names)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      tokens.py:3   ALGORITHMS = {"RS256": "rsa", "ES256K": "secp256k1", "HS512": "hmac"}
+      tokens.py:11   return jwt.decode(token, key, algorithms=["ES384", "EdDSA"])
+
+  EdDSA  (no call sites, 1 algorithm name)
+    Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner.
+    migrate to: ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448
+      tokens.py:11   return jwt.decode(token, key, algorithms=["ES384", "EdDSA"])
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (no call sites, 1 algorithm name)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      tokens.py:15   return {"alg": "RSA-OAEP", "enc": "A128CBC-HS256"}
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (no call sites, 3 algorithm names)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      tokens.py:3   ALGORITHMS = {"RS256": "rsa", "ES256K": "secp256k1", "HS512": "hmac"}
+      tokens.py:7   return jwt.encode(payload, key, algorithm="PS256")
+      tokens.py:15   return {"alg": "RSA-OAEP", "enc": "A128CBC-HS256"}
+
+  AES  (no call sites, 1 algorithm name)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      tokens.py:15   return {"alg": "RSA-OAEP", "enc": "A128CBC-HS256"}
+
 ========================================================================
-No quantum-vulnerable primitives found.
+No quantum-vulnerable call sites, 6 algorithm names and no imports across 1 file.
 

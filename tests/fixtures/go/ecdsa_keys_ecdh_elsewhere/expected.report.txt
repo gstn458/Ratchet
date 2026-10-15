@@ -18,6 +18,11 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       sign.go:15   return ecdsa.SignASN1(rand.Reader, key, digest)
       ... and 4 more
 
+  ECDH  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      agree.go:5   const ECDH_ES = "ECDH-ES"
+
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
@@ -30,6 +35,6 @@ USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not vis
       keys.go:4   "crypto/ecdsa"
 
 ========================================================================
-5 quantum-vulnerable call sites (1 in test code) and 5 imports across 5 files.
+5 quantum-vulnerable call sites (1 in test code), 1 algorithm name and 5 imports across 5 files.
 1 call site and 2 imports with usage undetermined: review before choosing a migration target.
 

@@ -74,5 +74,477 @@
       }
     ]
   },
-  "components": []
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-128",
+      "name": "AES-128",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "128",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt"
+          ],
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L15",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Grover halves effective key length. AES-256 stays at 128-bit margin."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "AES-256 if currently AES-128"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa-secp256k1",
+      "name": "ECDSA-SECP256K1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "SECP256K1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L3",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa-secp384r1",
+      "name": "ECDSA-SECP384R1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "SECP384R1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L11",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/eddsa",
+      "name": "EdDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L11",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L3",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "tokens.py#L7",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "tokens.py#L15",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.14.3.2.26"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L15",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Chosen-prefix collisions demonstrated in 2020. Retire it."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "SHA-256 or SHA-3"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 2
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "tokens.py#L3",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "tokens.py#L7",
+            "additionalContext": "algorithm name"
+          },
+          {
+            "location": "tokens.py#L15",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Grover gives a quadratic speedup only. Still acceptable."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "no action needed"
+        }
+      ]
+    }
+  ]
 }
