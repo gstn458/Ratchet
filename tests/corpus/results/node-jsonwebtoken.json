@@ -1,7 +1,7 @@
 {
   "name": "node-jsonwebtoken",
   "commit": "b924272f29192e12926b5414546f7c5bfcc9579d",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

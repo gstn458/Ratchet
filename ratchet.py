@@ -1285,6 +1285,11 @@ JAVA_IMPORTS = {
     "java.security.spec.DSA": "DSA",
     "javax.crypto.interfaces.DH": "DH",
     "javax.crypto.spec.DH": "DH",
+    "java.security.interfaces.EdEC": "EdDSA",
+    "java.security.spec.EdEC": "EdDSA",
+    "java.security.spec.EdDSAParameterSpec": "EdDSA",
+    "java.security.interfaces.XEC": "XDH",
+    "java.security.spec.XEC": "XDH",
     "javax.crypto.spec.DESKeySpec": "DES",
     "javax.crypto.spec.DESedeKeySpec": "3DES",
     # BouncyCastle lightweight API
@@ -1305,6 +1310,10 @@ JAVA_IMPORTS = {
     "org.bouncycastle.crypto.params.Ed25519": "Ed25519",
     "org.bouncycastle.crypto.agreement.X25519": "X25519",
     "org.bouncycastle.crypto.params.X25519": "X25519",
+    "org.bouncycastle.crypto.signers.Ed448": "Ed448",
+    "org.bouncycastle.crypto.params.Ed448": "Ed448",
+    "org.bouncycastle.crypto.agreement.X448": "X448",
+    "org.bouncycastle.crypto.params.X448": "X448",
     "org.bouncycastle.crypto.digests.MD5Digest": "MD5",
     "org.bouncycastle.crypto.digests.SHA1Digest": "SHA-1",
     "org.bouncycastle.crypto.engines.DESedeEngine": "3DES",
@@ -1328,12 +1337,13 @@ JCA_CLASSES = {
 
 # Standard JCA names (Java Security Standard Algorithm Names), lower-cased, as
 # JCA matches them without regard to case. Only algorithms in the registry
-# are mapped; anything else (SHA-512, EdDSA, XDH, Ed448, X448) records nothing.
+# are mapped; anything else (SHA-384, SHA-512, SHA-3) records nothing.
 JCA_NAMES = {
     "rsa": "RSA", "rsassa-pss": "RSA",
     "ec": "EC", "ecdsa": "ECDSA", "ecdh": "ECDH", "ecdhc": "ECDH",
     "dsa": "DSA", "dh": "DH", "diffiehellman": "DH",
-    "ed25519": "Ed25519", "x25519": "X25519",
+    "ed25519": "Ed25519", "x25519": "X25519", "ed448": "Ed448", "x448": "X448",
+    "eddsa": "EdDSA", "xdh": "XDH",
     "des": "DES", "desede": "3DES", "tripledes": "3DES",
     "rc4": "RC4", "arcfour": "RC4", "aes": "AES",
     "md5": "MD5", "sha1": "SHA-1", "sha-1": "SHA-1", "sha": "SHA-1",
@@ -1358,7 +1368,7 @@ JCA_CURVES = {"secp256r1": "SECP256R1", "prime256v1": "SECP256R1", "secp384r1": 
 # ("RSA", "EC", "MD5", "SHA-1", "DES") are used as labels too often to claim
 # anything outside getInstance.
 JCA_UNAMBIGUOUS = {"rsassa-pss", "desede", "tripledes", "diffiehellman", "ecdh", "ecdsa",
-                   "ed25519", "x25519", "arcfour"}
+                   "ed25519", "x25519", "ed448", "x448", "eddsa", "xdh", "arcfour"}
 JCA_TRANSFORMATION = re.compile(r"[a-z0-9_-]+/[a-z0-9]+/[a-z0-9-]*padding")
 
 
@@ -2145,7 +2155,7 @@ def build_cbom(scan, root, tool_version=VERSION):
 ASYMMETRIC_PRIMITIVES = {"pke", "signature", "key-agree", "kem", "unknown"}
 
 # Algorithms whose name fixes the parameter set, so "not stated" means nothing.
-FIXED_PARAMETER_ALGORITHMS = {"Ed25519", "X25519"}
+FIXED_PARAMETER_ALGORITHMS = {"Ed25519", "X25519", "Ed448", "X448"}
 
 
 def plural(n, word, words=None):

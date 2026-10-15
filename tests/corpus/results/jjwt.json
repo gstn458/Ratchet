@@ -1,7 +1,7 @@
 {
   "name": "jjwt",
   "commit": "fb71496164c71442d08adec4571d9616ed5e1b8d",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
@@ -29,6 +29,15 @@
       "path": "api/src/main/java/io/jsonwebtoken/JwtBuilder.java",
       "line": 42,
       "snippet": "import java.security.interfaces.RSAKey;"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 304,
+      "snippet": "public static final SignatureAlgorithm EdDSA = Jwts.get(REGISTRY, \"EdDSA\");"
     },
     {
       "label": "EC",
@@ -274,6 +283,15 @@
       "snippet": "public static final Curve Ed25519 = get().forKey(\"Ed25519\");"
     },
     {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/Jwks.java",
+      "line": 230,
+      "snippet": "public static final Curve Ed448 = get().forKey(\"Ed448\");"
+    },
+    {
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "algorithm name",
@@ -281,6 +299,15 @@
       "path": "api/src/main/java/io/jsonwebtoken/security/Jwks.java",
       "line": 243,
       "snippet": "public static final Curve X25519 = get().forKey(\"X25519\");"
+    },
+    {
+      "label": "X448",
+      "algorithm": "X448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/security/Jwks.java",
+      "line": 256,
+      "snippet": "public static final Curve X448 = get().forKey(\"X448\");"
     },
     {
       "label": "SHA-256",
@@ -751,6 +778,24 @@
       "snippet": "protected static final String JCA_NAME = \"ECDH\";"
     },
     {
+      "label": "XDH",
+      "algorithm": "XDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EcdhKeyAlgorithm.java",
+      "line": 60,
+      "snippet": "protected static final String XDH_JCA_NAME = \"XDH\";"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdSignatureAlgorithm.java",
+      "line": 30,
+      "snippet": "private static final String ID = \"EdDSA\";"
+    },
+    {
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "algorithm name",
@@ -760,6 +805,15 @@
       "snippet": "public static final EdwardsCurve X25519 = new EdwardsCurve(\"X25519\", 110); // Requires JDK >= 11 or BC"
     },
     {
+      "label": "X448",
+      "algorithm": "X448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 51,
+      "snippet": "public static final EdwardsCurve X448 = new EdwardsCurve(\"X448\", 111); // Requires JDK >= 11 or BC"
+    },
+    {
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "algorithm name",
@@ -767,6 +821,33 @@
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
       "line": 52,
       "snippet": "public static final EdwardsCurve Ed25519 = new EdwardsCurve(\"Ed25519\", 112); // Requires JDK >= 15 or BC"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 53,
+      "snippet": "public static final EdwardsCurve Ed448 = new EdwardsCurve(\"Ed448\", 113); // Requires JDK >= 15 or BC"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 297,
+      "snippet": "return \"EdDSA\".equals(alg) || \"XDH\".equals(alg) || findByKey(key) != null;"
+    },
+    {
+      "label": "XDH",
+      "algorithm": "XDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/EdwardsCurve.java",
+      "line": 297,
+      "snippet": "return \"EdDSA\".equals(alg) || \"XDH\".equals(alg) || findByKey(key) != null;"
     },
     {
       "label": "AES",
@@ -789,6 +870,24 @@
     {
       "label": "X25519",
       "algorithm": "X25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 254,
+      "snippet": "(\"XDH\".equals(this.jcaName) || \"X25519\".equals(this.jcaName) || \"X448\".equals(this.jcaName)) &&"
+    },
+    {
+      "label": "X448",
+      "algorithm": "X448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 254,
+      "snippet": "(\"XDH\".equals(this.jcaName) || \"X25519\".equals(this.jcaName) || \"X448\".equals(this.jcaName)) &&"
+    },
+    {
+      "label": "XDH",
+      "algorithm": "XDH",
       "kind": "algorithm name",
       "test": false,
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",

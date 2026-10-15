@@ -1,7 +1,7 @@
 {
   "name": "vault",
   "commit": "fdd82cfd09d5f905f29aa98d9fea6d2a77fd5eda",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

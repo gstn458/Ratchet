@@ -37,7 +37,8 @@ CASES = [
     # the start of a name built at run time ("HmacSHA" + bits), not SHA-1
     ("HmacSHA", []), ("PBKDF2WithHmacSHA", []), ("SHAwithRSA", ["RSA"]),
     # not in the registry yet, or not an algorithm name
-    ("EdDSA", []), ("XDH", []), ("Ed448", []), ("X448", []), ("", []), ("Banana", []),
+    ("EdDSA", ["EdDSA"]), ("XDH", ["XDH"]), ("Ed448", ["Ed448"]), ("X448", ["X448"]),
+    ("SHA3-256", []), ("", []), ("Banana", []),
 ]
 
 

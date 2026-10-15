@@ -56,7 +56,8 @@ Java's algorithm-name occurrences (an unambiguous JCA name in a string literal) 
 labelled one by one, because they never gate a build. When the kind was added, all 95 in
 the corpus were read: three were `"HmacSHA" + bits` and `"PBKDF2WithHmacSHA" + bits`, the
 start of a name built at run time, wrongly read as SHA-1. That was fixed before the
-measurement, leaving 92, all naming the algorithm they claim.
+measurement, leaving 92, all naming the algorithm they claim. Registry 2026.10.3 added
+Ed448, X448, EdDSA and XDH, which brought 11 more in jjwt; all 11 were read and are correct.
 
 ## Missed findings
 

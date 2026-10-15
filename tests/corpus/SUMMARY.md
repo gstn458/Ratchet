@@ -23,9 +23,9 @@ found by reading the code, listed in `labels/<name>.json`.
 | caddy | go | 20 | 17 | 16 | 0 | 20 | 0 | 0.0% | 0 |
 | vault | go | 251 | 138 | 206 | 0 | 251 | 0 | 0.0% | 48 |
 | java-jwt | java | 0 | 0 | 29 | 57 | 0 | 0 | n/a | 7 |
-| jjwt | java | 0 | 0 | 83 | 35 | 0 | 0 | n/a | 9 |
+| jjwt | java | 0 | 0 | 83 | 46 | 0 | 0 | n/a | 9 |
 | node-jsonwebtoken | javascript | 0 | 0 | 0 | 0 | 0 | 0 | n/a | 6 |
 | forge | javascript | 0 | 0 | 0 | 0 | 0 | 0 | n/a | 90 |
-| **total** | | 997 | 492 | 843 | 92 | 997 | 1 | 0.1% | 276 |
+| **total** | | 997 | 492 | 843 | 103 | 997 | 1 | 0.1% | 276 |
 
 Labelled 997 of 997 call sites (100.0%).

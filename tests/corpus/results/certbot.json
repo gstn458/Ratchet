@@ -1,7 +1,7 @@
 {
   "name": "certbot",
   "commit": "0201ba5ce70ba8b7545380064abddd4bc3a10c15",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

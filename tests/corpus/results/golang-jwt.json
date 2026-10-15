@@ -1,7 +1,7 @@
 {
   "name": "golang-jwt",
   "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

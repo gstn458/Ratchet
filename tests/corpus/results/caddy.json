@@ -1,7 +1,7 @@
 {
   "name": "caddy",
   "commit": "401582cccfb3d1b6de382d48929e4070ef6663f2",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

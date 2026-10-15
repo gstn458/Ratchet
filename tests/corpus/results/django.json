@@ -1,7 +1,7 @@
 {
   "name": "django",
   "commit": "f1d11117c6a3e227ce7cdd263cf0743f0eb73070",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

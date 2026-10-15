@@ -1,7 +1,7 @@
 {
   "name": "twisted",
   "commit": "bfa1ce9cd66e9b168f127fe3d764c83b841bb669",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

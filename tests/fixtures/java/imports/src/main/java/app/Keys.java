@@ -10,6 +10,9 @@ import org.bouncycastle.crypto.signers.ECDSASigner;
 import org.bouncycastle.crypto.digests.SHA1Digest;
 import static java.security.spec.RSAKeyGenParameterSpec.F4;
 import org.bouncycastle.crypto.params.*;
+import java.security.interfaces.EdECPublicKey;
+import java.security.spec.XECPrivateKeySpec;
+import org.bouncycastle.crypto.signers.Ed448Signer;
 import java.util.List;
 
 // import java.security.interfaces.RSAKey;  (commented out: not an import)

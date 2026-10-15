@@ -408,6 +408,71 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/eddsa",
+      "name": "EdDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Jca.java#L30",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/algorithm/md5",
       "name": "MD5",
       "cryptoProperties": {

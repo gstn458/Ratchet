@@ -34,6 +34,12 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       Jca.java:26   KeyAgreement.getInstance(KEX);
       Jca.java:13   private static final String KEX = "ECDH";
 
+  EdDSA  (1 call site)
+    parameter set: not stated in any call site
+    Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner.
+    migrate to: ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448
+      Jca.java:30   KeyPairGenerator.getInstance("EdDSA");
+
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
@@ -80,6 +86,6 @@ REVIEW               reduced margin under Grover, usually acceptable
       Jca.java:25   Cipher.getInstance("AES/GCM/NoPadding");
 
 ========================================================================
-9 quantum-vulnerable call sites, 2 algorithm names and 1 import across 2 files.
+10 quantum-vulnerable call sites, 2 algorithm names and 1 import across 2 files.
 1 call site and no imports with usage undetermined: review before choosing a migration target.
 

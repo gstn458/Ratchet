@@ -1,7 +1,7 @@
 {
   "name": "java-jwt",
   "commit": "33a2110a649dcd68a2feb07582b4f3763a43ec18",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",

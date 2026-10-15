@@ -26,6 +26,21 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       src/main/java/app/Keys.java:9   import org.bouncycastle.crypto.signers.ECDSASigner;
 
+  Ed448  (no call sites, 1 import)
+    Edwards448 discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-87 (FIPS 204)
+      src/main/java/app/Keys.java:15   import org.bouncycastle.crypto.signers.Ed448Signer;
+
+  EdDSA  (no call sites, 1 import)
+    Edwards-curve discrete log falls to Shor's algorithm. The curve, Ed25519 or Ed448, was not visible to the scanner.
+    migrate to: ML-DSA-65 (FIPS 204), or ML-DSA-87 if the curve is Ed448
+      src/main/java/app/Keys.java:13   import java.security.interfaces.EdECPublicKey;
+
+  XDH  (no call sites, 1 import)
+    Montgomery-curve discrete log falls to Shor's algorithm. The curve, X25519 or X448, was not visible to the scanner.
+    migrate to: ML-KEM-768 (FIPS 203), or ML-KEM-1024 if the curve is X448
+      src/main/java/app/Keys.java:14   import java.security.spec.XECPrivateKeySpec;
+
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
@@ -49,6 +64,6 @@ ALREADY BROKEN       weak today, quantum is not the issue
       src/main/java/app/Keys.java:10   import org.bouncycastle.crypto.digests.SHA1Digest;
 
 ========================================================================
-No quantum-vulnerable call sites and 7 imports across 2 files.
+No quantum-vulnerable call sites and 10 imports across 2 files.
 No call sites and 2 imports with usage undetermined: review before choosing a migration target.
 

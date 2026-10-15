@@ -1,7 +1,7 @@
 {
   "name": "paramiko",
   "commit": "d87f9c01c158588fe3ecb635ca7c0d7c0c1a26cc",
-  "registry_version": "2026.10.2",
+  "registry_version": "2026.10.3",
   "parsers": {
     "Python": "ast",
     "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
