@@ -1,0 +1,56 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, JavaScript tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1, Python ast
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (2 call sites)
+    parameter sets: SECP384R1: 1, not stated: 1
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      browser.js:6   await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-384' }, true, ['sign']);
+      browser.js:10   await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, key, data);
+
+  RSA  (2 call sites)
+    key sizes: 2048: 1, not stated: 1
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      browser.js:3   await crypto.subtle.generateKey(
+      browser.js:9   await crypto.subtle.importKey('spki', spki, { name: 'RSA-OAEP', hash: { name: 'SHA-1' } }, false, ['encrypt']);
+
+  Ed25519  (1 call site)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      browser.js:7   await crypto.subtle.generateKey('Ed25519', true, ['sign']);
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (2 call sites)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      browser.js:8   await crypto.subtle.digest('SHA-1', data);
+      browser.js:9   await crypto.subtle.importKey('spki', spki, { name: 'RSA-OAEP', hash: { name: 'SHA-1' } }, false, ['encrypt']);
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (2 call sites)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      browser.js:3   await crypto.subtle.generateKey(
+      browser.js:10   await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, key, data);
+
+  AES  (1 call site)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      browser.js:11   await window.crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, data);
+
+========================================================================
+5 quantum-vulnerable call sites and no imports across 1 file.
+

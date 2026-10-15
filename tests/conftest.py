@@ -62,7 +62,8 @@ def skip_without_tree_sitter(root):
     if fixture_options(root).get("backend") == "tree-sitter":
         try:
             ratchet.go_backend("tree-sitter")
-            ratchet.java_backend("tree-sitter")
+            for language in ratchet.TREE_SITTER_ONLY:
+                ratchet.optional_backend(language, "tree-sitter")
         except ratchet.BackendError:
             pytest.skip("tree-sitter grammars not installed")
 

@@ -221,8 +221,17 @@ such, with the curve (25519 or 448) not visible. Key sizes and curves are read f
 and `KeyGenerator.init(256)` when the value is a literal or a same-file constant and
 the generator is held in a variable bound once in the file. An EC generator
 initialized with a size leaves the curve to the provider, so nothing is claimed, and
-`NamedParameterSpec` does not yet narrow EdDSA or XDH to a curve. C, C#, JavaScript,
-Rust and Terraform are not covered.
+`NamedParameterSpec` does not yet narrow EdDSA or XDH to a curve.
+
+JavaScript is likewise scanned only with `tree-sitter-javascript` (`.js`, `.mjs`, `.cjs`,
+`.jsx`). Calls are matched through the module their receiver was bound to: Node's
+`crypto` (by `require`, `import` or destructuring), WebCrypto's `crypto.subtle`, and
+node-forge. Key sizes and curves are read from literal options (`modulusLength`,
+`namedCurve`, `bits`) and cipher names (`aes-256-gcm`). Node's `crypto.sign` and
+`createSign('sha256')` name only the hash, so the key algorithm is not claimed;
+forge's `forge.des` does DES or 3DES by key length and is not claimed; a `subtle`
+object held in a variable is not followed; and JWT algorithm names (`RS256`) are not
+read in any language yet. TypeScript, C, C#, Rust and Terraform are not covered.
 
 Source code only. Certificates, TLS configuration, hardware security modules, and
 anything on the network are out of scope. A complete cryptographic inventory needs

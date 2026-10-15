@@ -1,0 +1,45 @@
+
+ratchet 0.1.0  scanned 2 files in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, JavaScript tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1, Python ast
+skipped no directories
+parsed all 2 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (3 call sites)
+    key sizes: 2048: 1, 4096: 1, not stated: 1
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      sign.js:6   var keys = forge.pki.rsa.generateKeyPair(2048);
+      sign.js:7   var big = forge.pki.rsa.generateKeyPair({ bits: 4096, e: 0x10001 });
+      sign.js:8   var sized = forge.pki.rsa.generateKeyPair(bits);
+
+  Ed25519  (1 call site)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      sign.js:11   var ed = forge.ed25519.generateKeyPair();
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  3DES  (1 call site)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      sign.js:9   var cipher = forge.cipher.createCipher('3DES-CBC', key);
+
+  MD5  (1 call site)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      sign.js:4   var md5 = forge.md.md5.create();
+
+  SHA-1  (1 call site)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      sign.js:5   var sha1 = forge.md.sha1.create();
+
+========================================================================
+4 quantum-vulnerable call sites and no imports across 1 file.
+

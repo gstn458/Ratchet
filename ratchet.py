@@ -1591,6 +1591,321 @@ class TreeSitterJava(TreeSitterGrammar):
         return findings
 
 
+# ---------------------------------------------------------------------------
+# JavaScript via tree-sitter (optional)
+#
+# Like Java, JavaScript is parsed only with tree-sitter; without
+# tree-sitter-javascript its files are counted and reported as not scanned.
+# Calls are matched by the module their receiver was bound to: Node's crypto
+# (require("crypto"), require("node:crypto"), import ... from "crypto",
+# destructured or not), WebCrypto (crypto.subtle, window.crypto.subtle) and
+# node-forge.
+# ---------------------------------------------------------------------------
+
+JS_TREE_SITTER_QUERY = """
+(variable_declarator) @declarator
+(import_statement) @import
+(call_expression) @call
+(assignment_expression) @assignment
+"""
+
+# Packages that implement one algorithm. Importing Node's crypto or
+# node-forge names none: they implement them all.
+JS_IMPORTS = {
+    "node-rsa": "RSA", "elliptic": "EC", "md5": "MD5", "sha1": "SHA-1",
+    "crypto-js/md5": "MD5", "crypto-js/sha1": "SHA-1", "crypto-js/tripledes": "3DES",
+    "crypto-js/rc4": "RC4", "crypto-js/aes": "AES",
+}
+
+# OpenSSL digest and cipher names as Node takes them, lower-cased.
+JS_HASHES = {"md5": "MD5", "sha1": "SHA-1", "sha-1": "SHA-1", "sha256": "SHA-256", "sha-256": "SHA-256"}
+JS_KEY_TYPES = {"rsa": "RSA", "rsa-pss": "RSA", "dsa": "DSA", "ec": "EC", "dh": "DH",
+                "ed25519": "Ed25519", "ed448": "Ed448", "x25519": "X25519", "x448": "X448"}
+# Curves as Node (OpenSSL) and WebCrypto name them.
+JS_CURVES = dict(JCA_CURVES, **{"p-256": "SECP256R1", "p-384": "SECP384R1", "p-521": "SECP521R1"})
+# WebCrypto algorithm names (W3C Web Cryptography API, section 18 onwards).
+JS_WEBCRYPTO = {"rsassa-pkcs1-v1_5": "RSA", "rsa-pss": "RSA", "rsa-oaep": "RSA", "ecdsa": "ECDSA",
+                "ecdh": "ECDH", "ed25519": "Ed25519", "x25519": "X25519", "ed448": "Ed448",
+                "x448": "X448", "aes-gcm": "AES", "aes-cbc": "AES", "aes-ctr": "AES", "aes-kw": "AES"}
+
+
+def js_cipher(name):
+    """[(algorithm, key size or None)] for an OpenSSL cipher name such as
+    aes-256-gcm, des-ede3-cbc or rc4."""
+    n = name.lower()
+    m = re.fullmatch(r"(?:id-)?aes-?(128|192|256)(?:-\w+)?|aes(128|192|256)", n)
+    if m:
+        return [("AES", m.group(1) or m.group(2))]
+    if re.fullmatch(r"des-ede3(?:-\w+)?|des3|des-ede(?:-\w+)?|3des(?:-\w+)?", n):
+        return [("3DES", None)]
+    if re.fullmatch(r"des(?:-\w+)?", n):
+        return [("DES", None)]
+    if re.fullmatch(r"rc4(?:-\w+)?", n):
+        return [("RC4", None)]
+    return []
+
+
+def js_signature(name):
+    """Algorithms in a Node signature name: RSA-SHA256 is RSA and SHA-256,
+    sha256 is SHA-256 alone (the key decides the rest)."""
+    n = name.lower()
+    m = re.fullmatch(r"(rsa|ecdsa|dsa)-(?:with-)?(\w+(?:-\w+)?)", n)
+    if m:
+        key = {"rsa": "RSA", "ecdsa": "ECDSA", "dsa": "DSA"}[m.group(1)]
+        return [(key, None)] + ([(JS_HASHES[m.group(2)], None)] if m.group(2) in JS_HASHES else [])
+    return [(JS_HASHES[n], None)] if n in JS_HASHES else []
+
+
+def js_forge_cipher(name):
+    n = name.lower()
+    if n.startswith("3des"):
+        return [("3DES", None)]
+    if n.startswith("des"):
+        return [("DES", None)]
+    if n.startswith("aes"):
+        return [("AES", None)]
+    return []
+
+
+class TreeSitterJavaScript(TreeSitterGrammar):
+    module, language_name, query_source = "tree_sitter_javascript", "JavaScript", JS_TREE_SITTER_QUERY
+
+    def scan(self, path):
+        text_all = read_source(path)
+        lines = text_all.splitlines()
+        source = "\n".join(lines).encode("utf-8")
+        captures = self.captures(self.parser.parse(source).root_node)
+        findings = []
+
+        def text(node):
+            return source[node.start_byte:node.end_byte].decode("utf-8", "replace")
+
+        def line_of(node):
+            row = node.start_point[0]
+            return row + 1, lines[row] if row < len(lines) else ""
+
+        def module_name(spec):
+            """crypto, forge, or the specifier itself."""
+            if spec in ("crypto", "node:crypto"):
+                return "crypto"
+            base = spec.rsplit("/", 1)[-1]
+            if spec == "node-forge" or (spec.startswith(".") and base in ("forge", "forge.js")):
+                return "forge"
+            return spec
+
+        def string_value(node):
+            if node is not None and node.type == "string":
+                return text(node)[1:-1]
+            if node is not None and node.type == "template_string" and not node.named_children:
+                return text(node)[1:-1]
+            return None
+
+        # Bindings: local name -> qualified module path ("crypto",
+        # "crypto.createHash", "forge"). Constants: names declared once with a
+        # string or number and never assigned.
+        bindings, declared, assigned, values = {}, defaultdict(int), set(), {}
+        for node in captures.get("assignment", ()):
+            left = node.child_by_field_name("left")
+            if left is not None and left.type == "identifier":
+                assigned.add(text(left))
+        imports_found = []
+        for node in captures.get("declarator", ()):
+            name, value = node.child_by_field_name("name"), node.child_by_field_name("value")
+            if name is None:
+                continue
+            required = None
+            if value is not None and value.type == "call_expression":
+                fn, args = value.child_by_field_name("function"), value.child_by_field_name("arguments")
+                if fn is not None and text(fn) == "require" and args is not None and args.named_children:
+                    required = string_value(args.named_children[0])
+            if name.type == "identifier":
+                declared[text(name)] += 1
+                if required is not None:
+                    bindings[text(name)] = module_name(required)
+                    imports_found.append((node, required))
+                elif value is not None and value.type in ("string", "number"):
+                    values[text(name)] = value
+            elif name.type == "object_pattern" and required is not None:
+                imports_found.append((node, required))
+                for prop in name.named_children:
+                    if prop.type == "shorthand_property_identifier_pattern":
+                        bindings[text(prop)] = f"{module_name(required)}.{text(prop)}"
+                    elif prop.type == "pair_pattern":
+                        key, local = prop.child_by_field_name("key"), prop.child_by_field_name("value")
+                        if local is not None and local.type == "identifier":
+                            bindings[text(local)] = f"{module_name(required)}.{text(key)}"
+        for node in captures.get("import", ()):
+            spec = string_value(node.child_by_field_name("source"))
+            if spec is None:
+                continue
+            imports_found.append((node, spec))
+            mod = module_name(spec)
+            for clause in (c for c in node.named_children if c.type == "import_clause"):
+                for part in clause.named_children:
+                    if part.type == "identifier":
+                        bindings[text(part)] = mod
+                    elif part.type == "namespace_import":
+                        ident = next((c for c in part.named_children if c.type == "identifier"), None)
+                        if ident is not None:
+                            bindings[text(ident)] = mod
+                    elif part.type == "named_imports":
+                        for spec_node in part.named_children:
+                            if spec_node.type != "import_specifier":
+                                continue
+                            imported = spec_node.child_by_field_name("name")
+                            local = spec_node.child_by_field_name("alias") or imported
+                            bindings[text(local)] = f"{mod}.{text(imported)}"
+        constants = {name: node for name, node in values.items()
+                     if declared[name] == 1 and name not in assigned}
+
+        for node, spec in imports_found:
+            algo = JS_IMPORTS.get(spec)
+            if algo:
+                line, snippet = line_of(node)
+                findings.append(Finding(algo, path, line, snippet, kind=IMPORT))
+
+        def resolve(node):
+            """Literal value of a string, number or same-file constant."""
+            if node is not None and node.type == "identifier" and text(node) in constants:
+                node = constants[text(node)]
+            if node is None:
+                return None
+            if node.type == "number":
+                return text(node)
+            return string_value(node)
+
+        def qualified(node):
+            if node.type == "identifier":
+                name = text(node)
+                if name in bindings:
+                    return bindings[name]
+                return "webcrypto" if name == "crypto" else None
+            if node.type == "member_expression":
+                obj, prop = node.child_by_field_name("object"), node.child_by_field_name("property")
+                if obj is None or prop is None:
+                    return None
+                if obj.type == "identifier" and text(obj) in ("window", "globalThis", "self") \
+                        and text(obj) not in bindings and text(prop) == "crypto":
+                    return "webcrypto"
+                base = qualified(obj)
+                return f"{base}.{text(prop)}" if base else None
+            if node.type == "call_expression":
+                fn, args = node.child_by_field_name("function"), node.child_by_field_name("arguments")
+                if fn is not None and text(fn) == "require" and args is not None and args.named_children:
+                    spec = string_value(args.named_children[0])
+                    return module_name(spec) if spec else None
+            if node.type == "parenthesized_expression" and node.named_children:
+                return qualified(node.named_children[0])
+            return None
+
+        def option(obj, key):
+            """A property of an object literal: {modulusLength: 2048}."""
+            if obj is None or obj.type != "object":
+                return None
+            for pair in obj.named_children:
+                if pair.type == "pair" and text(pair.child_by_field_name("key")).strip("'\"") == key:
+                    return pair.child_by_field_name("value")
+            return None
+
+        def webcrypto(algo):
+            """[(algorithm, parameter set)] for a WebCrypto algorithm argument:
+            a name, or an object with a name, a hash, a curve or a modulus."""
+            name = resolve(algo) if algo is not None and algo.type != "object" else resolve(option(algo, "name"))
+            if not name:
+                return []
+            n = name.lower()
+            found = []
+            if n in JS_WEBCRYPTO:
+                params = None
+                size = resolve(option(algo, "modulusLength")) if algo.type == "object" else None
+                curve = resolve(option(algo, "namedCurve")) if algo.type == "object" else None
+                if JS_WEBCRYPTO[n] == "RSA" and size and size.isdigit():
+                    params = size
+                elif curve and curve.lower() in JS_CURVES:
+                    params = JS_CURVES[curve.lower()]
+                length = resolve(option(algo, "length")) if algo.type == "object" else None
+                if JS_WEBCRYPTO[n] == "AES" and length in ("128", "192", "256"):
+                    params = length
+                found.append((JS_WEBCRYPTO[n], params))
+            elif n in JS_HASHES:
+                found.append((JS_HASHES[n], None))
+            if algo.type == "object":
+                digest = option(algo, "hash")
+                digest = resolve(option(digest, "name")) if digest is not None and digest.type == "object" \
+                    else resolve(digest)
+                if digest and digest.lower() in JS_HASHES:
+                    found.append((JS_HASHES[digest.lower()], None))
+            return found
+
+        for node in sorted(captures.get("call", ()), key=lambda n: n.start_byte):
+            fn, args = node.child_by_field_name("function"), node.child_by_field_name("arguments")
+            if fn is None or args is None:
+                continue
+            name = qualified(fn)
+            if not name:
+                continue
+            argv = [c for c in args.named_children if c.type != "comment"]
+            first = argv[0] if argv else None
+            found = []
+            method = name.rsplit(".", 1)[-1]
+            if name.startswith(("webcrypto.subtle.", "crypto.subtle.", "crypto.webcrypto.subtle.")):
+                position = {"generateKey": 0, "digest": 0, "sign": 0, "verify": 0, "encrypt": 0,
+                            "decrypt": 0, "deriveKey": 0, "deriveBits": 0, "importKey": 2,
+                            "unwrapKey": 3, "wrapKey": 3}.get(method)
+                if position is not None and len(argv) > position:
+                    found = webcrypto(argv[position])
+            elif name in ("crypto.createHash", "crypto.createHmac"):
+                value = resolve(first)
+                found = [(JS_HASHES[value.lower()], None)] if value and value.lower() in JS_HASHES else []
+            elif name in ("crypto.createSign", "crypto.createVerify", "crypto.sign", "crypto.verify"):
+                value = resolve(first)
+                found = js_signature(value) if value else []
+            elif name in ("crypto.createCipheriv", "crypto.createDecipheriv",
+                          "crypto.createCipher", "crypto.createDecipher"):
+                value = resolve(first)
+                found = js_cipher(value) if value else []
+            elif name in ("crypto.generateKeyPair", "crypto.generateKeyPairSync"):
+                kind = resolve(first)
+                algo = JS_KEY_TYPES.get((kind or "").lower())
+                if algo:
+                    options = argv[1] if len(argv) > 1 else None
+                    size, curve = resolve(option(options, "modulusLength")), resolve(option(options, "namedCurve"))
+                    params = size if algo in ("RSA", "DSA") and size and size.isdigit() else \
+                        JS_CURVES.get((curve or "").lower()) if algo == "EC" else None
+                    found = [(algo, params)]
+            elif name in ("crypto.generateKey", "crypto.generateKeySync"):
+                if (resolve(first) or "").lower() == "aes":
+                    length = resolve(option(argv[1] if len(argv) > 1 else None, "length"))
+                    found = [("AES", length if length in ("128", "192", "256") else None)]
+            elif name in ("crypto.publicEncrypt", "crypto.privateDecrypt",
+                          "crypto.privateEncrypt", "crypto.publicDecrypt"):
+                found = [("RSA", None)]
+            elif name == "crypto.createECDH":
+                curve = resolve(first)
+                found = [("ECDH", JS_CURVES.get((curve or "").lower()))]
+            elif name in ("crypto.createDiffieHellman", "crypto.getDiffieHellman",
+                          "crypto.createDiffieHellmanGroup"):
+                size = resolve(first) if name == "crypto.createDiffieHellman" else None
+                found = [("DH", size if size and size.isdigit() else None)]
+            elif name in ("forge.md.md5.create", "forge.md.sha1.create", "forge.md.sha256.create"):
+                found = [({"md5": "MD5", "sha1": "SHA-1", "sha256": "SHA-256"}[name.split(".")[2]], None)]
+            elif name in ("forge.pki.rsa.generateKeyPair", "forge.rsa.generateKeyPair"):
+                bits = resolve(first) if first is not None and first.type != "object" \
+                    else resolve(option(first, "bits"))
+                found = [("RSA", bits if bits and bits.isdigit() else None)]
+            elif name.startswith(("forge.pki.rsa.", "forge.rsa.")):
+                found = [("RSA", None)]
+            elif name in ("forge.cipher.createCipher", "forge.cipher.createDecipher"):
+                value = resolve(first)
+                found = js_forge_cipher(value) if value else []
+            elif name.startswith("forge.ed25519."):
+                found = [("Ed25519", None)]
+            line, snippet = line_of(node)
+            for algo, params in found:
+                findings.append(Finding(algo, path, line, snippet, params))
+        return findings
+
+
 class GoFindings(list):
     """scan_go's findings, plus facts about the file that the package-level
     ECDSA/ECDH rule in walk() needs: whether it shows key agreement and
@@ -1890,12 +2205,13 @@ SCANNERS = {".py": scan_python, ".go": scan_go}
 
 # Every source language Ratchet knows, by extension. A file in one of these
 # whose parser is not available is counted and reported as not scanned.
-LANGUAGES = {".py": "Python", ".go": "Go", ".java": "Java"}
+LANGUAGES = {".py": "Python", ".go": "Go", ".java": "Java",
+             ".js": "JavaScript", ".mjs": "JavaScript", ".cjs": "JavaScript", ".jsx": "JavaScript"}
 
 # The parser behind each language, recorded in every report and CBOM. Two
 # runs that used different parsers can find different things, and the output
 # has to say so.
-PARSERS = {"Python": "ast", "Go": "regex", "Java": "not scanned"}
+PARSERS = {"Python": "ast", "Go": "regex", "Java": "not scanned", "JavaScript": "not scanned"}
 
 # Go backends: "auto" uses tree-sitter when it is installed and the regex
 # backend otherwise; "tree-sitter" requires it; "regex" never loads it.
@@ -1926,28 +2242,42 @@ def go_backend(backend="auto"):
     return grammar.lex, grammar.description
 
 
-def java_backend(backend="auto"):
-    """(TreeSitterJava or None, description) for the requested backend. Java
-    has no fallback: without tree-sitter-java its files are not scanned."""
+# Languages parsed only with tree-sitter: language -> (grammar class, extensions).
+TREE_SITTER_ONLY = {
+    "Java": (TreeSitterJava, (".java",)),
+    "JavaScript": (TreeSitterJavaScript, (".js", ".mjs", ".cjs", ".jsx")),
+}
+
+
+def optional_backend(language, backend="auto"):
+    """(grammar or None, description) for a language with no fallback parser:
+    without its tree-sitter grammar, its files are not scanned."""
+    cls = TREE_SITTER_ONLY[language][0]
+    package = cls.module.replace("_", "-")
     if backend == "regex":
         return None, "not scanned (regex backend requested)"
     try:
-        return (grammar := TreeSitterJava()), grammar.description
+        grammar = cls()
+        return grammar, grammar.description
     except ImportError:
         if backend == "tree-sitter":
-            raise BackendError("--backend tree-sitter: tree-sitter-java is not installed "
+            raise BackendError(f"--backend tree-sitter: {package} is not installed "
                                "(pip install -r requirements-treesitter.txt)")
-        return None, "not scanned (tree-sitter-java not installed)"
+        return None, f"not scanned ({package} not installed)"
     except RuntimeError as e:
         if backend == "tree-sitter":
             raise BackendError(f"--backend tree-sitter: {e}")
         return None, f"not scanned ({e})"
 
+
+def java_backend(backend="auto"):
+    return optional_backend("Java", backend)
+
 # Test code, by convention of each language. Findings there are real, but
 # test-only cryptography is not what a migration plan is about, so they are
 # counted apart in the report, the CBOM and the corpus measurement.
-TEST_DIRS = {"test", "tests", "testing", "testdata"}
-TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py|(Test|Tests|[a-z0-9]IT)\.java)$")
+TEST_DIRS = {"test", "tests", "testing", "testdata", "__tests__"}
+TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py|(Test|Tests|[a-z0-9]IT)\.java|\.(test|spec)\.[cm]?jsx?)$")
 
 
 def is_test_path(path):
@@ -1969,11 +2299,13 @@ def default_jobs():
         return os.cpu_count() or 1
 
 
-def make_scanners(go_lex_fn, java=None):
-    """{extension: scanner} for the parsers available in this run."""
+def make_scanners(go_lex_fn, grammars=None):
+    """{extension: scanner} for the parsers available in this run; grammars
+    maps each tree-sitter-only language that loaded to its grammar."""
     scanners = dict(SCANNERS, **{".go": functools.partial(scan_go, lex=go_lex_fn)})
-    if java is not None:
-        scanners[".java"] = java.scan
+    for language, grammar in (grammars or {}).items():
+        for ext in TREE_SITTER_ONLY[language][1]:
+            scanners[ext] = grammar.scan
     return scanners
 
 
@@ -1988,19 +2320,19 @@ def scan_file(scanners, path):
 _worker_scanners = None
 
 
-def _start_worker(go_backend_name, scan_java):
+def _start_worker(go_backend_name, languages):
     # A tree-sitter parser cannot be sent to another process, so each worker
     # loads its own, with the backends the main process resolved.
     global _worker_scanners
     _worker_scanners = make_scanners(go_backend(go_backend_name)[0],
-                                     TreeSitterJava() if scan_java else None)
+                                     {language: TREE_SITTER_ONLY[language][0]() for language in languages})
 
 
 def _scan_in_worker(path):
     return scan_file(_worker_scanners, path)
 
 
-def scan_files(paths, go_lex_fn, java=None, jobs=None):
+def scan_files(paths, go_lex_fn, grammars=None, jobs=None):
     """scan_file for every path, in order, in parallel when worthwhile."""
     jobs = default_jobs() if jobs is None else jobs
     if jobs > 1 and len(paths) >= PARALLEL_MIN_FILES:
@@ -2008,21 +2340,25 @@ def scan_files(paths, go_lex_fn, java=None, jobs=None):
             import multiprocessing
             pool = multiprocessing.Pool(
                 jobs, _start_worker,
-                ("regex" if go_lex_fn is regex_go_lex else "tree-sitter", java is not None))
+                ("regex" if go_lex_fn is regex_go_lex else "tree-sitter", tuple(sorted(grammars or {}))))
         except (ImportError, OSError):
             pool = None  # no process support here (no /dev/shm, say): scan in this one
         if pool is not None:
             with pool:
                 chunk = max(1, min(64, len(paths) // (jobs * 8)))
                 return list(pool.imap(_scan_in_worker, paths, chunk))
-    scanners = make_scanners(go_lex_fn, java)
+    scanners = make_scanners(go_lex_fn, grammars)
     return [scan_file(scanners, path) for path in paths]
 
 
 def walk(root, include_vendored=False, backend="auto", jobs=None):
     go_lex_fn, go_parser = go_backend(backend)
-    java, java_parser = java_backend(backend)
-    scannable = set(SCANNERS) | ({".java"} if java else set())
+    grammars, parsers = {}, dict(PARSERS, Go=go_parser)
+    for language in TREE_SITTER_ONLY:
+        grammar, parsers[language] = optional_backend(language, backend)
+        if grammar is not None:
+            grammars[language] = grammar
+    scannable = set(SCANNERS) | {ext for language in grammars for ext in TREE_SITTER_ONLY[language][1]}
     not_scanned = defaultdict(list)  # language -> paths with no parser in this run
     ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
@@ -2054,7 +2390,7 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
                 continue
             listed.append((dirpath, full, rel))
     files = len(listed)
-    results = scan_files([full for _, full, _ in listed], go_lex_fn, java, jobs)
+    results = scan_files([full for _, full, _ in listed], go_lex_fn, grammars, jobs)
     for (dirpath, _, rel), (found, error) in zip(listed, results):
         if error is not None:
             unparsed.append((rel, error))
@@ -2077,7 +2413,7 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
                 rule.matched.append(f)
                 break
     return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed),
-                ignore_rules, suppress_rules, dict(PARSERS, Go=go_parser, Java=java_parser),
+                ignore_rules, suppress_rules, parsers,
                 {language: sorted(paths) for language, paths in sorted(not_scanned.items())})
 
 

@@ -114,6 +114,16 @@ and are skipped when the grammars are not installed; CI installs them.
 | `algorithm_names` | Unambiguous JCA names held in string literals outside `getInstance` (an enum of JWT algorithms, a curve constant, `X25519`) are algorithm-name occurrences, counted apart from call sites; `"RSA"`, `"MD5"` and a sentence that mentions a name are not; the literal passed straight to `getInstance` is the call site only; the curve name is EC with `SECP256R1` as its parameter set, and stays EC because name occurrences are not usage evidence | ok (only the direct call was found before) |
 | `key_sizes` | Key sizes from `initialize(2048)`, `initialize(4096, random)`, `RSAKeyGenParameterSpec(3072, ...)`, an int constant, `ECGenParameterSpec` with a curve constant and AES `KeyGenerator.init(256)`, through the variable the `getInstance` result is assigned to; an EC size (the provider picks the curve), a parameter, and a variable declared twice in the file claim nothing | ok (no size was read before) |
 
+## js/
+
+JavaScript is parsed only with tree-sitter, so these fixtures set `{"backend": "tree-sitter"}`.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `node_crypto` | Node's crypto through `require`, `node:` and ES imports, destructured and aliased bindings and a same-file constant: hashes, HMAC, `createSign`/`sign` (the hash only, unless the name says RSA), ciphers with the AES key size from the name, `generateKeyPair(Sync)` with `modulusLength` and `namedCurve`, `publicEncrypt`, `createECDH` and `createDiffieHellman` sizes; a project module's `createHash` and a run-time name claim nothing; `keys.test.js` is test code | ok |
+| `webcrypto` | `crypto.subtle` and `window.crypto.subtle` by algorithm name or object, with the RSA modulus, the ECDSA curve and the hash inside the object counted as its own primitive; `subtle` held in a variable is not followed | ok, gap on the alias |
+| `forge` | node-forge `md.*.create()`, `pki.rsa.generateKeyPair` with a size or `{bits}`, `cipher.createCipher('3DES-CBC')`, `ed25519.*`; `forge.des.*` is DES or 3DES by key length and claims nothing; forge's own definitions (`forge.md.md5 = ...`) are not uses | ok, gap on `forge.des` |
+
 ## walk/
 
 | Case | Pins down | Status |
