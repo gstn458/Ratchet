@@ -2773,6 +2773,116 @@ def print_not_scanned(scan):
         print(f"not scanned  {plural(len(paths), f'{language} file')}: {not_scanned_reason(scan, language)}")
 
 
+# ---------------------------------------------------------------------------
+# SARIF 2.1.0 output, for code scanning
+#
+# SARIF is for alerts, so it carries what is worth one: quantum-broken
+# findings as errors and classically broken ones as warnings when they are
+# call sites, and as notes when they are imports or algorithm names, which
+# show presence rather than use. Reduced-margin algorithms (AES, SHA-256) are
+# recorded in the CBOM and left out here. Suppressed findings stay in, with
+# an external suppression giving the .ratchetignore rule and reason, so the
+# alert can be shown as dismissed rather than vanish. There are no
+# timestamps: the same tree gives byte-identical SARIF.
+# ---------------------------------------------------------------------------
+
+SARIF_SCHEMA = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json"
+SARIF_INFORMATION_URI = "https://github.com/gstn458/Ratchet"
+
+
+def sarif_level(finding):
+    """error, warning or note for a finding, or None to leave it out."""
+    spec = ALGORITHMS[finding.algorithm]
+    if spec["quantum"] == "broken":
+        level = "error"
+    elif spec["classical"] == "broken":
+        level = "warning"
+    else:
+        return None
+    return level if finding.kind == CALL else "note"
+
+
+def build_sarif(scan):
+    from urllib.parse import quote
+
+    findings = sorted((f for f in scan.findings if sarif_level(f)),
+                      key=lambda f: (f.path.replace(os.sep, "/"), f.line, vulnerability_id(f.algorithm),
+                                     f.kind, f.params or ""))
+    algorithms = sorted({f.algorithm for f in findings}, key=vulnerability_id)
+    rule_index = {algo: i for i, algo in enumerate(algorithms)}
+    rules = []
+    for algo in algorithms:
+        spec = ALGORITHMS[algo]
+        broken = "quantum" if spec["quantum"] == "broken" else "classical"
+        rules.append({
+            "id": vulnerability_id(algo),
+            "name": algo,
+            "shortDescription": {"text": f"{algo}: {'quantum-vulnerable' if broken == 'quantum' else 'classically broken'} cryptography"},
+            "fullDescription": {"text": spec["why"]},
+            "help": {"text": f"{spec['why']} Migrate to: {spec['replacement']}."},
+            "defaultConfiguration": {"level": "error" if broken == "quantum" else "warning"},
+            "properties": {"tags": ["cryptography", "post-quantum" if broken == "quantum" else "weak-crypto"],
+                           "ratchet:quantum": spec["quantum"], "ratchet:classical": spec["classical"]},
+        })
+
+    seen = defaultdict(int)  # fingerprint base -> how many before this one
+    results = []
+    for f in findings:
+        path = f.path.replace(os.sep, "/")
+        rule = vulnerability_id(f.algorithm)
+        base = hashlib.sha256(f"{rule}\0{path}\0{f.kind}\0{' '.join(f.snippet.split())}".encode()).hexdigest()[:32]
+        seen[base] += 1
+        spec = ALGORITHMS[f.algorithm]
+        where = " in test code" if f.in_test else ""
+        result = {
+            "ruleId": rule,
+            "ruleIndex": rule_index[f.algorithm],
+            "level": sarif_level(f),
+            "message": {"text": f"{f.label} {f.kind}{where}. {spec['why']} Migrate to: {spec['replacement']}."},
+            "locations": [{"physicalLocation": {
+                "artifactLocation": {"uri": quote(path), "uriBaseId": "%SRCROOT%"},
+                "region": {"startLine": f.line, "snippet": {"text": f.snippet}},
+            }}],
+            # Stable across runs and line moves: the rule, the file and the
+            # code on the line, numbered when the same line occurs twice.
+            "partialFingerprints": {"ratchet/v1": f"{base}:{seen[base]}"},
+            "properties": {"ratchet:kind": f.kind, "ratchet:testCode": f.in_test,
+                           **({"ratchet:parameterSet": f.params} if f.params else {})},
+        }
+        if f.suppressed_by is not None:
+            rule_ = f.suppressed_by
+            result["suppressions"] = [{
+                "kind": "external", "status": "accepted",
+                "justification": f"{rule_.text} -- {rule_.reason} ({IGNORE_FILE} line {rule_.line}, {rule_.state})",
+            }]
+        results.append(result)
+
+    notifications = [
+        {"level": "warning", "message": {"text": f"{path} was not parsed: {reason}"},
+         "locations": [{"physicalLocation": {"artifactLocation": {"uri": quote(path.replace(os.sep, "/")),
+                                                                  "uriBaseId": "%SRCROOT%"}}}]}
+        for path, reason in scan.unparsed
+    ] + [
+        {"level": "warning",
+         "message": {"text": f"{plural(len(paths), f'{language} file')} not scanned: {not_scanned_reason(scan, language)}"}}
+        for language, paths in scan.not_scanned.items()
+    ]
+    return {
+        "$schema": SARIF_SCHEMA,
+        "version": "2.1.0",
+        "runs": [{
+            "tool": {"driver": {
+                "name": "ratchet", "version": VERSION, "informationUri": SARIF_INFORMATION_URI, "rules": rules,
+                "properties": {"ratchet:registryVersion": REGISTRY["registry_version"],
+                               "ratchet:registrySha256": REGISTRY_DIGEST,
+                               "ratchet:parsers": dict(sorted(scan.parsers.items()))},
+            }},
+            "invocations": [{"executionSuccessful": True, "toolExecutionNotifications": notifications}],
+            "results": results,
+        }],
+    }
+
+
 def report(scan, root):
     """Print the terminal report.
 
@@ -2902,6 +3012,9 @@ def main():
     p.add_argument("path", help="repository or directory to scan")
     p.add_argument("--cbom", metavar="FILE", help="write a CycloneDX 1.6 CBOM to FILE")
     p.add_argument("--json", action="store_true", help="print the CBOM to stdout instead of a report")
+    p.add_argument("--sarif", metavar="FILE",
+                   help="write SARIF 2.1.0 to FILE, for code scanning: quantum-broken and classically broken "
+                        "findings only, call sites as errors or warnings, imports and names as notes")
     p.add_argument("--fail-on-vulnerable", action="store_true",
                    help="exit 1 if any unsuppressed quantum-vulnerable call site is found (for CI); "
                         "imports alone do not fail the build")
@@ -2937,6 +3050,12 @@ def main():
             json.dump(build_cbom(scan, args.path), fh, indent=2)
         if not args.json:
             print(f"CBOM written to {args.cbom}")
+
+    if args.sarif:
+        with open(args.sarif, "w") as fh:
+            json.dump(build_sarif(scan), fh, indent=2)
+        if not args.json:
+            print(f"SARIF written to {args.sarif}")
 
     return 1 if (args.fail_on_vulnerable and ci_gate_count(scan)) else 0
 

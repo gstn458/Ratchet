@@ -26,6 +26,7 @@ pip install '.[tree-sitter]'   # plus tree-sitter for Go, Java, JavaScript and T
 python3 ratchet.py /path/to/repo
 python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
+python3 ratchet.py /path/to/repo --sarif ratchet.sarif     # SARIF 2.1.0 for code scanning
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vulnerable call site
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 python3 ratchet.py /path/to/repo --jobs 1                # one process (default: one worker per CPU)
@@ -200,6 +201,29 @@ claims it was built on, and a CBOM made with a locally edited registry is identi
 by its hash. The parser that read each language is recorded the same way, as
 `ratchet:parser`, and printed at the top of every report. Output is deterministic: two scans of the same tree differ only in
 timestamp and serial number.
+
+### SARIF
+
+`--sarif FILE` writes SARIF 2.1.0 for GitHub code scanning and other SARIF tools. It
+is an alert list, not an inventory, so it holds less than the CBOM:
+
+| Finding | Level |
+| --- | --- |
+| Quantum-vulnerable call site (RSA, ECDSA, ECDH, Ed25519, DH, DSA, ...) | `error` |
+| Classically broken call site (MD5, SHA-1, DES, 3DES, RC4) | `warning` |
+| Import or algorithm name of either | `note` |
+| Reduced margin under Grover (AES, SHA-256, ...) | left out |
+
+There is one rule per algorithm, with the same id as the CBOM's vulnerability
+(`ratchet-pqc-rsa`, `ratchet-classical-md5`). Findings suppressed in `.ratchetignore`
+stay in the file with an external suppression giving the rule and its reason, so code
+scanning shows them as dismissed rather than dropping them. Each result has a
+`ratchet/v1` partial fingerprint built from the rule, the file, the kind and the code
+on the line, so an alert keeps its identity when lines above it move. Files that could
+not be parsed, and languages that were not scanned, are listed as tool notifications.
+Paths are relative to the scan root (`%SRCROOT%`); scan from the repository root so
+they match the repository. Like the CBOM, the file has no timestamp, and two scans of
+the same tree give identical SARIF.
 
 ## Limitations, stated plainly
 
