@@ -59,7 +59,11 @@ jobs:
           (cd /tmp && /tmp/installed/bin/ratchet "$GITHUB_WORKSPACE/tests/fixtures/walk/mixed" --json) | python -c "$normalise" > /tmp/installed.json
           python ratchet.py tests/fixtures/walk/mixed --json | python -c "$normalise" > /tmp/source.json
           cmp /tmp/installed.json /tmp/source.json
-          test "$(/tmp/installed/bin/python -c 'import ratchet; print(ratchet.REGISTRY_SOURCE)')" = embedded
+          # -I keeps the workspace, which holds ratchet.py and registry.json,
+          # off sys.path, so this imports the installed module.
+          source="$(/tmp/installed/bin/python -I -c 'import ratchet; print(ratchet.REGISTRY_SOURCE)')"
+          echo "installed registry source: $source"
+          test "$source" = embedded
 
   action:
     # The action as a user runs it, on each runner OS. On a pull request it
