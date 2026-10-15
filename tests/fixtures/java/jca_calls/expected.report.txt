@@ -9,6 +9,15 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
+  RSA  (4 call sites, 1 algorithm name)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      Jca.java:17   KeyPairGenerator.getInstance("RSA");
+      Jca.java:19   Signature.getInstance(SIG);
+      Jca.java:23   Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
+      ... and 2 more
+
   ECDSA  (3 call sites, 1 import)
     parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
@@ -18,20 +27,12 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       Signer.java:10   Signature.getInstance("SHA256withECDSA");
       ... and 1 more
 
-  RSA  (4 call sites)
-    parameter set: not stated in any call site
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      Jca.java:17   KeyPairGenerator.getInstance("RSA");
-      Jca.java:19   Signature.getInstance(SIG);
-      Jca.java:23   Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
-      ... and 1 more
-
-  ECDH  (1 call site)
+  ECDH  (1 call site, 1 algorithm name)
     parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       Jca.java:26   KeyAgreement.getInstance(KEX);
+      Jca.java:13   private static final String KEX = "ECDH";
 
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
@@ -45,13 +46,13 @@ USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not vis
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  SHA-1  (4 call sites)
+  SHA-1  (4 call sites, 1 algorithm name)
     Chosen-prefix collisions demonstrated in 2020. Retire it.
     migrate to: SHA-256 or SHA-3
       Jca.java:19   Signature.getInstance(SIG);
       Jca.java:21   java.security.MessageDigest.getInstance("SHA-1");
       Jca.java:23   Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
-      ... and 1 more
+      ... and 2 more
 
   3DES  (1 call site)
     Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
@@ -79,6 +80,6 @@ REVIEW               reduced margin under Grover, usually acceptable
       Jca.java:25   Cipher.getInstance("AES/GCM/NoPadding");
 
 ========================================================================
-9 quantum-vulnerable call sites and 1 import across 2 files.
+9 quantum-vulnerable call sites, 2 algorithm names and 1 import across 2 files.
 1 call site and no imports with usage undetermined: review before choosing a migration target.
 

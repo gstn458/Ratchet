@@ -49,3 +49,25 @@ def test_every_mapped_algorithm_is_in_the_registry():
         assert algo in ratchet.ALGORITHMS
     for algo in ratchet.JAVA_IMPORTS.values():
         assert algo in ratchet.ALGORITHMS
+
+
+@pytest.mark.parametrize("literal,expected", [
+    ("SHA256withRSA", [("RSA", None), ("SHA-256", None)]),
+    ("RSASSA-PSS", [("RSA", None)]),
+    ("DESede/CBC/PKCS5Padding", [("3DES", None)]),
+    ("secp256r1", [("EC", "SECP256R1")]), ("prime256v1", [("EC", "SECP256R1")]),
+    ("X25519", [("X25519", None)]), ("HmacSHA1", [("SHA-1", None)]),
+    # too short or too common to claim outside getInstance
+    ("RSA", []), ("EC", []), ("MD5", []), ("SHA-1", []), ("DES", []), ("AES", []),
+    # not names at all
+    ("use SHA256withRSA for new keys", []), ("rsa/keys/private", []), ("RSA/ECB", []),
+])
+def test_unambiguous_names(literal, expected):
+    assert ratchet.jca_named(literal) == expected
+
+
+def test_algorithm_names_never_fail_the_build():
+    name = ratchet.Finding("RSA", "A.java", 1, 'x = "SHA256withRSA";', kind=ratchet.NAME)
+    call = ratchet.Finding("RSA", "A.java", 2, 'Signature.getInstance("SHA256withRSA")')
+    assert ratchet.ci_gate_count(ratchet.Scan([name], 1, [], False)) == 0
+    assert ratchet.ci_gate_count(ratchet.Scan([name, call], 1, [], False)) == 1

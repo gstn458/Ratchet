@@ -99,6 +99,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "0"
         },
@@ -159,6 +163,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "0"
@@ -224,6 +232,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "0"
         },
@@ -284,6 +296,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "0"
@@ -357,6 +373,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "0"
         },
@@ -416,6 +436,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "0"

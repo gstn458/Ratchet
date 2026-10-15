@@ -99,6 +99,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "1"
         },
@@ -158,6 +162,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "1"
@@ -219,6 +227,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "1"
         },
@@ -273,12 +285,20 @@
       "evidence": {
         "occurrences": [
           {
+            "location": "Jca.java#L13",
+            "additionalContext": "algorithm name"
+          },
+          {
             "location": "Jca.java#L26",
             "additionalContext": "call site"
           }
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "1"
@@ -293,7 +313,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -352,6 +372,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "3"
@@ -413,6 +437,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "1"
         },
@@ -470,6 +498,10 @@
       "evidence": {
         "occurrences": [
           {
+            "location": "Jca.java#L12",
+            "additionalContext": "algorithm name"
+          },
+          {
             "location": "Jca.java#L17",
             "additionalContext": "call site"
           },
@@ -489,6 +521,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "4"
         },
@@ -502,7 +538,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "4"
+          "value": "5"
         },
         {
           "name": "ratchet:quantum_status",
@@ -542,6 +578,10 @@
       "evidence": {
         "occurrences": [
           {
+            "location": "Jca.java#L12",
+            "additionalContext": "algorithm name"
+          },
+          {
             "location": "Jca.java#L19",
             "additionalContext": "call site"
           },
@@ -561,6 +601,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "4"
         },
@@ -574,7 +618,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "4"
+          "value": "5"
         },
         {
           "name": "ratchet:quantum_status",
@@ -628,6 +672,10 @@
         ]
       },
       "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
         {
           "name": "ratchet:call_site_count",
           "value": "3"

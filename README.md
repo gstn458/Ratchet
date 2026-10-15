@@ -231,8 +231,15 @@ same occurrences differently by design.
 Imports are reported, and kept in the CBOM marked as imports, because a library that
 is present matters for the inventory even when no call is visible. They are counted
 separately from call sites; v0 counted them together, which overstated its figures.
+Java code adds a third kind, algorithm names: an unambiguous JCA name such as
+`SHA256withRSA`, `RSASSA-PSS`, `DESede/CBC/PKCS5Padding` or `secp256r1` held in a string
+literal outside a `getInstance` call, which is how JWT libraries keep their algorithm
+tables. A name shows the algorithm is used somewhere in the program, not where, so it
+is counted apart as well. Short names such as `"RSA"`, `"EC"` or `"MD5"` are too often
+plain labels to count outside `getInstance`.
 `--fail-on-vulnerable` counts only unsuppressed quantum-vulnerable call sites, so a
-library that is imported but never called does not fail a build. That is deliberate:
+library that is imported but never called, or an algorithm only named, does not fail
+a build. That is deliberate:
 anything that gates CI favours precision, while the inventory favours recall.
 
 Findings in test code are marked as such, by each language's convention: Go `_test.go`

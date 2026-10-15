@@ -675,7 +675,7 @@ TOOLING_DIRS = {".git", "__pycache__", ".tox", ".mypy_cache"}
 VENDORED, TOOLING = "vendored, test data or build output", "tooling or hidden"
 
 
-IMPORT, CALL = "import", "call site"
+IMPORT, CALL, NAME = "import", "call site", "algorithm name"
 
 
 class Finding:
@@ -1260,6 +1260,7 @@ JAVA_TREE_SITTER_QUERY = """
 (import_declaration) @import
 (method_invocation name: (identifier) @method (#eq? @method "getInstance")) @call
 (variable_declarator value: (string_literal)) @declarator
+(string_literal) @string
 (assignment_expression) @assignment
 """
 
@@ -1286,6 +1287,31 @@ JCA_SIGNATURE = re.compile(r"(?P<hash>[a-z0-9/-]+?)with(?P<key>rsa|ecdsa|dsa)(?:
 JCA_PREFIXED = re.compile(r"(?:hmac|pbkdf2withhmac)(?P<hash>.+)")
 JCA_PBE = re.compile(r"pbewith(?P<hash>[a-z0-9-]+?)and(?P<cipher>.+)")
 JCA_OAEP = re.compile(r"oaepwith(?P<hash>.+?)andmgf1padding")
+
+
+# Named curves in JCA (ECGenParameterSpec, JWK "crv" lookups), recorded as EC
+# with the curve as the parameter set, named as Python's cryptography names it.
+JCA_CURVES = {"secp256r1": "SECP256R1", "prime256v1": "SECP256R1", "secp384r1": "SECP384R1",
+              "secp521r1": "SECP521R1", "secp256k1": "SECP256K1", "secp224r1": "SECP224R1"}
+
+# Names that say which algorithm they are wherever they appear. Short names
+# ("RSA", "EC", "MD5", "SHA-1", "DES") are used as labels too often to claim
+# anything outside getInstance.
+JCA_UNAMBIGUOUS = {"rsassa-pss", "desede", "tripledes", "diffiehellman", "ecdh", "ecdsa",
+                   "ed25519", "x25519", "arcfour"}
+JCA_TRANSFORMATION = re.compile(r"[a-z0-9_-]+/[a-z0-9]+/[a-z0-9-]*padding")
+
+
+def jca_named(name):
+    """[(algorithm, parameter set or None)] for a string literal that is an
+    unambiguous JCA algorithm or curve name, else []."""
+    n = name.lower()
+    if n in JCA_CURVES:
+        return [("EC", JCA_CURVES[n])]
+    if (n in JCA_UNAMBIGUOUS or JCA_SIGNATURE.fullmatch(n) or JCA_TRANSFORMATION.fullmatch(n)
+            or JCA_PBE.fullmatch(n) or JCA_PREFIXED.fullmatch(n)):
+        return [(algo, None) for algo in jca_algorithms(name)]
+    return []
 
 
 def jca_name(name):
@@ -1357,6 +1383,7 @@ class TreeSitterJava(TreeSitterGrammar):
         constants = {name: values[0][1:-1] for name, values in declared.items()
                      if len(values) == 1 and name not in assigned}
 
+        call_names = set()  # literals passed straight to getInstance: call sites, not names
         for node in sorted(captures.get("call", ()), key=lambda n: n.start_byte):
             owner, arguments = node.child_by_field_name("object"), node.child_by_field_name("arguments")
             if owner is None or arguments is None or text(owner).rsplit(".", 1)[-1] not in JCA_CLASSES:
@@ -1364,6 +1391,7 @@ class TreeSitterJava(TreeSitterGrammar):
             first = next((c for c in arguments.named_children if c.type != "comment"), None)
             if first is None:
                 continue
+            call_names.add(first.start_byte)
             if first.type == "string_literal":
                 name = text(first)[1:-1]
             elif first.type == "identifier" and text(first) in constants:
@@ -1373,6 +1401,19 @@ class TreeSitterJava(TreeSitterGrammar):
             line, snippet = line_of(node)
             for algo in jca_algorithms(name):
                 findings.append(Finding(algo, path, line, snippet))
+
+        # Algorithm names held in string literals anywhere else: an enum of JWT
+        # algorithms, a constant passed on to another class. They show the
+        # algorithm is in use somewhere, not where, so they are counted apart.
+        named = set()
+        for node in sorted(captures.get("string", ()), key=lambda n: n.start_byte):
+            if node.start_byte in call_names:
+                continue
+            line, snippet = line_of(node)
+            for algo, params in jca_named(text(node)[1:-1]):
+                if (line, algo, params) not in named:
+                    named.add((line, algo, params))
+                    findings.append(Finding(algo, path, line, snippet, params, kind=NAME))
 
         for node in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
             # A package wildcard (java.security.*) matches no class-level prefix,
@@ -1957,6 +1998,8 @@ def build_cbom(scan, root, tool_version=VERSION):
                  "value": str(sum(f.kind == CALL for f in group))},
                 {"name": "ratchet:import_count",
                  "value": str(sum(f.kind == IMPORT for f in group))},
+                {"name": "ratchet:algorithm_name_count",
+                 "value": str(sum(f.kind == NAME for f in group))},
             ] + suppression, key=lambda p: p["name"]),
         })
 
@@ -2171,19 +2214,22 @@ def report(scan, root):
             spec = ALGORITHMS[algorithm]
             calls = sorted((f for f in group if f.kind == CALL), key=lambda f: (f.path, f.line))
             imports = sorted((f for f in group if f.kind == IMPORT), key=lambda f: (f.path, f.line))
+            names = sorted((f for f in group if f.kind == NAME), key=lambda f: (f.path, f.line))
             counts = [plural(len(calls), "call site")]
             in_test = sum(f.in_test for f in calls)
             if in_test:
                 counts.append(f"{in_test} in test code")
             if imports:
                 counts.append(plural(len(imports), "import"))
+            if names:
+                counts.append(plural(len(names), "algorithm name"))
             print(f"  {algorithm}  ({', '.join(counts)})")
             params = parameter_line(algorithm, calls)
             if params:
                 print(f"    {params}")
             print(f"    {spec['why']}")
             print(f"    migrate to: {spec['replacement']}")
-            shown = (calls + imports)[:3]
+            shown = (calls + imports + names)[:3]
             for f in shown:
                 print(f"      {f.path}:{f.line}   {f.snippet}")
             if len(group) > len(shown):
@@ -2199,7 +2245,7 @@ def report(scan, root):
     def tally(groups):
         flat = [f for g in groups for f in g]
         return (sum(f.kind == CALL for f in flat), sum(f.kind == IMPORT for f in flat),
-                len({f.path for f in flat}))
+                sum(f.kind == NAME for f in flat), len({f.path for f in flat}))
 
     calls_in_test = sum(f.kind == CALL and f.in_test
                         for g in list(buckets["broken"].values()) + list(buckets["undetermined"].values())
@@ -2207,12 +2253,13 @@ def report(scan, root):
     suppressed = sum(1 for f in scan.findings
                      if f.suppressed_by and ALGORITHMS[f.algorithm]["quantum"] == "broken")
     vulnerable = list(buckets["broken"].values()) + list(buckets["undetermined"].values())
-    calls, imports, files = tally(vulnerable)
-    u_calls, u_imports, _ = tally(buckets["undetermined"].values())
+    calls, imports, names, files = tally(vulnerable)
+    u_calls, u_imports, _, _ = tally(buckets["undetermined"].values())
     print("=" * 72)
-    if calls or imports:
+    if calls or imports or names:
         in_test = f" ({calls_in_test} in test code)" if calls_in_test else ""
-        line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test} and "
+        named = f", {plural(names, 'algorithm name')}" if names else ""
+        line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test}{named} and "
                 f"{plural(imports, 'import')} across {plural(files, 'file')}.")
         print(line[0].upper() + line[1:])
         if u_calls or u_imports:

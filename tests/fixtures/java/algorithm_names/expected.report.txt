@@ -9,20 +9,56 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (1 call site)
+  RSA  (1 call site, 3 algorithm names)
     parameter set: not stated in any call site
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       Algorithms.java:31   return Signature.getInstance("SHA256withRSA");  // a call site, counted once
+      Algorithms.java:6   RS256("SHA256withRSA"),
+      Algorithms.java:7   RS1("SHA1withRSA"),
+      ... and 1 more
+
+  ECDSA  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      Algorithms.java:9   ES256("SHA256withECDSA"),
+
+  X25519  (no call sites, 1 algorithm name)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      Algorithms.java:28   String agreement = "X25519";
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (no call sites, 1 algorithm name)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      Algorithms.java:24   static final String CURVE = "secp256r1";
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  3DES  (no call sites, 1 algorithm name)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      Algorithms.java:10   LEGACY("DESede/CBC/PKCS5Padding");
+
+  SHA-1  (no call sites, 1 algorithm name)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      Algorithms.java:7   RS1("SHA1withRSA"),
 
 
 REVIEW               reduced margin under Grover, usually acceptable
 
-  SHA-256  (1 call site)
+  SHA-256  (1 call site, 2 algorithm names)
     Grover gives a quadratic speedup only. Still acceptable.
     migrate to: no action needed
       Algorithms.java:31   return Signature.getInstance("SHA256withRSA");  // a call site, counted once
+      Algorithms.java:6   RS256("SHA256withRSA"),
+      Algorithms.java:9   ES256("SHA256withECDSA"),
 
 ========================================================================
-1 quantum-vulnerable call site and no imports across 1 file.
+1 quantum-vulnerable call site, 6 algorithm names and no imports across 1 file.
 
