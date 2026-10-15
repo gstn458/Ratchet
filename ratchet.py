@@ -558,8 +558,9 @@ GO_IMPORTS = {
 
 # Call sites, as (import path, pattern, algorithm, parameter group). A pattern
 # applies only when the file imports that path, so a third-party package that
-# happens to be called rsa does not match. Calls through an aliased import are
-# not matched by either backend yet.
+# happens to be called rsa does not match. scan_go matches each pattern
+# through the name the file binds the package to (go_bind), so an aliased or
+# dot import counts and an unrelated package with the same name does not.
 GO_CALL_PATTERNS = [
     # RSA: key generation, with the key size when it is a literal.
     ("crypto/rsa", re.compile(r"\brsa\.GenerateKey\s*\((?:[^,()]*,\s*(\d+)\s*\))?"), "RSA", 1),
@@ -641,6 +642,24 @@ GO_ECDSA_SIGNING = re.compile(
 GO_PACKAGE_TOKEN = {path: path.rsplit("/", 1)[-1] + "." for path, _, _, _ in GO_CALL_PATTERNS}
 GO_VARIANT_TOKENS = {path.rsplit("/", 1)[-1] + "." for path in GO_VARIANT_CALLS}
 GO_ELLIPTIC_TOKENS = {"elliptic.", "Scalar"}
+
+
+@functools.lru_cache(maxsize=None)
+def go_bind(pattern, import_path, name):
+    """A pattern whose match starts with a package's own name and a dot,
+    rewritten for a file that binds the package to another name: an alias, or
+    "." for a dot import, whose calls have no prefix but cannot follow an
+    identifier or a dot. Patterns that do not start with the package's name
+    (the bare .Sign( alternative of GO_ECDSA_SIGNING keeps working) are only
+    rewritten at the start."""
+    package = import_path.rsplit("/", 1)[-1]
+    prefix = r"\b" + package + r"\."
+    if name == package or not pattern.pattern.startswith(prefix):
+        return pattern
+    rest = pattern.pattern[len(prefix):]
+    if name == ".":
+        return re.compile(r"(?<![\w.])" + rest)
+    return re.compile(r"\b" + re.escape(name) + r"\." + rest)
 
 # Skipped by default for speed, scanned with --include-vendored. Vendored code
 # is exactly where unmaintained cryptography lives, and build output can bundle
@@ -1054,21 +1073,37 @@ def go_lex(text):
 GO_IMPORT_LINE = re.compile(r"^\s*import\b")
 
 
+# An import's path, already reduced to empty quotes by go_lex, with the name
+# it is bound to when the import gives one: gorsa "crypto/rsa", . "crypto/md5"
+# or _ "crypto/sha1".
+GO_IMPORT_SPEC = re.compile(r'(?:(?<![\w.])([A-Za-z_]\w*|\.)\s+)?(?:""|``)')
+
+
 def go_imports(code, strings):
-    """{line index: [import paths]} for import declarations only."""
-    imports = {}
+    """{line index: [(import path, name or None)]} for import declarations
+    only. The name is the alias the import binds the package to, or None for
+    the package's own name."""
+    lines = {}
     in_group = False
     for idx, line in enumerate(code):
         if in_group:
-            imports[idx] = strings[idx]
+            lines[idx] = strings[idx]
             if ")" in line:
                 in_group = False
         elif GO_IMPORT_LINE.match(line):
-            imports[idx] = strings[idx]
+            lines[idx] = strings[idx]
             after = line.split("import", 1)[1]
             if after.lstrip().startswith("(") and ")" not in after:
                 in_group = True
-    return {k: v for k, v in imports.items() if v}
+    imports = {}
+    for idx, paths in lines.items():
+        if not paths:
+            continue
+        names = [name if name != "import" else None for name in GO_IMPORT_SPEC.findall(code[idx])]
+        if len(names) != len(paths):
+            names = [None] * len(paths)  # not a line this can pair up; use the packages' own names
+        imports[idx] = list(zip(paths, names))
+    return imports
 
 
 # ---------------------------------------------------------------------------
@@ -1087,7 +1122,7 @@ GO_TREE_SITTER_QUERY = """
 (interpreted_string_literal) @string
 (raw_string_literal) @string
 (rune_literal) @rune
-(import_spec path: (_) @import)
+(import_spec) @import
 """
 
 
@@ -1118,7 +1153,7 @@ class TreeSitterGo:
         """(code, strings, imports) for Go source, in the shapes go_lex and
         go_imports return: code lines with comments removed and literals
         reduced to empty quotes, string contents by the line they open on, and
-        {line index: [import paths]}."""
+        {line index: [(import path, name or None)]}."""
         source = text.encode("utf-8")
         tree = self.parser.parse(source)
         captures = self.captures(tree.root_node)
@@ -1150,9 +1185,13 @@ class TreeSitterGo:
         lines = len(code)
         strings = [strings.get(i, []) for i in range(lines)]
         imports = defaultdict(list)
-        for node in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
-            imports[node.start_point[0]].append(
-                source[node.start_byte + 1:node.end_byte - 1].decode("utf-8", "replace"))
+        for spec in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
+            path, name = spec.child_by_field_name("path"), spec.child_by_field_name("name")
+            if path is None:
+                continue
+            imports[path.start_point[0]].append((
+                source[path.start_byte + 1:path.end_byte - 1].decode("utf-8", "replace"),
+                name.text.decode("utf-8", "replace") if name is not None else None))
         return code, strings, dict(imports)
 
 
@@ -1191,27 +1230,45 @@ def scan_go(path, lex=regex_go_lex):
     lines = read_source(path).splitlines()
 
     code, strings, import_lines = lex("\n".join(lines))
-    imports = {p for paths in import_lines.values() for p in paths}
+    # The names each import path is bound to in this file: its own package
+    # name, an alias, "." for a dot import or "_" for a blank one.
+    names = defaultdict(set)
+    for paths in import_lines.values():
+        for import_path, name in paths:
+            names[import_path].add(name or import_path.rsplit("/", 1)[-1])
+    imports = set(names)
 
     import_findings = defaultdict(list)  # import path -> its findings
     for idx, paths in sorted(import_lines.items()):
-        for import_path in paths:
+        for import_path, _ in paths:
             algo = GO_IMPORTS.get(import_path)
             if algo:
                 findings.append(Finding(algo, path, idx + 1, lines[idx], kind=IMPORT))
                 import_findings[import_path].append(findings[-1])
     variants = defaultdict(set)  # import path -> algorithms its calls used
-    calls = [(pattern, algo, group) for import_path, pattern, algo, group in GO_CALL_PATTERNS
-             if import_path in imports]
+    # Each call pattern is matched through the names its package is bound to,
+    # so gorsa.GenerateKey counts when crypto/rsa is imported as gorsa, and a
+    # different package that happens to be called rsa does not.
+    calls = [(go_bind(pattern, import_path, name), algo, group)
+             for import_path, pattern, algo, group in GO_CALL_PATTERNS
+             for name in sorted(names.get(import_path, ())) if name != "_"]
     elliptic = GO_ELLIPTIC_IMPORT in imports
+    elliptic_direct = [go_bind(GO_ELLIPTIC_DIRECT[0], GO_ELLIPTIC_IMPORT, name)
+                       for name in sorted(names.get(GO_ELLIPTIC_IMPORT, ())) if name != "_"]
+    elliptic_direct += GO_ELLIPTIC_DIRECT[1:]
     # Every rule's match contains a known substring, such as "rsa." for the
     # crypto/rsa calls. A line, or a whole file, without any of them cannot
     # match, so the regular expressions only run where one appears. This
     # changes no finding; it is the difference between scanning every line of
     # a large repository and scanning the few that mention a crypto package.
-    tokens = {GO_PACKAGE_TOKEN[import_path] for import_path in imports if import_path in GO_PACKAGE_TOKEN}
-    tokens |= GO_VARIANT_TOKENS | (GO_ELLIPTIC_TOKENS if elliptic else set())
-    gate = re.compile("|".join(map(re.escape, sorted(tokens))))
+    # The names stand in for the package's own name; a dot import leaves calls
+    # with no prefix to look for, so a file with one is matched line by line.
+    bound = {name for import_path in GO_PACKAGE_TOKEN.keys() | {GO_ELLIPTIC_IMPORT}
+             for name in names.get(import_path, ()) if name != "_"}
+    tokens = {name + "." for name in bound} | GO_VARIANT_TOKENS
+    if elliptic:
+        tokens.add("Scalar")
+    gate = re.compile("" if "." in bound else "|".join(map(re.escape, sorted(tokens))))
     joined = "\n".join(code)
     if not gate.search(joined):
         code_lines = ()
@@ -1232,7 +1289,7 @@ def scan_go(path, lex=regex_go_lex):
                 if pattern.search(text):
                     variants[import_path].add(algo)
                     findings.append(Finding(algo, path, i, line))
-        if elliptic and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
+        if elliptic and any(p.search(text) for p in elliptic_direct):
             findings.append(Finding("EC", path, i, line))
 
     for import_path, used in variants.items():
@@ -1245,8 +1302,12 @@ def scan_go(path, lex=regex_go_lex):
         GO_ECDH_NAME.search(GO_TLS_SUITE.sub("", text)) for text in code)
     ecdh = ecdh or (elliptic and "ScalarMult" in joined
                     and any(GO_SCALAR_MULT.search(text) for text in code))
-    signs = ("ecdsa." in joined or ".Sign" in joined) and any(
-        GO_ECDSA_SIGNING.search(text) for text in code)
+    # ecdsa.Sign and friends through crypto/ecdsa's names (its own name when
+    # it is not imported, as before), or .Sign( on any key.
+    ecdsa_names = sorted(names.get("crypto/ecdsa") or {"ecdsa"})
+    signing = [go_bind(GO_ECDSA_SIGNING, "crypto/ecdsa", name) for name in ecdsa_names if name != "_"]
+    signs = (".Sign" in joined or "." in ecdsa_names or any(name + "." in joined for name in ecdsa_names)) \
+        and any(p.search(text) for p in signing for text in code)
     return GoFindings(findings, ecdh=ecdh, signs=signs)
 
 

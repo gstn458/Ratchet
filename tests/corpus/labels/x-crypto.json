@@ -160,6 +160,10 @@
       "verdict": "tp",
       "note": "rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed"
     },
+    "ed25519/ed25519_test.go:15:Ed25519": {
+      "verdict": "tp",
+      "note": "read by hand: ed25519std is crypto/ed25519 imported under an alias; GenerateKey makes an Ed25519 key"
+    },
     "ed25519/ed25519_test.go:18:Ed25519": {
       "verdict": "tp",
       "note": "rule go-package-call: ed25519.Sign, golang.org/x/crypto/ed25519 imported, name not shadowed"

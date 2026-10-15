@@ -9,11 +9,13 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (no call sites, 1 import)
+  RSA  (1 call site, 1 import)
+    key sizes: 2048: 1
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.go:9   return gorsa.GenerateKey(rand.Reader, 2048)
       keys.go:5   gorsa "crypto/rsa"
 
 ========================================================================
-No quantum-vulnerable call sites and 1 import across 1 file.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

@@ -589,8 +589,8 @@
       "kind": "call site",
       "test": true,
       "path": "ed25519/ed25519_test.go",
-      "line": 18,
-      "snippet": "sig := ed25519.Sign(private, message)"
+      "line": 15,
+      "snippet": "public, private, _ := ed25519std.GenerateKey(nil)"
     },
     {
       "label": "Ed25519",
@@ -600,15 +600,6 @@
       "path": "ed25519/ed25519_test.go",
       "line": 18,
       "snippet": "sig := ed25519.Sign(private, message)"
-    },
-    {
-      "label": "Ed25519",
-      "algorithm": "Ed25519",
-      "kind": "call site",
-      "test": true,
-      "path": "ed25519/ed25519_test.go",
-      "line": 19,
-      "snippet": "if !ed25519.Verify(public, message, sig) {"
     },
     {
       "label": "Ed25519",

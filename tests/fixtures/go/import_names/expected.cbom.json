@@ -61,6 +61,66 @@
   "components": [
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "curves.go#L10",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/algorithm/ecdsa",
       "name": "ECDSA",
       "cryptoProperties": {
@@ -86,13 +146,21 @@
           {
             "location": "curves.go#L5",
             "additionalContext": "import"
+          },
+          {
+            "location": "curves.go#L14",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "curves.go#L16",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "2"
         },
         {
           "name": "ratchet:classical_status",
@@ -104,7 +172,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "3"
         },
         {
           "name": "ratchet:quantum_status",
@@ -146,13 +214,17 @@
           {
             "location": "blank_and_dot.go#L4",
             "additionalContext": "import"
+          },
+          {
+            "location": "blank_and_dot.go#L9",
+            "additionalContext": "call site"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -164,7 +236,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -210,69 +282,9 @@
           {
             "location": "shadow.go#L5",
             "additionalContext": "import"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:call_site_count",
-          "value": "0"
-        },
-        {
-          "name": "ratchet:classical_status",
-          "value": "ok"
-        },
-        {
-          "name": "ratchet:import_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "Shor's algorithm factors the modulus in polynomial time."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/rsa-1024",
-      "name": "RSA-1024",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "pke",
-          "parameterSetIdentifier": "1024",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "decrypt",
-            "encrypt",
-            "keygen",
-            "sign",
-            "verify"
-          ],
-          "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.2.840.113549.1.1.1"
-      },
-      "evidence": {
-        "occurrences": [
+          },
           {
-            "location": "shadow.go#L15",
+            "location": "shadow.go#L11",
             "additionalContext": "call site"
           }
         ]
@@ -288,11 +300,11 @@
         },
         {
           "name": "ratchet:import_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",

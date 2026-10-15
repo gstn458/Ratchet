@@ -10,7 +10,7 @@ regenerated from the committed labels by `review.py`). Change a verdict in
   `priv, err := ecdsa.GenerateKey(ctx.publicKey.Curve, randReader)`
   fp: read by hand: ecdsa.GenerateKey makes the ephemeral key for ECDH-ES in genKey(); the agreement is in cipher/ecdh_es.go. ECDSA usage label is wrong
 
-## True positives, random sample (99 of 993)
+## True positives, random sample (100 of 995)
 
 - **age** `agessh/agessh.go:212:X25519`
   `ourPublicKey, err := curve25519.X25519(ephemeral, curve25519.Basepoint)`
@@ -237,58 +237,58 @@ regenerated from the committed labels by `review.py`). Change a verdict in
 - **vault** `sdk/helper/certutil/types_test.go:29:Ed25519`
   `publicKey, _, err := ed25519.GenerateKey(rand.Reader)`
   tp: read by hand: call into the named algorithm confirmed in context
-- **vault** `sdk/helper/keysutil/policy.go:3063:ECDSA`
-  `privKey, err := ecdsa.GenerateKey(curve, rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **vault** `sdk/helper/keysutil/util.go:121:Ed25519`
-  `return ed25519.NewKeyFromSeed(ed25519Key.PrivateKey), nil`
-  tp: rule go-package-call: ed25519.NewKeyFromSeed, golang.org/x/crypto/ed25519 imported, name not shadowed
-- **vault** `sdk/helper/template/funcs.go:59:SHA-256`
-  `return fmt.Sprintf("%x", sha256.Sum256([]byte(str)))`
+- **vault** `sdk/helper/keysutil/policy.go:1400:RSA`
+  `sig, err = rsa.SignPSS(rand.Reader, key, algo, input, &rsa.PSSOptions{SaltLength: saltLength})`
+  tp: rule go-package-call: rsa.SignPSS, crypto/rsa imported, name not shadowed
+- **vault** `sdk/helper/keysutil/policy.go:2822:RSA`
+  `ephKeyWrapped, err := rsa.EncryptOAEP(hash, rand.Reader, wrappingKey, ephKey, []byte{} /* label */)`
+  tp: rule go-package-call: rsa.EncryptOAEP, crypto/rsa imported, name not shadowed
+- **vault** `sdk/helper/keysutil/policy_test.go:938:Ed25519`
+  `_, ed25519Key, err := ed25519.GenerateKey(rand.Reader)`
+  tp: rule go-package-call: ed25519.GenerateKey, golang.org/x/crypto/ed25519 imported, name not shadowed
+- **vault** `sdk/helper/salt/salt.go:196:SHA-256`
+  `hashed := sha256.Sum256(inp)`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `sdk/logical/token_test.go:87:SHA-256`
-  `hashed = sha256.Sum256([]byte(expectedIDPlaintext))`
+- **vault** `sdk/logical/token_test.go:62:SHA-256`
+  `hashed := sha256.Sum256([]byte(expectedIDPlaintext))`
   tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `vault/acme_billing_system_view.go:131:SHA-256`
-  `identifiersHash := sha256.Sum256([]byte(joinedIdentifiers))`
-  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
-- **vault** `vault/external_tests/identity/external_group_duplicate_claim_test.go:37:RSA-2048`
-  `privateKey, err := rsa.GenerateKey(rand.Reader, 2048)`
+- **vault** `tools/pipeline/internal/pkg/golang/check_generate.go:255:SHA-256`
+  `h := sha256.New()`
+  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
+- **vault** `vault/external_tests/exactdeny/case_insensitive_bypass_test.go:97:RSA-2048`
+  `key, err := rsa.GenerateKey(rand.Reader, 2048)`
   tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **vault** `vault/testing.go:1255:ECDSA`
-  `caKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **x-crypto** `acme/acme.go:787:ECDSA`
-  `if key, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader); err != nil {`
-  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
-- **x-crypto** `acme/autocert/autocert.go:638:ECDSA`
-  `key, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
+- **vault** `vault/plugincatalog/testing.go:72:SHA-256`
+  `hash := sha256.New()`
+  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
+- **x-crypto** `acme/acme.go:616:SHA-256`
+  `shasum := sha256.Sum256([]byte(ka))`
+  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **x-crypto** `acme/autocert/autocert.go:636:RSA-2048`
+  `key, err = rsa.GenerateKey(rand.Reader, 2048)`
+  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
+- **x-crypto** `acme/autocert/autocert_test.go:636:ECDSA`
+  `ecdsaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: read by hand: TLS certificate keys (signing)
-- **x-crypto** `acme/autocert/autocert_test.go:649:RSA-1024`
-  `rsaKey, err := rsa.GenerateKey(rand.Reader, 1024)`
-  tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **x-crypto** `acme/autocert/internal/acmetest/ca.go:94:ECDSA`
+- **x-crypto** `acme/autocert/autocert_test.go:830:ECDSA`
   `key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)`
   tp: read by hand: TLS certificate keys (signing)
-- **x-crypto** `acme/jws_test.go:272:ECDSA`
-  `if !ecdsa.Verify(testKeyEC.Public().(*ecdsa.PublicKey), h[:], r, s) {`
-  tp: rule go-package-call: ecdsa.Verify, crypto/ecdsa imported, name not shadowed
-- **x-crypto** `ed25519/ed25519_test.go:19:Ed25519`
-  `if !ed25519.Verify(public, message, sig) {`
-  tp: rule go-package-call: ed25519.Verify, golang.org/x/crypto/ed25519 imported, name not shadowed
+- **x-crypto** `acme/jws_test.go:271:SHA-256`
+  `h := sha256.Sum256([]byte(protected + "." + payload))`
+  tp: rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed
+- **x-crypto** `ed25519/ed25519_test.go:15:Ed25519`
+  `public, private, _ := ed25519std.GenerateKey(nil)`
+  tp: read by hand: ed25519std is crypto/ed25519 imported under an alias; GenerateKey makes an Ed25519 key
 - **x-crypto** `otr/otr.go:1232:DSA`
   `ok := dsa.Verify(&pk.PublicKey, hashed, r, s)`
   tp: rule go-package-call: dsa.Verify, crypto/dsa imported, name not shadowed
-- **x-crypto** `otr/otr.go:1275:DSA-L1024N160`
-  `if err := dsa.GenerateParameters(&priv.PrivateKey.PublicKey.Parameters, rand, dsa.L1024N160); err != nil {`
-  tp: rule go-package-call: dsa.GenerateParameters, crypto/dsa imported, name not shadowed
-- **x-crypto** `otr/otr.go:790:SHA-256`
-  `h := sha256.New()`
-  tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
-- **x-crypto** `otr/otr.go:992:AES`
-  `aesCipher, err := aes.NewCipher(slot.sendAESKey)`
+- **x-crypto** `otr/otr.go:1278:DSA`
+  `if err := dsa.GenerateKey(&priv.PrivateKey, rand); err != nil {`
+  tp: rule go-package-call: dsa.GenerateKey, crypto/dsa imported, name not shadowed
+- **x-crypto** `otr/otr.go:732:AES`
+  `aesCipher, err := aes.NewCipher(keys.c[:])`
   tp: rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed
-- **x-crypto** `otr/smp.go:182:SHA-256`
+- **x-crypto** `otr/otr.go:790:SHA-256`
   `h := sha256.New()`
   tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed
 - **x-crypto** `ssh/certs_test.go:507:ECDSA`
@@ -300,9 +300,12 @@ regenerated from the committed labels by `review.py`). Change a verdict in
 - **x-crypto** `ssh/example_test.go:479:RSA-3072`
   `privateKey, err := rsa.GenerateKey(rand.Reader, 3072)`
   tp: rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed
-- **x-crypto** `ssh/keys.go:890:EC`
-  `keyBytes := elliptic.Marshal(k.Curve, k.X, k.Y)`
-  tp: read by hand: EC, usage undetermined: encodes or checks SSH ECDSA keys (actual use: ECDSA)
+- **x-crypto** `ssh/keys.go:835:Ed25519`
+  `if ok := ed25519.Verify(ed25519.PublicKey(k), b, sig.Blob); !ok {`
+  tp: rule go-package-call: ed25519.Verify, crypto/ed25519 imported, name not shadowed
+- **x-crypto** `ssh/keys_test.go:76:ECDSA`
+  `raw, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)`
+  tp: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file
 - **x-crypto** `ssh/mlkem.go:129:SHA-256`
   `h := sha256.New()`
   tp: rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed

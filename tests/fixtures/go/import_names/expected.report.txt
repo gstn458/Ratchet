@@ -9,24 +9,37 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (1 call site, 1 import)
-    key sizes: 1024: 1
-    Shor's algorithm factors the modulus in polynomial time.
-    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
-      shadow.go:15   rsa.GenerateKey(rand.Reader, 1024)
-      shadow.go:5   gorsa "crypto/rsa"
-
-  ECDSA  (no call sites, 1 import)
+  ECDSA  (2 call sites, 1 import)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      curves.go:14   k, _ := ec.GenerateKey(ell.P256(), rand.Reader)
+      curves.go:16   return ec.SignASN1(rand.Reader, key, digest)
       curves.go:5   ec "crypto/ecdsa"
+
+  RSA  (1 call site, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      shadow.go:11   return gorsa.SignPKCS1v15(rand.Reader, key, 0, digest)
+      shadow.go:5   gorsa "crypto/rsa"
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (1 call site)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      curves.go:10   return ell.Marshal(key.Curve, key.X, key.Y)
 
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  MD5  (no call sites, 1 import)
+  MD5  (1 call site, 1 import)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      blank_and_dot.go:9   return Sum(data)
       blank_and_dot.go:4   . "crypto/md5"
 
   SHA-1  (no call sites, 1 import)
@@ -35,5 +48,6 @@ ALREADY BROKEN       weak today, quantum is not the issue
       blank_and_dot.go:5   _ "crypto/sha1"
 
 ========================================================================
-1 quantum-vulnerable call site and 2 imports across 2 files.
+4 quantum-vulnerable call sites and 2 imports across 2 files.
+1 call site and no imports with usage undetermined: review before choosing a migration target.
 

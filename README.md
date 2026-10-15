@@ -145,7 +145,7 @@ more slowly than the lexer reads; in a single process, 132 seconds.
 
 Three things make that possible, none of which changes a finding. Files are scanned
 by one worker process per CPU and the results are put back in order, so the output is
-identical with any number of workers. Rules run only on lines that mention the
+identical with any number of workers. Go rules run only on lines that mention the
 package they look for. And a Python file that names no cryptographic module or hash is
 parsed, so a syntax error is still reported, but its syntax tree is not walked. The
 test suite checks each shortcut against the rules it skips.
@@ -253,9 +253,11 @@ DSA. A key size or curve held in a variable is not resolved. See
 `tests/fixtures/README.md` for the full list of known gaps.
 
 Go rules are regular expressions over code with comments and strings removed, with
-either backend. Tree-sitter makes that separation exact but does not yet change what
-the rules match: a call through an aliased import (`gorsa.GenerateKey`) is not
-matched, and a key size held in a variable is not captured. Because pre-1.20 Go code generated ECDH keys with
+either backend. Calls are matched through the name each import binds, so
+`gorsa.GenerateKey` counts when `crypto/rsa` is imported as `gorsa`, a dot import's bare
+`Sum(...)` counts, and a project package that happens to be called `rsa` does not. A
+key size held in a variable is not captured, and a package reached any other way than
+through its import name, such as a function value passed around, is not followed. Because pre-1.20 Go code generated ECDH keys with
 `ecdsa.GenerateKey`, often doing the key agreement in another file,
 `crypto/ecdsa` findings in a file that never signs are reported as usage
 undetermined when that file shows ECDH, or when another production file in the

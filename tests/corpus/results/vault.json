@@ -3122,15 +3122,6 @@
       "snippet": "_, pri, err := ed25519.GenerateKey(limReader)"
     },
     {
-      "label": "Ed25519",
-      "algorithm": "Ed25519",
-      "kind": "call site",
-      "test": false,
-      "path": "sdk/helper/keysutil/policy.go",
-      "line": 1048,
-      "snippet": "_, pri, err := ed25519.GenerateKey(limReader)"
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
@@ -3208,8 +3199,8 @@
       "kind": "call site",
       "test": false,
       "path": "sdk/helper/keysutil/policy.go",
-      "line": 2043,
-      "snippet": "pub, pri, err := ed25519.GenerateKey(randReader)"
+      "line": 1721,
+      "snippet": "if err := stdlibEd25519.VerifyWithOptions(pub, input, sigBytes, opts); err != nil {"
     },
     {
       "label": "Ed25519",
