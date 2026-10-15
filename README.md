@@ -208,9 +208,16 @@ Anything not routed through a recognized library or import is invisible.
 
 Python, Go, and Java with tree-sitter installed. Java has no fallback parser: without
 `tree-sitter-java`, every Java file is counted and listed as not scanned, in the report
-and the CBOM. Java detection so far covers imports of the JDK's key interfaces and
-specs and of BouncyCastle classes; JCA `getInstance` calls are next. C, C#,
-JavaScript, Rust and Terraform are not covered.
+and the CBOM. Java detection covers imports of the JDK's key interfaces and specs and
+of BouncyCastle classes, and JCA `getInstance` calls (KeyPairGenerator, Signature,
+Cipher, KeyAgreement, MessageDigest, Mac, SecretKeyFactory and the rest) whose name is
+a literal or a constant declared once in the same file. A compound name counts once per
+primitive: `SHA1withRSA` is RSA and SHA-1. A name built at run time, held in another
+file, or passed in from outside is not resolved, which in libraries such as JWT
+implementations is most of them. SHA-384 and SHA-512 are not in the registry, so the
+hash in `SHA512withRSA` records nothing, and EdDSA, XDH, Ed448 and X448 are not mapped
+until the registry has entries for them. Key sizes passed to `initialize()` are not
+read yet. C, C#, JavaScript, Rust and Terraform are not covered.
 
 Source code only. Certificates, TLS configuration, hardware security modules, and
 anything on the network are out of scope. A complete cryptographic inventory needs

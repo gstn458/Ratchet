@@ -1258,7 +1258,66 @@ JAVA_IMPORTS = {
 
 JAVA_TREE_SITTER_QUERY = """
 (import_declaration) @import
+(method_invocation name: (identifier) @method (#eq? @method "getInstance")) @call
+(variable_declarator value: (string_literal)) @declarator
+(assignment_expression) @assignment
 """
+
+# JCA engine classes whose getInstance(name) names the algorithm.
+JCA_CLASSES = {
+    "KeyPairGenerator", "KeyFactory", "Signature", "Cipher", "KeyAgreement", "MessageDigest",
+    "Mac", "KeyGenerator", "SecretKeyFactory", "AlgorithmParameterGenerator", "AlgorithmParameters",
+}
+
+# Standard JCA names (Java Security Standard Algorithm Names), lower-cased, as
+# JCA matches them without regard to case. Only algorithms in the registry
+# are mapped; anything else (SHA-512, EdDSA, XDH, Ed448, X448) records nothing.
+JCA_NAMES = {
+    "rsa": "RSA", "rsassa-pss": "RSA",
+    "ec": "EC", "ecdsa": "ECDSA", "ecdh": "ECDH", "ecdhc": "ECDH",
+    "dsa": "DSA", "dh": "DH", "diffiehellman": "DH",
+    "ed25519": "Ed25519", "x25519": "X25519",
+    "des": "DES", "desede": "3DES", "tripledes": "3DES",
+    "rc4": "RC4", "arcfour": "RC4", "aes": "AES",
+    "md5": "MD5", "sha1": "SHA-1", "sha-1": "SHA-1", "sha": "SHA-1",
+    "sha256": "SHA-256", "sha-256": "SHA-256",
+}
+JCA_SIGNATURE = re.compile(r"(?P<hash>[a-z0-9/-]+?)with(?P<key>rsa|ecdsa|dsa)(?:andmgf1|/pss|inp1363format)?")
+JCA_PREFIXED = re.compile(r"(?:hmac|pbkdf2withhmac)(?P<hash>.+)")
+JCA_PBE = re.compile(r"pbewith(?P<hash>[a-z0-9-]+?)and(?P<cipher>.+)")
+JCA_OAEP = re.compile(r"oaepwith(?P<hash>.+?)andmgf1padding")
+
+
+def jca_name(name):
+    """A name with a key or block size suffix (AES_256, RC4_128) removed."""
+    return re.sub(r"_\d+$", "", name)
+
+
+def jca_algorithms(name):
+    """The registry algorithms a JCA algorithm name uses, one per primitive:
+    SHA1withRSA is RSA and SHA-1, RSA/ECB/OAEPWithSHA-1AndMGF1Padding is RSA
+    and SHA-1, PBEWithMD5AndDES is MD5 and DES. [] for a name it does not know."""
+    n = name.strip().lower()
+    m = JCA_SIGNATURE.fullmatch(n)
+    if m:
+        key = JCA_NAMES[m.group("key")]
+        digest = JCA_NAMES.get(m.group("hash"))
+        return [key] + ([digest] if digest else [])
+    if "/" in n:  # Cipher transformation: algorithm/mode/padding
+        cipher, _, rest = n.partition("/")
+        found = [JCA_NAMES[jca_name(cipher)]] if jca_name(cipher) in JCA_NAMES else []
+        oaep = JCA_OAEP.search(rest)
+        if oaep and JCA_NAMES.get(oaep.group("hash")):
+            found.append(JCA_NAMES[oaep.group("hash")])
+        return found
+    m = JCA_PBE.fullmatch(n)
+    if m:
+        digest = re.sub(r"^hmac", "", m.group("hash"))
+        return [JCA_NAMES[x] for x in (digest, jca_name(m.group("cipher"))) if x in JCA_NAMES]
+    m = JCA_PREFIXED.fullmatch(n)
+    if m:
+        return [JCA_NAMES[m.group("hash")]] if m.group("hash") in JCA_NAMES else []
+    return [JCA_NAMES[jca_name(n)]] if jca_name(n) in JCA_NAMES else []
 
 
 def java_import_algorithm(name):
@@ -1276,6 +1335,45 @@ class TreeSitterJava(TreeSitterGrammar):
         source = "\n".join(lines).encode("utf-8")
         captures = self.captures(self.parser.parse(source).root_node)
         findings = []
+
+        def text(node):
+            return source[node.start_byte:node.end_byte].decode("utf-8", "replace")
+
+        def line_of(node):
+            row = node.start_point[0]
+            return row + 1, lines[row] if row < len(lines) else ""
+
+        # Constants: a name declared once in the file with a string literal and
+        # never assigned again, so getInstance(SIG) names what SIG holds.
+        declared = defaultdict(list)
+        for node in captures.get("declarator", ()):
+            declared[text(node.child_by_field_name("name"))].append(text(node.child_by_field_name("value")))
+        assigned = set()
+        for node in captures.get("assignment", ()):
+            left = node.child_by_field_name("left")
+            if left is not None:
+                field = left.child_by_field_name("field") if left.type == "field_access" else left
+                assigned.add(text(field))
+        constants = {name: values[0][1:-1] for name, values in declared.items()
+                     if len(values) == 1 and name not in assigned}
+
+        for node in sorted(captures.get("call", ()), key=lambda n: n.start_byte):
+            owner, arguments = node.child_by_field_name("object"), node.child_by_field_name("arguments")
+            if owner is None or arguments is None or text(owner).rsplit(".", 1)[-1] not in JCA_CLASSES:
+                continue
+            first = next((c for c in arguments.named_children if c.type != "comment"), None)
+            if first is None:
+                continue
+            if first.type == "string_literal":
+                name = text(first)[1:-1]
+            elif first.type == "identifier" and text(first) in constants:
+                name = constants[text(first)]
+            else:
+                continue  # a name only known at run time
+            line, snippet = line_of(node)
+            for algo in jca_algorithms(name):
+                findings.append(Finding(algo, path, line, snippet))
+
         for node in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
             # A package wildcard (java.security.*) matches no class-level prefix,
             # so it names no algorithm; a class's static members do.
@@ -1284,6 +1382,14 @@ class TreeSitterJava(TreeSitterGrammar):
             if algo:
                 row = node.start_point[0]
                 findings.append(Finding(algo, path, row + 1, lines[row] if row < len(lines) else "", kind=IMPORT))
+
+        # EC keys and imports take the file's usage when every signature or key
+        # agreement call in it agrees, as in Python; otherwise they stay EC.
+        usages = {f.algorithm for f in findings if f.kind == CALL and f.algorithm in ("ECDSA", "ECDH")}
+        if len(usages) == 1:
+            for f in findings:
+                if f.algorithm == "EC":
+                    f.algorithm = next(iter(usages))
         return findings
 
 

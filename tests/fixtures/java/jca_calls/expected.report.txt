@@ -7,14 +7,78 @@ parsed all 2 files
 no .ratchetignore; no findings suppressed
 ========================================================================
 
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (3 call sites, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      Jca.java:20   Signature.getInstance("SHA256withECDSA", "BC");
+      Signer.java:9   KeyPairGenerator.getInstance("EC");
+      Signer.java:10   Signature.getInstance("SHA256withECDSA");
+      ... and 1 more
+
+  RSA  (4 call sites)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      Jca.java:17   KeyPairGenerator.getInstance("RSA");
+      Jca.java:19   Signature.getInstance(SIG);
+      Jca.java:23   Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
+      ... and 1 more
+
+  ECDH  (1 call site)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      Jca.java:26   KeyAgreement.getInstance(KEX);
+
+
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (no call sites, 1 import)
+  EC  (1 call site)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
-      Signer.java:5   import java.security.interfaces.ECPublicKey;
+      Jca.java:18   KeyPairGenerator.getInstance("EC");
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (4 call sites)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      Jca.java:19   Signature.getInstance(SIG);
+      Jca.java:21   java.security.MessageDigest.getInstance("SHA-1");
+      Jca.java:23   Cipher.getInstance("RSA/ECB/OAEPWithSHA-1AndMGF1Padding");
+      ... and 1 more
+
+  3DES  (1 call site)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      Jca.java:24   Cipher.getInstance("DESede/CBC/PKCS5Padding");
+
+  MD5  (1 call site)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      Jca.java:22   MessageDigest.getInstance("md5");
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (3 call sites)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      Jca.java:20   Signature.getInstance("SHA256withECDSA", "BC");
+      Jca.java:28   SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+      Signer.java:10   Signature.getInstance("SHA256withECDSA");
+
+  AES  (1 call site)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      Jca.java:25   Cipher.getInstance("AES/GCM/NoPadding");
 
 ========================================================================
-No quantum-vulnerable call sites and 1 import across 1 file.
-No call sites and 1 import with usage undetermined: review before choosing a migration target.
+9 quantum-vulnerable call sites and 1 import across 2 files.
+1 call site and no imports with usage undetermined: review before choosing a migration target.
 

@@ -110,7 +110,7 @@ and are skipped when the grammars are not installed; CI installs them.
 | Case | Pins down | Status |
 | --- | --- | --- |
 | `imports` | Imports of JDK key interfaces and specs and BouncyCastle classes map to their algorithm by the longest matching prefix (`RSAPublicKey` RSA, `ECPrivateKey` and `ECGenParameterSpec` EC, `DESedeKeySpec` 3DES, `ECDSASigner` ECDSA, `SHA1Digest` SHA-1); a static import of an RSA class counts; package wildcards, `java.util`, a commented-out import and an import written in a string do not; `KeysTest.java` under `src/test` is test code | ok |
-| `jca_calls` | JCA `getInstance` calls with a literal or same-file constant name, compound signature and Cipher transformation names, Mac and PBKDF2 names, case-insensitive matching, a provider argument, a fully qualified class; a dynamic name, a reassigned field and a non-JCA class's `getInstance` claim nothing; `Signer.java` signs with ECDSA, so its EC key generator is ECDSA | gap: only the ECPublicKey import is found |
+| `jca_calls` | JCA `getInstance` calls with a literal or same-file constant name, compound signature and Cipher transformation names, Mac and PBKDF2 names, case-insensitive matching, a provider argument, a fully qualified class, one finding per primitive (`SHA1withRSA` is RSA and SHA-1); `SHA512withRSA` is RSA only (SHA-512 is not in the registry); EdDSA, a dynamic name, a reassigned field and a non-JCA class's `getInstance` claim nothing; `Jca.java` both signs with ECDSA and agrees keys with ECDH, so its EC generator stays EC, while `Signer.java` only signs, so its EC generator and ECPublicKey import are ECDSA | ok (only the import was found before) |
 
 ## walk/
 
