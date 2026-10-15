@@ -338,5 +338,4 @@ and the actual product.
 
 ## License
 
-Pick one before publishing. Apache 2.0 is the conventional choice for security
-tooling that wants enterprise adoption.
+Apache License 2.0. See [`LICENSE`](LICENSE).
