@@ -361,11 +361,10 @@ and the actual product.
 
 ## Roadmap
 
-1. Java and JavaScript detection, since that is where most enterprise code is
-2. Certificate and TLS configuration scanning
-3. Language model triage to cut false positives on wrapped and dynamic calls
-4. GitHub App that posts the CBOM diff as a check on every pull request
-5. Remediation pull requests, hybrid mode first, behind a test suite gate
+1. Certificate, TLS configuration and dependency manifest scanning
+2. Language model triage to cut false positives on wrapped and dynamic calls
+3. GitHub App that posts the CBOM diff as a check on every pull request
+4. Remediation pull requests, hybrid mode first, behind a test suite gate
 
 ## License
 
