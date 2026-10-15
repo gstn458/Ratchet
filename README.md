@@ -21,6 +21,7 @@ python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vulnerable call site
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
+python3 ratchet.py /path/to/repo --jobs 1                # one process (default: one worker per CPU)
 ```
 
 Go can optionally be parsed with tree-sitter instead of the built-in regex backend:
@@ -133,6 +134,21 @@ it outright and it has to be migrated. Already broken means it is weak today and
 quantum has nothing to do with it, which is usually the more urgent finding. Reduced
 means Grover halves the effective security margin, which at AES-256 and SHA-256 is
 acceptable and is recorded rather than flagged.
+
+## Speed
+
+The target is a 100,000-file repository in under a minute on a laptop.
+`tools/bench.py` builds a tree of 100,000 links to the corpus's Python and Go
+sources and times a scan. On a 4-CPU machine with a warm file cache it takes
+36 seconds with the built-in Go lexer and 51 seconds with tree-sitter, which parses
+more slowly than the lexer reads; in a single process, 132 seconds.
+
+Three things make that possible, none of which changes a finding. Files are scanned
+by one worker process per CPU and the results are put back in order, so the output is
+identical with any number of workers. Rules run only on lines that mention the
+package they look for. And a Python file that names no cryptographic module or hash is
+parsed, so a syntax error is still reported, but its syntax tree is not walked. The
+test suite checks each shortcut against the rules it skips.
 
 ## Excluding and suppressing
 
