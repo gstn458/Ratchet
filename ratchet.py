@@ -588,7 +588,8 @@ GO_CALL_PATTERNS = [
 
 # Packages that serve more than one algorithm. The call says which, and the
 # package's import takes that algorithm when every such call in the file
-# agrees; otherwise it keeps its GO_IMPORTS mapping.
+# agrees; otherwise it keeps its GO_IMPORTS mapping. Like the call patterns,
+# they match only through the name the file binds the package to.
 GO_VARIANT_CALLS = {
     "crypto/ecdh": [
         (re.compile(r"\becdh\.X25519\s*\("), "X25519"),
@@ -636,11 +637,10 @@ GO_ECDSA_SIGNING = re.compile(
 
 # The substring every match of a pattern above contains, used to skip code
 # that cannot match: each call pattern starts with its package name and a
-# dot, the variant patterns with ecdh. or des., and the direct crypto/elliptic
+# dot (the variant patterns too), and the direct crypto/elliptic
 # patterns contain elliptic. or Scalar. tests/test_performance.py checks the
 # patterns against these.
 GO_PACKAGE_TOKEN = {path: path.rsplit("/", 1)[-1] + "." for path, _, _, _ in GO_CALL_PATTERNS}
-GO_VARIANT_TOKENS = {path.rsplit("/", 1)[-1] + "." for path in GO_VARIANT_CALLS}
 GO_ELLIPTIC_TOKENS = {"elliptic.", "Scalar"}
 
 
@@ -1252,6 +1252,10 @@ def scan_go(path, lex=regex_go_lex):
     calls = [(go_bind(pattern, import_path, name), algo, group)
              for import_path, pattern, algo, group in GO_CALL_PATTERNS
              for name in sorted(names.get(import_path, ())) if name != "_"]
+    variant_calls = [(import_path, go_bind(pattern, import_path, name), algo)
+                     for import_path, patterns in GO_VARIANT_CALLS.items()
+                     for pattern, algo in patterns
+                     for name in sorted(names.get(import_path, ())) if name != "_"]
     elliptic = GO_ELLIPTIC_IMPORT in imports
     elliptic_direct = [go_bind(GO_ELLIPTIC_DIRECT[0], GO_ELLIPTIC_IMPORT, name)
                        for name in sorted(names.get(GO_ELLIPTIC_IMPORT, ())) if name != "_"]
@@ -1263,9 +1267,9 @@ def scan_go(path, lex=regex_go_lex):
     # a large repository and scanning the few that mention a crypto package.
     # The names stand in for the package's own name; a dot import leaves calls
     # with no prefix to look for, so a file with one is matched line by line.
-    bound = {name for import_path in GO_PACKAGE_TOKEN.keys() | {GO_ELLIPTIC_IMPORT}
+    bound = {name for import_path in GO_PACKAGE_TOKEN.keys() | GO_VARIANT_CALLS.keys() | {GO_ELLIPTIC_IMPORT}
              for name in names.get(import_path, ()) if name != "_"}
-    tokens = {name + "." for name in bound} | GO_VARIANT_TOKENS
+    tokens = {name + "." for name in bound}
     if elliptic:
         tokens.add("Scalar")
     gate = re.compile("" if "." in bound else "|".join(map(re.escape, sorted(tokens))))
@@ -1284,11 +1288,10 @@ def scan_go(path, lex=regex_go_lex):
             if m:
                 params = m.group(group) if group else None
                 findings.append(Finding(algo, path, i, line, params))
-        for import_path, patterns in GO_VARIANT_CALLS.items():
-            for pattern, algo in patterns:
-                if pattern.search(text):
-                    variants[import_path].add(algo)
-                    findings.append(Finding(algo, path, i, line))
+        for import_path, pattern, algo in variant_calls:
+            if pattern.search(text):
+                variants[import_path].add(algo)
+                findings.append(Finding(algo, path, i, line))
         if elliptic and any(p.search(text) for p in elliptic_direct):
             findings.append(Finding("EC", path, i, line))
 

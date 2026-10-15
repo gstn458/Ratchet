@@ -61,8 +61,8 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/des",
-      "name": "DES",
+      "bom-ref": "crypto/algorithm/3des",
+      "name": "3DES",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
@@ -79,7 +79,7 @@
           ],
           "nistQuantumSecurityLevel": 0
         },
-        "oid": "1.3.14.3.2.7"
+        "oid": "1.2.840.113549.3.7"
       },
       "evidence": {
         "occurrences": [
@@ -88,7 +88,7 @@
             "additionalContext": "import"
           },
           {
-            "location": "legacy.go#L9",
+            "location": "aliased.go#L11",
             "additionalContext": "call site"
           }
         ]
@@ -116,7 +116,7 @@
         },
         {
           "name": "ratchet:rationale",
-          "value": "56-bit key. Brute-forced on commodity hardware."
+          "value": "Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023."
         },
         {
           "name": "ratchet:recommended_replacement",
@@ -151,66 +151,9 @@
           {
             "location": "aliased.go#L4",
             "additionalContext": "import"
-          }
-        ]
-      },
-      "properties": [
-        {
-          "name": "ratchet:call_site_count",
-          "value": "0"
-        },
-        {
-          "name": "ratchet:classical_status",
-          "value": "ok"
-        },
-        {
-          "name": "ratchet:import_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:occurrence_count",
-          "value": "1"
-        },
-        {
-          "name": "ratchet:quantum_status",
-          "value": "broken"
-        },
-        {
-          "name": "ratchet:rationale",
-          "value": "Shor's algorithm solves the discrete log on the curve."
-        },
-        {
-          "name": "ratchet:recommended_replacement",
-          "value": "ML-KEM-768, ideally hybrid X25519+ML-KEM during transition"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/x25519",
-      "name": "X25519",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "key-agree",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "generic",
-          "certificationLevel": [
-            "none"
-          ],
-          "cryptoFunctions": [
-            "keyderive",
-            "keygen"
-          ],
-          "nistQuantumSecurityLevel": 0
-        },
-        "oid": "1.3.101.110"
-      },
-      "evidence": {
-        "occurrences": [
+          },
           {
-            "location": "legacy.go#L10",
+            "location": "aliased.go#L9",
             "additionalContext": "call site"
           }
         ]
@@ -226,11 +169,11 @@
         },
         {
           "name": "ratchet:import_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -238,11 +181,11 @@
         },
         {
           "name": "ratchet:rationale",
-          "value": "Curve25519 discrete log falls to Shor's algorithm."
+          "value": "Shor's algorithm solves the discrete log on the curve."
         },
         {
           "name": "ratchet:recommended_replacement",
-          "value": "hybrid X25519+ML-KEM-768, then ML-KEM alone"
+          "value": "ML-KEM-768, ideally hybrid X25519+ML-KEM during transition"
         }
       ]
     }

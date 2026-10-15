@@ -9,25 +9,22 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  ECDH  (no call sites, 1 import)
+  ECDH  (1 call site, 1 import)
+    parameter set: not stated in any call site
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      aliased.go:9   k, _ := goecdh.P256().GenerateKey(nil)
       aliased.go:4   goecdh "crypto/ecdh"
-
-  X25519  (1 call site)
-    Curve25519 discrete log falls to Shor's algorithm.
-    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
-      legacy.go:10   ecdh.X25519()
 
 
 ALREADY BROKEN       weak today, quantum is not the issue
 
-  DES  (1 call site, 1 import)
-    56-bit key. Brute-forced on commodity hardware.
+  3DES  (1 call site, 1 import)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
     migrate to: AES-256-GCM
-      legacy.go:9   des.NewCipher(key)
+      aliased.go:11   stddes.NewTripleDESCipher(make([]byte, 24))
       aliased.go:5   stddes "crypto/des"
 
 ========================================================================
-1 quantum-vulnerable call site and 1 import across 2 files.
+1 quantum-vulnerable call site and 1 import across 1 file.
 

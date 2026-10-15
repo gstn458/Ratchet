@@ -99,7 +99,7 @@ after the fixtures were first written:
 | `import_forms` | Single-line, aliased, grouped, blank and raw-string imports are found; a commented-out import, an import path in a block comment, a raw string, a struct tag and an escaped string are not | ok |
 | `aliased_import` | `gorsa "crypto/rsa"` import and `gorsa.GenerateKey(..., 2048)` as RSA-2048 | ok (the call was missed before) |
 | `import_names` | Calls are matched through the name each import binds: `gorsa.SignPKCS1v15` (aliased crypto/rsa), `ell.Marshal` (aliased crypto/elliptic, EC) and `ec.GenerateKey`/`ec.SignASN1` (aliased crypto/ecdsa, which signs, so ECDSA); a project package bound to the name `rsa` beside an aliased crypto/rsa is not crypto/rsa; a blank import is an import finding with no calls; a dot import's bare `Sum(...)` is MD5 | ok (before: the project package was RSA-1024 and every aliased or dot-imported call was missed) |
-| `variant_imports` | crypto/des and crypto/ecdh calls only through the name their import binds: a project package called `des` or `ecdh` is reported as DES and X25519, and the aliased `goecdh.P256()` and `stddes.NewTripleDESCipher` are missed, so the aliased crypto/des import stays DES | wrong: false positives and false negatives |
+| `variant_imports` | crypto/des and crypto/ecdh calls only through the name their import binds: a project package called `des` or `ecdh` is not crypto; the aliased `goecdh.P256()` is ECDH and `stddes.NewTripleDESCipher` is 3DES, which makes the aliased import 3DES too | ok (before: the project packages were DES and X25519, and the aliased calls were missed) |
 | `comments` | Calls inside `//` comments, `/* */` blocks and after a trailing `//` are not matched | ok (block and trailing comments matched before step 5) |
 
 ## walk/

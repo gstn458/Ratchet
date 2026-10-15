@@ -27,7 +27,6 @@ def test_go_call_patterns_contain_their_package_token():
 def test_go_variant_patterns_contain_their_package_token():
     for import_path, patterns in ratchet.GO_VARIANT_CALLS.items():
         token = import_path.rsplit("/", 1)[-1]
-        assert token + "." in ratchet.GO_VARIANT_TOKENS
         for pattern, _ in patterns:
             assert pattern.pattern.startswith(r"\b" + token + r"\."), pattern.pattern
 
