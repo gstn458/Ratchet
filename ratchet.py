@@ -3005,8 +3005,193 @@ def ci_gate_count(scan):
                if f.kind == CALL and ALGORITHMS[f.algorithm]["quantum"] == "broken")
 
 
-def main():
-    p = argparse.ArgumentParser(description="Find quantum-breakable cryptography in a codebase.")
+# ---------------------------------------------------------------------------
+# ratchet diff: compare two CBOMs
+#
+# Occurrences are counted per (algorithm, file, kind), apart for suppressed
+# components, and the two counts compared. Line numbers are not part of the
+# key, so code that only moves within a file is no change. A file that is
+# renamed reads as a decrease in the old path and an increase in the new one.
+# --fail-on-new-vulnerable fails when an unsuppressed, quantum-vulnerable
+# call-site count goes up in any file: imports, algorithm names and
+# suppressed findings never fail it, matching --fail-on-vulnerable.
+# ---------------------------------------------------------------------------
+
+class CbomError(Exception):
+    pass
+
+
+def read_cbom(path):
+    """The occurrence counts and scan settings in a CBOM Ratchet wrote.
+
+    Returns (meta, counts, lines, status): meta maps property names to lists
+    of values; counts and lines are keyed by (algorithm, path, kind,
+    suppressed); status maps an algorithm to its (quantum, classical) status
+    as that CBOM recorded it.
+    """
+    try:
+        with open(path, encoding="utf-8") as fh:
+            doc = json.load(fh)
+    except OSError as e:
+        raise CbomError(f"cannot read {path}: {e.strerror}")
+    except ValueError as e:
+        raise CbomError(f"{path} is not JSON: {e}")
+    try:
+        return parse_cbom(doc)
+    except (AttributeError, KeyError, TypeError, ValueError):
+        raise CbomError(f"{path} is not a CBOM written by ratchet")
+
+
+def parse_cbom(doc):
+    tools = doc["metadata"]["tools"]
+    if doc["bomFormat"] != "CycloneDX" or not any(t["name"] == "ratchet" for t in tools["components"]):
+        raise ValueError("not a ratchet CBOM")
+    meta = defaultdict(list)
+    for p in doc["metadata"].get("properties", []):
+        meta[p["name"]].append(p["value"])
+    meta["tool_version"] = [t.get("version", "") for t in tools["components"] if t.get("name") == "ratchet"]
+
+    counts, lines, status = defaultdict(int), defaultdict(list), {}
+    for c in doc.get("components", []):
+        if c.get("type") != "cryptographic-asset":
+            continue
+        props = {p["name"]: p["value"] for p in c.get("properties", [])}
+        params = c["cryptoProperties"]["algorithmProperties"]["parameterSetIdentifier"]
+        name = c["name"]
+        algorithm = name[:-len(params) - 1] if params != "unspecified" and name.endswith(f"-{params}") else name
+        status[algorithm] = (props.get("ratchet:quantum_status"), props.get("ratchet:classical_status"))
+        suppressed = "ratchet:suppressed_by" in props
+        for o in c.get("evidence", {}).get("occurrences", []):
+            file, line = o["location"].rsplit("#L", 1)
+            kind = o["additionalContext"].replace(" (test code)", "")
+            key = (algorithm, file, kind, suppressed)
+            counts[key] += 1
+            lines[key].append(int(line))
+    return meta, counts, lines, status
+
+
+def diff_cboms(old_path, new_path):
+    """Compare two CBOMs. Returns a dict that is printed as text or JSON."""
+    old_meta, old_counts, old_lines, old_status = read_cbom(old_path)
+    new_meta, new_counts, new_lines, new_status = read_cbom(new_path)
+    status = {**old_status, **new_status}
+
+    warnings = []
+    for name, label in (("tool_version", "ratchet version"),
+                        ("ratchet:scan_registry_version", "registry version"),
+                        ("ratchet:scan_registry_sha256", "registry hash"),
+                        ("ratchet:include_vendored", "--include-vendored")):
+        old_value, new_value = ", ".join(old_meta.get(name, [])), ", ".join(new_meta.get(name, []))
+        if old_value != new_value:
+            warnings.append(f"{label} differs: {old_value or 'not recorded'} -> {new_value or 'not recorded'}")
+    old_parsers = dict(v.split(": ", 1) for v in old_meta.get("ratchet:parser", []))
+    new_parsers = dict(v.split(": ", 1) for v in new_meta.get("ratchet:parser", []))
+    for language in sorted(set(old_parsers) | set(new_parsers)):
+        if old_parsers.get(language) != new_parsers.get(language):
+            warnings.append(f"{language} parser differs: {old_parsers.get(language, 'not recorded')} -> "
+                            f"{new_parsers.get(language, 'not recorded')}")
+    for name, label in (("ratchet:unparsed_file", "could not parse"),
+                        ("ratchet:not_scanned_file", "did not scan")):
+        for value in sorted(set(new_meta.get(name, [])) - set(old_meta.get(name, []))):
+            warnings.append(f"the new scan {label} {value}, so any findings in it are missing")
+
+    def severity(algorithm):
+        quantum, classical = status[algorithm]
+        return 0 if quantum == "broken" else 1 if classical == "broken" else 2
+
+    changes = []
+    for key in sorted(set(old_counts) | set(new_counts),
+                      key=lambda k: (k[3], severity(k[0]), k[0], k[1], k[2])):
+        before, after = old_counts.get(key, 0), new_counts.get(key, 0)
+        if before == after:
+            continue
+        algorithm, file, kind, suppressed = key
+        changes.append({
+            "algorithm": algorithm, "path": file, "kind": kind, "suppressed": suppressed,
+            "quantum_status": status[algorithm][0], "classical_status": status[algorithm][1],
+            "old": before, "new": after,
+            "old_lines": sorted(old_lines.get(key, [])), "new_lines": sorted(new_lines.get(key, [])),
+        })
+
+    def gate(counts):
+        return sum(n for (algorithm, _, kind, suppressed), n in counts.items()
+                   if kind == CALL and not suppressed and status[algorithm][0] == "broken")
+
+    new_vulnerable = sum(c["new"] - c["old"] for c in changes
+                         if c["new"] > c["old"] and c["kind"] == CALL and not c["suppressed"]
+                         and c["quantum_status"] == "broken")
+    return {
+        "old": old_path, "new": new_path,
+        "warnings": warnings,
+        "changes": changes,
+        "quantum_vulnerable_call_sites": {"old": gate(old_counts), "new": gate(new_counts)},
+        "new_quantum_vulnerable_call_sites": new_vulnerable,
+    }
+
+
+def print_diff(result):
+    print()
+    print(f"ratchet diff  {result['old']} -> {result['new']}")
+    for w in result["warnings"]:
+        print(f"warning: {w}")
+    print("=" * 72)
+
+    def rows(title, picked):
+        if not picked:
+            return
+        print(f"\n{title}\n")
+        for c in picked:
+            lines = c["new_lines"] or c["old_lines"]
+            where = "line" if len(lines) == 1 else "lines"
+            now = "now at" if c["new_lines"] else "was at"
+            print(f"  {c['algorithm']} {c['kind']}  {c['path']}  {c['old']} -> {c['new']}  "
+                  f"({now} {where} {', '.join(map(str, lines))})")
+
+    active = [c for c in result["changes"] if not c["suppressed"]]
+    rows("MORE   counts that went up", [c for c in active if c["new"] > c["old"]])
+    rows("FEWER  counts that went down", [c for c in active if c["new"] < c["old"]])
+    rows("SUPPRESSED, CHANGED   not counted toward --fail-on-new-vulnerable",
+         [c for c in result["changes"] if c["suppressed"]])
+    if not result["changes"]:
+        print("\nno changes")
+    print()
+    print("=" * 72)
+    gate = result["quantum_vulnerable_call_sites"]
+    more = result["new_quantum_vulnerable_call_sites"]
+    print(f"quantum-vulnerable call sites: {gate['old']} -> {gate['new']} in total, "
+          f"{more or 'none'} more counting file by file.")
+    print()
+
+
+def diff_main(argv):
+    p = argparse.ArgumentParser(prog="ratchet diff",
+                                description="Compare two CBOMs written by ratchet, file by file.")
+    p.add_argument("old", help="the CBOM before the change, e.g. from the base branch")
+    p.add_argument("new", help="the CBOM after the change")
+    p.add_argument("--json", action="store_true", help="print the comparison as JSON")
+    p.add_argument("--fail-on-new-vulnerable", action="store_true",
+                   help="exit 1 if any file has more unsuppressed quantum-vulnerable call sites than "
+                        "before; imports, algorithm names and suppressed findings do not count")
+    args = p.parse_args(argv)
+    try:
+        result = diff_cboms(args.old, args.new)
+    except CbomError as e:
+        print(f"ratchet diff: {e}", file=sys.stderr)
+        return 2
+    if args.json:
+        print(json.dumps(result, indent=2))
+    else:
+        print_diff(result)
+    return 1 if (args.fail_on_new_vulnerable and result["new_quantum_vulnerable_call_sites"]) else 0
+
+
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["diff"]:
+        return diff_main(argv[1:])
+    p = argparse.ArgumentParser(description="Find quantum-breakable cryptography in a codebase.",
+                                epilog="To compare two CBOMs: ratchet diff OLD NEW (see ratchet diff --help). "
+                                       "To scan a directory named diff, give it as ./diff.")
     p.add_argument("--version", action="version",
                    version=f"ratchet {VERSION} (registry {REGISTRY['registry_version']})")
     p.add_argument("path", help="repository or directory to scan")
@@ -3027,7 +3212,7 @@ def main():
     p.add_argument("--backend", choices=BACKENDS, default="auto",
                    help="Go parser: tree-sitter if installed (auto, the default), "
                         "tree-sitter (required), or the dependency-free regex backend")
-    args = p.parse_args()
+    args = p.parse_args(argv)
 
     if not os.path.isdir(args.path):
         print(f"not a directory: {args.path}", file=sys.stderr)

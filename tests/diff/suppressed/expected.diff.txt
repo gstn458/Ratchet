@@ -1,0 +1,11 @@
+
+ratchet diff  old.cbom.json -> new.cbom.json
+========================================================================
+
+SUPPRESSED, CHANGED   not counted toward --fail-on-new-vulnerable
+
+  RSA call site  tools/gen_keys.py  1 -> 2  (now at lines 3, 4)
+
+========================================================================
+quantum-vulnerable call sites: 0 -> 0 in total, none more counting file by file.
+

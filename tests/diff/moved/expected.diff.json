@@ -1,0 +1,11 @@
+{
+  "old": "old.cbom.json",
+  "new": "new.cbom.json",
+  "warnings": [],
+  "changes": [],
+  "quantum_vulnerable_call_sites": {
+    "old": 1,
+    "new": 1
+  },
+  "new_quantum_vulnerable_call_sites": 0
+}

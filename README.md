@@ -27,6 +27,7 @@ python3 ratchet.py /path/to/repo
 python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
 python3 ratchet.py /path/to/repo --sarif ratchet.sarif     # SARIF 2.1.0 for code scanning
+python3 ratchet.py diff old.cbom.json new.cbom.json --fail-on-new-vulnerable
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vulnerable call site
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 python3 ratchet.py /path/to/repo --jobs 1                # one process (default: one worker per CPU)
@@ -225,6 +226,31 @@ Paths are relative to the scan root (`%SRCROOT%`); scan from the repository root
 they match the repository. Like the CBOM, the file has no timestamp, and two scans of
 the same tree give identical SARIF.
 
+### Comparing two scans
+
+`ratchet diff OLD NEW` compares two CBOMs written by ratchet, typically one from the
+base branch and one from a pull request:
+
+```
+git switch main      && ratchet . --cbom /tmp/old.cbom.json
+git switch my-branch && ratchet . --cbom /tmp/new.cbom.json
+ratchet diff /tmp/old.cbom.json /tmp/new.cbom.json --fail-on-new-vulnerable
+```
+
+It counts occurrences per algorithm, file and kind (call site, import, algorithm name)
+and lists every count that went up or down, with the lines where the occurrences are
+now. Line numbers are not compared, so code that only moves within a file is no
+change. Suppressed findings are listed apart. `--fail-on-new-vulnerable` exits 1 when
+any file has more unsuppressed quantum-vulnerable call sites than before; like
+`--fail-on-vulnerable`, it ignores imports, algorithm names and suppressed findings,
+and counts test code. `--json` prints the comparison as JSON.
+
+The diff warns when the two scans were made differently: another ratchet or registry
+version, another parser for a language, a different `--include-vendored`, or files
+the new scan could not parse or did not scan. Each of those can change findings with
+no change to the code. Scan both sides from the repository root so the paths match.
+To scan a directory called `diff`, write it as `./diff`.
+
 ## Limitations, stated plainly
 
 Because they will come up in the first conversation with anyone technical.
@@ -298,6 +324,12 @@ plain labels to count outside `getInstance`.
 library that is imported but never called, or an algorithm only named, does not fail
 a build. That is deliberate:
 anything that gates CI favours precision, while the inventory favours recall.
+
+`ratchet diff` counts per file, so renaming or moving a file that has a
+quantum-vulnerable call site reads as a new call site in the new path, and fails
+`--fail-on-new-vulnerable`. Counting per file is what lets it catch one file dropping
+RSA while another starts using it; renames are the cost. The report then shows the
+same count leaving the old path, which is how a reviewer tells a rename from new use.
 
 Findings in test code are marked as such, by each language's convention: Go `_test.go`
 files, Python `test_*.py`, `*_test.py` and `conftest.py`, and anything under a `test`,

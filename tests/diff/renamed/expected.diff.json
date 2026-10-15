@@ -1,0 +1,68 @@
+{
+  "old": "old.cbom.json",
+  "new": "new.cbom.json",
+  "warnings": [],
+  "changes": [
+    {
+      "algorithm": "RSA",
+      "path": "keys.py",
+      "kind": "call site",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 1,
+      "new": 0,
+      "old_lines": [
+        3
+      ],
+      "new_lines": []
+    },
+    {
+      "algorithm": "RSA",
+      "path": "keys.py",
+      "kind": "import",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 1,
+      "new": 0,
+      "old_lines": [
+        1
+      ],
+      "new_lines": []
+    },
+    {
+      "algorithm": "RSA",
+      "path": "signing.py",
+      "kind": "call site",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 0,
+      "new": 1,
+      "old_lines": [],
+      "new_lines": [
+        3
+      ]
+    },
+    {
+      "algorithm": "RSA",
+      "path": "signing.py",
+      "kind": "import",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 0,
+      "new": 1,
+      "old_lines": [],
+      "new_lines": [
+        1
+      ]
+    }
+  ],
+  "quantum_vulnerable_call_sites": {
+    "old": 1,
+    "new": 1
+  },
+  "new_quantum_vulnerable_call_sites": 1
+}

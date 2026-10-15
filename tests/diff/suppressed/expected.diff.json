@@ -1,0 +1,29 @@
+{
+  "old": "old.cbom.json",
+  "new": "new.cbom.json",
+  "warnings": [],
+  "changes": [
+    {
+      "algorithm": "RSA",
+      "path": "tools/gen_keys.py",
+      "kind": "call site",
+      "suppressed": true,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 1,
+      "new": 2,
+      "old_lines": [
+        3
+      ],
+      "new_lines": [
+        3,
+        4
+      ]
+    }
+  ],
+  "quantum_vulnerable_call_sites": {
+    "old": 0,
+    "new": 0
+  },
+  "new_quantum_vulnerable_call_sites": 0
+}
