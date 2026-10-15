@@ -101,6 +101,8 @@ def main():
            .subject_name(x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "csr.example.test")]))
            .sign(p256b, hashes.SHA256()))
     write(k / "request.csr", csr.public_bytes(PEM))
+    write(k / "pkcs1.der", rsa1024.private_bytes(DER, TRAD, NONE))
+    write(k / "sec1.der", p256.private_bytes(DER, TRAD, NONE))
 
     m = OUT / "malformed"
     write(m / "bad_base64.pem", b"-----BEGIN CERTIFICATE-----\nnot base64 at all!\n-----END CERTIFICATE-----\n")

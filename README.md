@@ -191,6 +191,20 @@ the 26 Go fixtures and the eight Go repositories in the corpus they produce iden
 findings. Every report and CBOM names the backend that ran, with tree-sitter's
 version, and says why when it fell back to the lexer.
 
+Certificates and key files are read too: files ending `.pem`, `.crt`, `.cer`,
+`.cert`, `.der`, `.key`, `.pub`, `.csr`, `.p8` or `.pk8`, and files named `id_rsa`,
+`id_ed25519` and the like or `authorized_keys`. Ratchet decodes PEM and DER itself
+(X.509 certificates, certificate requests, PKCS#8, PKCS#1 and SEC 1 keys,
+SubjectPublicKeyInfo) and OpenSSH keys, and takes the algorithm from the key's OID as
+the registry lists it, with the RSA modulus size, the DSA prime size or the named
+curve. An EC key in a certificate is ECDSA or ECDH when its key usage extension says
+which, and EC, usage undetermined, otherwise. Each key is counted as a certificate, a
+public key or a private key. These are inventory, like imports: they show what a
+repository holds, not what its code does, so they never fail `--fail-on-vulnerable`
+and are notes in SARIF. Every file holding a private key is named at the top of the
+report and in the CBOM, with nothing read from the key past its algorithm and size;
+an encrypted private key is listed with its algorithm marked as not visible.
+
 Every finding is classified three ways. Quantum broken means Shor's algorithm defeats
 it outright and it has to be migrated. Already broken means it is weak today and
 quantum has nothing to do with it, which is usually the more urgent finding. Reduced
@@ -309,6 +323,16 @@ Because they will come up in the first conversation with anyone technical.
 Dynamically constructed cryptography is missed. If the algorithm name arrives as a
 variable or from configuration, static analysis will not see it. This is the false
 negative case and it is the reason the roadmap has a language model triage step.
+
+Certificates and keys are read only from files with the names above. A PEM block
+inside source code, such as a test certificate in a Go string, is not read yet, and
+neither are PKCS#12 (`.p12`, `.pfx`) or Java keystores. A key whose algorithm OID is
+not in the registry is listed as unparsed with the OID rather than guessed at; RSASSA-PSS
+keys (1.2.840.113549.1.1.10) and X.509 Diffie-Hellman keys (dhpublicnumber,
+1.2.840.10046.2.1) are the common cases. A certificate's own signature algorithm, the
+issuer's key type and hash such as sha1WithRSAEncryption, is not recorded yet; only the
+key the certificate certifies is. `known_hosts` is not read, because the keys in it
+belong to other machines.
 
 Hand-rolled cryptography is missed. paramiko implements Diffie-Hellman with raw
 modular exponentiation rather than calling a library, and Ratchet does not flag it.

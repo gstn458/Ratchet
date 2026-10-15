@@ -14,6 +14,8 @@ Stdlib only. No dependencies. Run it anywhere.
 
 import argparse
 import ast
+import base64
+import binascii
 import functools
 import hashlib
 import json
@@ -2262,11 +2264,14 @@ class Scan:
     attempted, the directories skipped and the files that could not be parsed
     as (relative path, reason), whether vendored directories were included,
     the .ratchetignore path and suppression rules (None when there is no such
-    file), and the parser that ran for each language."""
+    file), the parser that ran for each language, and the files holding a
+    private key as (relative path, None or why its algorithm is unknown)."""
 
     def __init__(self, findings, files, skipped, include_vendored, unparsed=(),
-                 ignore_rules=None, suppress_rules=None, parsers=None, not_scanned=None):
+                 ignore_rules=None, suppress_rules=None, parsers=None, not_scanned=None,
+                 private_keys=()):
         self.findings = findings
+        self.private_keys = list(private_keys)
         self.parsers = dict(parsers or PARSERS)
         self.not_scanned = dict(not_scanned or {})  # language -> paths no parser read
         self.files = files
@@ -2288,6 +2293,479 @@ def skip_reason(name, include_vendored):
     if name in TOOLING_DIRS or name.startswith("."):
         return TOOLING
     return None
+
+
+# ---------------------------------------------------------------------------
+# Certificates and key files
+#
+# X.509 certificates, certificate requests, public and private keys in PEM
+# or DER, and OpenSSH keys. Each key found is one finding of kind
+# certificate, public key or private key. These are inventory: a key file
+# shows what a project holds, not what its code does, so like imports and
+# algorithm names they never fail --fail-on-vulnerable.
+#
+# The algorithm comes from the key's OID, looked up in the registry, so no
+# claim is made here that the registry does not make. An EC key is ECDSA or
+# ECDH only when a certificate's key usage extension says which (RFC 5480,
+# section 3); otherwise it is EC, usage undetermined. Private key material is
+# never read past the algorithm and size, and never printed: a private key is
+# reported by its path and type alone.
+# ---------------------------------------------------------------------------
+
+CERTIFICATE, PUBLIC_KEY, PRIVATE_KEY = "certificate", "public key", "private key"
+KEY_KINDS = (CERTIFICATE, PUBLIC_KEY, PRIVATE_KEY)
+
+KEY_FILE_EXTENSIONS = {".pem", ".crt", ".cer", ".cert", ".der", ".key", ".pub", ".csr", ".p8", ".pk8"}
+KEY_FILE_NAMES = {"id_rsa", "id_dsa", "id_ecdsa", "id_ed25519", "id_ecdsa_sk", "id_ed25519_sk",
+                  "authorized_keys", "authorized_keys2"}
+# Extensions that claim a DER certificate or key, so a file that does not
+# parse as one is reported as unparsed rather than passed over.
+DER_EXTENSIONS = {".der", ".cer", ".crt", ".p8", ".pk8"}
+
+
+def is_key_file(name):
+    return os.path.splitext(name)[1].lower() in KEY_FILE_EXTENSIONS or name in KEY_FILE_NAMES
+
+
+# Named curves (SEC 2 version 2, section 2; RFC 5480, section 2.1.1.1), by
+# the parameter set names the source scanners record.
+CURVE_OIDS = {"1.2.840.10045.3.1.7": "SECP256R1", "1.3.132.0.34": "SECP384R1", "1.3.132.0.35": "SECP521R1",
+              "1.3.132.0.33": "SECP224R1", "1.3.132.0.10": "SECP256K1"}
+SSH_CURVES = {"nistp256": "SECP256R1", "nistp384": "SECP384R1", "nistp521": "SECP521R1"}
+
+# OpenSSH key types (RFC 4253 section 6.6, RFC 5656 section 3.1, RFC 8709,
+# OpenSSH PROTOCOL.u2f). Each names one algorithm; ecdsa-sha2-* keys sign.
+SSH_KEY_TYPES = {
+    "ssh-rsa": "RSA", "ssh-dss": "DSA", "ssh-ed25519": "Ed25519", "ssh-ed448": "Ed448",
+    "ecdsa-sha2-nistp256": "ECDSA", "ecdsa-sha2-nistp384": "ECDSA", "ecdsa-sha2-nistp521": "ECDSA",
+    "sk-ecdsa-sha2-nistp256@openssh.com": "ECDSA", "sk-ssh-ed25519@openssh.com": "Ed25519",
+}
+SSH_CERT_SUFFIX = "-cert-v01@openssh.com"
+
+# keyUsage bits (RFC 5280, section 4.2.1.3) that say a key signs, and the
+# one that says it agrees keys.
+KEY_USAGE_SIGNS = {0, 1, 5, 6}  # digitalSignature, nonRepudiation, keyCertSign, cRLSign
+KEY_USAGE_AGREES = {4}         # keyAgreement
+KEY_USAGE_OID, COMMON_NAME_OID = "2.5.29.15", "2.5.4.3"
+
+KEY_PRIMITIVES = {"pke", "signature", "key-agree", "kem", "unknown"}
+
+
+def key_algorithm_oids():
+    """OID -> (algorithm, parameter set) for every public-key algorithm in
+    the registry, from the entries' own oid and parameter_sets fields."""
+    out = {}
+    for name, spec in ALGORITHMS.items():
+        if spec["primitive"] not in KEY_PRIMITIVES:
+            continue
+        if spec.get("oid"):
+            out[spec["oid"]] = (name, None)
+        for ps, p in spec.get("parameter_sets", {}).items():
+            if p.get("oid"):
+                out[p["oid"]] = (name, ps)
+    return out
+
+
+KEY_OIDS = key_algorithm_oids()
+
+
+class DerError(ValueError):
+    pass
+
+
+def der_children(data, start, end):
+    """The (tag, content start, content end) of each DER element in data[start:end]."""
+    out, pos = [], start
+    while pos < end:
+        if pos + 2 > end:
+            raise DerError("truncated")
+        tag, length = data[pos], data[pos + 1]
+        pos += 2
+        if tag & 0x1F == 0x1F:
+            raise DerError("high tag number")
+        if length & 0x80:
+            n = length & 0x7F
+            if not 1 <= n <= 4 or pos + n > end:
+                raise DerError("bad length")
+            length = int.from_bytes(data[pos:pos + n], "big")
+            pos += n
+        if pos + length > end:
+            raise DerError("truncated")
+        out.append((tag, pos, pos + length))
+        pos += length
+    return out
+
+
+def der_sequence(data, element, size=None):
+    tag, start, end = element
+    if tag != 0x30:
+        raise DerError("expected a SEQUENCE")
+    items = der_children(data, start, end)
+    if size is not None and len(items) < size:
+        raise DerError("SEQUENCE too short")
+    return items
+
+
+def der_oid(data, element):
+    tag, start, end = element
+    if tag != 0x06 or start == end:
+        raise DerError("expected an OBJECT IDENTIFIER")
+    values, n = [], 0
+    for b in data[start:end]:
+        n = (n << 7) | (b & 0x7F)
+        if not b & 0x80:
+            values.append(n)
+            n = 0
+    first = min(values[0] // 40, 2)
+    return ".".join(map(str, [first, values[0] - 40 * first] + values[1:]))
+
+
+def der_int_bits(data, element):
+    tag, start, end = element
+    if tag != 0x02:
+        raise DerError("expected an INTEGER")
+    return int.from_bytes(data[start:end], "big").bit_length()
+
+
+def algorithm_identifier(data, element):
+    """(OID, parameters element or None) of an AlgorithmIdentifier."""
+    items = der_sequence(data, element, 1)
+    return der_oid(data, items[0]), (items[1] if len(items) > 1 else None)
+
+
+def key_algorithm(data, oid, params, key_bits=None):
+    """(algorithm, parameter set) for a key's AlgorithmIdentifier. key_bits
+    reads the RSA modulus size from the key itself."""
+    if oid not in KEY_OIDS:
+        raise DerError(f"key algorithm {oid} is not in the registry")
+    algorithm, parameter_set = KEY_OIDS[oid]
+    if algorithm == "RSA" and key_bits is not None:
+        parameter_set = key_bits()
+    elif algorithm in ("EC", "ECDH") and params is not None and params[0] == 0x06:
+        parameter_set = CURVE_OIDS.get(der_oid(data, params))
+    elif algorithm == "DSA" and params is not None and params[0] == 0x30:
+        parameter_set = der_int_bits(data, der_sequence(data, params, 1)[0])
+    return algorithm, parameter_set
+
+
+def rsa_modulus_bits(data, element):
+    """Bits in the modulus of an RSAPublicKey or RSAPrivateKey (RFC 8017, A.1)."""
+    items = der_sequence(data, element, 2)
+    # RSAPrivateKey starts with a version INTEGER 0; RSAPublicKey with n.
+    first = items[0]
+    if first[0] == 0x02 and first[2] - first[1] == 1 and data[first[1]] in (0, 1) and len(items) > 2:
+        return der_int_bits(data, items[1])
+    return der_int_bits(data, first)
+
+
+def subject_public_key(data, element):
+    """(algorithm, parameter set) of a SubjectPublicKeyInfo (RFC 5280, 4.1)."""
+    alg, key = der_sequence(data, element, 2)[:2]
+    oid, params = algorithm_identifier(data, alg)
+
+    def bits():
+        tag, start, end = key
+        if tag != 0x03 or start == end:
+            raise DerError("expected a BIT STRING")
+        return rsa_modulus_bits(data, der_children(data, start + 1, end)[0])
+    return key_algorithm(data, oid, params, bits)
+
+
+def private_key_info(data, element):
+    """(algorithm, parameter set) of a PKCS#8 PrivateKeyInfo (RFC 5958)."""
+    items = der_sequence(data, element, 3)
+    oid, params = algorithm_identifier(data, items[1])
+
+    def bits():
+        tag, start, end = items[2]
+        if tag != 0x04:
+            raise DerError("expected an OCTET STRING")
+        return rsa_modulus_bits(data, der_children(data, start, end)[0])
+    algorithm, parameter_set = key_algorithm(data, oid, params, bits)
+    if algorithm == "EC" and parameter_set is None and params is None:
+        tag, start, end = items[2]   # the curve may be in the ECPrivateKey only
+        parameter_set = ec_private_key(data, der_children(data, start, end)[0])[1]
+    return algorithm, parameter_set
+
+
+def ec_private_key(data, element):
+    """('EC', curve) of a SEC 1 ECPrivateKey (RFC 5915, section 3). Explicit
+    curve parameters, rather than a named curve, leave the curve unknown."""
+    items = der_sequence(data, element, 2)
+    version, key = items[:2]
+    if version[0] != 0x02 or data[version[1]:version[2]] != b"\x01" or key[0] != 0x04:
+        raise DerError("not an ECPrivateKey")
+    curve = None
+    for tag, start, end in items[2:]:
+        if tag == 0xA0:
+            params = der_children(data, start, end)[0]
+            if params[0] == 0x06:
+                curve = CURVE_OIDS.get(der_oid(data, params))
+    return "EC", curve
+
+
+def rsa_private_key(data, element):
+    """('RSA', modulus bits) of a PKCS#1 RSAPrivateKey (RFC 8017, A.1.2)."""
+    items = der_sequence(data, element, 9)
+    if any(tag != 0x02 for tag, _, _ in items[:9]) or data[items[0][1]:items[0][2]] not in (b"\x00", b"\x01"):
+        raise DerError("not an RSAPrivateKey")
+    return "RSA", der_int_bits(data, items[1])
+
+
+def dsa_private_key(data, element):
+    """('DSA', bits of p) of OpenSSL's DSA private key: version, p, q, g, y, x."""
+    items = der_sequence(data, element, 6)
+    return "DSA", der_int_bits(data, items[1])
+
+
+def key_usage(data, extensions):
+    """The set of keyUsage bits in a certificate's extensions, or None."""
+    for tag, start, end in extensions:
+        if tag != 0xA3:
+            continue
+        for ext in der_sequence(data, der_children(data, start, end)[0]):
+            items = der_sequence(data, ext, 2)
+            if der_oid(data, items[0]) != KEY_USAGE_OID:
+                continue
+            tag, start, end = items[-1]
+            tag, start, end = der_children(data, start, end)[0]
+            if tag != 0x03 or start == end:
+                raise DerError("keyUsage is not a BIT STRING")
+            return {i for i in range((end - start - 1) * 8)
+                    if data[start + 1 + i // 8] >> (7 - i % 8) & 1}
+    return None
+
+
+def common_name(data, name):
+    for rdn in der_sequence(data, name):
+        tag, start, end = rdn
+        for attr in der_children(data, start, end):
+            items = der_sequence(data, attr, 2)
+            if der_oid(data, items[0]) == COMMON_NAME_OID:
+                return data[items[1][1]:items[1][2]].decode("utf-8", "replace")
+    return None
+
+
+def certificate(data, element):
+    """(algorithm, parameter set, subject common name) of an X.509 certificate."""
+    tbs = der_sequence(data, der_sequence(data, element, 3)[0], 6)
+    i = 1 if tbs[0][0] == 0xA0 else 0  # explicit version
+    subject, spki = tbs[i + 4], tbs[i + 5]
+    algorithm, parameter_set = subject_public_key(data, spki)
+    if algorithm == "EC":
+        usage = key_usage(data, tbs[i + 6:])
+        if usage is not None:
+            signs, agrees = bool(usage & KEY_USAGE_SIGNS), bool(usage & KEY_USAGE_AGREES)
+            if signs != agrees:
+                algorithm = "ECDSA" if signs else "ECDH"
+    return algorithm, parameter_set, common_name(data, subject)
+
+
+def certificate_request(data, element):
+    """(algorithm, parameter set, subject common name) of a PKCS#10 request."""
+    info = der_sequence(data, der_sequence(data, element, 3)[0], 3)
+    algorithm, parameter_set = subject_public_key(data, info[2])
+    return algorithm, parameter_set, common_name(data, info[1])
+
+
+def ssh_fields(blob):
+    """The length-prefixed strings of an SSH wire-format blob (RFC 4251, 5)."""
+    out, pos = [], 0
+    while pos < len(blob):
+        if pos + 4 > len(blob):
+            raise DerError("truncated SSH field")
+        n = int.from_bytes(blob[pos:pos + 4], "big")
+        if pos + 4 + n > len(blob):
+            raise DerError("truncated SSH field")
+        out.append(blob[pos + 4:pos + 4 + n])
+        pos += 4 + n
+    return out
+
+
+def ssh_public_key(blob):
+    """(algorithm, parameter set, key type) of an SSH public key blob."""
+    fields = ssh_fields(blob)
+    key_type = fields[0].decode("ascii", "replace")
+    base = key_type[:-len(SSH_CERT_SUFFIX)] if key_type.endswith(SSH_CERT_SUFFIX) else key_type
+    if base not in SSH_KEY_TYPES:
+        raise DerError(f"SSH key type {key_type} is not recognised")
+    rest = fields[2:] if base != key_type else fields[1:]  # a certificate has a nonce first
+    algorithm, parameter_set = SSH_KEY_TYPES[base], None
+    if base == "ssh-rsa":
+        parameter_set = int.from_bytes(rest[1], "big").bit_length()   # e, then n
+    elif base == "ssh-dss":
+        parameter_set = int.from_bytes(rest[0], "big").bit_length()   # p
+    elif algorithm == "ECDSA":
+        parameter_set = SSH_CURVES.get(rest[0].decode("ascii", "replace"))
+    return algorithm, parameter_set, key_type
+
+
+def openssh_private_key(blob):
+    """(algorithm, parameter set) from the public key an OpenSSH private key
+    file carries in the clear (OpenSSH PROTOCOL.key)."""
+    magic = b"openssh-key-v1\0"
+    if not blob.startswith(magic):
+        raise DerError("not an openssh-key-v1 file")
+    body = blob[len(magic):]
+    cipher, kdf, options = ssh_fields_prefix(body, 3)
+    pos = sum(4 + len(f) for f in (cipher, kdf, options)) + 4  # then the key count
+    public = ssh_fields_prefix(body[pos:], 1)[0]
+    return ssh_public_key(public)[:2]
+
+
+def ssh_fields_prefix(blob, count):
+    out, pos = [], 0
+    for _ in range(count):
+        if pos + 4 > len(blob):
+            raise DerError("truncated SSH field")
+        n = int.from_bytes(blob[pos:pos + 4], "big")
+        out.append(blob[pos + 4:pos + 4 + n])
+        pos += 4 + n
+    return out
+
+
+PEM_BLOCK = re.compile(rb"-----BEGIN ([A-Z0-9 ]+)-----(.*?)-----END \1-----", re.S)
+SSH_LINE = re.compile(r"(?:^|\s)((?:ssh|ecdsa|sk)-[a-z0-9@.-]+)\s+([A-Za-z0-9+/]{40,}={0,2})(?:\s+(.*))?$")
+
+# PEM labels (RFC 7468 and the OpenSSL and OpenSSH forms) and what each holds.
+PEM_KINDS = {
+    "CERTIFICATE": CERTIFICATE, "TRUSTED CERTIFICATE": CERTIFICATE, "X509 CERTIFICATE": CERTIFICATE,
+    "CERTIFICATE REQUEST": PUBLIC_KEY, "NEW CERTIFICATE REQUEST": PUBLIC_KEY,
+    "PUBLIC KEY": PUBLIC_KEY, "RSA PUBLIC KEY": PUBLIC_KEY,
+    "PRIVATE KEY": PRIVATE_KEY, "RSA PRIVATE KEY": PRIVATE_KEY, "EC PRIVATE KEY": PRIVATE_KEY,
+    "DSA PRIVATE KEY": PRIVATE_KEY, "OPENSSH PRIVATE KEY": PRIVATE_KEY, "ENCRYPTED PRIVATE KEY": PRIVATE_KEY,
+}
+
+
+class KeyFindings(list):
+    """scan_key_file's findings, plus the private keys whose algorithm is
+    hidden by encryption, as (line, label)."""
+
+    def __init__(self, findings=(), encrypted=()):
+        super().__init__(findings)
+        self.encrypted = list(encrypted)
+
+
+def pem_key(label, body):
+    """(algorithm, parameter set, detail) of one decoded PEM block, or None
+    for an encrypted private key, whose algorithm is not visible."""
+    if label == "OPENSSH PRIVATE KEY":
+        return openssh_private_key(body) + (None,)
+    if label == "ENCRYPTED PRIVATE KEY":
+        return None
+    root = der_children(body, 0, len(body))
+    if not root:
+        raise DerError("empty")
+    element = root[0]
+    if PEM_KINDS[label] == CERTIFICATE:
+        algorithm, parameter_set, name = certificate(body, element)
+        return algorithm, parameter_set, name and f"CN={name}"
+    if label.endswith("CERTIFICATE REQUEST"):
+        algorithm, parameter_set, name = certificate_request(body, element)
+        return algorithm, parameter_set, name and f"CN={name}"
+    if label == "PUBLIC KEY":
+        return subject_public_key(body, element) + (None,)
+    if label in ("RSA PUBLIC KEY", "RSA PRIVATE KEY"):
+        return "RSA", rsa_modulus_bits(body, element), None
+    if label == "PRIVATE KEY":
+        return private_key_info(body, element) + (None,)
+    if label == "EC PRIVATE KEY":
+        return ec_private_key(body, element) + (None,)
+    return dsa_private_key(body, element) + (None,)
+
+
+def der_file(data):
+    """(kind, algorithm, parameter set, detail) of a DER file, trying each
+    structure in turn, or None if it is none of them. A structure that parses
+    but names a key algorithm the registry does not hold is Unparsed, with
+    the OID, rather than passed over."""
+    unknown = None
+    for kind, read in ((CERTIFICATE, certificate), (PUBLIC_KEY, certificate_request),
+                       (PUBLIC_KEY, subject_public_key), (PRIVATE_KEY, private_key_info),
+                       (PRIVATE_KEY, rsa_private_key), (PRIVATE_KEY, ec_private_key)):
+        try:
+            found = read(data, der_children(data, 0, len(data))[0])
+        except (DerError, IndexError) as e:
+            if str(e).endswith("is not in the registry"):
+                unknown = unknown or str(e)
+            continue
+        if len(found) == 3:
+            algorithm, parameter_set, name = found
+            return kind, algorithm, parameter_set, name and f"CN={name}"
+        return (kind,) + found + (None,)
+    if unknown:
+        raise Unparsed(unknown)
+    return None
+
+
+def scan_key_file(path):
+    try:
+        with open(path, "rb") as fh:
+            data = fh.read()
+    except OSError as e:
+        raise Unparsed(f"could not be read: {e.strerror or e.__class__.__name__}")
+    found = KeyFindings()
+
+    def add(algorithm, parameter_set, kind, line, snippet):
+        parameter_set = None if parameter_set is None else str(parameter_set)
+        found.append(Finding(algorithm, path, line, snippet, parameter_set, kind=kind))
+
+    blocks = [m for m in PEM_BLOCK.finditer(data) if m.group(1).decode() in PEM_KINDS]
+    for m in blocks:
+        label = m.group(1).decode()
+        line = data.count(b"\n", 0, m.start()) + 1
+        text = m.group(2).decode("ascii", "replace")
+        if "Proc-Type:" in text and "ENCRYPTED" in text:
+            # A legacy encrypted PEM key: the label still names the algorithm.
+            name = {"RSA PRIVATE KEY": "RSA", "EC PRIVATE KEY": "EC", "DSA PRIVATE KEY": "DSA"}[label]
+            add(name, None, PRIVATE_KEY, line, f"{label} (encrypted)")
+            continue
+        # The messages are Ratchet's own: Python's wording varies by version.
+        try:
+            body = base64.b64decode("".join(text.split()), validate=True)
+        except (ValueError, binascii.Error):
+            raise Unparsed(f"{label} at line {line} is not valid base64")
+        try:
+            key = pem_key(label, body)
+        except (DerError, IndexError) as e:
+            reason = str(e) if isinstance(e, DerError) and str(e) else "malformed DER"
+            raise Unparsed(f"{label} at line {line} could not be read: {reason}")
+        if key is None:
+            found.encrypted.append((line, label))
+            continue
+        algorithm, parameter_set, detail = key
+        add(algorithm, parameter_set, PEM_KINDS[label], line, f"{label} {detail}" if detail else label)
+    if blocks:
+        return found
+
+    if data[:1] == b"\x30":
+        key = der_file(data)
+        if key is not None:
+            kind, algorithm, parameter_set, detail = key
+            add(algorithm, parameter_set, kind, 1, f"DER {kind} {detail}" if detail else f"DER {kind}")
+            return found
+        if os.path.splitext(path)[1].lower() in DER_EXTENSIONS:
+            raise Unparsed("not a DER certificate or key")
+        return found
+
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return found   # binary, and not DER: not key material (a Keynote .key, say)
+    for n, raw in enumerate(text.splitlines(), 1):
+        m = SSH_LINE.search(raw.strip())
+        if not m:
+            continue
+        try:
+            blob = base64.b64decode(m.group(2), validate=True)
+            algorithm, parameter_set, key_type = ssh_public_key(blob)
+        except (DerError, IndexError, ValueError, binascii.Error):
+            continue
+        if key_type != m.group(1):
+            continue
+        comment = (m.group(3) or "").strip()
+        add(algorithm, parameter_set, PUBLIC_KEY, n, f"{key_type} key {comment}".strip())
+    return found
 
 
 SCANNERS = {".py": scan_python, ".go": scan_go}
@@ -2421,8 +2899,9 @@ def make_scanners(go_lex_fn, grammars=None):
 
 def scan_file(scanners, path):
     """(findings, None), or (None, reason) for a file that could not be parsed."""
+    scanner = scanners.get(os.path.splitext(path)[1]) or scan_key_file
     try:
-        return scanners[os.path.splitext(path)[1]](path), None
+        return scanner(path), None
     except Unparsed as e:
         return None, str(e)
 
@@ -2471,7 +2950,7 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
     scannable = set(SCANNERS) | {ext for language in grammars for ext in TREE_SITTER_ONLY[language][1]}
     not_scanned = defaultdict(list)  # language -> paths with no parser in this run
     ignore_rules, suppress_rules = load_ignore_file(root)
-    findings, skipped, unparsed = [], [], []
+    findings, skipped, unparsed, private_keys = [], [], [], []
     go_packages = defaultdict(list)  # directory -> GoFindings of its files
     listed = []  # (directory, full path, path relative to root), in scan order
     for dirpath, dirnames, filenames in os.walk(root):
@@ -2487,7 +2966,7 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
         dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
             ext = os.path.splitext(fn)[1]
-            if ext not in LANGUAGES:
+            if ext not in LANGUAGES and not is_key_file(fn):
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
@@ -2495,7 +2974,7 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
             if rule:
                 rule.matched.append(rel)
                 continue
-            if ext not in scannable:
+            if ext in LANGUAGES and ext not in scannable:
                 not_scanned[LANGUAGES[ext]].append(rel)
                 continue
             listed.append((dirpath, full, rel))
@@ -2506,6 +2985,11 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
             unparsed.append((rel, error))
             continue
         in_test = is_test_path(rel)
+        if isinstance(found, KeyFindings):
+            private_keys += [(rel, f"{label} at line {line}, encrypted: algorithm not visible")
+                             for line, label in found.encrypted]
+            if any(f.kind == PRIVATE_KEY for f in found):
+                private_keys.append((rel, None))
         if isinstance(found, GoFindings):
             found.in_test = in_test
             go_packages[dirpath].append(found)
@@ -2524,7 +3008,8 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
                 break
     return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed),
                 ignore_rules, suppress_rules, parsers,
-                {language: sorted(paths) for language, paths in sorted(not_scanned.items())})
+                {language: sorted(paths) for language, paths in sorted(not_scanned.items())},
+                sorted(private_keys, key=lambda p: (p[0], p[1] or "")))
 
 
 # ---------------------------------------------------------------------------
@@ -2603,6 +3088,12 @@ def build_cbom(scan, root, tool_version=VERSION):
                  "value": str(sum(f.kind == IMPORT for f in group))},
                 {"name": "ratchet:algorithm_name_count",
                  "value": str(sum(f.kind == NAME for f in group))},
+            ] + [
+                # Only when present, so components from source code alone
+                # keep the properties they always had.
+                {"name": f"ratchet:{kind.replace(' ', '_')}_count",
+                 "value": str(sum(f.kind == kind for f in group))}
+                for kind in KEY_KINDS if any(f.kind == kind for f in group)
             ] + suppression, key=lambda p: p["name"]),
         })
 
@@ -2669,7 +3160,13 @@ def build_cbom(scan, root, tool_version=VERSION):
             ] + [
                 {"name": "ratchet:unparsed_file", "value": f"{path} ({reason})"}
                 for path, reason in scan.unparsed
-            ], key=lambda p: (p["name"], p["value"])),
+            ] + [
+                {"name": "ratchet:private_key_file", "value": f"{path} ({note})" if note else path}
+                for path, note in scan.private_keys
+            ] + ([
+                {"name": "ratchet:private_key_file_count",
+                 "value": str(len({path for path, _ in scan.private_keys}))}
+            ] if scan.private_keys else []), key=lambda p: (p["name"], p["value"])),
         },
         "components": components,
     }
@@ -2706,7 +3203,9 @@ def parameter_line(algorithm, calls):
                 and algorithm not in FIXED_PARAMETER_ALGORITHMS):
             return f"parameter set: not stated in any call site"
         return None
-    noun = "key sizes" if all(p.isdigit() for p in stated) else "parameter sets"
+    # ML-KEM-768 and ML-DSA-65 name parameter sets, not key sizes.
+    sizes = all(p.isdigit() for p in stated) and ALGORITHMS[algorithm]["quantum"] != "safe"
+    noun = "key sizes" if sizes else "parameter sets"
     parts = [f"{p}: {n}" for p, n in sorted(stated.items(), key=lambda kv: (-kv[1], kv[0]))]
     if unstated:
         parts.append(f"not stated: {unstated}")
@@ -2765,6 +3264,18 @@ def not_scanned_reason(scan, language):
     """Why a language's files were not scanned, from its parser description."""
     parser = scan.parsers.get(language, "")
     return parser[len("not scanned ("):-1] if parser.startswith("not scanned (") else "no parser"
+
+
+def print_private_keys(scan):
+    """Name every file holding a private key, on every run in which there is
+    one. Only the path and key type are given, never key material."""
+    if not scan.private_keys:
+        return
+    files = len({path for path, _ in scan.private_keys})
+    print(f"private keys  {plural(files, 'file holds', 'files hold')} a private key; anyone who can "
+          f"read this repository has {'it' if files == 1 else 'them'}:")
+    for path, note in scan.private_keys:
+        print(f"  {path}" + (f" ({note})" if note else ""))
 
 
 def print_not_scanned(scan):
@@ -2902,6 +3413,8 @@ def report(scan, root):
             return "undetermined" if spec["primitive"] == "unknown" else "broken"
         if spec["classical"] == "broken":
             return "weak"
+        if spec["quantum"] == "safe":
+            return "safe"
         return "other"
 
     buckets = defaultdict(dict)
@@ -2916,6 +3429,7 @@ def report(scan, root):
     print_skipped(scan)
     print_unparsed(scan)
     print_not_scanned(scan)
+    print_private_keys(scan)
     print_ignored(scan)
     print("=" * 72)
 
@@ -2928,6 +3442,7 @@ def report(scan, root):
             calls = sorted((f for f in group if f.kind == CALL), key=lambda f: (f.path, f.line))
             imports = sorted((f for f in group if f.kind == IMPORT), key=lambda f: (f.path, f.line))
             names = sorted((f for f in group if f.kind == NAME), key=lambda f: (f.path, f.line))
+            keys = sorted((f for f in group if f.kind in KEY_KINDS), key=lambda f: (f.path, f.line))
             counts = [plural(len(calls), "call site")]
             in_test = sum(f.in_test for f in calls)
             if in_test:
@@ -2936,13 +3451,17 @@ def report(scan, root):
                 counts.append(plural(len(imports), "import"))
             if names:
                 counts.append(plural(len(names), "algorithm name"))
+            for kind in KEY_KINDS:
+                n = sum(f.kind == kind for f in keys)
+                if n:
+                    counts.append(plural(n, kind))
             print(f"  {algorithm}  ({', '.join(counts)})")
-            params = parameter_line(algorithm, calls)
+            params = parameter_line(algorithm, calls + keys)
             if params:
                 print(f"    {params}")
             print(f"    {spec['why']}")
             print(f"    migrate to: {spec['replacement']}")
-            shown = (calls + imports + names)[:3]
+            shown = (calls + imports + names + keys)[:3]
             for f in shown:
                 print(f"      {f.path}:{f.line}   {f.snippet}")
             if len(group) > len(shown):
@@ -2954,11 +3473,13 @@ def report(scan, root):
             buckets["undetermined"])
     section("ALREADY BROKEN       weak today, quantum is not the issue", buckets["weak"])
     section("REVIEW               reduced margin under Grover, usually acceptable", buckets["other"])
+    section("POST-QUANTUM         NIST post-quantum standards, nothing to migrate", buckets["safe"])
 
     def tally(groups):
         flat = [f for g in groups for f in g]
         return (sum(f.kind == CALL for f in flat), sum(f.kind == IMPORT for f in flat),
-                sum(f.kind == NAME for f in flat), len({f.path for f in flat}))
+                sum(f.kind == NAME for f in flat), sum(f.kind in KEY_KINDS for f in flat),
+                len({f.path for f in flat}))
 
     calls_in_test = sum(f.kind == CALL and f.in_test
                         for g in list(buckets["broken"].values()) + list(buckets["undetermined"].values())
@@ -2966,14 +3487,19 @@ def report(scan, root):
     suppressed = sum(1 for f in scan.findings
                      if f.suppressed_by and ALGORITHMS[f.algorithm]["quantum"] == "broken")
     vulnerable = list(buckets["broken"].values()) + list(buckets["undetermined"].values())
-    calls, imports, names, files = tally(vulnerable)
-    u_calls, u_imports, _, _ = tally(buckets["undetermined"].values())
+    calls, imports, names, keys, files = tally(vulnerable)
+    u_calls, u_imports, _, _, _ = tally(buckets["undetermined"].values())
     print("=" * 72)
-    if calls or imports or names:
+    if calls or imports or names or keys:
         in_test = f" ({calls_in_test} in test code)" if calls_in_test else ""
         named = f", {plural(names, 'algorithm name')}" if names else ""
-        line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test}{named} and "
-                f"{plural(imports, 'import')} across {plural(files, 'file')}.")
+        if keys:
+            line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test}{named}, "
+                    f"{plural(imports, 'import')} and {plural(keys, 'certificate or key', 'certificates and keys')} "
+                    f"across {plural(files, 'file')}.")
+        else:
+            line = (f"{plural(calls, 'quantum-vulnerable call site')}{in_test}{named} and "
+                    f"{plural(imports, 'import')} across {plural(files, 'file')}.")
         print(line[0].upper() + line[1:])
         if u_calls or u_imports:
             line = (f"{plural(u_calls, 'call site')} and {plural(u_imports, 'import')} with usage "

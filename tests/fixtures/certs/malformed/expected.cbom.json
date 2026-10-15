@@ -69,8 +69,16 @@
         "value": "0"
       },
       {
+        "name": "ratchet:unparsed_file",
+        "value": "bad_base64.pem (CERTIFICATE at line 1 is not valid base64)"
+      },
+      {
+        "name": "ratchet:unparsed_file",
+        "value": "truncated.der (not a DER certificate or key)"
+      },
+      {
         "name": "ratchet:unparsed_file_count",
-        "value": "0"
+        "value": "2"
       }
     ]
   },

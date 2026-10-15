@@ -73,9 +73,9 @@ def test_every_occurrence_is_listed(root):
         props = {p["name"]: int(p["value"]) for p in c["properties"]
                  if p["name"].endswith("_count")}
         assert len(c["evidence"]["occurrences"]) == props["ratchet:occurrence_count"], c["name"]
-        assert props["ratchet:call_site_count"] + props["ratchet:import_count"] \
-                + props["ratchet:algorithm_name_count"] \
-            == props["ratchet:occurrence_count"], c["name"]
+        kinds = ["ratchet:call_site_count", "ratchet:import_count", "ratchet:algorithm_name_count",
+                 "ratchet:certificate_count", "ratchet:public_key_count", "ratchet:private_key_count"]
+        assert sum(props.get(k, 0) for k in kinds) == props["ratchet:occurrence_count"], c["name"]
 
 
 @pytest.mark.parametrize("root", fixture_dirs(), ids=fixture_id)
