@@ -61,7 +61,8 @@ Ed448, X448, EdDSA and XDH, which brought 11 more in jjwt; all 11 were read and 
 
 JOSE algorithm names (`RS256`, `ES256`, `RSA-OAEP` and the rest) are algorithm names in
 every language. When they were added, every one outside the eight JWT libraries was
-read (158, in certbot, twisted, scapy, x-crypto, cfssl, vault and forge), along with a
+read (158 at the time, 150 after the fix below, in certbot, twisted, scapy, x-crypto,
+cfssl, vault and forge), along with a
 fixed-seed sample of 30 of the 1,477 inside them. forge's `'RSA-OAEP'` is its own OAEP
 scheme name with the hash passed separately, so `RSA-OAEP` was changed to record RSA
 only, not JOSE's implied SHA-1. Everything else names the algorithm it claims; outside
