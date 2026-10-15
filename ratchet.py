@@ -604,6 +604,15 @@ GO_ECDSA_SIGNING = re.compile(
     r"\becdsa\.(Sign|SignASN1|Verify|VerifyASN1)\s*\(|\.Sign\s*\(\s*[^\s)]"
 )
 
+# The substring every match of a pattern above contains, used to skip code
+# that cannot match: each call pattern starts with its package name and a
+# dot, the variant patterns with ecdh. or des., and the direct crypto/elliptic
+# patterns contain elliptic. or Scalar. tests/test_performance.py checks the
+# patterns against these.
+GO_PACKAGE_TOKEN = {path: path.rsplit("/", 1)[-1] + "." for path, _, _, _ in GO_CALL_PATTERNS}
+GO_VARIANT_TOKENS = {path.rsplit("/", 1)[-1] + "." for path in GO_VARIANT_CALLS}
+GO_ELLIPTIC_TOKENS = {"elliptic.", "Scalar"}
+
 # Skipped by default for speed, scanned with --include-vendored. Vendored code
 # is exactly where unmaintained cryptography lives, and build output can bundle
 # third-party code, so a scan that skips them says so in the report and CBOM.
@@ -1147,12 +1156,28 @@ def scan_go(path, lex=regex_go_lex):
                 findings.append(Finding(algo, path, idx + 1, lines[idx], kind=IMPORT))
                 import_findings[import_path].append(findings[-1])
     variants = defaultdict(set)  # import path -> algorithms its calls used
+    calls = [(pattern, algo, group) for import_path, pattern, algo, group in GO_CALL_PATTERNS
+             if import_path in imports]
+    elliptic = GO_ELLIPTIC_IMPORT in imports
+    # Every rule's match contains a known substring, such as "rsa." for the
+    # crypto/rsa calls. A line, or a whole file, without any of them cannot
+    # match, so the regular expressions only run where one appears. This
+    # changes no finding; it is the difference between scanning every line of
+    # a large repository and scanning the few that mention a crypto package.
+    tokens = {GO_PACKAGE_TOKEN[import_path] for import_path in imports if import_path in GO_PACKAGE_TOKEN}
+    tokens |= GO_VARIANT_TOKENS | (GO_ELLIPTIC_TOKENS if elliptic else set())
+    gate = re.compile("|".join(map(re.escape, sorted(tokens))))
+    joined = "\n".join(code)
+    if not gate.search(joined):
+        code_lines = ()
+    else:
+        code_lines = enumerate(zip(lines, code), start=1)
     # Patterns run on code only, so calls in comments and strings never match.
     # The finding still shows the original line.
-    for i, (line, text) in enumerate(zip(lines, code), start=1):
-        for import_path, pattern, algo, group in GO_CALL_PATTERNS:
-            if import_path not in imports:
-                continue
+    for i, (line, text) in code_lines:
+        if not gate.search(text):
+            continue
+        for pattern, algo, group in calls:
             m = pattern.search(text)
             if m:
                 params = m.group(group) if group else None
@@ -1162,7 +1187,7 @@ def scan_go(path, lex=regex_go_lex):
                 if pattern.search(text):
                     variants[import_path].add(algo)
                     findings.append(Finding(algo, path, i, line))
-        if GO_ELLIPTIC_IMPORT in imports and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
+        if elliptic and any(p.search(text) for p in GO_ELLIPTIC_DIRECT):
             findings.append(Finding("EC", path, i, line))
 
     for import_path, used in variants.items():
@@ -1170,9 +1195,13 @@ def scan_go(path, lex=regex_go_lex):
             for f in import_findings[import_path]:
                 f.algorithm = next(iter(used))
 
-    ecdh = any(GO_ECDH_NAME.search(GO_TLS_SUITE.sub("", text)) for text in code) or (
-        GO_ELLIPTIC_IMPORT in imports and any(GO_SCALAR_MULT.search(text) for text in code))
-    signs = any(GO_ECDSA_SIGNING.search(text) for text in code)
+    # The same reasoning: each check needs a substring its pattern contains.
+    ecdh = ("ECDH" in joined or "ecdh." in joined) and any(
+        GO_ECDH_NAME.search(GO_TLS_SUITE.sub("", text)) for text in code)
+    ecdh = ecdh or (elliptic and "ScalarMult" in joined
+                    and any(GO_SCALAR_MULT.search(text) for text in code))
+    signs = ("ecdsa." in joined or ".Sign" in joined) and any(
+        GO_ECDSA_SIGNING.search(text) for text in code)
     return GoFindings(findings, ecdh=ecdh, signs=signs)
 
 
