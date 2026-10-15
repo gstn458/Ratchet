@@ -933,6 +933,15 @@ def scan_python(path):
 # Go scanning via text patterns
 # ---------------------------------------------------------------------------
 
+GO_LEX_SPECIAL = re.compile(r"[\n\"'`/]")
+GO_LEX_QUOTED = {
+    # A backslash escapes the next character, even a line break, and a quoted
+    # literal otherwise ends at its closing quote or at the end of the line.
+    '"': re.compile(r'(?:[^"\\\n]|\\[\s\S]?)*'),
+    "'": re.compile(r"(?:[^'\\\n]|\\[\s\S]?)*"),
+}
+
+
 def go_lex(text):
     """Split Go source into code and string literals, line by line.
 
@@ -940,13 +949,13 @@ def go_lex(text):
     string or rune literal reduced to its empty quotes, and strings[i] lists
     the contents of the string literals that start on line i. This is not a Go
     parser. It is just enough to tell code from comments and strings, so
-    nothing inside either is mistaken for an import or a call.
+    nothing inside either is mistaken for an import or a call. It moves from
+    one quote, slash or line break to the next rather than character by
+    character, so plain code is copied in runs.
     """
     code, strings = [], []
     line_code, line_strings = [], []
     i, n = 0, len(text)
-    state = None  # None, "block" (/* */) or "raw" (`...`)
-    raw, raw_line = [], 0
 
     def end_line():
         code.append("".join(line_code))
@@ -955,53 +964,58 @@ def go_lex(text):
         line_strings.clear()
 
     while i < n:
-        c = text[i]
+        m = GO_LEX_SPECIAL.search(text, i)
+        if not m:
+            line_code.append(text[i:])
+            break
+        j = m.start()
+        if j > i:
+            line_code.append(text[i:j])
+        c = text[j]
         if c == "\n":
-            if state == "raw":
-                raw.append(c)
             end_line()
-            i += 1
-        elif state == "block":
-            if text.startswith("*/", i):
-                state = None
-                line_code.append(" ")
-                i += 2
+            i = j + 1
+        elif c == "/" and text.startswith("//", j):
+            k = text.find("\n", j)
+            i = n if k < 0 else k
+        elif c == "/" and text.startswith("/*", j):
+            # A block comment leaves a space where it closes; its line breaks
+            # still end lines.
+            k = text.find("*/", j + 2)
+            stop = n if k < 0 else k
+            for _ in range(text.count("\n", j + 2, stop)):
+                end_line()
+            if k < 0:
+                i = n
             else:
-                i += 1
-        elif state == "raw":
-            if c == "`":
-                state = None
+                line_code.append(" ")
+                i = k + 2
+        elif c == "/":
+            line_code.append(c)
+            i = j + 1
+        elif c == "`":
+            k = text.find("`", j + 1)
+            stop = n if k < 0 else k
+            raw = text[j + 1:stop]
+            opened = len(code)
+            for _ in range(raw.count("\n")):
+                end_line()
+            if k < 0:
+                i = n
+            else:
                 line_code.append("``")
                 # Attributed to the line the literal opens on.
-                if raw_line == len(code):
-                    line_strings.append("".join(raw))
+                if opened == len(code):
+                    line_strings.append(raw)
                 else:
-                    strings[raw_line].append("".join(raw))
-                i += 1
-            else:
-                raw.append(c)
-                i += 1
-        elif text.startswith("//", i):
-            while i < n and text[i] != "\n":
-                i += 1
-        elif text.startswith("/*", i):
-            state = "block"
-            i += 2
-        elif c == "`":
-            state = "raw"
-            raw, raw_line = [], len(code)
-            i += 1
-        elif c in "\"'":
-            j = i + 1
-            while j < n and text[j] != c and text[j] != "\n":
-                j += 2 if text[j] == "\\" else 1
-            if c == '"':
-                line_strings.append(text[i + 1:j])
-            line_code.append(c + c)
-            i = j + 1
+                    strings[opened].append(raw)
+                i = k + 1
         else:
-            line_code.append(c)
-            i += 1
+            e = GO_LEX_QUOTED[c].match(text, j + 1).end()
+            if c == '"':
+                line_strings.append(text[j + 1:e])
+            line_code.append(c + c)
+            i = e + 1
     end_line()
     return code, strings
 
