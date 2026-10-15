@@ -1188,6 +1188,7 @@ class TreeSitterGrammar:
     installed but cannot load (a grammar built for another tree-sitter ABI)."""
 
     module = language_name = query_source = None  # set by each language
+    language_function = "language"  # tree-sitter-typescript has two grammars, neither called language
 
     def __init__(self):
         import importlib
@@ -1195,7 +1196,7 @@ class TreeSitterGrammar:
         tree_sitter = importlib.import_module("tree_sitter")
         grammar = importlib.import_module(self.module)
         try:
-            language = tree_sitter.Language(grammar.language())
+            language = tree_sitter.Language(getattr(grammar, self.language_function)())
             self.parser = tree_sitter.Parser(language)
             self.query = tree_sitter.Query(language, self.query_source)
         except (TypeError, ValueError) as e:
@@ -1735,6 +1736,15 @@ class TreeSitterJavaScript(TreeSitterGrammar):
                         if local is not None and local.type == "identifier":
                             bindings[text(local)] = f"{module_name(required)}.{text(key)}"
         for node in captures.get("import", ()):
+            # TypeScript's import crypto = require("crypto")
+            clause = next((c for c in node.named_children if c.type == "import_require_clause"), None)
+            if clause is not None:
+                ident = next((c for c in clause.named_children if c.type == "identifier"), None)
+                spec = string_value(next((c for c in clause.named_children if c.type == "string"), None))
+                if ident is not None and spec is not None:
+                    bindings[text(ident)] = module_name(spec)
+                    imports_found.append((node, spec))
+                continue
             spec = string_value(node.child_by_field_name("source"))
             if spec is None:
                 continue
@@ -1794,7 +1804,9 @@ class TreeSitterJavaScript(TreeSitterGrammar):
                 if fn is not None and text(fn) == "require" and args is not None and args.named_children:
                     spec = string_value(args.named_children[0])
                     return module_name(spec) if spec else None
-            if node.type == "parenthesized_expression" and node.named_children:
+            # (crypto), and TypeScript's crypto as any, crypto! and crypto satisfies T
+            if node.type in ("parenthesized_expression", "as_expression", "non_null_expression",
+                             "satisfies_expression") and node.named_children:
                 return qualified(node.named_children[0])
             return None
 
@@ -2206,12 +2218,14 @@ SCANNERS = {".py": scan_python, ".go": scan_go}
 # Every source language Ratchet knows, by extension. A file in one of these
 # whose parser is not available is counted and reported as not scanned.
 LANGUAGES = {".py": "Python", ".go": "Go", ".java": "Java",
-             ".js": "JavaScript", ".mjs": "JavaScript", ".cjs": "JavaScript", ".jsx": "JavaScript"}
+             ".js": "JavaScript", ".mjs": "JavaScript", ".cjs": "JavaScript", ".jsx": "JavaScript",
+             ".ts": "TypeScript", ".mts": "TypeScript", ".cts": "TypeScript", ".tsx": "TypeScript"}
 
 # The parser behind each language, recorded in every report and CBOM. Two
 # runs that used different parsers can find different things, and the output
 # has to say so.
-PARSERS = {"Python": "ast", "Go": "regex", "Java": "not scanned", "JavaScript": "not scanned"}
+PARSERS = {"Python": "ast", "Go": "regex", "Java": "not scanned", "JavaScript": "not scanned",
+           "TypeScript": "not scanned"}
 
 # Go backends: "auto" uses tree-sitter when it is installed and the regex
 # backend otherwise; "tree-sitter" requires it; "regex" never loads it.
@@ -2242,10 +2256,29 @@ def go_backend(backend="auto"):
     return grammar.lex, grammar.description
 
 
+class TreeSitterTypeScript(TreeSitterJavaScript):
+    """TypeScript, with the JavaScript rules: its grammar extends JavaScript's
+    with the same node types for calls, imports and literals. .tsx files go
+    through the TSX grammar from the same package."""
+    module, language_name, language_function = "tree_sitter_typescript", "TypeScript", "language_typescript"
+
+    def __init__(self):
+        super().__init__()
+        self.tsx = TreeSitterTSX()
+
+    def scan(self, path):
+        return self.tsx.scan(path) if path.endswith(".tsx") else super().scan(path)
+
+
+class TreeSitterTSX(TreeSitterJavaScript):
+    module, language_name, language_function = "tree_sitter_typescript", "TSX", "language_tsx"
+
+
 # Languages parsed only with tree-sitter: language -> (grammar class, extensions).
 TREE_SITTER_ONLY = {
     "Java": (TreeSitterJava, (".java",)),
     "JavaScript": (TreeSitterJavaScript, (".js", ".mjs", ".cjs", ".jsx")),
+    "TypeScript": (TreeSitterTypeScript, (".ts", ".mts", ".cts", ".tsx")),
 }
 
 
@@ -2277,7 +2310,7 @@ def java_backend(backend="auto"):
 # test-only cryptography is not what a migration plan is about, so they are
 # counted apart in the report, the CBOM and the corpus measurement.
 TEST_DIRS = {"test", "tests", "testing", "testdata", "__tests__"}
-TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py|(Test|Tests|[a-z0-9]IT)\.java|\.(test|spec)\.[cm]?jsx?)$")
+TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py|(Test|Tests|[a-z0-9]IT)\.java|\.(test|spec)\.[cm]?[jt]sx?)$")
 
 
 def is_test_path(path):

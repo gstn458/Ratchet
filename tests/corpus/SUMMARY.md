@@ -21,11 +21,11 @@ found by reading the code, listed in `labels/<name>.json`.
 | cfssl | go | 87 | 33 | 100 | 0 | 87 | 0 | 0.0% | 51 |
 | age | go | 32 | 12 | 17 | 0 | 32 | 0 | 0.0% | 0 |
 | caddy | go | 20 | 17 | 16 | 0 | 20 | 0 | 0.0% | 0 |
-| vault | go | 251 | 138 | 206 | 0 | 251 | 0 | 0.0% | 48 |
+| vault | go | 252 | 138 | 206 | 0 | 252 | 0 | 0.0% | 48 |
 | java-jwt | java | 0 | 0 | 29 | 57 | 0 | 0 | n/a | 7 |
 | jjwt | java | 0 | 0 | 83 | 46 | 0 | 0 | n/a | 9 |
 | node-jsonwebtoken | javascript | 6 | 6 | 0 | 0 | 6 | 0 | 0.0% | 0 |
 | forge | javascript | 36 | 7 | 0 | 0 | 36 | 0 | 0.0% | 51 |
-| **total** | | 1039 | 505 | 843 | 103 | 1039 | 1 | 0.1% | 231 |
+| **total** | | 1040 | 505 | 843 | 103 | 1040 | 1 | 0.1% | 231 |
 
-Labelled 1039 of 1039 call sites (100.0%).
+Labelled 1040 of 1040 call sites (100.0%).

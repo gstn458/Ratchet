@@ -231,7 +231,11 @@ node-forge. Key sizes and curves are read from literal options (`modulusLength`,
 `createSign('sha256')` name only the hash, so the key algorithm is not claimed;
 forge's `forge.des` does DES or 3DES by key length and is not claimed; a `subtle`
 object held in a variable is not followed; and JWT algorithm names (`RS256`) are not
-read in any language yet. TypeScript, C, C#, Rust and Terraform are not covered.
+read in any language yet. TypeScript (`.ts`, `.mts`, `.cts`, `.tsx`) is scanned with the same
+rules through `tree-sitter-typescript`, including `import x = require(...)` and receivers
+wrapped in `as`, `!` or `satisfies`; types themselves are not followed, so a variable
+typed as Node's `Hash` but assigned elsewhere is not traced. In the corpus only vault's
+web UI is TypeScript. C, C#, Rust and Terraform are not covered.
 
 Source code only. Certificates, TLS configuration, hardware security modules, and
 anything on the network are out of scope. A complete cryptographic inventory needs

@@ -1,0 +1,45 @@
+
+ratchet 0.1.0  scanned 3 files in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, JavaScript tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1, Python ast, TypeScript tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2
+skipped no directories
+parsed all 3 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  ECDSA  (1 call site)
+    parameter sets: SECP256R1: 1
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      Login.tsx:6   crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign']);
+
+  RSA  (1 call site)
+    key sizes: 1024: 1
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.ts:12   return generateKeyPairSync('rsa', { modulusLength: 1024 }) as any;
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  SHA-1  (2 call sites, 1 in test code)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      Login.tsx:5   window.crypto.subtle.digest('SHA-1', data);
+      keys.spec.ts:4   createHash('sha1');
+
+  3DES  (1 call site)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      keys.ts:16   return crypto!.createCipheriv('des-ede3-cbc', key, iv) satisfies unknown;
+
+  MD5  (1 call site)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      keys.ts:8   return (crypto as any).createHash(LEGACY).update(data).digest('hex');
+
+========================================================================
+2 quantum-vulnerable call sites and no imports across 2 files.
+

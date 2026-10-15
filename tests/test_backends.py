@@ -35,7 +35,7 @@ def without_parser(cbom, report):
     """CBOM and report with the parsers that depend on tree-sitter taken out."""
     cbom["metadata"]["properties"] = [
         p for p in cbom["metadata"]["properties"]
-        if not (p["name"] == "ratchet:parser" and p["value"].startswith(("Go: ", "Java: ", "JavaScript: ")))
+        if not (p["name"] == "ratchet:parser" and p["value"].startswith(("Go: ", "Java: ", "JavaScript: ", "TypeScript: ")))
     ]
     lines = [line for line in report.splitlines() if not line.startswith("parsers  ")]
     return dumps(cbom), "\n".join(lines)
@@ -106,7 +106,8 @@ def test_bare_interpreter_reports_the_regex_fallback():
                if p["name"] == "ratchet:parser"]
     assert parsers == ["Go: regex (tree-sitter not installed)",
                        "Java: not scanned (tree-sitter-java not installed)",
-                       "JavaScript: not scanned (tree-sitter-javascript not installed)", "Python: ast"]
+                       "JavaScript: not scanned (tree-sitter-javascript not installed)", "Python: ast",
+                       "TypeScript: not scanned (tree-sitter-typescript not installed)"]
 
 
 def test_java_without_tree_sitter_is_counted_not_dropped(tmp_path):

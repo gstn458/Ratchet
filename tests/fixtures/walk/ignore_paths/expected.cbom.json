@@ -69,6 +69,10 @@
         "value": "Python: ast"
       },
       {
+        "name": "ratchet:parser",
+        "value": "TypeScript: not scanned (regex backend requested)"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
         "value": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71"
       },

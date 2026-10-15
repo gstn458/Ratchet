@@ -124,6 +124,12 @@ JavaScript is parsed only with tree-sitter, so these fixtures set `{"backend": "
 | `webcrypto` | `crypto.subtle` and `window.crypto.subtle` by algorithm name or object, with the RSA modulus, the ECDSA curve and the hash inside the object counted as its own primitive; `subtle` held in a variable is not followed | ok, gap on the alias |
 | `forge` | node-forge `md.*.create()`, `pki.rsa.generateKeyPair` with a size or `{bits}`, `cipher.createCipher('3DES-CBC')`, `ed25519.*`; `forge.des.*` is DES or 3DES by key length and claims nothing; forge's own definitions (`forge.md.md5 = ...`) are not uses | ok, gap on `forge.des` |
 
+## ts/
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `node_crypto` | TypeScript and TSX with the JavaScript rules: `import crypto = require('crypto')`, receivers wrapped in `as any`, `!` and `satisfies`, a constant with a type annotation, WebCrypto in a `.tsx` component; an interface's `createHash` is not Node's crypto; `keys.spec.ts` is test code | ok |
+
 ## walk/
 
 | Case | Pins down | Status |

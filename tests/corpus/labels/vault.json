@@ -916,6 +916,10 @@
       "verdict": "tp",
       "note": "rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed"
     },
+    "ui/app/components/auth/form/saml.ts:180:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: WebCrypto crypto.subtle.digest('SHA-256') in vault's TypeScript UI (PKCE challenge)"
+    },
     "vault/acme_billing_system_view.go:131:SHA-256": {
       "verdict": "tp",
       "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
