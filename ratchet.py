@@ -3186,6 +3186,11 @@ def diff_main(argv):
 
 
 def main(argv=None):
+    # The report quotes the scanned code. A terminal or pipe that cannot
+    # encode a character gets an escape for it instead of a crash, as on a
+    # Windows runner whose pipes use the ANSI code page.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="backslashreplace")
     argv = sys.argv[1:] if argv is None else argv
     if argv[:1] == ["diff"]:
         return diff_main(argv[1:])
