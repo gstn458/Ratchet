@@ -1,0 +1,675 @@
+{
+  "findings": {
+    "lib/aesCipherSuites.js:57:AES": {
+      "verdict": "tp",
+      "note": "read by hand: forge.cipher.createCipher/createDecipher('AES-CBC') with forge = require('./forge')"
+    },
+    "lib/aesCipherSuites.js:63:AES": {
+      "verdict": "tp",
+      "note": "read by hand: forge.cipher.createCipher/createDecipher('AES-CBC') with forge = require('./forge')"
+    },
+    "lib/pbe.js:649:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pbe.js:938:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs1.js:194:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs1.js:264:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs1.js:94:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs12.js:1007:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs12.js:441:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs12.js:445:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs12.js:457:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/pkcs12.js:827:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/ssh.js:170:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/ssh.js:230:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/tls.js:2046:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/tls.js:2047:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/tls.js:3995:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/tls.js:3996:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:1130:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:1375:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:1392:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:1697:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:1794:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:2823:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:705:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:707:MD5": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:709:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:715:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "lib/x509.js:918:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: forge.md.<hash>.create() with forge = require('./forge') in forge's own library"
+    },
+    "tests/benchmarks/so-44303784.js:72:AES-128": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/pocs/ghsa-ppp5-5v6c-4jwp.js:141:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/pocs/ghsa-ppp5-5v6c-4jwp.js:151:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/pocs/ghsa-ppp5-5v6c-4jwp.js:155:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/pocs/ghsa-ppp5-5v6c-4jwp.js:80:RSA-4096": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/pocs/ghsa-ppp5-5v6c-4jwp.js:94:SHA-256": {
+      "verdict": "tp",
+      "note": "read by hand: Node crypto bound by const crypto = require('crypto')"
+    },
+    "tests/unit/tls.js:121:RSA-512": {
+      "verdict": "tp",
+      "note": "read by hand: forge.pki.rsa.generateKeyPair(512) with forge = require('../../lib/forge')"
+    }
+  },
+  "missed": [
+    {
+      "path": "examples/create-cert.js",
+      "line": 4,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(2048);"
+    },
+    {
+      "path": "examples/create-csr.js",
+      "line": 4,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(2048);"
+    },
+    {
+      "path": "examples/create-pkcs12.js",
+      "line": 6,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(2048);"
+    },
+    {
+      "path": "examples/sign-p7.js",
+      "line": 46,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(2048);"
+    },
+    {
+      "path": "examples/tls.js",
+      "line": 7,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(512);"
+    },
+    {
+      "path": "lib/des.js",
+      "line": 214,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "return new forge.des.Algorithm(name, mode);"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 260,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createEncryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 313,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var cipher = forge.des.createEncryptionCipher(dk);"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 492,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createEncryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 498,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createEncryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 557,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createDecryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 561,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createDecryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 578,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "return forge.rc2.createDecryptionCipher(key, 40);"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 584,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "return forge.rc2.createDecryptionCipher(key, 64);"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 590,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "return forge.rc2.createDecryptionCipher(key, 128);"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 842,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createDecryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 846,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.createDecryptionCipher;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 894,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "cipherFn = forge.des.startDecrypting;"
+    },
+    {
+      "path": "lib/pbe.js",
+      "line": 901,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var cipher = forge.rc2.createDecryptionCipher(key, 40);"
+    },
+    {
+      "path": "lib/pkcs7.js",
+      "line": 756,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "ciphFn = forge.des.createEncryptionCipher;"
+    },
+    {
+      "path": "lib/pkcs7.js",
+      "line": 1244,
+      "algorithm": "DES",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "ciph = forge.des.createDecryptionCipher(msg.encryptedContent.key);"
+    },
+    {
+      "path": "lib/rc2.js",
+      "line": 115,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "key = forge.rc2.expandKey(key, bits);"
+    },
+    {
+      "path": "lib/rc2.js",
+      "line": 353,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var cipher = forge.rc2.createEncryptionCipher(key, 128);"
+    },
+    {
+      "path": "lib/rc2.js",
+      "line": 390,
+      "algorithm": "RC2 (not in the registry)",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var cipher = forge.rc2.createDecryptionCipher(key, 128);"
+    },
+    {
+      "path": "lib/rsa.js",
+      "line": 231,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var publicKeyValidator = forge.pki.rsa.publicKeyValidator = {"
+    },
+    {
+      "path": "lib/rsa.js",
+      "line": 934,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "return _crypto.generateKeyPair('rsa', {"
+    },
+    {
+      "path": "lib/rsa.js",
+      "line": 1014,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-node-crypto",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var keypair = _crypto.generateKeyPairSync('rsa', {"
+    },
+    {
+      "path": "lib/x509.js",
+      "line": 148,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": false,
+      "snippet": "var publicKeyValidator = forge.pki.rsa.publicKeyValidator;"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 101,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(bits);"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 116,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 138,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(bits);"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 324,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 333,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 344,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 356,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 367,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 440,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.md5.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 452,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 461,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 472,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 484,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 495,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 513,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 1485,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 1513,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var md = forge.md.sha1.create();"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 1664,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var state = forge.pki.rsa.createKeyPairGenerationState(512);"
+    },
+    {
+      "path": "tests/legacy/common.js",
+      "line": 1669,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "if(!forge.pki.rsa.stepKeyPairGenerationState(state, 1000))"
+    },
+    {
+      "path": "tests/legacy/webid.js",
+      "line": 153,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var state = forge.pki.rsa.createKeyPairGenerationState(bits);"
+    },
+    {
+      "path": "tests/legacy/webid.js",
+      "line": 158,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "if(!forge.pki.rsa.stepKeyPairGenerationState(state, 1000))"
+    },
+    {
+      "path": "tests/websockets/server-webid.js",
+      "line": 297,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(512);"
+    },
+    {
+      "path": "tests/websockets/server-ws.js",
+      "line": 9,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "js-forge",
+      "note": "JavaScript is not scanned yet",
+      "test": true,
+      "snippet": "var keys = forge.pki.rsa.generateKeyPair(512);"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

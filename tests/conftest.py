@@ -56,12 +56,27 @@ def fixture_options(root):
     return json.loads(path.read_text()) if path.exists() else {}
 
 
-def scan(root):
+def skip_without_tree_sitter(root):
+    """Skip a fixture that asks for tree-sitter when it is not installed:
+    Java has no other parser, so its goldens can only be checked with it."""
+    if fixture_options(root).get("backend") == "tree-sitter":
+        try:
+            ratchet.go_backend("tree-sitter")
+            for language in ratchet.TREE_SITTER_ONLY:
+                ratchet.optional_backend(language, "tree-sitter")
+        except ratchet.BackendError:
+            pytest.skip("tree-sitter grammars not installed")
+
+
+def scan(root, backend="regex"):
     """Scan a fixture the way the CLI does, from inside it, so paths are relative.
 
+    Goldens are written with the regex Go backend, which runs everywhere;
+    tests/test_backends.py checks that tree-sitter gives the same output.
     Returns (normalised CBOM dict, terminal report text).
     """
-    options = fixture_options(root)
+    skip_without_tree_sitter(root)
+    options = {"backend": backend, **fixture_options(root)}
     old = os.getcwd()
     os.chdir(root)
     try:

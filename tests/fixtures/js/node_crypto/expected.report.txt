@@ -1,0 +1,103 @@
+
+ratchet 0.1.0  scanned 3 files in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, JavaScript tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1, Python ast, TypeScript tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2
+skipped no directories
+parsed all 3 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (4 call sites, 1 in test code)
+    key sizes: 1024: 1, 2048: 1, not stated: 2
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.js:17   crypto.createSign('RSA-SHA256').update(data).sign(privateKey);
+      keys.js:28   crypto.generateKeyPairSync('rsa', { modulusLength: 2048 });
+      keys.js:32   publicEncrypt(publicKey, Buffer.from('secret'));
+      ... and 1 more
+
+  ECDH  (2 call sites)
+    parameter sets: SECP256R1: 1, SECP384R1: 1
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
+      keys.js:33   crypto.createECDH('prime256v1');
+      module.mjs:6   export const ecdh = () => nodeCrypto.createECDH('secp384r1');
+
+  DH  (1 call site)
+    key sizes: 2048: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-KEM-768 (FIPS 203)
+      keys.js:34   crypto.createDiffieHellman(2048);
+
+  DSA  (1 call site)
+    key sizes: 1024: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      module.mjs:5   export const keyPair = () => gen('dsa', { modulusLength: 1024 });
+
+  Ed25519  (1 call site)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      keys.js:30   crypto.generateKeyPairSync('ed25519');
+
+  X448  (1 call site)
+    Curve448 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X448+ML-KEM-1024, then ML-KEM-1024 alone
+      keys.js:31   crypto.generateKeyPair('x448', {}, () => {});
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (1 call site)
+    parameter sets: SECP256R1: 1
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      keys.js:29   crypto.generateKeyPairSync('ec', { namedCurve: 'P-256' });
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (2 call sites)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      keys.js:8   crypto.createHash('md5').update(data);
+      module.mjs:4   export const fingerprint = (data) => createHash('md5').update(data).digest('hex');
+
+  SHA-1  (2 call sites)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      keys.js:9   digest(LEGACY_HASH).update(data);
+      keys.js:11   crypto.createHmac('SHA1', key);
+
+  3DES  (1 call site)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      keys.js:22   crypto.createCipheriv('des-ede3-cbc', key, iv);
+
+  RC4  (1 call site)
+    Biased keystream. Prohibited in TLS since RFC 7465.
+    migrate to: AES-256-GCM or ChaCha20-Poly1305
+      keys.js:24   crypto.createDecipheriv('rc4', key, null);
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (3 call sites)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      keys.js:10   crypto.createHash('sha256').update(data);
+      keys.js:17   crypto.createSign('RSA-SHA256').update(data).sign(privateKey);
+      keys.js:18   crypto.sign('sha256', data, privateKey);   // the key decides RSA or EC: only the hash is claimed
+
+  AES  (1 call site)
+    key sizes: 256: 1
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      keys.js:23   crypto.createCipheriv('aes-256-gcm', key, iv);
+
+========================================================================
+11 quantum-vulnerable call sites (1 in test code) and no imports across 3 files.
+1 call site and no imports with usage undetermined: review before choosing a migration target.
+

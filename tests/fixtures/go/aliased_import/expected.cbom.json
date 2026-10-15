@@ -29,12 +29,36 @@
         "value": "false"
       },
       {
+        "name": "ratchet:not_scanned_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Go: regex (requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Java: not scanned (regex backend requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "JavaScript: not scanned (regex backend requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "TypeScript: not scanned (regex backend requested)"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
-        "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
+        "value": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.2"
+        "value": "2026.10.3"
       },
       {
         "name": "ratchet:skipped_directory_count",
@@ -86,6 +110,10 @@
       },
       "properties": [
         {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
           "name": "ratchet:call_site_count",
           "value": "0"
         },
@@ -96,6 +124,74 @@
         {
           "name": "ratchet:import_count",
           "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-2048",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "2048",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys.go#L9",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
         },
         {
           "name": "ratchet:occurrence_count",

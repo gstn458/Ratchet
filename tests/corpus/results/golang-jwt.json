@@ -1,0 +1,621 @@
+{
+  "name": "golang-jwt",
+  "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 46,
+  "unparsed": [],
+  "skipped_directories": 2,
+  "findings": [
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "cmd/jwt/main.go",
+      "line": 307,
+      "snippet": "return *flagAlg == \"EdDSA\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 5,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 34,
+      "snippet": "SigningMethodES256 = &SigningMethodECDSA{\"ES256\", crypto.SHA256, 32, 256}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 34,
+      "snippet": "SigningMethodES256 = &SigningMethodECDSA{\"ES256\", crypto.SHA256, 32, 256}"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 40,
+      "snippet": "SigningMethodES384 = &SigningMethodECDSA{\"ES384\", crypto.SHA384, 48, 384}"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 46,
+      "snippet": "SigningMethodES512 = &SigningMethodECDSA{\"ES512\", crypto.SHA512, 66, 521}"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 83,
+      "snippet": "if verifystatus := ecdsa.Verify(ecdsaKey, hasher.Sum(nil), r, s); verifystatus {"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "ecdsa.go",
+      "line": 111,
+      "snippet": "if r, s, err := ecdsa.Sign(rand.Reader, ecdsaKey, hasher.Sum(nil)); err == nil {"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 4,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 25,
+      "snippet": "\"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 25,
+      "snippet": "\"ES256\","
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 33,
+      "snippet": "\"ES384\","
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 41,
+      "snippet": "\"ES512\","
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 49,
+      "snippet": "\"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ecdsa_test.go",
+      "line": 49,
+      "snippet": "\"ES256\","
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "ecdsa_utils.go",
+      "line": 4,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "ed25519.go",
+      "line": 5,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ed25519.go",
+      "line": 31,
+      "snippet": "return \"EdDSA\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "ed25519.go",
+      "line": 49,
+      "snippet": "if !ed25519.Verify(ed25519Key, []byte(signingString), sig) {"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ed25519_test.go",
+      "line": 23,
+      "snippet": "\"EdDSA\","
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ed25519_test.go",
+      "line": 31,
+      "snippet": "\"EdDSA\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "ed25519_utils.go",
+      "line": 5,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "hmac.go",
+      "line": 26,
+      "snippet": "SigningMethodHS256 = &SigningMethodHMAC{\"HS256\", crypto.SHA256}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "hmac_test.go",
+      "line": 22,
+      "snippet": "\"HS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "hmac_test.go",
+      "line": 43,
+      "snippet": "\"HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "http_example_test.go",
+      "line": 7,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "http_example_test.go",
+      "line": 137,
+      "snippet": "t := jwt.New(jwt.GetSigningMethod(\"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "http_example_test.go",
+      "line": 137,
+      "snippet": "t := jwt.New(jwt.GetSigningMethod(\"RS256\"))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 5,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 323,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"HS256\"})),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 333,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"RS256\", \"HS256\"})),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 333,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"RS256\", \"HS256\"})),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 343,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"RS256\", \"HS256\"})),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 343,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"RS256\", \"HS256\"})),"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 353,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"HS256\", \"ES256\"})),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "parser_test.go",
+      "line": 353,
+      "snippet": "jwt.NewParser(jwt.WithValidMethods([]string{\"HS256\", \"ES256\"})),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "rsa.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa.go",
+      "line": 25,
+      "snippet": "SigningMethodRS256 = &SigningMethodRSA{\"RS256\", crypto.SHA256}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa.go",
+      "line": 25,
+      "snippet": "SigningMethodRS256 = &SigningMethodRSA{\"RS256\", crypto.SHA256}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa.go",
+      "line": 31,
+      "snippet": "SigningMethodRS384 = &SigningMethodRSA{\"RS384\", crypto.SHA384}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa.go",
+      "line": 37,
+      "snippet": "SigningMethodRS512 = &SigningMethodRSA{\"RS512\", crypto.SHA512}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "rsa.go",
+      "line": 65,
+      "snippet": "return rsa.VerifyPKCS1v15(rsaKey, m.Hash, hasher.Sum(nil), sig)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "rsa.go",
+      "line": 88,
+      "snippet": "if sigBytes, err := rsa.SignPKCS1v15(rand.Reader, rsaKey, m.Hash, hasher.Sum(nil)); err == nil {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 31,
+      "snippet": "Name: \"PS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 31,
+      "snippet": "Name: \"PS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 48,
+      "snippet": "Name: \"PS384\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 65,
+      "snippet": "Name: \"PS512\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 103,
+      "snippet": "return rsa.VerifyPSS(rsaKey, m.Hash, hasher.Sum(nil), sig, opts)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "rsa_pss.go",
+      "line": 127,
+      "snippet": "if sigBytes, err := rsa.SignPSS(rand.Reader, rsaKey, m.Hash, hasher.Sum(nil), m.Options); err == nil {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 4,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 24,
+      "snippet": "\"PS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 24,
+      "snippet": "\"PS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 31,
+      "snippet": "\"PS384\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 38,
+      "snippet": "\"PS512\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 45,
+      "snippet": "\"PS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_pss_test.go",
+      "line": 45,
+      "snippet": "\"PS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 6,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 26,
+      "snippet": "\"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 26,
+      "snippet": "\"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 32,
+      "snippet": "\"RS384\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 38,
+      "snippet": "\"RS512\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 44,
+      "snippet": "\"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 44,
+      "snippet": "\"RS256\","
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "rsa_test.go",
+      "line": 123,
+      "snippet": "randomKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "rsa_utils.go",
+      "line": 4,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "test/helpers.go",
+      "line": 5,
+      "snippet": "\"crypto/rsa\""
+    }
+  ]
+}

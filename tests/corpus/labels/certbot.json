@@ -1,0 +1,112 @@
+{
+  "findings": {
+    "acme/examples/http01_example.py:161:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "acme/examples/http01_example.py:72:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "acme/src/acme/_internal/tests/client_test.py:652:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "acme/src/acme/_internal/tests/crypto_util_test.py:120:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "acme/src/acme/_internal/tests/crypto_util_test.py:206:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot-ci/src/certbot_integration_tests/utils/misc.py:218:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot-ci/src/certbot_integration_tests/utils/misc.py:220:EC-SECP384R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot-ci/src/certbot_integration_tests/utils/pebble_ocsp_server.py:71:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/account.py:70:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.md5() call"
+    },
+    "certbot/src/certbot/_internal/account.py:75:MD5": {
+      "verdict": "tp",
+      "note": "rule py-hashlib: hashlib.new('md5') call"
+    },
+    "certbot/src/certbot/_internal/client.py:199:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: generate_private_key from-imported from asymmetric.rsa; key size held in a variable"
+    },
+    "certbot/src/certbot/_internal/ocsp.py:100:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/tests/ocsp_test.py:230:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/tests/ocsp_test.py:241:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "certbot/src/certbot/_internal/tests/renewal_test.py:24:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/_internal/tests/san_test.py:113:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/_internal/tests/san_test.py:134:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/_internal/tests/san_test.py:70:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/_internal/tests/san_test.py:89:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/crypto_util.py:264:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/crypto_util.py:274:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    },
+    "certbot/src/certbot/crypto_util.py:373:RSA": {
+      "verdict": "tp",
+      "note": "read by hand: PKCS1v15 from-imported from asymmetric.padding, verifying an RSA signature"
+    },
+    "certbot/src/certbot/crypto_util.py:377:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: EC keys sign certificates or CSRs (actual use: ECDSA); RSA keys are account and certificate keys"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

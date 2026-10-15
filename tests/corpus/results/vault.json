@@ -1,0 +1,4941 @@
+{
+  "name": "vault",
+  "commit": "fdd82cfd09d5f905f29aa98d9fea6d2a77fd5eda",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 4896,
+  "unparsed": [],
+  "skipped_directories": 19,
+  "findings": [
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "api/auth/aws/aws.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "api/auth/aws/aws.go",
+      "line": 366,
+      "snippet": "payloadHash := sha256.Sum256(body)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "api/auth/cert/cert_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "api/auth/cert/cert_test.go",
+      "line": 304,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "api/auth/cert/cert_test.go",
+      "line": 340,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "api/client.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "audit/backend_noop.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "audit/broker_test.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "audit/hashstructure_test.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/credential/approle/validation.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/credential/aws/backend_test.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/aws/backend_test.go",
+      "line": 1580,
+      "snippet": "payloadHash := sha256.Sum256(body)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/credential/aws/path_role_tag.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 95,
+      "snippet": "caKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 129,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 485,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 518,
+      "snippet": "clientKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1297,
+      "snippet": "ca3Key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1392,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1427,
+      "snippet": "clientKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1604,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1830,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 1913,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 2060,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 3816,
+      "snippet": "rootCaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 3843,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/backend_test.go",
+      "line": 3884,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/credential/cert/path_crls_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/path_crls_test.go",
+      "line": 64,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/credential/cert/path_crls_test.go",
+      "line": 99,
+      "snippet": "clientKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/credential/cert/test_responder.go",
+      "line": 18,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/credential/cert/test_responder.go",
+      "line": 256,
+      "snippet": "responseHash := sha256.Sum256(ocspResponse)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/database/credentials_test.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/database/rollback.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/database/rollback_test.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/database/rollback_test.go",
+      "line": 570,
+      "snippet": "key, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/acme_billing_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_billing_test.go",
+      "line": 267,
+      "snippet": "accountKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_billing_test.go",
+      "line": 331,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/acme_challenges.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/acme_challenges.go",
+      "line": 66,
+      "snippet": "checksum := sha256.Sum256([]byte(authzContents))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/acme_challenges.go",
+      "line": 83,
+      "snippet": "expectedAuthz := sha256.Sum256([]byte(authzContents))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 12,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 306,
+      "snippet": "checksum := sha256.Sum256([]byte(tc.keyAuthz))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 404,
+      "snippet": "checksum := sha256.Sum256([]byte(tc.keyAuthz))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 409,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 453,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 475,
+      "snippet": "checksum := sha256.Sum256([]byte(\"valid.valid\"))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 480,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 524,
+      "snippet": "checksum := sha256.Sum256([]byte(\"valid.valid\"))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 529,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 573,
+      "snippet": "checksum := sha256.Sum256([]byte(\"valid.valid\"))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 578,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 622,
+      "snippet": "checksum := sha256.Sum256([]byte(\"valid.valid\"))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 627,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 672,
+      "snippet": "checksum := sha256.Sum256([]byte(\"valid.valid\"))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 677,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 717,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/acme_challenges_test.go",
+      "line": 750,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 18,
+      "snippet": "\"RS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 18,
+      "snippet": "\"RS256\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 19,
+      "snippet": "\"RS384\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 20,
+      "snippet": "\"RS512\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 21,
+      "snippet": "\"PS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 21,
+      "snippet": "\"PS256\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 22,
+      "snippet": "\"PS384\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 23,
+      "snippet": "\"PS512\": true,"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 24,
+      "snippet": "\"ES256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 24,
+      "snippet": "\"ES256\": true,"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 25,
+      "snippet": "\"ES384\": true,"
+    },
+    {
+      "label": "EC-SECP521R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 26,
+      "snippet": "\"ES512\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 30,
+      "snippet": "\"HS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pki/acme_state_test.go",
+      "line": 79,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 11,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 12,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 15,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 844,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P224(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 846,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 848,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 850,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 855,
+      "snippet": "_, priv, err = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 1341,
+      "snippet": "privKey, _ = ecdsa.GenerateKey(curve, rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 1348,
+      "snippet": "_, privKey, _ = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 4058,
+      "snippet": "cak, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 4127,
+      "snippet": "_, edk, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/backend_test.go",
+      "line": 8097,
+      "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/ca_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/ca_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/ca_test.go",
+      "line": 58,
+      "snippet": "cak, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/ca_test.go",
+      "line": 127,
+      "snippet": "_, edk, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/ca_util.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/ca_util.go",
+      "line": 11,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/ca_util.go",
+      "line": 22,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/ca_util_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/ca_util_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/ca_util_test.go",
+      "line": 25,
+      "snippet": "ecdsaKey, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/ca_util_test.go",
+      "line": 30,
+      "snippet": "publicKey, _, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pki/crl_test.go",
+      "line": 178,
+      "snippet": "{\"ed25519\", 0, \"\", 0, false, \"Ed25519\"},"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 7,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdh\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 10,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 15,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 16,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 96,
+      "snippet": "k, genErr := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 102,
+      "snippet": "k, genErr := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 108,
+      "snippet": "k, genErr := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 240,
+      "snippet": "wrappedCEK, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, pub, cek, nil)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 240,
+      "snippet": "wrappedCEK, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, pub, cek, nil)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 270,
+      "snippet": "ephPriv, err = ecdh.P256().GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 272,
+      "snippet": "ephPriv, err = ecdh.P384().GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 274,
+      "snippet": "ephPriv, err = ecdh.P521().GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 354,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 417,
+      "snippet": "decryptedCEK, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, rsaPriv, blob.WrappedCEK, nil)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 417,
+      "snippet": "decryptedCEK, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, rsaPriv, blob.WrappedCEK, nil)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/export_crypto.go",
+      "line": 506,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/export_crypto_test.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/export_crypto_test.go",
+      "line": 27,
+      "snippet": "caPriv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/export_crypto_test.go",
+      "line": 68,
+      "snippet": "caPriv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/integration_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/integration_test.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/integration_test.go",
+      "line": 11,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/sign_cert.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/sign_cert.go",
+      "line": 8,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/sign_cert.go",
+      "line": 10,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/signing_utils.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/signing_utils.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/signing_utils.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/signing_utils.go",
+      "line": 78,
+      "snippet": "{x509.PureEd25519, \"Ed25519\", oidSignatureEd25519, emptyRawValue, x509.Ed25519, crypto.Hash(0) /* no pre-hashing */, false},"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_order_test.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_order_test.go",
+      "line": 332,
+      "snippet": "accountKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_order_test.go",
+      "line": 351,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_order_test.go",
+      "line": 532,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 251,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 386,
+      "snippet": "accountKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 456,
+      "snippet": "accountKey2, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 754,
+      "snippet": "accountKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 778,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 859,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 932,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 1202,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 1632,
+      "snippet": "accountKey2, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 1801,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 1946,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_acme_test.go",
+      "line": 2117,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_ca_key_export_record.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/path_ca_key_export_record.go",
+      "line": 75,
+      "snippet": "sum := sha256.Sum256(pubBytes)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/path_ca_key_export_record.go",
+      "line": 90,
+      "snippet": "sum := sha256.Sum256(spkiDER)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_ca_key_export_record_test.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_ca_key_export_record_test.go",
+      "line": 245,
+      "snippet": "sum := sha256.Sum256(pubDER)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_intermediate_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_revoke.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_revoke.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_revoke.go",
+      "line": 11,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_root.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_root.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/path_root.go",
+      "line": 30,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 9,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 11,
+      "snippet": "\"crypto/ecdh\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 12,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 16,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 17,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 37,
+      "snippet": "priv, err := rsa.GenerateKey(rand.Reader, bits)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 48,
+      "snippet": "priv, err := ecdsa.GenerateKey(curve, rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 73,
+      "snippet": "cek, err := rsa.DecryptOAEP(sha256.New(), nil, priv, blob.WrappedCEK, nil)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 73,
+      "snippet": "cek, err := rsa.DecryptOAEP(sha256.New(), nil, priv, blob.WrappedCEK, nil)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 117,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_secure_export_key_test.go",
+      "line": 466,
+      "snippet": "wrongPriv, err := ecdh.P384().GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pki/path_tidy_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pki/path_tidy_test.go",
+      "line": 936,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/storage_migrations.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/pki/storage_migrations.go",
+      "line": 160,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/test_helpers.go",
+      "line": 10,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/pki/test_helpers.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkcs12_jks_java_validator_test.go",
+      "line": 226,
+      "snippet": "{name: \"Ed25519\", keyType: \"ed25519\", keyBits: 0},"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkcs12_openssl_validator_test.go",
+      "line": 170,
+      "snippet": "{name: \"Ed25519\", keyType: \"ed25519\", keyBits: 0},"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkiext_binary/acme_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkiext_binary/acme_test.go",
+      "line": 750,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkiext_binary/acme_test.go",
+      "line": 1097,
+      "snippet": "csrKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_config_ca.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_config_ca.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/ssh/path_config_ca.go",
+      "line": 408,
+      "snippet": "privateSeed, err := ecdsa.GenerateKey(curve, randomSource)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/ssh/path_config_ca.go",
+      "line": 426,
+      "snippet": "_, privateSeed, err := ed25519.GenerateKey(randomSource)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 8,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 13,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/ssh/path_issue_sign.go",
+      "line": 286,
+      "snippet": "\"public_key_hash\":    fmt.Sprintf(\"%x\", sha256.Sum256(pubKey.Marshal())),"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/backend_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_byok.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_byok.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_export.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_export_test.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_hash.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/transit/path_hash.go",
+      "line": 107,
+      "snippet": "hf = sha256.New()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 9,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 10,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 407,
+      "snippet": "ephKey, err := rsa.DecryptOAEP(hashFn, b.GetRandomReader(), privWrappingKey, wrappedEphKey, []byte{})"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 472,
+      "snippet": "return sha1.New(), nil"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "builtin/logical/transit/path_import.go",
+      "line": 476,
+      "snippet": "return sha256.New(), nil"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 13,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 1104,
+      "snippet": "ephKeyWrapped, err := rsa.EncryptOAEP(hashFn, rand.Reader, wrappingKey, ephKey, []byte{})"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 1135,
+      "snippet": "_, priv, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 1138,
+      "snippet": "return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 1140,
+      "snippet": "return ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_import_test.go",
+      "line": 1142,
+      "snippet": "return ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_keys.go",
+      "line": 23,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_sign_verify.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_sign_verify_test.go",
+      "line": 20,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "builtin/logical/transit/path_sign_verify_test.go",
+      "line": 378,
+      "snippet": "valid := ed25519.Verify(ed25519.PublicKey(pubKeyRaw), input, signature)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "builtin/logical/transit/path_wrapping_key.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "builtin/logical/transit/path_wrapping_key_test.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "command/client/agent/testing.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "command/client/transit_import_key.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "command/client/transit_import_key.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "command/client/transit_import_key.go",
+      "line": 153,
+      "snippet": "wrappedAESKey, err := rsa.EncryptOAEP("
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "command/client/transit_import_key.go",
+      "line": 154,
+      "snippet": "sha256.New(),"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent/jwt_end_to_end_test.go",
+      "line": 80,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent/jwt_end_to_end_test.go",
+      "line": 80,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent_test.go",
+      "line": 82,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent_test.go",
+      "line": 82,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "command/server/operator_raft_snapshot_inspect.go",
+      "line": 11,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "command/server/operator_raft_snapshot_inspect.go",
+      "line": 426,
+      "snippet": "h := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "command/server/plugin_test.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "command/server/plugin_test.go",
+      "line": 33,
+      "snippet": "h := sha256.New()"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/proxy_test.go",
+      "line": 74,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/proxy_test.go",
+      "line": 74,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "command/server/server.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "command/server/server.go",
+      "line": 2213,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 6,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "DES",
+      "algorithm": "DES",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 8,
+      "snippet": "\"crypto/des\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 10,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 45,
+      "snippet": "contentKey, err = rsa.DecryptOAEP(oaepHash.New(), rand.Reader, pkey, recipient.EncryptedKey, []byte{})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 51,
+      "snippet": "contentKey, err = rsa.DecryptPKCS1v15(rand.Reader, pkey, recipient.EncryptedKey)"
+    },
+    {
+      "label": "DES",
+      "algorithm": "DES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 197,
+      "snippet": "block, err = des.NewCipher(key)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 199,
+      "snippet": "block, err = des.NewTripleDESCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/decrypt.go",
+      "line": 203,
+      "snippet": "block, err = aes.NewCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 5,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "DES",
+      "algorithm": "DES",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 7,
+      "snippet": "\"crypto/des\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 115,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "DES",
+      "algorithm": "DES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 188,
+      "snippet": "block, err = des.NewCipher(key)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 193,
+      "snippet": "block, err = des.NewTripleDESCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 253,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/encrypt.go",
+      "line": 441,
+      "snippet": "return rsa.EncryptPKCS1v15(rand.Reader, pub, key)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/pkcs7.go",
+      "line": 7,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/pkcs7.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/pkcs7.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/pkcs7.go",
+      "line": 10,
+      "snippet": "_ \"crypto/sha1\" // for crypto.SHA1"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 5,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 6,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 9,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 159,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 172,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "helper/pkcs7/pkcs7_test.go",
+      "line": 185,
+      "snippet": "priv, err = ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/sign.go",
+      "line": 6,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/sign.go",
+      "line": 220,
+      "snippet": "r, s, err := dsa.Sign(rand.Reader, pkey, sd.messageDigest)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/sign.go",
+      "line": 366,
+      "snippet": "r, s, err := dsa.Sign(rand.Reader, pkey, hash)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": true,
+      "path": "helper/pkcs7/sign_test.go",
+      "line": 5,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/pkcs7/verify.go",
+      "line": 5,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/pkcs7/verify.go",
+      "line": 159,
+      "snippet": "if !dsa.Verify(dsaKey, signed, dsaSig.R, dsaSig.S) {"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/serverconfig/tls_util.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/serverconfig/tls_util.go",
+      "line": 161,
+      "snippet": "pk, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "test": false,
+      "path": "helper/storagepacker/storagepacker.go",
+      "line": 8,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/storagepacker/storagepacker.go",
+      "line": 119,
+      "snippet": "hf := md5.New()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/testhelpers/certhelpers/cert_helpers.go",
+      "line": 10,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "helper/testhelpers/certhelpers/cert_helpers.go",
+      "line": 11,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/testhelpers/certhelpers/cert_helpers.go",
+      "line": 242,
+      "snippet": "subjKeyID := sha1.Sum(marshaledKey)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "helper/testhelpers/pki/pkihelper.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/testhelpers/pki/pkihelper.go",
+      "line": 92,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/testhelpers/pki/pkihelper.go",
+      "line": 183,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "helper/testhelpers/pluginhelpers/pluginhelpers.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "helper/testhelpers/pluginhelpers/pluginhelpers.go",
+      "line": 159,
+      "snippet": "sha := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "internal/awsutil/v2/generate_credentials.go",
+      "line": 19,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "internal/awsutil/v2/generate_credentials.go",
+      "line": 84,
+      "snippet": "payloadHash := sha256.Sum256(body)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/awsutil/generate_credentials.go",
+      "line": 19,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/awsutil/generate_credentials.go",
+      "line": 84,
+      "snippet": "payloadHash := sha256.Sum256(body)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 8,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 11,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 16,
+      "snippet": "\"golang.org/x/crypto/curve25519\""
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 39,
+      "snippet": "public, err := curve25519.X25519(scalar, curve25519.Basepoint)"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 56,
+      "snippet": "return curve25519.X25519(ourPrivate, theirPublic)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 113,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/dhutil/dhutil.go",
+      "line": 150,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/listenerutil/tls_reload.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/listenerutil/tls_reload.go",
+      "line": 52,
+      "snippet": "cert:  sha256.Sum256(certPEM),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/listenerutil/tls_reload.go",
+      "line": 53,
+      "snippet": "key:   sha256.Sum256(keyPEM),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "internalshared/tpmutil/tpm.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "internalshared/tpmutil/tpm.go",
+      "line": 17,
+      "snippet": "sum := sha256.Sum256(der)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "physical/aerospike/aerospike.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "physical/aerospike/aerospike.go",
+      "line": 252,
+      "snippet": "hash := sha256.Sum256([]byte(s))"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "test": false,
+      "path": "physical/gcs/gcs.go",
+      "line": 8,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "physical/gcs/gcs.go",
+      "line": 197,
+      "snippet": "md5Array := md5.Sum(entry.Value)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "test": true,
+      "path": "physical/raft/raft_test.go",
+      "line": 9,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": true,
+      "path": "physical/raft/raft_test.go",
+      "line": 994,
+      "snippet": "pe.Key = fmt.Sprintf(\"%x\", md5.Sum([]byte(fmt.Sprintf(\"%s-%d\", testName, i))))"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": true,
+      "path": "physical/raft/raft_test.go",
+      "line": 1027,
+      "snippet": "pe.Key = fmt.Sprintf(\"%x\", md5.Sum([]byte(fmt.Sprintf(\"%s-%d\", testName, i))))"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": true,
+      "path": "physical/raft/raft_test.go",
+      "line": 1037,
+      "snippet": "pe.Key = fmt.Sprintf(\"%x\", md5.Sum([]byte(fmt.Sprintf(\"%s-%d\", testName, i))))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "physical/raft/streamlayer.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "physical/raft/streamlayer.go",
+      "line": 94,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "plugins/database/mongodb/cert_helpers_test.go",
+      "line": 10,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": true,
+      "path": "plugins/database/mongodb/cert_helpers_test.go",
+      "line": 11,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "plugins/database/mongodb/cert_helpers_test.go",
+      "line": 226,
+      "snippet": "subjKeyID := sha1.Sum(marshaledKey)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "plugins/database/postgresql/scram/scram.go",
+      "line": 14,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "plugins/database/postgresql/scram/scram.go",
+      "line": 59,
+      "snippet": "h := sha256.New()"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 30,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 48,
+      "snippet": "intermediateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 66,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 159,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 195,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 215,
+      "snippet": "intKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 231,
+      "snippet": "subIntKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 247,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 286,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 305,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 343,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 361,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 405,
+      "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 424,
+      "snippet": "intKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/cert_verification_test.go",
+      "line": 441,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 10,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 14,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 504,
+      "snippet": "ecdsa, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 511,
+      "snippet": "ed25519, _, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 671,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 706,
+      "snippet": "intKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 743,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 878,
+      "snippet": "pubkey, privkey, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 1159,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 1255,
+      "snippet": "caKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 1367,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/certutil_test.go",
+      "line": 1375,
+      "snippet": "key, priv, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "DSA",
+      "algorithm": "DSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 9,
+      "snippet": "\"crypto/dsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 10,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 11,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 15,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 16,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 87,
+      "snippet": "x509.PureEd25519:      \"Ed25519\","
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 194,
+      "snippet": "publicKeyBytes = elliptic.Marshal(pub.Curve, pub.X, pub.Y)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 202,
+      "snippet": "skid := sha1.Sum(publicKeyBytes)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 419,
+      "snippet": "privateKey, err = ecdsa.GenerateKey(curve, randReader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 429,
+      "snippet": "_, privateKey, err = ed25519.GenerateKey(randReader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 2317,
+      "snippet": "case \"Ed25519\":"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/types.go",
+      "line": 17,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/types.go",
+      "line": 18,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/certutil/types.go",
+      "line": 20,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/types_test.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/types_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/types_test.go",
+      "line": 24,
+      "snippet": "ecdsaKey, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/types_test.go",
+      "line": 29,
+      "snippet": "publicKey, _, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/certutil/x509verify/verify_test.go",
+      "line": 12,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/certutil/x509verify/verify_test.go",
+      "line": 1809,
+      "snippet": "priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/cryptoutil/rsa.go",
+      "line": 7,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/cryptoutil/rsa.go",
+      "line": 31,
+      "snippet": "return rsa.GenerateKey(randomSource, bits)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/kdf/kdf.go",
+      "line": 12,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/consts.go",
+      "line": 8,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/consts.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 10,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 12,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 13,
+      "snippet": "stdlibEd25519 \"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 17,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 18,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 48,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1048,
+      "snippet": "_, pri, err := ed25519.GenerateKey(limReader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1230,
+      "snippet": "plain, err = rsa.DecryptPKCS1v15(rand.Reader, key, decoded)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1232,
+      "snippet": "plain, err = rsa.DecryptOAEP(hashFn(), rand.Reader, key, decoded, nil)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1400,
+      "snippet": "sig, err = rsa.SignPSS(rand.Reader, key, algo, input, &rsa.PSSOptions{SaltLength: saltLength})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1405,
+      "snippet": "sig, err = rsa.SignPKCS1v15(rand.Reader, key, algo, input)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1488,
+      "snippet": "r, s, err := ecdsa.Sign(rand.Reader, key, input)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1625,
+      "snippet": "err = rsa.VerifyPSS(publicKey, algo, input, sigBytes, &rsa.PSSOptions{SaltLength: saltLength})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1631,
+      "snippet": "err = rsa.VerifyPKCS1v15(publicKey, algo, input, sigBytes)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1684,
+      "snippet": "return ecdsa.Verify(key, input, ecdsaSig.R, ecdsaSig.S), nil"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 1721,
+      "snippet": "if err := stdlibEd25519.VerifyWithOptions(pub, input, sigBytes, opts); err != nil {"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2043,
+      "snippet": "pub, pri, err := ed25519.GenerateKey(randReader)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2179,
+      "snippet": "aesCipher, err := aes.NewCipher(encKey)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2259,
+      "snippet": "aesCipher, err := aes.NewCipher(encKey)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2393,
+      "snippet": "ciphertext, err = rsa.EncryptPKCS1v15(rand.Reader, publicKey, plaintext)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2395,
+      "snippet": "ciphertext, err = rsa.EncryptOAEP(hashFn(), rand.Reader, publicKey, plaintext, nil)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 2822,
+      "snippet": "ephKeyWrapped, err := rsa.EncryptOAEP(hash, rand.Reader, wrappingKey, ephKey, []byte{} /* label */)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/policy.go",
+      "line": 3063,
+      "snippet": "privKey, err := ecdsa.GenerateKey(curve, rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 12,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 32,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 881,
+      "snippet": "ecdsaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 928,
+      "snippet": "ecdsaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/keysutil/policy_test.go",
+      "line": 938,
+      "snippet": "_, ed25519Key, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/keysutil/util.go",
+      "line": 13,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/keysutil/util.go",
+      "line": 121,
+      "snippet": "return ed25519.NewKeyFromSeed(ed25519Key.PrivateKey), nil"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/ocsp/ocsp_test.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/ocsp/ocsp_test.go",
+      "line": 548,
+      "snippet": "rootCaKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/ocsp/ocsp_test.go",
+      "line": 569,
+      "snippet": "leafKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/pluginutil/run_config.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/pluginutil/run_config.go",
+      "line": 167,
+      "snippet": "Hash:     sha256.New(),"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/pluginutil/tls.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/pluginutil/tls.go",
+      "line": 24,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/salt/salt.go",
+      "line": 9,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/salt/salt.go",
+      "line": 10,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/salt/salt.go",
+      "line": 190,
+      "snippet": "hashed := sha1.Sum(inp)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/salt/salt.go",
+      "line": 196,
+      "snippet": "hashed := sha256.Sum256(inp)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/salt/salt_test.go",
+      "line": 8,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/salt/salt_test.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/template/funcs.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/template/funcs.go",
+      "line": 59,
+      "snippet": "return fmt.Sprintf(\"%x\", sha256.Sum256([]byte(str)))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/testcluster/blackbox/plugin_binary.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/testcluster/blackbox/plugin_binary.go",
+      "line": 132,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/testcluster/blackbox/session_plugin.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/testcluster/blackbox/session_plugin.go",
+      "line": 26,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/testcluster/docker/environment.go",
+      "line": 10,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/testcluster/docker/environment.go",
+      "line": 283,
+      "snippet": "ca.CAKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/testcluster/docker/environment.go",
+      "line": 347,
+      "snippet": "n.ServerKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/testcluster/types.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/testhelpers/output.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/testhelpers/output.go",
+      "line": 51,
+      "snippet": "return fmt.Sprintf(\"%x\", sha256.Sum256(b)), nil"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/helper/tpm/attestation.go",
+      "line": 11,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/tpm/attestation.go",
+      "line": 365,
+      "snippet": "sum := sha256.Sum256(pubDER)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/helper/tpm/attestation.go",
+      "line": 557,
+      "snippet": "appPubSum := sha256.Sum256(appPubDER)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/helper/tpm/attestation_test.go",
+      "line": 7,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/helper/tpm/attestation_test.go",
+      "line": 26,
+      "snippet": "privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "sdk/logical/token.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "sdk/logical/token.go",
+      "line": 210,
+      "snippet": "hashed := sha256.Sum256([]byte(clientIDInput))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "sdk/logical/token_test.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/logical/token_test.go",
+      "line": 62,
+      "snippet": "hashed := sha256.Sum256([]byte(expectedIDPlaintext))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/logical/token_test.go",
+      "line": 87,
+      "snippet": "hashed = sha256.Sum256([]byte(expectedIDPlaintext))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "sdk/logical/token_test.go",
+      "line": 101,
+      "snippet": "hashed = sha256.Sum256([]byte(expectedIDPlaintext))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "tools/pipeline/internal/pkg/golang/check_generate.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "tools/pipeline/internal/pkg/golang/check_generate.go",
+      "line": 255,
+      "snippet": "h := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "ui/app/components/auth/form/saml.ts",
+      "line": 180,
+      "snippet": "const hashBuffer = await crypto.subtle.digest('SHA-256', data);"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/routes/vault/cluster/access/oidc/keys/create.js",
+      "line": 15,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/routes/vault/cluster/access/oidc/keys/create.js",
+      "line": 15,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 38,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 38,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 95,
+      "snippet": "data: { algorithm: 'EdDSA' },"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 73,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('ES256');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 73,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('ES256');"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 92,
+      "snippet": "expect(key.algorithm).toBe('ES256');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 92,
+      "snippet": "expect(key.algorithm).toBe('ES256');"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 113,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('EdDSA');"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 116,
+      "snippet": "expect((await readOidcData(page, 'key', 'test-oidc-key')).algorithm).toBe('EdDSA');"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/mirage/handlers/agent-registry.js",
+      "line": 24,
+      "snippet": "supported_algorithms: ['RS256'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/mirage/handlers/agent-registry.js",
+      "line": 24,
+      "snippet": "supported_algorithms: ['RS256'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 229,
+      "snippet": "assert.dom(GENERAL.infoRowValue('Algorithm')).hasText('RS256', 'defaults to RS526 algorithm');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 229,
+      "snippet": "assert.dom(GENERAL.infoRowValue('Algorithm')).hasText('RS256', 'defaults to RS526 algorithm');"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 265,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 265,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 288,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 288,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 364,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 364,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 37,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 37,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 70,
+      "snippet": "assert.dom('[data-test-input=\"algorithm\"]').hasValue('RS256', 'default algorithm is correct');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 70,
+      "snippet": "assert.dom('[data-test-input=\"algorithm\"]').hasValue('RS256', 'default algorithm is correct');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/acme_billing_system_view.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/acme_billing_system_view.go",
+      "line": 131,
+      "snippet": "identifiersHash := sha256.Sum256([]byte(joinedIdentifiers))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/audit.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "vault/barrier_aes_gcm.go",
+      "line": 8,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/barrier_aes_gcm.go",
+      "line": 1012,
+      "snippet": "aesCipher, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "test": true,
+      "path": "vault/bench/smoke_bench_test.go",
+      "line": 8,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/bench/smoke_bench_test.go",
+      "line": 58,
+      "snippet": "key := fmt.Sprintf(\"%s/%x\", secretPath, md5.Sum([]byte(fmt.Sprintf(\"%s-%d\", testName, i))))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "vault/cert_count/cert_count_manager_test.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/cert_count/cert_count_manager_test.go",
+      "line": 26,
+      "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/cluster.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/cluster.go",
+      "line": 229,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), c.secureRandomReader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/core.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/external_tests/blackbox/isolated/plugins/mongodb/secret_mongodb_test_helper.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/external_tests/blackbox/isolated/plugins/mongodb/secret_mongodb_test_helper.go",
+      "line": 87,
+      "snippet": "sum := sha256.Sum256([]byte(out))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/external_tests/blackbox/isolated/plugins/postgresql/secret_postgresql_connection_test_helper.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/external_tests/blackbox/isolated/plugins/postgresql/secret_postgresql_connection_test_helper.go",
+      "line": 138,
+      "snippet": "sum := sha256.Sum256([]byte(out))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "vault/external_tests/exactdeny/case_insensitive_bypass_test.go",
+      "line": 20,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/external_tests/exactdeny/case_insensitive_bypass_test.go",
+      "line": 65,
+      "snippet": "key, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/external_tests/exactdeny/case_insensitive_bypass_test.go",
+      "line": 97,
+      "snippet": "key, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "vault/external_tests/identity/external_group_duplicate_claim_test.go",
+      "line": 8,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/external_tests/identity/external_group_duplicate_claim_test.go",
+      "line": 37,
+      "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 347,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 347,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 696,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 696,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "vault/external_tests/raft/raft_snapshot_plugin_test.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/external_tests/raft/raft_snapshot_plugin_test.go",
+      "line": 358,
+      "snippet": "hash := sha256.New()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "import",
+      "test": true,
+      "path": "vault/external_tests/raft/raft_test.go",
+      "line": 9,
+      "snippet": "\"crypto/md5\""
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/external_tests/raft/raft_test.go",
+      "line": 1307,
+      "snippet": "key := fmt.Sprintf(\"secret/%x\", md5.Sum([]byte(fmt.Sprintf(\"%s-%d\", testName, i))))"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/ha.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 37,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 228,
+      "snippet": "Default:     \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 228,
+      "snippet": "Default:     \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1801,
+      "snippet": "case \"RS256\", \"RS384\", \"RS512\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1801,
+      "snippet": "case \"RS256\", \"RS384\", \"RS512\":"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1806,
+      "snippet": "case \"ES256\", \"ES384\", \"ES512\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1806,
+      "snippet": "case \"ES256\", \"ES384\", \"ES512\":"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1810,
+      "snippet": "case \"ES256\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1810,
+      "snippet": "case \"ES256\":"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1812,
+      "snippet": "case \"ES384\":"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1814,
+      "snippet": "case \"ES512\":"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1818,
+      "snippet": "if key, err = ecdsa.GenerateKey(curve, rand.Reader); err != nil {"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1821,
+      "snippet": "case \"EdDSA\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1822,
+      "snippet": "_, key, err = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider.go",
+      "line": 2568,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider.go",
+      "line": 2568,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_provider_test.go",
+      "line": 1180,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_provider_test.go",
+      "line": 1180,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider_util.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider_util.go",
+      "line": 91,
+      "snippet": "hf := sha256.New()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 426,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 426,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 470,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 470,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 500,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 500,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1033,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1033,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1084,
+      "snippet": "Algorithm:       \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1084,
+      "snippet": "Algorithm:       \"RS256\","
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/logical_system.go",
+      "line": 10,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/logical_system.go",
+      "line": 5482,
+      "snippet": "hf = sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/login_mfa.go",
+      "line": 2215,
+      "snippet": "\"alg\":       \"HS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/plugincatalog/plugin_artifact.go",
+      "line": 7,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/plugincatalog/plugin_artifact.go",
+      "line": 543,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "vault/plugincatalog/plugin_catalog_test.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "vault/plugincatalog/plugin_catalog_test.go",
+      "line": 768,
+      "snippet": "hasher := sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/plugincatalog/testing.go",
+      "line": 8,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/plugincatalog/testing.go",
+      "line": 72,
+      "snippet": "hash := sha256.New()"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/request_forwarding.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/testing.go",
+      "line": 9,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "vault/testing.go",
+      "line": 65,
+      "snippet": "\"golang.org/x/crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/testing.go",
+      "line": 1255,
+      "snippet": "caKey, err = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/testing.go",
+      "line": 1350,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "vault/testing_util_stubs_oss.go",
+      "line": 9,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "vault/token_store.go",
+      "line": 9,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "vault/wrapping.go",
+      "line": 8,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "vault/wrapping.go",
+      "line": 41,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), c.secureRandomReader)"
+    }
+  ]
+}

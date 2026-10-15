@@ -1,0 +1,305 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "ecdsa_keys_ecdh_elsewhere"
+    },
+    "properties": [
+      {
+        "name": "ratchet:ignored_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
+        "name": "ratchet:not_scanned_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Go: regex (requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Java: not scanned (regex backend requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "JavaScript: not scanned (regex backend requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "TypeScript: not scanned (regex backend requested)"
+      },
+      {
+        "name": "ratchet:scan_registry_sha256",
+        "value": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71"
+      },
+      {
+        "name": "ratchet:scan_registry_version",
+        "value": "2026.10.3"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:unparsed_file_count",
+        "value": "0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "agree.go#L3",
+            "additionalContext": "import"
+          },
+          {
+            "location": "keys.go#L4",
+            "additionalContext": "import"
+          },
+          {
+            "location": "keys.go#L12",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdh",
+      "name": "ECDH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keyderive",
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.132.1.12"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "agree.go#L5",
+            "additionalContext": "algorithm name"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768, ideally hybrid X25519+ML-KEM during transition"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys_test.go#L4",
+            "additionalContext": "import (test code)"
+          },
+          {
+            "location": "keys_test.go#L13",
+            "additionalContext": "call site (test code)"
+          },
+          {
+            "location": "sign.go#L4",
+            "additionalContext": "import"
+          },
+          {
+            "location": "sign.go#L11",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "sign.go#L15",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "signer/keys.go#L4",
+            "additionalContext": "import"
+          },
+          {
+            "location": "signer/keys.go#L11",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "4"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "7"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    }
+  ]
+}

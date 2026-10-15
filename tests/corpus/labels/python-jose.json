@@ -1,0 +1,60 @@
+{
+  "findings": {
+    "jose/backends/cryptography_backend.py:139:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jose/backends/cryptography_backend.py:145:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jose/backends/cryptography_backend.py:208:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:209:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.OAEP(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:209:SHA-1": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: hashes.SHA1(), hashes imported once from cryptography.hazmat.primitives, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:210:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.OAEP(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:306:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jose/backends/cryptography_backend.py:316:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "tests/algorithms/test_EC.py:111:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
+    },
+    "tests/algorithms/test_EC.py:238:EC-SECP256R1": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: key used for JWS ES* signing elsewhere"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

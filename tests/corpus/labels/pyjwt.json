@@ -1,0 +1,60 @@
+{
+  "findings": {
+    "jwt/algorithms.py:683:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jwt/algorithms.py:688:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PKCS1v15(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jwt/algorithms.py:761:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jwt/algorithms.py:777:ECDSA": {
+      "verdict": "tp",
+      "note": "read by hand: call into the named algorithm confirmed in context"
+    },
+    "jwt/algorithms.py:916:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "jwt/algorithms.py:929:RSA": {
+      "verdict": "tp",
+      "note": "rule py-cryptography-object: padding.PSS(), padding imported once from cryptography.hazmat.primitives.asymmetric, bound nowhere else"
+    },
+    "tests/test_algorithms.py:1755:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1769:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1788:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    },
+    "tests/test_algorithms.py:1805:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: deliberately undersized RSA key in a test of key-size rejection"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "name": "paramiko",
+  "commit": "d87f9c01c158588fe3ecb635ca7c0d7c0c1a26cc",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 70,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": [
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/config.py",
+      "line": 449,
+      "snippet": "\"%C\": sha1(tohash.encode()).hexdigest(),"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/ecdsakey.py",
+      "line": 28,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/ecdsakey.py",
+      "line": 224,
+      "snippet": "ecdsa = ec.ECDSA(self.ecdsa_curve.hash_object())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/ecdsakey.py",
+      "line": 242,
+      "snippet": "signature, data, ec.ECDSA(self.ecdsa_curve.hash_object())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/ecdsakey.py",
+      "line": 268,
+      "snippet": "private_key = ec.generate_private_key(curve, backend=default_backend())"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/ed25519key.py",
+      "line": 20,
+      "snippet": "import nacl.signing"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/hostkeys.py",
+      "line": 294,
+      "snippet": "salt = os.urandom(sha1().digest_size)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/hostkeys.py",
+      "line": 299,
+      "snippet": "assert len(salt) == sha1().digest_size"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/kex_curve25519.py",
+      "line": 6,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.x25519 import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_curve25519.py",
+      "line": 30,
+      "snippet": "X25519PrivateKey.generate()"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_curve25519.py",
+      "line": 45,
+      "snippet": "self.key = X25519PrivateKey.generate()"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/kex_ecdh_nist.py",
+      "line": 11,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_ecdh_nist.py",
+      "line": 59,
+      "snippet": "self.P = ec.generate_private_key(self.curve, default_backend())"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_ecdh_nist.py",
+      "line": 71,
+      "snippet": "K = self.P.exchange(ec.ECDH(), self.Q_C)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_ecdh_nist.py",
+      "line": 117,
+      "snippet": "K = self.P.exchange(ec.ECDH(), self.Q_S)"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/kex_mlkem.py",
+      "line": 20,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.x25519 import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_mlkem.py",
+      "line": 76,
+      "snippet": "X25519PrivateKey.generate()"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/kex_mlkem.py",
+      "line": 84,
+      "snippet": "self.x25519_key = X25519PrivateKey.generate()"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/pkey.py",
+      "line": 37,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/pkey.py",
+      "line": 40,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/pkey.py",
+      "line": 41,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/pkey.py",
+      "line": 390,
+      "snippet": "return md5(self.asbytes()).digest()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "paramiko/rsakey.py",
+      "line": 28,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import padding, rsa"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/rsakey.py",
+      "line": 143,
+      "snippet": "padding=padding.PKCS1v15(),"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/rsakey.py",
+      "line": 171,
+      "snippet": "sign, data, padding.PKCS1v15(), self.HASHES[sig_algorithm]()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "paramiko/rsakey.py",
+      "line": 188,
+      "snippet": "key = rsa.generate_private_key("
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "tests/pkey.py",
+      "line": 5,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.ec import ("
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "tests/pkey.py",
+      "line": 9,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "tests/test_kex.py",
+      "line": 31,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": true,
+      "path": "tests/test_kex.py",
+      "line": 34,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "tests/test_pkey.py",
+      "line": 34,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateNumbers"
+    }
+  ]
+}

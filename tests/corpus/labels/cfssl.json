@@ -1,0 +1,879 @@
+{
+  "findings": {
+    "api/certadd/insert_test.go:58:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "api/generator/generator.go:100:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed"
+    },
+    "api/generator/generator.go:101:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "api/generator/generator.go:102:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "api/revoke/revoke_test.go:129:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "bundler/bundle_from_remote_test.go:236:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "bundler/mldsa_test.go:127:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "bundler/mldsa_test.go:131:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "certdb/ocspstapling/ocspstapling_test.go:134:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "certinfo/certinfo_test.go:110:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "csr/csr.go:101:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.NewKeyFromSeed, crypto/ed25519 imported, name not shadowed"
+    },
+    "csr/csr.go:82:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "csr/csr.go:95:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "helpers/derhelpers/ed25519.go:131:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.NewKeyFromSeed, crypto/ed25519 imported, name not shadowed"
+    },
+    "helpers/helpers_test.go:104:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "helpers/helpers_test.go:114:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "helpers/helpers_test.go:95:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "ocsp/responder.go:405:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/md5/example_test.go:14:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.New, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/md5/example_test.go:23:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/example_test.go:100:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/example_test.go:120:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/example_test.go:139:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/example_test.go:158:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/example_test.go:64:AES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
+    },
+    "scan/crypto/rsa/pkcs1v15_test.go:197:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/pkcs1v15_test.go:215:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/pss_test.go:60:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/pss_test.go:64:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/pss_test.go:72:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/rsa_test.go:163:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "scan/crypto/rsa/rsa_test.go:210:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: sha1.New() on the right of a declaration that then shadows the package name"
+    },
+    "scan/crypto/rsa/rsa_test.go:232:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: sha1.New() on the right of a declaration that then shadows the package name"
+    },
+    "scan/crypto/sha1/example_test.go:14:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/sha1/example_test.go:23:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/tls/cipher_suites.go:103:3DES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: des.NewTripleDESCipher, crypto/des imported, name not shadowed"
+    },
+    "scan/crypto/tls/cipher_suites.go:111:AES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
+    },
+    "scan/crypto/tls/cipher_suites.go:122:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/tls/cipher_suites.go:160:AES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
+    },
+    "scan/crypto/tls/cipher_suites.go:98:RC4": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rc4.NewCipher, crypto/rc4 imported, name not shadowed"
+    },
+    "scan/crypto/tls/generate_cert.go:100:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "scan/crypto/tls/generate_cert.go:90:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/generate_cert.go:92:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "scan/crypto/tls/generate_cert.go:94:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "scan/crypto/tls/generate_cert.go:96:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "scan/crypto/tls/generate_cert.go:98:EC": {
+      "verdict": "tp",
+      "note": "EC, usage undetermined, after the Go ECDH package rule (actual use: signing); was a correct ECDSA label: rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "scan/crypto/tls/handshake_server.go:517:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.Verify, crypto/ecdsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/handshake_server.go:530:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/key_agreement.go:101:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.New, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/key_agreement.go:209:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:213:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:284:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:291:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:317:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:366:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.Verify, crypto/ecdsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/key_agreement.go:374:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.VerifyPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/key_agreement.go:388:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:392:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:397:EC": {
+      "verdict": "tp",
+      "note": "read by hand: EC, usage undetermined: copy of Go's TLS ECDHE key agreement (actual use: ECDH)"
+    },
+    "scan/crypto/tls/key_agreement.go:76:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.EncryptPKCS1v15, crypto/rsa imported, name not shadowed"
+    },
+    "scan/crypto/tls/key_agreement.go:90:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "scan/crypto/tls/prf.go:208:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.New, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/prf.go:208:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: SSL 3.0 / TLS 1.0 PRF and finished hash; some calls are on a local variable named sha1 holding a SHA-1 hash"
+    },
+    "scan/crypto/tls/prf.go:261:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/prf.go:267:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.Sum, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/prf.go:272:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: SSL 3.0 / TLS 1.0 PRF and finished hash; some calls are on a local variable named sha1 holding a SHA-1 hash"
+    },
+    "scan/crypto/tls/prf.go:278:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: SSL 3.0 / TLS 1.0 PRF and finished hash; some calls are on a local variable named sha1 holding a SHA-1 hash"
+    },
+    "scan/crypto/tls/prf.go:341:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.New, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/prf.go:343:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: SSL 3.0 / TLS 1.0 PRF and finished hash; some calls are on a local variable named sha1 holding a SHA-1 hash"
+    },
+    "scan/crypto/tls/prf.go:83:SHA-1": {
+      "verdict": "tp",
+      "note": "read by hand: SSL 3.0 / TLS 1.0 PRF and finished hash; some calls are on a local variable named sha1 holding a SHA-1 hash"
+    },
+    "scan/crypto/tls/prf.go:84:MD5": {
+      "verdict": "tp",
+      "note": "rule go-package-call: md5.New, crypto/md5 imported, name not shadowed"
+    },
+    "scan/crypto/tls/ticket.go:148:AES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
+    },
+    "scan/crypto/tls/ticket.go:193:AES": {
+      "verdict": "tp",
+      "note": "rule go-package-call: aes.NewCipher, crypto/aes imported, name not shadowed"
+    },
+    "selfsign/selfsign.go:87:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.New, crypto/sha1 imported, name not shadowed"
+    },
+    "signer/local/local.go:79:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "signer/local/local_test.go:1393:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "signer/local/local_test.go:1506:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "signer/local/local_test.go:1659:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "signer/signer.go:343:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    },
+    "signer/signer_test.go:308:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "signer/signer_test.go:312:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "signer/signer_test.go:316:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "transport/kp/key_provider.go:204:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "transport/kp/key_provider.go:230:ECDSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdsa.GenerateKey, crypto/ecdsa imported, name not shadowed; no key-agreement use in the file"
+    },
+    "transport/kp/key_provider.go:253:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.NewKeyFromSeed, crypto/ed25519 imported, name not shadowed"
+    },
+    "transport/roots/provider.go:53:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "ubiquity/ubiquity_platform.go:22:SHA-1": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha1.Sum, crypto/sha1 imported, name not shadowed"
+    }
+  },
+  "missed": [
+    {
+      "path": "api/ocsp/ocspsign.go",
+      "line": 46,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "\"MD5\":    crypto.MD5,"
+    },
+    {
+      "path": "api/ocsp/ocspsign.go",
+      "line": 47,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "\"SHA1\":   crypto.SHA1,"
+    },
+    {
+      "path": "bundler/bundler_sha1_deprecation_test.go",
+      "line": 105,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if sha1Inter.SignatureAlgorithm != x509.SHA1WithRSA {"
+    },
+    {
+      "path": "csr/csr.go",
+      "line": 126,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.SHA1WithRSA"
+    },
+    {
+      "path": "csr/csr.go",
+      "line": 137,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.ECDSAWithSHA1"
+    },
+    {
+      "path": "csr/csr_test.go",
+      "line": 485,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "} else if sa := kr.SigAlgo(); sa != x509.ECDSAWithSHA1 {"
+    },
+    {
+      "path": "csr/csr_test.go",
+      "line": 492,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "} else if sa := kr.SigAlgo(); sa != x509.SHA1WithRSA {"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 136,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.MD2WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 138,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.MD5WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 140,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.SHA1WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 148,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.DSAWithSHA1:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 152,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.ECDSAWithSHA1:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 177,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.MD2WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 179,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.MD5WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 181,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.SHA1WithRSA:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 189,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.DSAWithSHA1:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 193,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.ECDSAWithSHA1:"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 509,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.SHA1WithRSA"
+    },
+    {
+      "path": "helpers/helpers.go",
+      "line": 520,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.ECDSAWithSHA1"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 199,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if HashAlgoString(x509.MD2WithRSA) != \"MD2\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 202,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if HashAlgoString(x509.MD5WithRSA) != \"MD5\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 205,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if HashAlgoString(x509.SHA1WithRSA) != \"SHA1\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 217,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if HashAlgoString(x509.DSAWithSHA1) != \"SHA1\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 223,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if HashAlgoString(x509.ECDSAWithSHA1) != \"SHA1\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 244,
+      "algorithm": "RSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if SignatureString(x509.MD2WithRSA) != \"MD2WithRSA\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 247,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if SignatureString(x509.MD5WithRSA) != \"MD5WithRSA\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 250,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if SignatureString(x509.SHA1WithRSA) != \"SHA1WithRSA\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 262,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if SignatureString(x509.DSAWithSHA1) != \"DSAWithSHA1\" {"
+    },
+    {
+      "path": "helpers/helpers_test.go",
+      "line": 268,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "if SignatureString(x509.ECDSAWithSHA1) != \"ECDSAWithSHA1\" {"
+    },
+    {
+      "path": "ocsp/responder.go",
+      "line": 237,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "crypto.SHA1:   \"SHA1\","
+    },
+    {
+      "path": "revoke/revoke.go",
+      "line": 225,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "Hash: crypto.SHA1,"
+    },
+    {
+      "path": "scan/crypto/md5/md5.go",
+      "line": 16,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "crypto.RegisterHash(crypto.MD5, New)"
+    },
+    {
+      "path": "scan/crypto/rsa/pkcs1v15.go",
+      "line": 208,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "crypto.MD5:       {0x30, 0x20, 0x30, 0x0c, 0x06, 0x08, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x02, 0x05, 0x05, 0x00, 0x04, 0x10},"
+    },
+    {
+      "path": "scan/crypto/rsa/pkcs1v15.go",
+      "line": 209,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "crypto.SHA1:      {0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e, 0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14},"
+    },
+    {
+      "path": "scan/crypto/rsa/pkcs1v15_test.go",
+      "line": 201,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "s, err := SignPKCS1v15(nil, rsaPrivateKey, crypto.SHA1, digest)"
+    },
+    {
+      "path": "scan/crypto/rsa/pkcs1v15_test.go",
+      "line": 221,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "err := VerifyPKCS1v15(&rsaPrivateKey.PublicKey, crypto.SHA1, digest, sig)"
+    },
+    {
+      "path": "scan/crypto/rsa/pss_test.go",
+      "line": 130,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "hash := crypto.SHA1"
+    },
+    {
+      "path": "scan/crypto/rsa/pss_test.go",
+      "line": 214,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": true,
+      "snippet": "hash := crypto.MD5"
+    },
+    {
+      "path": "scan/crypto/sha1/sha1.go",
+      "line": 14,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "crypto.RegisterHash(crypto.SHA1, New)"
+    },
+    {
+      "path": "scan/crypto/tls/key_agreement.go",
+      "line": 130,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "return sha1Hash(slices), crypto.SHA1, nil"
+    },
+    {
+      "path": "scan/crypto/tls/prf.go",
+      "line": 187,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "return crypto.SHA1, nil"
+    },
+    {
+      "path": "scan/crypto/tls/prf.go",
+      "line": 358,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-crypto-hash-constant",
+      "note": "crypto.MD5 or crypto.SHA1 passed to a signature or hash API",
+      "test": false,
+      "snippet": "return h.server.Sum(nil), crypto.SHA1, nil"
+    },
+    {
+      "path": "scan/pki.go",
+      "line": 122,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.ECDSAWithSHA1:"
+    },
+    {
+      "path": "scan/pki.go",
+      "line": 124,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.SHA1WithRSA:"
+    },
+    {
+      "path": "signer/local/local_test.go",
+      "line": 384,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "rsaSigAlgos := []x509.SignatureAlgorithm{x509.SHA1WithRSA, x509.SHA256WithRSA, x509.SHA384WithRSA, x509.SHA512WithRSA}"
+    },
+    {
+      "path": "signer/local/local_test.go",
+      "line": 412,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": true,
+      "snippet": "SigAlgos := []x509.SignatureAlgorithm{x509.ECDSAWithSHA1, x509.ECDSAWithSHA256, x509.ECDSAWithSHA384, x509.ECDSAWithSHA512}"
+    },
+    {
+      "path": "signer/signer.go",
+      "line": 161,
+      "algorithm": "SHA-1",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.SHA1WithRSA"
+    },
+    {
+      "path": "signer/signer.go",
+      "line": 172,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "return x509.ECDSAWithSHA1"
+    },
+    {
+      "path": "ubiquity/performance.go",
+      "line": 18,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.ECDSAWithSHA1, x509.DSAWithSHA1, x509.SHA1WithRSA:"
+    },
+    {
+      "path": "ubiquity/ubiquity_crypto.go",
+      "line": 52,
+      "algorithm": "ECDSA",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.ECDSAWithSHA1, x509.DSAWithSHA1, x509.SHA1WithRSA:"
+    },
+    {
+      "path": "ubiquity/ubiquity_crypto.go",
+      "line": 58,
+      "algorithm": "MD5",
+      "source": "search",
+      "search": "go-x509-signature-algorithm",
+      "note": "certificate signature algorithm constant",
+      "test": false,
+      "snippet": "case x509.MD5WithRSA, x509.MD2WithRSA:"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

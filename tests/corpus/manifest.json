@@ -1,0 +1,145 @@
+{
+  "description": "Pinned repositories for measuring Ratchet's precision and recall. Changing a commit changes the measurement; say why in the commit message.",
+  "repositories": [
+    {
+      "name": "paramiko",
+      "url": "https://github.com/paramiko/paramiko",
+      "commit": "d87f9c01c158588fe3ecb635ca7c0d7c0c1a26cc",
+      "language": "python",
+      "why": "SSH: RSA, ECDSA, ECDH, Ed25519, X25519, and hand-rolled DH"
+    },
+    {
+      "name": "pyjwt",
+      "url": "https://github.com/jpadilla/pyjwt",
+      "commit": "f97b3273d3db3ed7266ae009784d65f1877dba66",
+      "language": "python",
+      "why": "JWT signing over cryptography: RSA, ECDSA, Ed25519, HMAC"
+    },
+    {
+      "name": "python-jose",
+      "url": "https://github.com/mpdavis/python-jose",
+      "commit": "018b310ddb8b50dcfd09a0c152117835a21dd656",
+      "language": "python",
+      "why": "JOSE with several interchangeable backends (cryptography, pycryptodome, python-rsa, ecdsa)"
+    },
+    {
+      "name": "certbot",
+      "url": "https://github.com/certbot/certbot",
+      "commit": "0201ba5ce70ba8b7545380064abddd4bc3a10c15",
+      "language": "python",
+      "why": "ACME client: key generation, CSRs, certificates"
+    },
+    {
+      "name": "twisted",
+      "url": "https://github.com/twisted/twisted",
+      "commit": "bfa1ce9cd66e9b168f127fe3d764c83b841bb669",
+      "language": "python",
+      "why": "Conch SSH implementation and TLS glue; large, older codebase"
+    },
+    {
+      "name": "django",
+      "url": "https://github.com/django/django",
+      "commit": "f1d11117c6a3e227ce7cdd263cf0743f0eb73070",
+      "language": "python",
+      "why": "Web framework: non-security MD5/SHA-1 uses next to password hashing"
+    },
+    {
+      "name": "scapy",
+      "url": "https://github.com/secdev/scapy",
+      "commit": "5376fcc86aaba7c516fb4aa19576b03b387d217a",
+      "language": "python",
+      "why": "Packet library with a TLS stack and legacy ciphers"
+    },
+    {
+      "name": "ansible",
+      "url": "https://github.com/ansible/ansible",
+      "commit": "7769a0b59580f0448e8c399d6bde6cdbdca5375a",
+      "language": "python",
+      "why": "Large automation codebase; incidental hashing"
+    },
+    {
+      "name": "golang-jwt",
+      "url": "https://github.com/golang-jwt/jwt",
+      "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
+      "language": "go",
+      "why": "JWT signing: RSA, RSA-PSS, ECDSA, Ed25519"
+    },
+    {
+      "name": "x-crypto",
+      "url": "https://github.com/golang/crypto",
+      "commit": "3b414e3e8284a71c817c4d1009acdd5d3a464ff9",
+      "language": "go",
+      "why": "Go's extended crypto: SSH, ACME, legacy algorithms; dense and adversarial"
+    },
+    {
+      "name": "go-jose",
+      "url": "https://github.com/go-jose/go-jose",
+      "commit": "13b7118f01278681667af05e054c6dc852f3db49",
+      "language": "go",
+      "why": "JOSE: RSA-OAEP, ECDH-ES, ECDSA, Ed25519"
+    },
+    {
+      "name": "step-ca",
+      "url": "https://github.com/smallstep/certificates",
+      "commit": "69d3c36fa1e1fccbac5138a45fa3367122b89a11",
+      "language": "go",
+      "why": "Certificate authority: key generation and signing"
+    },
+    {
+      "name": "cfssl",
+      "url": "https://github.com/cloudflare/cfssl",
+      "commit": "ab47f0d984778865b3f5b5adf6ba336a15b96c31",
+      "language": "go",
+      "why": "PKI toolkit; vendored dependencies"
+    },
+    {
+      "name": "age",
+      "url": "https://github.com/FiloSottile/age",
+      "commit": "b74dce4cdbe35b5e5f66c06d9612b72f89028758",
+      "language": "go",
+      "why": "Modern file encryption: X25519 and a post-quantum hybrid recipient"
+    },
+    {
+      "name": "caddy",
+      "url": "https://github.com/caddyserver/caddy",
+      "commit": "401582cccfb3d1b6de382d48929e4070ef6663f2",
+      "language": "go",
+      "why": "Web server with automatic TLS"
+    },
+    {
+      "name": "vault",
+      "url": "https://github.com/hashicorp/vault",
+      "commit": "fdd82cfd09d5f905f29aa98d9fea6d2a77fd5eda",
+      "language": "go",
+      "why": "Secrets manager: transit engine, PKI; very large"
+    },
+    {
+      "name": "java-jwt",
+      "url": "https://github.com/auth0/java-jwt",
+      "commit": "33a2110a649dcd68a2feb07582b4f3763a43ec18",
+      "language": "java",
+      "why": "JWT for Java: RSA and ECDSA through JCA. Not scanned until Java support"
+    },
+    {
+      "name": "jjwt",
+      "url": "https://github.com/jwtk/jjwt",
+      "commit": "fb71496164c71442d08adec4571d9616ed5e1b8d",
+      "language": "java",
+      "why": "JWT for Java: JCA algorithm strings. Not scanned until Java support"
+    },
+    {
+      "name": "node-jsonwebtoken",
+      "url": "https://github.com/auth0/node-jsonwebtoken",
+      "commit": "b924272f29192e12926b5414546f7c5bfcc9579d",
+      "language": "javascript",
+      "why": "JWT for Node: algorithm names as strings. Not scanned until JavaScript support"
+    },
+    {
+      "name": "forge",
+      "url": "https://github.com/digitalbazaar/forge",
+      "commit": "723240415b25120d47146f982809fa69344ab890",
+      "language": "javascript",
+      "why": "Pure-JavaScript crypto: RSA, DES, RC2, MD5, implemented by hand. Not scanned until JavaScript support"
+    }
+  ]
+}

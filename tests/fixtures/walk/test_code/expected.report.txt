@@ -1,0 +1,22 @@
+
+ratchet 0.1.0  scanned 7 files in .
+registry 2026.10.3  from registry.json
+parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
+skipped no directories
+parsed all 7 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  MD5  (7 call sites, 4 in test code, 2 imports)
+    Collisions are practical today. Quantum is not the problem here.
+    migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
+      app/contest.py:2   hashlib.md5(b"x")
+      app/latest.py:2   hashlib.md5(b"x")
+      conftest.py:2   hashlib.md5(b"x")
+      ... and 6 more
+
+========================================================================
+No quantum-vulnerable primitives found.
+

@@ -1,0 +1,1305 @@
+{
+  "name": "node-jsonwebtoken",
+  "commit": "b924272f29192e12926b5414546f7c5bfcc9579d",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 46,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": [
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 5,
+      "snippet": "'ec': ['ES256', 'ES384', 'ES512'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 5,
+      "snippet": "'ec': ['ES256', 'ES384', 'ES512'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 6,
+      "snippet": "'rsa': ['RS256', 'PS256', 'RS384', 'PS384', 'RS512', 'PS512'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 6,
+      "snippet": "'rsa': ['RS256', 'PS256', 'RS384', 'PS384', 'RS512', 'PS512'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 7,
+      "snippet": "'rsa-pss': ['PS256', 'PS384', 'PS512']"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/validateAsymmetricKey.js",
+      "line": 7,
+      "snippet": "'rsa-pss': ['PS256', 'PS384', 'PS512']"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 14,
+      "snippet": "const SUPPORTED_ALGS = ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'none'];"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 14,
+      "snippet": "const SUPPORTED_ALGS = ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'none'];"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 14,
+      "snippet": "const SUPPORTED_ALGS = ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'none'];"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 16,
+      "snippet": "SUPPORTED_ALGS.splice(3, 0, 'PS256', 'PS384', 'PS512');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 16,
+      "snippet": "SUPPORTED_ALGS.splice(3, 0, 'PS256', 'PS384', 'PS512');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sign.js",
+      "line": 98,
+      "snippet": "alg: options.algorithm || 'HS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 13,
+      "snippet": "jwt.sign({ foo: 'bar' }, secret, { algorithm: 'HS256' }, function (err, asyncToken) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 15,
+      "snippet": "var syncToken = jwt.sign({ foo: 'bar' }, secret, { algorithm: 'HS256' });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 57,
+      "snippet": "jwt.sign({ foo: 'bar' }, secret, { algorithm: 'RS256' }, function (err) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 57,
+      "snippet": "jwt.sign({ foo: 'bar' }, secret, { algorithm: 'RS256' }, function (err) {"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 64,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 66,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' }, function (err) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 66,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' }, function (err) {"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 73,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 75,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256', allowInsecureKeySizes: true }, done);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 75,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256', allowInsecureKeySizes: true }, done);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 81,
+      "snippet": "jwt.sign({ foo: 'bar' }, secret, { algorithm: 'PS256' }, function (err) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/async_sign.tests.js",
+      "line": 81,
+      "snippet": "jwt.sign({ foo: 'bar' }, secret, { algorithm: 'PS256' }, function (err) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-aud.test.js",
+      "line": 9,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-aud.test.js",
+      "line": 50,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {audience: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-exp.test.js",
+      "line": 11,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-exp.test.js",
+      "line": 50,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {expiresIn: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-exp.test.js",
+      "line": 134,
+      "snippet": "const header = { alg: 'HS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 15,
+      "snippet": "const opts = Object.assign({algorithm: 'HS256'}, options);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 51,
+      "snippet": "testUtils.signJWTHelper({iat: undefined}, 'secret', {algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 77,
+      "snippet": "const header = { alg: 'HS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 190,
+      "snippet": "const token = jwt.sign({}, 'secret', {algorithm: 'HS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 237,
+      "snippet": "const token = jwt.sign({}, 'secret', {algorithm: 'HS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 254,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iat.test.js",
+      "line": 266,
+      "snippet": "const options = {algorithm: 'HS256', header: {typ: 'JWT'}};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iss.test.js",
+      "line": 9,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-iss.test.js",
+      "line": 47,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {issuer: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-jti.test.js",
+      "line": 9,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-jti.test.js",
+      "line": 47,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {jwtid: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-nbf.test.js",
+      "line": 11,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-nbf.test.js",
+      "line": 50,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {notBefore: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-nbf.test.js",
+      "line": 134,
+      "snippet": "const header = { alg: 'HS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-private.tests.js",
+      "line": 8,
+      "snippet": "testUtils.signJWTHelper(payload, 'secret', {algorithm: 'HS256'}, callback);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-sub.tests.js",
+      "line": 9,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/claim-sub.tests.js",
+      "line": 47,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {subject: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/header-kid.test.js",
+      "line": 9,
+      "snippet": "const options = {algorithm: 'HS256'};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/header-kid.test.js",
+      "line": 47,
+      "snippet": "testUtils.signJWTHelper({}, 'secret', {keyid: undefined, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/issue_70.tests.js",
+      "line": 10,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'RS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/issue_70.tests.js",
+      "line": 10,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'RS256'});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 179,
+      "snippet": "const algorithm = 'RS256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 179,
+      "snippet": "const algorithm = 'RS256';"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 191,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 191,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 201,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.asymmetric_signing.tests.js",
+      "line": 201,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 8,
+      "snippet": "describe('HS256', function() {"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 12,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 15,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'HS256' })"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 21,
+      "snippet": "jwt.sign(undefined, \"secret\", { algorithm: 'HS256' })"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 27,
+      "snippet": "jwt.sign({ foo: 'bar' }, \"secret\", ['HS256'])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 35,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, secret, { algorithm: 'HS256' });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 99,
+      "snippet": "var token = jwt.sign({ exp: 1 }, secret, { algorithm: 'HS256' });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 100,
+      "snippet": "jwt.verify(token, secret, { algorithm: 'HS256' }, function(err, decoded) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 108,
+      "snippet": "var token = jwt.sign({ exp: 1, foo: 'bar' }, secret, { algorithm: 'HS256' });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 109,
+      "snippet": "jwt.verify(token, secret, { algorithm: 'HS256', ignoreExpiration: true }, function(err, decoded) {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 127,
+      "snippet": "var token  = jwt.sign({ foo: 'bar' }, secret, { algorithm: 'HS256' });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.hs.tests.js",
+      "line": 131,
+      "snippet": "jwt.verify(malformedToken, secret, { algorithm: 'HS256', ignoreExpiration: true }, function(err) {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.malicious.tests.js",
+      "line": 15,
+      "snippet": "const options = {algorithms: ['RS256', 'HS256']};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/jwt.malicious.tests.js",
+      "line": 15,
+      "snippet": "const options = {algorithms: ['RS256', 'HS256']};"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/jwt.malicious.tests.js",
+      "line": 19,
+      "snippet": "} = crypto.generateKeyPairSync('rsa', {modulusLength: 2048});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-complete.test.js",
+      "line": 13,
+      "snippet": "const header = { alg: 'RS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-complete.test.js",
+      "line": 13,
+      "snippet": "const header = { alg: 'RS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-maxAge.test.js",
+      "line": 14,
+      "snippet": "token = jwt.sign({iat: 70}, 'secret', {algorithm: 'HS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-maxAge.test.js",
+      "line": 40,
+      "snippet": "expect(jwt.verify(token, 'secret', {maxAge: '3s', algorithm: 'HS256'})).to.not.throw;"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-maxAge.test.js",
+      "line": 41,
+      "snippet": "jwt.verify(token, 'secret', {maxAge: testCase.maxAge, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-maxAge.test.js",
+      "line": 57,
+      "snippet": "expect(() => jwt.verify(token, 'secret', {maxAge, algorithm: 'HS256'})).to.throw("
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-maxAge.test.js",
+      "line": 61,
+      "snippet": "jwt.verify(token, 'secret', {maxAge, algorithm: 'HS256'}, (err) => {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/option-nonce.test.js",
+      "line": 12,
+      "snippet": "token = jwt.sign({ nonce: 'abcde' }, 'secret', { algorithm: 'HS256' });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 13,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'RS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 13,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'RS256'});"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 19,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 22,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'})"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 22,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'})"
+    },
+    {
+      "label": "RSA-1024",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 29,
+      "snippet": "const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 1024 });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 31,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256', allowInsecureKeySizes: true}, done)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 31,
+      "snippet": "jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256', allowInsecureKeySizes: true}, done)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 40,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'PS256'});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/rsa-public-key.tests.js",
+      "line": 40,
+      "snippet": "var token = jwt.sign({ foo: 'bar' }, cert_priv, { algorithm: 'PS256'});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 23,
+      "snippet": "sign({algorithm: 'RS256'}, cert_rsa_priv);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 23,
+      "snippet": "sign({algorithm: 'RS256'}, cert_rsa_priv);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 24,
+      "snippet": "sign({algorithm: 'RS384'}, cert_rsa_priv);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 25,
+      "snippet": "sign({algorithm: 'RS512'}, cert_rsa_priv);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 27,
+      "snippet": "sign({algorithm: 'PS256'}, cert_rsa_priv);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 27,
+      "snippet": "sign({algorithm: 'PS256'}, cert_rsa_priv);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 28,
+      "snippet": "sign({algorithm: 'PS384'}, cert_rsa_priv);"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 29,
+      "snippet": "sign({algorithm: 'PS512'}, cert_rsa_priv);"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 31,
+      "snippet": "sign({algorithm: 'ES256'}, cert_ecdsa_priv);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 31,
+      "snippet": "sign({algorithm: 'ES256'}, cert_ecdsa_priv);"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 32,
+      "snippet": "sign({algorithm: 'ES384'}, cert_secp384r1_priv);"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 33,
+      "snippet": "sign({algorithm: 'ES512'}, cert_secp521r1_priv);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/schema.tests.js",
+      "line": 34,
+      "snippet": "sign({algorithm: 'HS256'}, 'superSecret');"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 50,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 50,
+      "snippet": "const algorithm = 'ES256';"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 62,
+      "snippet": "const algorithm = 'RS256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 62,
+      "snippet": "const algorithm = 'RS256';"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 74,
+      "snippet": "{ algorithm: 'ES256', curve: 'prime256v1' },"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 74,
+      "snippet": "{ algorithm: 'ES256', curve: 'prime256v1' },"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 75,
+      "snippet": "{ algorithm: 'ES384', curve: 'secp384r1' },"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 76,
+      "snippet": "{ algorithm: 'ES512', curve: 'secp521r1' },"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 120,
+      "snippet": "const algorithm = 'PS512';"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 127,
+      "snippet": "const algorithm = 'PS256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 127,
+      "snippet": "const algorithm = 'PS256';"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 136,
+      "snippet": "const algorithm = 'PS256';"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/validateAsymmetricKey.tests.js",
+      "line": 136,
+      "snippet": "const algorithm = 'PS256';"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 16,
+      "snippet": "const header = { alg: 'RS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 16,
+      "snippet": "const header = { alg: 'RS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 84,
+      "snippet": "const header = { alg: 'HS256' };"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 106,
+      "snippet": "const options = {algorithms: ['HS256'], ignoreExpiration: true};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 118,
+      "snippet": "assert.deepEqual(header, { alg: 'HS256', typ: 'JWT' });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 197,
+      "snippet": "const options = {algorithms: ['HS256']};"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 211,
+      "snippet": "const options = {algorithms: ['HS256'], clockTolerance: 5 }"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 256,
+      "snippet": "const options = {algorithms: ['HS256'], clockTimestamp: clockTimestamp, maxAge: '1000y'};"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 288,
+      "snippet": "jwt.verify(token, key, { algorithms: ['ES256'] });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 288,
+      "snippet": "jwt.verify(token, key, { algorithms: ['ES256'] });"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 297,
+      "snippet": "jwt.verify(token, key, { algorithms: ['ES256'], allowInvalidAsymmetricKeyTypes: true });"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/verify.tests.js",
+      "line": 297,
+      "snippet": "jwt.verify(token, key, { algorithms: ['ES256'], allowInvalidAsymmetricKeyTypes: true });"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/wrong_alg.tests.js",
+      "line": 28,
+      "snippet": "jwt.verify(TOKEN, pub, {algorithms: ['RS256']});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/wrong_alg.tests.js",
+      "line": 28,
+      "snippet": "jwt.verify(TOKEN, pub, {algorithms: ['RS256']});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/wrong_alg.tests.js",
+      "line": 37,
+      "snippet": "jwt.verify(TOKEN, pub, {algorithms: ['PS256']});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/wrong_alg.tests.js",
+      "line": 37,
+      "snippet": "jwt.verify(TOKEN, pub, {algorithms: ['PS256']});"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/wrong_alg.tests.js",
+      "line": 46,
+      "snippet": "var token = jwt.sign({foo: 'bar'}, 'secret', {algorithm: 'HS256'});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 11,
+      "snippet": "const PUB_KEY_ALGS = ['RS256', 'RS384', 'RS512'];"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 11,
+      "snippet": "const PUB_KEY_ALGS = ['RS256', 'RS384', 'RS512'];"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 12,
+      "snippet": "const EC_KEY_ALGS = ['ES256', 'ES384', 'ES512'];"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 12,
+      "snippet": "const EC_KEY_ALGS = ['ES256', 'ES384', 'ES512'];"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 13,
+      "snippet": "const RSA_KEY_ALGS = ['RS256', 'RS384', 'RS512'];"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 13,
+      "snippet": "const RSA_KEY_ALGS = ['RS256', 'RS384', 'RS512'];"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 14,
+      "snippet": "const HS_ALGS = ['HS256', 'HS384', 'HS512'];"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 17,
+      "snippet": "PUB_KEY_ALGS.splice(PUB_KEY_ALGS.length, 0, 'PS256', 'PS384', 'PS512');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 17,
+      "snippet": "PUB_KEY_ALGS.splice(PUB_KEY_ALGS.length, 0, 'PS256', 'PS384', 'PS512');"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 18,
+      "snippet": "RSA_KEY_ALGS.splice(RSA_KEY_ALGS.length, 0, 'PS256', 'PS384', 'PS512');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "verify.js",
+      "line": 18,
+      "snippet": "RSA_KEY_ALGS.splice(RSA_KEY_ALGS.length, 0, 'PS256', 'PS384', 'PS512');"
+    }
+  ]
+}

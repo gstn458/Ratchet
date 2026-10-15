@@ -1,0 +1,44 @@
+{
+  "findings": {
+    "test/async_sign.tests.js:64:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    },
+    "test/async_sign.tests.js:73:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    },
+    "test/jwt.hs.tests.js:12:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    },
+    "test/jwt.malicious.tests.js:19:RSA-2048": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    },
+    "test/rsa-public-key.tests.js:19:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    },
+    "test/rsa-public-key.tests.js:29:RSA-1024": {
+      "verdict": "tp",
+      "note": "read by hand: generateKeyPairSync from require('crypto') (destructured or crypto.), an RSA key for a test"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

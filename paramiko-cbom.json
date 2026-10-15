@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:44c97e1c-e955-4663-85aa-c8b49925af7e",
+  "serialNumber": "urn:uuid:7e8bfa80-6c89-4dc8-9228-ebb98fcf1d73",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-12T13:13:13.918533+00:00",
+    "timestamp": "2026-10-14T16:23:59.501088+00:00",
     "tools": {
       "components": [
         {
@@ -21,12 +21,52 @@
     },
     "properties": [
       {
+        "name": "ratchet:ignored_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Go: regex (tree-sitter not installed)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
+      },
+      {
         "name": "ratchet:scan_registry_sha256",
         "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
       },
       {
         "name": "ratchet:scan_registry_version",
         "value": "2026.10.2"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": ".circleci (tooling or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": ".git (tooling or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory",
+        "value": ".github (tooling or hidden)"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "3"
+      },
+      {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:unparsed_file_count",
+        "value": "0"
       }
     ]
   },
@@ -60,11 +100,11 @@
           },
           {
             "location": "tests/pkey.py#L5",
-            "additionalContext": "import"
+            "additionalContext": "import (test code)"
           },
           {
             "location": "tests/test_kex.py#L31",
-            "additionalContext": "import"
+            "additionalContext": "import (test code)"
           }
         ]
       },
@@ -407,23 +447,31 @@
             "additionalContext": "import"
           },
           {
+            "location": "paramiko/rsakey.py#L143",
+            "additionalContext": "call site"
+          },
+          {
+            "location": "paramiko/rsakey.py#L171",
+            "additionalContext": "call site"
+          },
+          {
             "location": "paramiko/rsakey.py#L188",
             "additionalContext": "call site"
           },
           {
             "location": "tests/pkey.py#L9",
-            "additionalContext": "import"
+            "additionalContext": "import (test code)"
           },
           {
             "location": "tests/test_pkey.py#L34",
-            "additionalContext": "import"
+            "additionalContext": "import (test code)"
           }
         ]
       },
       "properties": [
         {
           "name": "ratchet:call_site_count",
-          "value": "1"
+          "value": "3"
         },
         {
           "name": "ratchet:classical_status",
@@ -435,7 +483,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "5"
+          "value": "7"
         },
         {
           "name": "ratchet:quantum_status",
@@ -569,7 +617,7 @@
           },
           {
             "location": "tests/test_kex.py#L34",
-            "additionalContext": "import"
+            "additionalContext": "import (test code)"
           }
         ]
       },

@@ -1,0 +1,148 @@
+{
+  "findings": {
+    "agessh/agessh.go:132:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.DecryptOAEP, crypto/rsa imported, name not shadowed"
+    },
+    "agessh/agessh.go:132:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed"
+    },
+    "agessh/agessh.go:212:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:217:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:227:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:269:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:329:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:339:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "agessh/agessh.go:36:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "agessh/agessh.go:81:RSA": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.EncryptOAEP, crypto/rsa imported, name not shadowed"
+    },
+    "agessh/agessh.go:81:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.New, crypto/sha256 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:101:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:134:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:177:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:186:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:219:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:223:Ed25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ed25519.GenerateKey, crypto/ed25519 imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:35:RSA-1024": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:49:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "agessh/agessh_test.go:92:RSA-2048": {
+      "verdict": "tp",
+      "note": "rule go-package-call: rsa.GenerateKey, crypto/rsa imported, name not shadowed"
+    },
+    "plugin/encode.go:100:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdh.X25519-family call, crypto/ecdh imported, name not shadowed"
+    },
+    "plugin/encode.go:89:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdh.X25519-family call, crypto/ecdh imported, name not shadowed"
+    },
+    "tag/internal/tagtest/tagtest.go:26:ECDH": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdh.P256, crypto/ecdh imported, name not shadowed"
+    },
+    "tag/tag.go:121:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "tag/tag.go:78:ECDH": {
+      "verdict": "tp",
+      "note": "rule go-package-call: ecdh.P256, crypto/ecdh imported, name not shadowed"
+    },
+    "testkit_test.go:196:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "testkit_test.go:203:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "testkit_test.go:259:SHA-256": {
+      "verdict": "tp",
+      "note": "rule go-package-call: sha256.Sum256, crypto/sha256 imported, name not shadowed"
+    },
+    "x25519.go:127:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "x25519.go:176:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "x25519.go:70:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    },
+    "x25519.go:75:X25519": {
+      "verdict": "tp",
+      "note": "rule go-package-call: curve25519.X25519-family call, golang.org/x/crypto/curve25519 imported, name not shadowed"
+    }
+  },
+  "missed": [],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

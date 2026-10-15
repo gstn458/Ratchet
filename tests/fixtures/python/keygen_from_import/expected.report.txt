@@ -1,0 +1,42 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.3  from registry.json
+parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (2 call sites, 2 imports)
+    key sizes: 2048: 1, 4096: 1
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      keys.py:7   rsa_key = rsa_generate_private_key(65537, 4096)
+      keys.py:10   plain = generate_private_key(public_exponent=65537, key_size=2048)
+      keys.py:4   from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
+      ... and 1 more
+
+  DSA  (1 call site, 1 import)
+    key sizes: 1024: 1
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      keys.py:8   dsa_key = dsa_generate_private_key(1024)
+      keys.py:1   from cryptography.hazmat.primitives.asymmetric.dsa import generate_private_key as dsa_generate_private_key
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (1 call site, 2 imports)
+    parameter sets: SECP384R1: 1
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      keys.py:9   ec_key = ecdsa_generate_private_key(SECP384R1())
+      keys.py:2   from cryptography.hazmat.primitives.asymmetric.ec import SECP384R1
+      keys.py:3   from cryptography.hazmat.primitives.asymmetric.ec import generate_private_key as ecdsa_generate_private_key
+
+========================================================================
+4 quantum-vulnerable call sites and 5 imports across 1 file.
+1 call site and 2 imports with usage undetermined: review before choosing a migration target.
+

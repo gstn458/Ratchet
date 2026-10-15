@@ -64,7 +64,11 @@ after the fixtures were first written:
 | `ed25519` | `Ed25519PrivateKey.generate()` resolved through an imported class name | ok |
 | `x25519` | `X25519PrivateKey.generate()` resolved the same way | ok |
 | `nacl` | PyNaCl `SigningKey` → Ed25519, `PrivateKey` → X25519 | ok |
-| `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports; `.new(...)` calls add nothing | ok |
+| `legacy_ciphers` | PyCryptodome DES, DES3, ARC4, AES, MD5, SHA1 recorded from their imports, including a renamed module and a from-imported `new`; `RSA.import_key` adds nothing | ok |
+| `jwt_names` | JOSE algorithm names in string literals (RFC 7518, 8037, 8812): a pyjwt algorithm table, `algorithm=`, `algorithms=[...]` and a JWE header, in a file that imports no crypto module; a sentence and a lower-cased name are not names; HS512 records nothing (SHA-512 is not in the registry) | ok (nothing was found before) |
+| | Each `.new(...)` on those modules is a call site of the module's algorithm, through a renamed module or a from-imported `new` | ok (added nothing before) |
+| `cryptography_objects` | `cryptography` hash, cipher and RSA padding objects: `hashes.MD5()`, a from-imported `SHA1()`, `algorithms.TripleDES`/`ARC4` from `primitives` and `decrepit`, `padding.PKCS1v15()`/`PSS()`/`OAEP()`; `hashes.SHA256()` and symmetric `padding.PKCS7` are not flagged | ok (only imports of other modules were seen before) |
+| `keygen_from_import` | `generate_private_key` from-imported, plain or renamed (`as rsa_generate_private_key`), from `rsa`, `dsa` and `ec`, is a key-generation call site with its key size or curve | ok (only the imports were recorded before) |
 | `import_only` | Importing `rsa` and `ec` with no calls yields two imports and no call sites; the `ec` import is EC, usage undetermined | ok (counted as call sites before step 7) |
 | `name_collision` | A project's own function named `md5()` is reported as MD5 | wrong, unscheduled (precision, Phase 1) |
 | `syntax_error` | A Python 2 file is listed as `not valid Python 3 syntax at line 3` in the report and the CBOM, and the closing line says the result covers only parsed files; the `RSA.generate(1024)` in it is still not detected | ok, gap on the file's contents (skipped silently before step 9) |
@@ -78,6 +82,7 @@ after the fixtures were first written:
 | | With a variable key size the call is an RSA call site with no stated key size | ok (only the import was recorded before) |
 | `ecdsa` | `crypto/ecdsa` import and `ecdsa.GenerateKey` call; `elliptic.P256()` passed to it is curve selection, not direct `crypto/elliptic` use | ok |
 | `ecdsa_keys_for_ecdh` | x/crypto/ssh's idiom: keys from `ecdsa.GenerateKey` used for ECDH through `curve.ScalarMult`, with no signing in the file, are EC, usage undetermined; `x.Sign()` on a big.Int is not signing | ok (was ECDSA) |
+| `ecdsa_keys_ecdh_elsewhere` | A key from `ecdsa.GenerateKey` in one file, used for ECDH-ES in another production file of the same package, is EC, usage undetermined; a signing file in the package, a test file in the package and a separate package (`signer/`) stay ECDSA; the `"ECDH-ES"` constant is an ECDH algorithm name | ok (all ECDSA before) |
 | `ecdsa_signs_and_multiplies` | A file that signs with `ecdsa.SignASN1` stays ECDSA even though it also does a raw `ScalarMult` | ok |
 | `ecdh` | `crypto/ecdh` maps to ECDH; `ecdh.P256()` is an ECDH call site and `ecdh.X25519()` an X25519 one; with both curves in the file the import stays ECDH | ok |
 | `ecdh_x25519_only` | When every curve a file takes from `crypto/ecdh` is X25519, the import is X25519 too | ok |
@@ -93,8 +98,41 @@ after the fixtures were first written:
 | `sign_verify_encrypt` | RSA, ECDSA and Ed25519 signing and verification, RSA encryption and decryption, DSA parameter generation, X25519, AES and SHA-256 calls are call sites, each only when the file imports the package | ok (only imports were recorded before) |
 | `string_literal` | `"crypto/rsa"` and `"crypto/md5"` in ordinary strings are not imports | ok (were reported before step 5) |
 | `import_forms` | Single-line, aliased, grouped, blank and raw-string imports are found; a commented-out import, an import path in a block comment, a raw string, a struct tag and an escaped string are not | ok |
-| `aliased_import` | `gorsa "crypto/rsa"` import is seen, but `gorsa.GenerateKey(..., 2048)` is not, so the key size is lost | gap (tree-sitter, Phase 1) |
+| `aliased_import` | `gorsa "crypto/rsa"` import and `gorsa.GenerateKey(..., 2048)` as RSA-2048 | ok (the call was missed before) |
+| `import_names` | Calls are matched through the name each import binds: `gorsa.SignPKCS1v15` (aliased crypto/rsa), `ell.Marshal` (aliased crypto/elliptic, EC) and `ec.GenerateKey`/`ec.SignASN1` (aliased crypto/ecdsa, which signs, so ECDSA); a project package bound to the name `rsa` beside an aliased crypto/rsa is not crypto/rsa; a blank import is an import finding with no calls; a dot import's bare `Sum(...)` is MD5 | ok (before: the project package was RSA-1024 and every aliased or dot-imported call was missed) |
+| `variant_imports` | crypto/des and crypto/ecdh calls only through the name their import binds: a project package called `des` or `ecdh` is not crypto; the aliased `goecdh.P256()` is ECDH and `stddes.NewTripleDESCipher` is 3DES, which makes the aliased import 3DES too | ok (before: the project packages were DES and X25519, and the aliased calls were missed) |
+| `jwt_names` | JOSE algorithm names in Go string literals: a list, a constant and a header map; a name in a comment or a sentence is not | ok (nothing was found before) |
 | `comments` | Calls inside `//` comments, `/* */` blocks and after a trailing `//` are not matched | ok (block and trailing comments matched before step 5) |
+
+## java/
+
+Java is parsed only with tree-sitter, so these fixtures set `{"backend": "tree-sitter"}`
+and are skipped when the grammars are not installed; CI installs them.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `imports` | Imports of JDK key interfaces and specs and BouncyCastle classes map to their algorithm by the longest matching prefix (`RSAPublicKey` RSA, `ECPrivateKey` and `ECGenParameterSpec` EC, `DESedeKeySpec` 3DES, `ECDSASigner` ECDSA, `SHA1Digest` SHA-1, `EdECPublicKey` EdDSA, `XECPrivateKeySpec` XDH, `Ed448Signer` Ed448); a static import of an RSA class counts; package wildcards, `java.util`, a commented-out import and an import written in a string do not; `KeysTest.java` under `src/test` is test code | ok |
+| `jca_calls` | JCA `getInstance` calls with a literal or same-file constant name, compound signature and Cipher transformation names, Mac and PBKDF2 names, case-insensitive matching, a provider argument, a fully qualified class, one finding per primitive (`SHA1withRSA` is RSA and SHA-1); `SHA512withRSA` is RSA only (SHA-512 is not in the registry); `EdDSA` is EdDSA with the curve not visible; a dynamic name, a reassigned field and a non-JCA class's `getInstance` claim nothing; `Jca.java` both signs with ECDSA and agrees keys with ECDH, so its EC generator stays EC, while `Signer.java` only signs, so its EC generator and ECPublicKey import are ECDSA | ok (only the import was found before) |
+| `algorithm_names` | Unambiguous JCA names held in string literals outside `getInstance` (an enum of JWT algorithms, a curve constant, `X25519`) are algorithm-name occurrences, counted apart from call sites; `"RSA"`, `"MD5"` and a sentence that mentions a name are not; the literal passed straight to `getInstance` is the call site only; the curve name is EC with `SECP256R1` as its parameter set, and stays EC because name occurrences are not usage evidence | ok (only the direct call was found before) |
+| `key_sizes` | Key sizes from `initialize(2048)`, `initialize(4096, random)`, `RSAKeyGenParameterSpec(3072, ...)`, an int constant, `ECGenParameterSpec` with a curve constant and AES `KeyGenerator.init(256)`, through the variable the `getInstance` result is assigned to; an EC size (the provider picks the curve), a parameter, and a variable declared twice in the file claim nothing | ok (no size was read before) |
+| `jwt_names` | JOSE algorithm names in Java string literals | ok (only `Ed25519`, a JCA name, was found before) |
+
+## js/
+
+JavaScript is parsed only with tree-sitter, so these fixtures set `{"backend": "tree-sitter"}`.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `node_crypto` | Node's crypto through `require`, `node:` and ES imports, destructured and aliased bindings and a same-file constant: hashes, HMAC, `createSign`/`sign` (the hash only, unless the name says RSA), ciphers with the AES key size from the name, `generateKeyPair(Sync)` with `modulusLength` and `namedCurve`, `publicEncrypt`, `createECDH` and `createDiffieHellman` sizes; a project module's `createHash` and a run-time name claim nothing; `keys.test.js` is test code | ok |
+| `webcrypto` | `crypto.subtle` and `window.crypto.subtle` by algorithm name or object, with the RSA modulus, the ECDSA curve and the hash inside the object counted as its own primitive; `subtle` held in a variable is not followed | ok, gap on the alias |
+| `forge` | node-forge `md.*.create()`, `pki.rsa.generateKeyPair` with a size or `{bits}`, `cipher.createCipher('3DES-CBC')`, `ed25519.*`; `forge.des.*` is DES or 3DES by key length and claims nothing; forge's own definitions (`forge.md.md5 = ...`) are not uses | ok, gap on `forge.des` |
+| `jwt_names` | JOSE algorithm names in JavaScript string and plain template literals, in jsonwebtoken options and a JWE header | ok (nothing was found before) |
+
+## ts/
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `node_crypto` | TypeScript and TSX with the JavaScript rules: `import crypto = require('crypto')`, receivers wrapped in `as any`, `!` and `satisfies`, a constant with a type annotation, WebCrypto in a `.tsx` component; an interface's `createHash` is not Node's crypto; `keys.spec.ts` is test code | ok |
 
 ## walk/
 
@@ -104,6 +142,7 @@ after the fixtures were first written:
 | `include_vendored` | The same tree with `--include-vendored` (via `options.json`): vendored, test-data and build-output code is scanned, and dot-directories are still skipped and listed | ok |
 | `ignore_paths` | `.ratchetignore` path rules with required reasons: a directory rule, a no-slash rule matching at any depth, and a rule that matches nothing; each rule and each ignored file is listed in the report and the CBOM | ok |
 | `suppressions` | MD5 suppressed under `src/cache/**` while MD5 in `src/auth/legacy.py` stays unsuppressed in its own component; a `false-positive` rule; an RSA rule covering two parameter sets; a rule matching nothing; vulnerability entries point only at the suppressed components, and the closing line says what was suppressed | ok |
+| `test_code` | Test code by convention (`tests/`, `test_*.py`, `conftest.py`, `_test.go`) is counted apart and marked in each occurrence's context; `latest.py`, `contest.py` and Go's `testutil.go` are not test code | ok |
 | `occurrence_cap` | 51 MD5 call sites in one file: the CBOM lists all 51 locations, matching `occurrence_count` | ok (50 listed before step 10) |
 | `mixed` | Python and Go in one tree, relative paths, the report sections, RSA grouped across both languages, and a summary counting call sites and imports apart | ok |
 

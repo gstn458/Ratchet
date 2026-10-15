@@ -136,3 +136,14 @@ def test_suppressed_findings_do_not_fail_ci(tmp_path):
         r = run(str(tmp_path), "--fail-on-vulnerable", *args)
         assert r.returncode == 0, r.stdout
     assert "2 quantum-vulnerable findings suppressed" in run(str(tmp_path)).stdout
+
+
+def test_ci_gate_counts_call_sites_not_imports():
+    # Imports belong to the inventory, not the CI gate.
+    r = run(str(FIXTURES / "python" / "import_only"), "--fail-on-vulnerable")
+    assert r.returncode == 0
+    assert "No quantum-vulnerable call sites and 2 imports" in r.stdout
+    r = run(str(FIXTURES / "python" / "import_only"), "--fail-on-vulnerable", "--json")
+    assert r.returncode == 0
+    # An undetermined EC call site is still quantum vulnerable and does fail.
+    assert run(str(FIXTURES / "python" / "ec_undetermined"), "--fail-on-vulnerable").returncode == 1

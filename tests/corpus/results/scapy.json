@@ -1,0 +1,675 @@
+{
+  "name": "scapy",
+  "commit": "5376fcc86aaba7c516fb4aa19576b03b387d217a",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 411,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": [
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/asn1/mib.py",
+      "line": 286,
+      "snippet": "\"1.3.101.112\": \"Ed25519\","
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/asn1/mib.py",
+      "line": 287,
+      "snippet": "\"1.3.101.113\": \"Ed448\","
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/config.py",
+      "line": 775,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey  # noqa: E501"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/config.py",
+      "line": 776,
+      "snippet": "X25519PrivateKey.generate()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/contrib/tacacs.py",
+      "line": 46,
+      "snippet": "msg = hashlib.md5()"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/dns.py",
+      "line": 112,
+      "snippet": "15: \"Ed25519\", 16: \"Ed448\","
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/dns.py",
+      "line": 112,
+      "snippet": "15: \"Ed25519\", 16: \"Ed448\","
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/dot11.py",
+      "line": 2333,
+      "snippet": "decrepit_algorithms.ARC4(self.iv + key.encode(\"utf8\")),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/dot11.py",
+      "line": 2358,
+      "snippet": "decrepit_algorithms.ARC4(self.iv + key.encode(\"utf8\")),"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/inet.py",
+      "line": 730,
+      "snippet": "h = hashlib.md5()  # nosec"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/inet6.py",
+      "line": 2398,
+      "snippet": "h = md5(record.encode(\"utf8\"))"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ipsec.py",
+      "line": 220,
+      "snippet": "DES = lambda key: decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/kerberos.py",
+      "line": 201,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import dh"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 151,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 155,
+      "snippet": "h = hmac.HMAC(M4SS, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 227,
+      "snippet": "digest = hashes.Hash(hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 233,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 246,
+      "snippet": "h = hmac.HMAC(XorKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 248,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 255,
+      "snippet": "h = hmac.HMAC(SessionKey, hashes.MD5())"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/msrpce/msnrpc.py",
+      "line": 257,
+      "snippet": "h = hmac.HMAC(h.finalize(), hashes.MD5())"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ntlm.py",
+      "line": 1111,
+      "snippet": "algorithm = decrepit_algorithms.ARC4(key)"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/ntlm.py",
+      "line": 1136,
+      "snippet": "algorithm = decrepit_algorithms.ARC4(key)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/radius.py",
+      "line": 1341,
+      "snippet": "radius_mac = hashlib.md5(data + shared_secret)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/smbserver.py",
+      "line": 1051,
+      "snippet": "hash = hashlib.md5((fname or \"\").encode()).digest()"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 168,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, x25519, x448"
+    },
+    {
+      "label": "RSA-512",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 183,
+      "snippet": "rsa.generate_private_key(public_exponent=65537, key_size=512)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 188,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.rsa import rust_openssl"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 463,
+      "snippet": "private_key = rsa.generate_private_key("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 516,
+      "snippet": "private_key = ec.generate_private_key(curve(), default_backend())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 534,
+      "snippet": "self.pubkey.verify(sig, msg, ec.ECDSA(_get_hash(h)))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 823,
+      "snippet": "self.key = rsa.generate_private_key("
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 899,
+      "snippet": "self.key = ec.generate_private_key(curve(), default_backend())"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 917,
+      "snippet": "return self.key.sign(data, ec.ECDSA(_get_hash(h)))"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1958,
+      "snippet": "hashes.SHA1(),"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1991,
+      "snippet": "ASN1_OID(\"Ed25519\"),"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1997,
+      "snippet": "ASN1_OID(\"Ed448\"),"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/cipher_block.py",
+      "line": 37,
+      "snippet": "DES = lambda key: decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 25,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 33,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dh import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/groups.py",
+      "line": 526,
+      "snippet": "return ec.generate_private_key(curve, default_backend())"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 95,
+      "snippet": "return padding.PKCS1v15()"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 99,
+      "snippet": "return padding.PSS(mgf=mgf(h), salt_length=h.digest_size)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/crypto/pkcs1.py",
+      "line": 101,
+      "snippet": "return padding.OAEP(mgf=mgf(h), algorithm=h, label=label)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "DH",
+      "algorithm": "DH",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 47,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric.dh import ("
+    },
+    {
+      "label": "X25519",
+      "algorithm": "X25519",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 52,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import x25519"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 858,
+      "snippet": "pms = s.client_kx_privkey.exchange(ec.ECDH(),"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange.py",
+      "line": 887,
+      "snippet": "ZZ = s.server_kx_privkey.exchange(ec.ECDH(), s.client_kx_pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 39,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ec"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 41,
+      "snippet": "from cryptography.hazmat.primitives.asymmetric import ed25519"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 181,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 205,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/layers/tls/keyexchange_tls13.py",
+      "line": 217,
+      "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1127,
+      "snippet": "lambda pkt: getoid(pkt) in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1127,
+      "snippet": "lambda pkt: getoid(pkt) in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1179,
+      "snippet": "in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1179,
+      "snippet": "in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 101,
+      "snippet": "return decrepit_algorithms.TripleDES(key * 3)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 888,
+      "snippet": "decrepit_algorithms.TripleDES(key), modes.CBC(b\"\\0\" * 8)"
+    },
+    {
+      "label": "3DES",
+      "algorithm": "3DES",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 897,
+      "snippet": "decrepit_algorithms.TripleDES(key), modes.CBC(b\"\\0\" * 8)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 926,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 1078,
+      "snippet": "rc4 = Cipher(algorithms.ARC4(ke), mode=None).encryptor()"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/libs/rfc3961.py",
+      "line": 1096,
+      "snippet": "rc4 = Cipher(decrepit_algorithms.ARC4(ke), mode=None).decryptor()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/modules/krack/automaton.py",
+      "line": 190,
+      "snippet": "algorithm=hashes.SHA1(),"
+    },
+    {
+      "label": "RC4",
+      "algorithm": "RC4",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/modules/krack/crypto.py",
+      "line": 24,
+      "snippet": "algorithm = algorithms.ARC4(key)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/tools/UTscapy.py",
+      "line": 462,
+      "snippet": "return hashlib.sha1(x.encode(\"utf8\")).hexdigest().upper()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/tools/UTscapy.py",
+      "line": 477,
+      "snippet": "test_campaign.sha = sha1(fdesc.read())"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/utils6.py",
+      "line": 431,
+      "snippet": "globalid = hashlib.sha1(btod + eui64).digest()[:5]"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "scapy/utils6.py",
+      "line": 462,
+      "snippet": "s = hashlib.md5(s).digest()"
+    }
+  ]
+}

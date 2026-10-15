@@ -1,0 +1,9 @@
+# Optional. With these installed, Ratchet parses Go with tree-sitter instead of
+# its regex backend; without them it runs exactly as before. Pinned to versions
+# that install on Python 3.9 through 3.13. Other versions work too, and every
+# report and CBOM records which ones parsed the scan.
+tree-sitter==0.23.2
+tree-sitter-go==0.23.4
+tree-sitter-java==0.23.5
+tree-sitter-javascript==0.23.1
+tree-sitter-typescript==0.23.2

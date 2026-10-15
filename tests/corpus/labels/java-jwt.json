@@ -1,0 +1,90 @@
+{
+  "findings": {},
+  "missed": [
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/CryptoHelper.java",
+      "line": 157,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "final Signature s = Signature.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/CryptoHelper.java",
+      "line": 209,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "final Signature s = Signature.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/CryptoHelper.java",
+      "line": 235,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "final Mac mac = Mac.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/CryptoHelper.java",
+      "line": 255,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "final Mac mac = Mac.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/CryptoHelper.java",
+      "line": 302,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "final Signature s = Signature.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/PemUtils.java",
+      "line": 35,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": true,
+      "snippet": "KeyFactory kf = KeyFactory.getInstance(algorithm);"
+    },
+    {
+      "path": "lib/src/test/java/com/auth0/jwt/PemUtils.java",
+      "line": 50,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": true,
+      "snippet": "KeyFactory kf = KeyFactory.getInstance(algorithm);"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

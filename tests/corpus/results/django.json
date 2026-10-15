@@ -1,0 +1,173 @@
+{
+  "name": "django",
+  "commit": "f1d11117c6a3e227ce7cdd263cf0743f0eb73070",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 2971,
+  "unparsed": [
+    "tests/test_runner_apps/tagged/tests_syntax_error.py (not valid Python 3 syntax at line 11)"
+  ],
+  "skipped_directories": 8,
+  "findings": [
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/contrib/auth/hashers.py",
+      "line": 665,
+      "snippet": "hash = hashlib.md5(force_bytes(salt) + force_bytes(password)).hexdigest()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/contrib/staticfiles/storage.py",
+      "line": 161,
+      "snippet": "hasher = md5(usedforsecurity=False)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/core/cache/backends/filebased.py",
+      "line": 136,
+      "snippet": "md5(key.encode(), usedforsecurity=False).hexdigest(),"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/core/cache/utils.py",
+      "line": 7,
+      "snippet": "hasher = md5(usedforsecurity=False)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/db/backends/sqlite3/_functions.py",
+      "line": 414,
+      "snippet": "return md5(text.encode()).hexdigest()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "django/db/backends/sqlite3/_functions.py",
+      "line": 460,
+      "snippet": "return sha1(text.encode()).hexdigest()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/db/backends/utils.py",
+      "line": 309,
+      "snippet": "h = md5(usedforsecurity=False)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "django/template/loaders/cached.py",
+      "line": 96,
+      "snippet": "return hashlib.sha1(\"|\".join(values).encode()).hexdigest()"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/utils/cache.py",
+      "line": 125,
+      "snippet": "md5(response.content, usedforsecurity=False).hexdigest(),"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/utils/cache.py",
+      "line": 356,
+      "snippet": "ctx = md5(usedforsecurity=False)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/utils/cache.py",
+      "line": 364,
+      "snippet": "url = md5(request.build_absolute_uri().encode(\"ascii\"), usedforsecurity=False)"
+    },
+    {
+      "label": "MD5",
+      "algorithm": "MD5",
+      "kind": "call site",
+      "test": false,
+      "path": "django/utils/cache.py",
+      "line": 376,
+      "snippet": "url = md5(request.build_absolute_uri().encode(\"ascii\"), usedforsecurity=False)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/file_uploads/tests.py",
+      "line": 116,
+      "snippet": "post_data[key + \"_hash\"] = hashlib.sha1("
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/file_uploads/tests.py",
+      "line": 121,
+      "snippet": "post_data[key + \"_hash\"] = hashlib.sha1("
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/file_uploads/views.py",
+      "line": 50,
+      "snippet": "new_hash = hashlib.sha1(value.read()).hexdigest()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/file_uploads/views.py",
+      "line": 52,
+      "snippet": "new_hash = hashlib.sha1(value.encode()).hexdigest()"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "tests/utils_tests/test_crypto.py",
+      "line": 45,
+      "snippet": "{\"secret\": \"x\" * hashlib.sha1().block_size, \"algorithm\": \"sha1\"},"
+    }
+  ]
+}

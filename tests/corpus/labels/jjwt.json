@@ -1,0 +1,110 @@
+{
+  "findings": {},
+  "missed": [
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 440,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? Cipher.getInstance(jcaName, provider) : Cipher.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 451,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? KeyFactory.getInstance(jcaName, provider) : KeyFactory.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 462,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? SecretKeyFactory.getInstance(jcaName, provider) : SecretKeyFactory.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 473,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? KeyGenerator.getInstance(jcaName, provider) : KeyGenerator.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 484,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? KeyPairGenerator.getInstance(jcaName, provider) : KeyPairGenerator.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 495,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? KeyAgreement.getInstance(jcaName, provider) : KeyAgreement.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 506,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? MessageDigest.getInstance(jcaName, provider) : MessageDigest.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 517,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? Signature.getInstance(jcaName, provider) : Signature.getInstance(jcaName);"
+    },
+    {
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/JcaTemplate.java",
+      "line": 528,
+      "algorithm": "unresolved",
+      "source": "search",
+      "search": "java-jca-unresolved",
+      "note": "JCA call whose algorithm name is a variable or parameter, resolved only at run time",
+      "test": false,
+      "snippet": "return provider != null ? Mac.getInstance(jcaName, provider) : Mac.getInstance(jcaName);"
+    }
+  ],
+  "searched": [
+    "py-cryptography-hash",
+    "py-cryptography-cipher",
+    "py-rsa-padding",
+    "py-renamed-keygen",
+    "go-crypto-hash-constant",
+    "go-x509-signature-algorithm",
+    "go-tls-cipher-suite",
+    "go-ecdh-method",
+    "java-jca",
+    "java-jca-name",
+    "java-jca-unresolved",
+    "js-node-crypto",
+    "js-forge"
+  ]
+}

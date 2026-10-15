@@ -1,0 +1,1881 @@
+{
+  "name": "go-jose",
+  "commit": "13b7118f01278681667af05e054c6dc852f3db49",
+  "registry_version": "2026.10.3",
+  "parsers": {
+    "Python": "ast",
+    "Go": "tree-sitter 0.23.2 with tree-sitter-go 0.23.4",
+    "Java": "tree-sitter 0.23.2 with tree-sitter-java 0.23.5",
+    "JavaScript": "tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1",
+    "TypeScript": "tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2"
+  },
+  "not_scanned": {},
+  "files_scanned": 73,
+  "unparsed": [],
+  "skipped_directories": 3,
+  "findings": [
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 21,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 22,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 23,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 26,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 27,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 28,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 199,
+      "snippet": "return rsa.EncryptPKCS1v15(randReader, ctx.publicKey, cek)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 201,
+      "snippet": "return rsa.EncryptOAEP(sha1.New(), randReader, ctx.publicKey, cek, []byte{})"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 201,
+      "snippet": "return rsa.EncryptOAEP(sha1.New(), randReader, ctx.publicKey, cek, []byte{})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 203,
+      "snippet": "return rsa.EncryptOAEP(sha256.New(), randReader, ctx.publicKey, cek, []byte{})"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 203,
+      "snippet": "return rsa.EncryptOAEP(sha256.New(), randReader, ctx.publicKey, cek, []byte{})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 249,
+      "snippet": "_ = rsa.DecryptPKCS1v15SessionKey(rand.Reader, ctx.privateKey, jek, cek)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 254,
+      "snippet": "return rsa.DecryptOAEP(sha1.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 254,
+      "snippet": "return rsa.DecryptOAEP(sha1.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 257,
+      "snippet": "return rsa.DecryptOAEP(sha256.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 257,
+      "snippet": "return rsa.DecryptOAEP(sha256.New(), rand.Reader, ctx.privateKey, jek, []byte{})"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 292,
+      "snippet": "out, err = rsa.SignPKCS1v15(randReader, ctx.privateKey, hash, hashed)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 294,
+      "snippet": "out, err = rsa.SignPSS(randReader, ctx.privateKey, hash, hashed, &rsa.PSSOptions{"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 332,
+      "snippet": "return rsa.VerifyPKCS1v15(ctx.publicKey, hash, hashed, signature)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 334,
+      "snippet": "return rsa.VerifyPSS(ctx.publicKey, hash, hashed, signature, nil)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 372,
+      "snippet": "block, err := aes.NewCipher(kek)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 395,
+      "snippet": "priv, err := ecdsa.GenerateKey(ctx.publicKey.Curve, randReader)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 474,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 502,
+      "snippet": "ok := ed25519.Verify(ctx.publicKey, payload, signature)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 537,
+      "snippet": "r, s, err := ecdsa.Sign(randReader, ctx.privateKey, hashed)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": false,
+      "path": "asymmetric.go",
+      "line": 607,
+      "snippet": "match := ecdsa.Verify(ctx.publicKey, hashed, r, s)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 20,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 23,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 53,
+      "snippet": "sig, err := dec.signPayload([]byte(\"This is a test\"), \"EdDSA\")"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 60,
+      "snippet": "err = enc.verifyPayload([]byte(\"This is a test\"), sig.Signature, \"EdDSA\")"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 65,
+      "snippet": "err = enc.verifyPayload([]byte(\"This is test number 2\"), sig.Signature, \"EdDSA\")"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 149,
+      "snippet": "algID:     \"A128GCM\","
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 203,
+      "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 233,
+      "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 263,
+      "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 302,
+      "snippet": "priv, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 381,
+      "snippet": "r, s, err := ecdsa.Sign(rand.Reader, ecTestKey256, hash384[:])"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "asymmetric_test.go",
+      "line": 403,
+      "snippet": "r, s, err = ecdsa.Sign(rand.Reader, ecTestKey384, hash512[:])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "cipher/cbc_hmac.go",
+      "line": 23,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": true,
+      "path": "cipher/cbc_hmac_test.go",
+      "line": 21,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/cbc_hmac_test.go",
+      "line": 345,
+      "snippet": "block, err := aes.NewCipher(key[len(key)/2:])"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "cipher/ecdh_es.go",
+      "line": 22,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "cipher/ecdh_es.go",
+      "line": 49,
+      "snippet": "z, _ := priv.Curve.ScalarMult(pub.X, pub.Y, priv.D.Bytes())"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "cipher/ecdh_es_test.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cipher/ecdh_es_test.go",
+      "line": 63,
+      "snippet": "output := DeriveECDHES(\"A128GCM\", apuData, apvData, bobKey, &aliceKey.PublicKey, 16)"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cipher/ecdh_es_test.go",
+      "line": 87,
+      "snippet": "DeriveECDHES(\"A128GCM\", []byte{}, []byte{}, bobKey, &invalid.PublicKey, 16)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 21,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 29,
+      "snippet": "block0, _ := aes.NewCipher(kek0)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 84,
+      "snippet": "block0, _ := aes.NewCipher(kek0)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 85,
+      "snippet": "block1, _ := aes.NewCipher(kek1)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 86,
+      "snippet": "block2, _ := aes.NewCipher(kek2)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 127,
+      "snippet": "block, _ := aes.NewCipher(kek)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 156,
+      "snippet": "block, _ := aes.NewCipher(kek)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": true,
+      "path": "cipher/key_wrap_test.go",
+      "line": 170,
+      "snippet": "block, _ := aes.NewCipher(kek)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "crypter.go",
+      "line": 20,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "crypter.go",
+      "line": 21,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 22,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 25,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 37,
+      "snippet": "var rsaTestKey, _ = rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 39,
+      "snippet": "var ecTestKey256, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 40,
+      "snippet": "var ecTestKey384, _ = ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 41,
+      "snippet": "var ecTestKey521, _ = ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "crypter_test.go",
+      "line": 43,
+      "snippet": "var ed25519PublicKey, ed25519PrivateKey, _ = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": false,
+      "path": "cryptosigner/cryptosigner.go",
+      "line": 24,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "cryptosigner/cryptosigner.go",
+      "line": 25,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "cryptosigner/cryptosigner.go",
+      "line": 28,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 22,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 23,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 26,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 119,
+      "snippet": "ver, sig, _ = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 121,
+      "snippet": "rsaTestKey, _ := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 125,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 129,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 133,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 153,
+      "snippet": "_, edKey, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 158,
+      "snippet": "rsaKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 163,
+      "snippet": "p224, err := ecdsa.GenerateKey(elliptic.P224(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 168,
+      "snippet": "p256, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 173,
+      "snippet": "p384, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 178,
+      "snippet": "p521, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 192,
+      "snippet": "{\"EdDSA\", fields{edKey}, []jose.SignatureAlgorithm{jose.EdDSA}},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 193,
+      "snippet": "{\"ES256\", fields{p256}, []jose.SignatureAlgorithm{jose.ES256}},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 193,
+      "snippet": "{\"ES256\", fields{p256}, []jose.SignatureAlgorithm{jose.ES256}},"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 194,
+      "snippet": "{\"ES384\", fields{p384}, []jose.SignatureAlgorithm{jose.ES384}},"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cryptosigner/cryptosigner_test.go",
+      "line": 195,
+      "snippet": "{\"ES512\", fields{p521}, []jose.SignatureAlgorithm{jose.ES512}},"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "doc_test.go",
+      "line": 20,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "doc_test.go",
+      "line": 22,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "doc_test.go",
+      "line": 31,
+      "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "RSA-2048",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": true,
+      "path": "doc_test.go",
+      "line": 79,
+      "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 22,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 25,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 55,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 61,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 67,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 73,
+      "snippet": "pub, key, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 76,
+      "snippet": "key, err := rsa.GenerateKey(rand.Reader, bits)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 96,
+      "snippet": "key, err := rsa.GenerateKey(rand.Reader, bits)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "call site",
+      "test": false,
+      "path": "jose-util/generator/generate.go",
+      "line": 113,
+      "snippet": "key, err := ecdsa.GenerateKey(crv, rand.Reader)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": true,
+      "path": "jwe_test.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "jwe_test.go",
+      "line": 23,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "jwk.go",
+      "line": 22,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "jwk.go",
+      "line": 23,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "jwk.go",
+      "line": 25,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": false,
+      "path": "jwk.go",
+      "line": 26,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "jwk.go",
+      "line": 27,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "jwk.go",
+      "line": 159,
+      "snippet": "expectedSHA1 := sha1.Sum(k.Certificates[0].Raw)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "jwk.go",
+      "line": 160,
+      "snippet": "expectedSHA256 := sha256.Sum256(k.Certificates[0].Raw)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jwk.go",
+      "line": 244,
+      "snippet": "if raw.Crv == \"Ed25519\" {"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": false,
+      "path": "jwk.go",
+      "line": 339,
+      "snippet": "sha1sum := sha1.Sum(leaf.Raw)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": false,
+      "path": "jwk.go",
+      "line": 340,
+      "snippet": "sha256sum := sha256.Sum256(leaf.Raw)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jwk.go",
+      "line": 401,
+      "snippet": "crv := \"Ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jwk.go",
+      "line": 526,
+      "snippet": "Crv: \"Ed25519\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": false,
+      "path": "jwk.go",
+      "line": 634,
+      "snippet": "privateKey := ed25519.NewKeyFromSeed(seed)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 22,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 23,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 26,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "import",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 27,
+      "snippet": "\"crypto/sha1\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 28,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 256,
+      "snippet": "x5tSHA1 := sha1.Sum(testCertificates[0].Raw)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 257,
+      "snippet": "x5tSHA256 := sha256.Sum256(testCertificates[0].Raw)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 423,
+      "snippet": "sha1sum := sha1.Sum(nil)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 425,
+      "snippet": "sha256sum := sha256.Sum256(nil)"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 486,
+      "snippet": "x5tSHA1 := sha1.Sum(testCertificates[0].Raw)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 487,
+      "snippet": "x5tSHA256 := sha256.Sum256(testCertificates[0].Raw)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "call site",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 913,
+      "snippet": "_, otherPrivateKey, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 957,
+      "snippet": "\"crv\": \"Ed25519\","
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwk_test.go",
+      "line": 1069,
+      "snippet": "if jwk1.Algorithm != \"A128KW\" {"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jws_test.go",
+      "line": 509,
+      "snippet": "if obj.Signatures[0].Header.Algorithm != \"ES512\" {"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jws_test.go",
+      "line": 512,
+      "snippet": "if obj.Signatures[0].Protected.Algorithm != \"ES512\" {"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jws_test.go",
+      "line": 527,
+      "snippet": "if obj.Signatures[0].Header.Algorithm != \"ES512\" {"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jws_test.go",
+      "line": 530,
+      "snippet": "if obj.Signatures[0].Protected.Algorithm != \"ES512\" {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "jwt/builder_test.go",
+      "line": 22,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwt/builder_test.go",
+      "line": 204,
+      "snippet": "\"enc\":                  \"A128CBC-HS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwt/builder_test.go",
+      "line": 204,
+      "snippet": "\"enc\":                  \"A128CBC-HS256\","
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwt/builder_test.go",
+      "line": 334,
+      "snippet": "\"enc\":           \"A128CBC-HS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "jwt/builder_test.go",
+      "line": 334,
+      "snippet": "\"enc\":           \"A128CBC-HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "jwt/example_test.go",
+      "line": 25,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "opaque_test.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "opaque_test.go",
+      "line": 376,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 94,
+      "snippet": "RSA1_5             = KeyAlgorithm(\"RSA1_5\")             // RSA-PKCS1v1.5"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 95,
+      "snippet": "RSA_OAEP           = KeyAlgorithm(\"RSA-OAEP\")           // RSA-OAEP-SHA1"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 96,
+      "snippet": "RSA_OAEP_256       = KeyAlgorithm(\"RSA-OAEP-256\")       // RSA-OAEP-SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 96,
+      "snippet": "RSA_OAEP_256       = KeyAlgorithm(\"RSA-OAEP-256\")       // RSA-OAEP-SHA256"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 97,
+      "snippet": "A128KW             = KeyAlgorithm(\"A128KW\")             // AES key wrap (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 98,
+      "snippet": "A192KW             = KeyAlgorithm(\"A192KW\")             // AES key wrap (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 99,
+      "snippet": "A256KW             = KeyAlgorithm(\"A256KW\")             // AES key wrap (256)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 101,
+      "snippet": "ECDH_ES            = KeyAlgorithm(\"ECDH-ES\")            // ECDH-ES"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 102,
+      "snippet": "ECDH_ES_A128KW     = KeyAlgorithm(\"ECDH-ES+A128KW\")     // ECDH-ES + AES key wrap (128)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 102,
+      "snippet": "ECDH_ES_A128KW     = KeyAlgorithm(\"ECDH-ES+A128KW\")     // ECDH-ES + AES key wrap (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 103,
+      "snippet": "ECDH_ES_A192KW     = KeyAlgorithm(\"ECDH-ES+A192KW\")     // ECDH-ES + AES key wrap (192)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 103,
+      "snippet": "ECDH_ES_A192KW     = KeyAlgorithm(\"ECDH-ES+A192KW\")     // ECDH-ES + AES key wrap (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 104,
+      "snippet": "ECDH_ES_A256KW     = KeyAlgorithm(\"ECDH-ES+A256KW\")     // ECDH-ES + AES key wrap (256)"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 104,
+      "snippet": "ECDH_ES_A256KW     = KeyAlgorithm(\"ECDH-ES+A256KW\")     // ECDH-ES + AES key wrap (256)"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 105,
+      "snippet": "A128GCMKW          = KeyAlgorithm(\"A128GCMKW\")          // AES-GCM key wrap (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 106,
+      "snippet": "A192GCMKW          = KeyAlgorithm(\"A192GCMKW\")          // AES-GCM key wrap (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 107,
+      "snippet": "A256GCMKW          = KeyAlgorithm(\"A256GCMKW\")          // AES-GCM key wrap (256)"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 108,
+      "snippet": "PBES2_HS256_A128KW = KeyAlgorithm(\"PBES2-HS256+A128KW\") // PBES2 + HMAC-SHA256 + AES key wrap (128)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 108,
+      "snippet": "PBES2_HS256_A128KW = KeyAlgorithm(\"PBES2-HS256+A128KW\") // PBES2 + HMAC-SHA256 + AES key wrap (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 109,
+      "snippet": "PBES2_HS384_A192KW = KeyAlgorithm(\"PBES2-HS384+A192KW\") // PBES2 + HMAC-SHA384 + AES key wrap (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 110,
+      "snippet": "PBES2_HS512_A256KW = KeyAlgorithm(\"PBES2-HS512+A256KW\") // PBES2 + HMAC-SHA512 + AES key wrap (256)"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 115,
+      "snippet": "EdDSA = SignatureAlgorithm(\"EdDSA\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 116,
+      "snippet": "HS256 = SignatureAlgorithm(\"HS256\") // HMAC using SHA-256"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 119,
+      "snippet": "RS256 = SignatureAlgorithm(\"RS256\") // RSASSA-PKCS-v1.5 using SHA-256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 119,
+      "snippet": "RS256 = SignatureAlgorithm(\"RS256\") // RSASSA-PKCS-v1.5 using SHA-256"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 120,
+      "snippet": "RS384 = SignatureAlgorithm(\"RS384\") // RSASSA-PKCS-v1.5 using SHA-384"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 121,
+      "snippet": "RS512 = SignatureAlgorithm(\"RS512\") // RSASSA-PKCS-v1.5 using SHA-512"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 122,
+      "snippet": "ES256 = SignatureAlgorithm(\"ES256\") // ECDSA using P-256 and SHA-256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 122,
+      "snippet": "ES256 = SignatureAlgorithm(\"ES256\") // ECDSA using P-256 and SHA-256"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 123,
+      "snippet": "ES384 = SignatureAlgorithm(\"ES384\") // ECDSA using P-384 and SHA-384"
+    },
+    {
+      "label": "EC-SECP521R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 124,
+      "snippet": "ES512 = SignatureAlgorithm(\"ES512\") // ECDSA using P-521 and SHA-512"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 125,
+      "snippet": "PS256 = SignatureAlgorithm(\"PS256\") // RSASSA-PSS using SHA256 and MGF1-SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 125,
+      "snippet": "PS256 = SignatureAlgorithm(\"PS256\") // RSASSA-PSS using SHA256 and MGF1-SHA256"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 126,
+      "snippet": "PS384 = SignatureAlgorithm(\"PS384\") // RSASSA-PSS using SHA384 and MGF1-SHA384"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 127,
+      "snippet": "PS512 = SignatureAlgorithm(\"PS512\") // RSASSA-PSS using SHA512 and MGF1-SHA512"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 132,
+      "snippet": "A128CBC_HS256 = ContentEncryption(\"A128CBC-HS256\") // AES-CBC + HMAC-SHA256 (128)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 132,
+      "snippet": "A128CBC_HS256 = ContentEncryption(\"A128CBC-HS256\") // AES-CBC + HMAC-SHA256 (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 133,
+      "snippet": "A192CBC_HS384 = ContentEncryption(\"A192CBC-HS384\") // AES-CBC + HMAC-SHA384 (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 134,
+      "snippet": "A256CBC_HS512 = ContentEncryption(\"A256CBC-HS512\") // AES-CBC + HMAC-SHA512 (256)"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 135,
+      "snippet": "A128GCM       = ContentEncryption(\"A128GCM\")       // AES-GCM (128)"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 136,
+      "snippet": "A192GCM       = ContentEncryption(\"A192GCM\")       // AES-GCM (192)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "shared.go",
+      "line": 137,
+      "snippet": "A256GCM       = ContentEncryption(\"A256GCM\")       // AES-GCM (256)"
+    },
+    {
+      "label": "EC",
+      "algorithm": "EC",
+      "kind": "import",
+      "test": false,
+      "path": "signing.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": false,
+      "path": "signing.go",
+      "line": 22,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": false,
+      "path": "signing.go",
+      "line": 23,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "import",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 21,
+      "snippet": "\"crypto/ecdsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "import",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 22,
+      "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "import",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 25,
+      "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 244,
+      "snippet": "{name: \"Ed25519\", algorithm: EdDSA, verificationKey: ed25519.PublicKey(nil)},"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 341,
+      "snippet": "keyBar, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 345,
+      "snippet": "keyFoo, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader) // only its public key goes in the JWKS"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 394,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 446,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 450,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P384(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 454,
+      "snippet": "key, _ := ecdsa.GenerateKey(elliptic.P521(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 524,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 589,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "call site",
+      "test": true,
+      "path": "signing_test.go",
+      "line": 677,
+      "snippet": "key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "import",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 21,
+      "snippet": "\"crypto/aes\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 26,
+      "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 97,
+      "snippet": "aes, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 300,
+      "snippet": "block, err := aes.NewCipher(ctx.key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 338,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 409,
+      "snippet": "block, err := aes.NewCipher(ctx.key)"
+    },
+    {
+      "label": "AES",
+      "algorithm": "AES",
+      "kind": "call site",
+      "test": false,
+      "path": "symmetric.go",
+      "line": 453,
+      "snippet": "block, err := aes.NewCipher(key)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "import",
+      "test": true,
+      "path": "symmetric_test.go",
+      "line": 24,
+      "snippet": "\"crypto/sha256\""
+    }
+  ]
+}
