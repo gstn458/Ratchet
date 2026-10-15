@@ -14,6 +14,7 @@ Stdlib only. No dependencies. Run it anywhere.
 
 import argparse
 import ast
+import functools
 import hashlib
 import json
 import os
@@ -1476,13 +1477,70 @@ def is_test_path(path):
     return bool(TEST_FILE.search(parts[-1])) or any(p in TEST_DIRS for p in parts[:-1])
 
 
-def walk(root, include_vendored=False, backend="auto"):
+# Files are scanned in worker processes when there are enough of them to
+# repay starting the workers. Results come back in the order the files were
+# listed, so the output is byte-identical to a scan in one process.
+PARALLEL_MIN_FILES = 200
+
+
+def default_jobs():
+    """CPUs this process may run on."""
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:  # not on macOS or Windows
+        return os.cpu_count() or 1
+
+
+def make_scanners(go_lex_fn):
+    return dict(SCANNERS, **{".go": functools.partial(scan_go, lex=go_lex_fn)})
+
+
+def scan_file(scanners, path):
+    """(findings, None), or (None, reason) for a file that could not be parsed."""
+    try:
+        return scanners[os.path.splitext(path)[1]](path), None
+    except Unparsed as e:
+        return None, str(e)
+
+
+_worker_scanners = None
+
+
+def _start_worker(go_backend_name):
+    # A tree-sitter parser cannot be sent to another process, so each worker
+    # loads its own, with the backend the main process resolved.
+    global _worker_scanners
+    _worker_scanners = make_scanners(go_backend(go_backend_name)[0])
+
+
+def _scan_in_worker(path):
+    return scan_file(_worker_scanners, path)
+
+
+def scan_files(paths, go_lex_fn, jobs=None):
+    """scan_file for every path, in order, in parallel when worthwhile."""
+    jobs = default_jobs() if jobs is None else jobs
+    if jobs > 1 and len(paths) >= PARALLEL_MIN_FILES:
+        try:
+            import multiprocessing
+            pool = multiprocessing.Pool(
+                jobs, _start_worker, ("regex" if go_lex_fn is regex_go_lex else "tree-sitter",))
+        except (ImportError, OSError):
+            pool = None  # no process support here (no /dev/shm, say): scan in this one
+        if pool is not None:
+            with pool:
+                chunk = max(1, min(64, len(paths) // (jobs * 8)))
+                return list(pool.imap(_scan_in_worker, paths, chunk))
+    scanners = make_scanners(go_lex_fn)
+    return [scan_file(scanners, path) for path in paths]
+
+
+def walk(root, include_vendored=False, backend="auto", jobs=None):
     go_lex_fn, go_parser = go_backend(backend)
-    scanners = dict(SCANNERS, **{".go": lambda path: scan_go(path, go_lex_fn)})
     ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
     go_packages = defaultdict(list)  # directory -> GoFindings of its files
-    files = 0
+    listed = []  # (directory, full path, path relative to root), in scan order
     for dirpath, dirnames, filenames in os.walk(root):
         keep = []
         for d in dirnames:
@@ -1495,8 +1553,7 @@ def walk(root, include_vendored=False, backend="auto"):
         # depend on the filesystem's directory ordering.
         dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
-            scanner = scanners.get(os.path.splitext(fn)[1])
-            if not scanner:
+            if os.path.splitext(fn)[1] not in SCANNERS:
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
@@ -1504,20 +1561,21 @@ def walk(root, include_vendored=False, backend="auto"):
             if rule:
                 rule.matched.append(rel)
                 continue
-            files += 1
-            try:
-                found = scanner(full)
-            except Unparsed as e:
-                unparsed.append((rel, str(e)))
-                continue
-            in_test = is_test_path(rel)
-            if isinstance(found, GoFindings):
-                found.in_test = in_test
-                go_packages[dirpath].append(found)
-            for f in found:
-                f.path = rel
-                f.in_test = in_test
-                findings.append(f)
+            listed.append((dirpath, full, rel))
+    files = len(listed)
+    results = scan_files([full for _, full, _ in listed], go_lex_fn, jobs)
+    for (dirpath, _, rel), (found, error) in zip(listed, results):
+        if error is not None:
+            unparsed.append((rel, error))
+            continue
+        in_test = is_test_path(rel)
+        if isinstance(found, GoFindings):
+            found.in_test = in_test
+            go_packages[dirpath].append(found)
+        for f in found:
+            f.path = rel
+            f.in_test = in_test
+            findings.append(f)
     go_package_ecdh(go_packages)
     # First matching rule wins, in file order.
     for f in findings:
@@ -1880,6 +1938,9 @@ def main():
     p.add_argument("--include-vendored", action="store_true",
                    help="also scan vendored and test-data directories: "
                         + ", ".join(sorted(VENDORED_DIRS)))
+    p.add_argument("--jobs", type=int, default=None, metavar="N",
+                   help="worker processes (default: one per CPU; 1 scans in this process). "
+                        "The output is the same whatever the number")
     p.add_argument("--backend", choices=BACKENDS, default="auto",
                    help="Go parser: tree-sitter if installed (auto, the default), "
                         "tree-sitter (required), or the dependency-free regex backend")
@@ -1890,7 +1951,8 @@ def main():
         return 2
 
     try:
-        scan = walk(args.path, include_vendored=args.include_vendored, backend=args.backend)
+        scan = walk(args.path, include_vendored=args.include_vendored, backend=args.backend,
+                    jobs=args.jobs)
     except (IgnoreFileError, BackendError) as e:
         print(f"ratchet: {e}", file=sys.stderr)
         return 2
