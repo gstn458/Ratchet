@@ -1,0 +1,50 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, Python ast
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (5 call sites, 1 import)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      KeyGen.java:14   KeyPairGenerator rsaGen = KeyPairGenerator.getInstance("RSA");
+      KeyGen.java:19   KeyPairGenerator strong = KeyPairGenerator.getInstance("RSA");
+      KeyGen.java:24   KeyPairGenerator specGen = KeyPairGenerator.getInstance("RSA");
+      ... and 3 more
+
+  DSA  (1 call site)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-DSA-65 (FIPS 204)
+      KeyGen.java:29   KeyPairGenerator dsaGen = KeyPairGenerator.getInstance("DSA");
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (2 call sites, 1 import, 1 algorithm name)
+    parameter set: not stated in any call site
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      KeyGen.java:34   KeyPairGenerator ecGen = KeyPairGenerator.getInstance("EC");
+      KeyGen.java:39   KeyPairGenerator sized = KeyPairGenerator.getInstance("EC");
+      KeyGen.java:5   import java.security.spec.ECGenParameterSpec;
+      ... and 1 more
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  AES  (1 call site)
+    Grover halves effective key length. AES-256 stays at 128-bit margin.
+    migrate to: AES-256 if currently AES-128
+      KeyGen.java:44   KeyGenerator aesGen = KeyGenerator.getInstance("AES");
+
+========================================================================
+8 quantum-vulnerable call sites, 1 algorithm name and 2 imports across 1 file.
+2 call sites and 1 import with usage undetermined: review before choosing a migration target.
+
