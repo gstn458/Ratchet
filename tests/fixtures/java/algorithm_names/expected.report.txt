@@ -1,0 +1,28 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.2  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, Python ast
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (1 call site)
+    parameter set: not stated in any call site
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      Algorithms.java:31   return Signature.getInstance("SHA256withRSA");  // a call site, counted once
+
+
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (1 call site)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      Algorithms.java:31   return Signature.getInstance("SHA256withRSA");  // a call site, counted once
+
+========================================================================
+1 quantum-vulnerable call site and no imports across 1 file.
+
