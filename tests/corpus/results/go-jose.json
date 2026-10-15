@@ -1302,15 +1302,6 @@
       "snippet": "RSA_OAEP           = KeyAlgorithm(\"RSA-OAEP\")           // RSA-OAEP-SHA1"
     },
     {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "shared.go",
-      "line": 95,
-      "snippet": "RSA_OAEP           = KeyAlgorithm(\"RSA-OAEP\")           // RSA-OAEP-SHA1"
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "algorithm name",

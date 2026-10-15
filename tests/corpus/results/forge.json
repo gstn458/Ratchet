@@ -132,26 +132,8 @@
       "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
     },
     {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "lib/rsa.js",
-      "line": 1087,
-      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "lib/rsa.js",
-      "line": 1286,
-      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
-    },
-    {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
       "kind": "algorithm name",
       "test": false,
       "path": "lib/rsa.js",
@@ -375,26 +357,8 @@
       "snippet": "ciphertext = publicKey.encrypt(message, 'RSA-OAEP', {md: md});"
     },
     {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
-      "kind": "algorithm name",
-      "test": true,
-      "path": "tests/unit/pkcs1.js",
-      "line": 1036,
-      "snippet": "ciphertext = publicKey.encrypt(message, 'RSA-OAEP', {md: md});"
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
-      "kind": "algorithm name",
-      "test": true,
-      "path": "tests/unit/pkcs1.js",
-      "line": 1037,
-      "snippet": "decoded = privateKey.decrypt(ciphertext, 'RSA-OAEP', {md: md});"
-    },
-    {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
       "kind": "algorithm name",
       "test": true,
       "path": "tests/unit/pkcs1.js",

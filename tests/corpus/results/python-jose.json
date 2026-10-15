@@ -303,15 +303,6 @@
       "snippet": "RSA_OAEP = \"RSA-OAEP\""
     },
     {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "jose/constants.py",
-      "line": 33,
-      "snippet": "RSA_OAEP = \"RSA-OAEP\""
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "algorithm name",

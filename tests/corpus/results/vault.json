@@ -4515,7 +4515,7 @@
       "snippet": "case \"RS256\", \"RS384\", \"RS512\":"
     },
     {
-      "label": "ECDSA-SECP521R1",
+      "label": "ECDSA-SECP256R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": false,
@@ -4740,7 +4740,7 @@
       "snippet": "Algorithm:       \"RS256\","
     },
     {
-      "label": "ECDSA-SECP384R1",
+      "label": "ECDSA-SECP521R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": true,

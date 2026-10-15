@@ -330,15 +330,6 @@
       "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP = Jwts.get(REGISTRY, \"RSA-OAEP\");"
     },
     {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
-      "line": 715,
-      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP = Jwts.get(REGISTRY, \"RSA-OAEP\");"
-    },
-    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "algorithm name",
@@ -1538,15 +1529,6 @@
     {
       "label": "RSA",
       "algorithm": "RSA",
-      "kind": "algorithm name",
-      "test": false,
-      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
-      "line": 38,
-      "snippet": "private static final String RSA_OAEP_ID = \"RSA-OAEP\";"
-    },
-    {
-      "label": "SHA-1",
-      "algorithm": "SHA-1",
       "kind": "algorithm name",
       "test": false,
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",

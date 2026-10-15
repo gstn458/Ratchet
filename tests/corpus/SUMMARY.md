@@ -8,7 +8,7 @@ found by reading the code, listed in `labels/<name>.json`.
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | paramiko | python | 17 | 0 | 14 | 0 | 17 | 0 | 0.0% | 8 |
 | pyjwt | python | 10 | 4 | 25 | 360 | 10 | 0 | 0.0% | 0 |
-| python-jose | python | 11 | 2 | 9 | 108 | 11 | 0 | 0.0% | 0 |
+| python-jose | python | 11 | 2 | 9 | 107 | 11 | 0 | 0.0% | 0 |
 | certbot | python | 23 | 10 | 37 | 9 | 23 | 0 | 0.0% | 0 |
 | twisted | python | 65 | 32 | 20 | 19 | 65 | 0 | 0.0% | 0 |
 | django | python | 17 | 5 | 0 | 0 | 17 | 0 | 0.0% | 0 |
@@ -16,16 +16,16 @@ found by reading the code, listed in `labels/<name>.json`.
 | ansible | python | 21 | 4 | 11 | 0 | 21 | 0 | 0.0% | 0 |
 | golang-jwt | go | 8 | 1 | 13 | 46 | 8 | 0 | 0.0% | 0 |
 | x-crypto | go | 143 | 54 | 96 | 17 | 143 | 0 | 0.0% | 30 |
-| go-jose | go | 87 | 49 | 53 | 68 | 87 | 1 | 1.1% | 0 |
+| go-jose | go | 87 | 49 | 53 | 67 | 87 | 1 | 1.1% | 0 |
 | step-ca | go | 156 | 131 | 100 | 539 | 156 | 0 | 0.0% | 27 |
 | cfssl | go | 87 | 33 | 100 | 6 | 87 | 0 | 0.0% | 51 |
 | age | go | 32 | 12 | 17 | 0 | 32 | 0 | 0.0% | 0 |
 | caddy | go | 20 | 17 | 16 | 0 | 20 | 0 | 0.0% | 0 |
 | vault | go | 252 | 138 | 206 | 89 | 252 | 0 | 0.0% | 48 |
 | java-jwt | java | 0 | 0 | 29 | 121 | 0 | 0 | n/a | 7 |
-| jjwt | java | 0 | 0 | 83 | 98 | 0 | 0 | n/a | 9 |
+| jjwt | java | 0 | 0 | 83 | 96 | 0 | 0 | n/a | 9 |
 | node-jsonwebtoken | javascript | 6 | 6 | 0 | 137 | 6 | 0 | 0.0% | 0 |
-| forge | javascript | 36 | 7 | 0 | 8 | 36 | 0 | 0.0% | 51 |
-| **total** | | 1040 | 505 | 843 | 1635 | 1040 | 1 | 0.1% | 231 |
+| forge | javascript | 36 | 7 | 0 | 4 | 36 | 0 | 0.0% | 51 |
+| **total** | | 1040 | 505 | 843 | 1627 | 1040 | 1 | 0.1% | 231 |
 
 Labelled 1040 of 1040 call sites (100.0%).
