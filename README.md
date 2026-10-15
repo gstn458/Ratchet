@@ -49,6 +49,57 @@ makes about an algorithm, is maintained in `registry.json` and embedded in the s
 If `registry.json` sits next to `ratchet.py` it is used instead of the embedded copy.
 A `registry.json` that is present but unreadable is an error, not a silent fallback.
 
+## GitHub Action
+
+```yaml
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  ratchet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gstn458/Ratchet@<commit SHA>   # no release yet: pin a full commit
+```
+
+On a pull request the Action scans the checkout, checks the pull request's base out in
+a separate git worktree, scans that too, and compares the two with `ratchet diff`. By
+default it fails only when a file gains unsuppressed quantum-vulnerable call sites, so
+a repository that already uses RSA can adopt it without first migrating. Each file
+that gained call sites is annotated in the pull request at each of its call sites; the
+diff counts per file, so it cannot tell which of them is the new one. On a push there
+is no base, so it reports and does not fail. The comparison, the counts and the full
+report go to the run's job summary. Nothing is posted to the pull request and the
+Action needs only `contents: read`.
+
+| Input | Default | |
+| --- | --- | --- |
+| `path` | `.` | directory to scan, relative to the workspace |
+| `fail-on` | `new` | `new`: fail on added quantum-vulnerable call sites, compared with the base; `any`: fail on any; `none`: never |
+| `base` | the pull request's base | commit or branch to compare with, on any event |
+| `tree-sitter` | `true` | install the pinned grammars; without them Java, JavaScript and TypeScript are not scanned |
+| `include-vendored` | `false` | also scan vendored and test-data directories |
+| `upload-sarif` | `false` | upload the SARIF to code scanning (needs `security-events: write`, and GitHub Advanced Security on a private repository) |
+| `sarif-category` | `ratchet` | code scanning category |
+| `python-version` | `3.12` | Python that runs ratchet; it is kept off the job's `PATH` |
+
+Outputs: `cbom`, `sarif`, `base-cbom` and `diff` (file paths), `vulnerable` (unsuppressed
+quantum-vulnerable call sites in the checkout), `new-vulnerable` (added compared with the
+base, empty without one) and `failed`. When the gate fails, the SARIF upload still runs
+before the job fails.
+
+The base comes from the event: the pull request's base commit, or the merge queue's.
+`actions/checkout` checks out the merge of the pull request into its base, and that is
+compared with the base itself. If the workflow checks out the pull request's head
+instead, it is compared with the merge base, fetching more history when the clone is
+shallow. The base is fetched through the checkout's credentials; with
+`persist-credentials: false`, use `fetch-depth: 0`. Under `pull_request_target` the
+default checkout is the base branch, so check out the head to scan the change. Ratchet
+never runs the code it scans.
+
 ## Tests
 
 The scanner needs nothing installed. The test suite needs pytest and jsonschema:
@@ -395,7 +446,7 @@ and the actual product.
 
 1. Certificate, TLS configuration and dependency manifest scanning
 2. Language model triage to cut false positives on wrapped and dynamic calls
-3. GitHub App that posts the CBOM diff as a check on every pull request
+3. A GitHub App that posts the CBOM diff as a check run on every pull request, without a workflow
 4. Remediation pull requests, hybrid mode first, behind a test suite gate
 
 ## License

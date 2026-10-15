@@ -1,0 +1,107 @@
+name: Ratchet CBOM
+description: >-
+  Find quantum-vulnerable cryptography, write a CycloneDX CBOM and SARIF, and
+  fail a pull request only when it adds quantum-vulnerable call sites.
+author: gstn458
+branding:
+  icon: lock
+  color: orange
+
+inputs:
+  path:
+    description: Directory to scan, relative to the workspace.
+    default: "."
+  fail-on:
+    description: >-
+      new: fail when a file gains unsuppressed quantum-vulnerable call sites
+      compared with the pull request's base (report only when there is no
+      base, as on a push). any: fail on any unsuppressed quantum-vulnerable
+      call site. none: never fail.
+    default: new
+  base:
+    description: >-
+      Commit or branch to compare with. Defaults to the pull request's base,
+      or the merge queue's base; empty on other events.
+    default: ""
+  tree-sitter:
+    description: >-
+      Install the pinned tree-sitter grammars. Java, JavaScript and TypeScript
+      are only scanned with them; without them those files are listed as not
+      scanned.
+    default: "true"
+  include-vendored:
+    description: Also scan vendored and test-data directories.
+    default: "false"
+  upload-sarif:
+    description: >-
+      Upload the SARIF to GitHub code scanning. Needs permission
+      security-events write, and GitHub Advanced Security on a private
+      repository.
+    default: "false"
+  sarif-category:
+    description: Code scanning category for the upload.
+    default: ratchet
+  python-version:
+    description: Python used to run ratchet. Any of 3.9 to 3.13.
+    default: "3.12"
+
+outputs:
+  cbom:
+    description: Path of the CBOM for this checkout.
+    value: ${{ steps.scan.outputs.cbom }}
+  sarif:
+    description: Path of the SARIF for this checkout.
+    value: ${{ steps.scan.outputs.sarif }}
+  base-cbom:
+    description: Path of the CBOM for the base commit, empty without one.
+    value: ${{ steps.scan.outputs.base-cbom }}
+  diff:
+    description: Path of the ratchet diff JSON, empty without a base.
+    value: ${{ steps.scan.outputs.diff }}
+  vulnerable:
+    description: Unsuppressed quantum-vulnerable call sites in this checkout.
+    value: ${{ steps.scan.outputs.vulnerable }}
+  new-vulnerable:
+    description: >-
+      Quantum-vulnerable call sites added compared with the base, counted file
+      by file. Empty without a base.
+    value: ${{ steps.scan.outputs.new-vulnerable }}
+  failed:
+    description: true when the fail-on gate failed.
+    value: ${{ steps.scan.outputs.failed }}
+
+runs:
+  using: composite
+  steps:
+    # update-environment: false keeps this Python off the job's PATH, so the
+    # steps after this action see the Python they had before.
+    - id: python
+      uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+      with:
+        python-version: ${{ inputs.python-version }}
+        update-environment: false
+
+    - if: inputs.tree-sitter == 'true'
+      shell: bash
+      run: >-
+        "$RATCHET_PYTHON" -m pip install --quiet --disable-pip-version-check
+        -r "$GITHUB_ACTION_PATH/requirements-treesitter.txt"
+      env:
+        RATCHET_PYTHON: ${{ steps.python.outputs.python-path }}
+
+    - id: scan
+      shell: bash
+      run: '"$RATCHET_PYTHON" "$GITHUB_ACTION_PATH/action/run.py"'
+      env:
+        RATCHET_PYTHON: ${{ steps.python.outputs.python-path }}
+        RATCHET_PATH: ${{ inputs.path }}
+        RATCHET_FAIL_ON: ${{ inputs.fail-on }}
+        RATCHET_BASE: ${{ inputs.base }}
+        RATCHET_INCLUDE_VENDORED: ${{ inputs.include-vendored }}
+
+    # Runs after a failed gate too, so the alerts reach code scanning.
+    - if: ${{ !cancelled() && inputs.upload-sarif == 'true' && steps.scan.outputs.sarif != '' }}
+      uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}
+        category: ${{ inputs.sarif-category }}

@@ -60,3 +60,34 @@ jobs:
           python ratchet.py tests/fixtures/walk/mixed --json | python -c "$normalise" > /tmp/source.json
           cmp /tmp/installed.json /tmp/source.json
           test "$(/tmp/installed/bin/python -c 'import ratchet; print(ratchet.REGISTRY_SOURCE)')" = embedded
+
+  action:
+    # The action as a user runs it, on each runner OS. On a pull request it
+    # also checks out the base and compares; on a push it reports only.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - id: ratchet
+        uses: ./
+        with:
+          path: tests/fixtures/walk/mixed
+          fail-on: none
+      - name: Outputs are set
+        shell: bash
+        env:
+          CBOM: ${{ steps.ratchet.outputs.cbom }}
+          SARIF: ${{ steps.ratchet.outputs.sarif }}
+          FAILED: ${{ steps.ratchet.outputs.failed }}
+          VULNERABLE: ${{ steps.ratchet.outputs.vulnerable }}
+          NEW_VULNERABLE: ${{ steps.ratchet.outputs.new-vulnerable }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          test -s "$CBOM"
+          test -s "$SARIF"
+          test "$FAILED" = false
+          test "$VULNERABLE" -gt 0
+          if [ "$EVENT" = pull_request ]; then test -n "$NEW_VULNERABLE"; else test -z "$NEW_VULNERABLE"; fi
