@@ -216,8 +216,13 @@ primitive: `SHA1withRSA` is RSA and SHA-1. A name built at run time, held in ano
 file, or passed in from outside is not resolved, which in libraries such as JWT
 implementations is most of them. SHA-384 and SHA-512 are not in the registry, so the
 hash in `SHA512withRSA` records nothing. The generic `EdDSA` and `XDH` are reported as
-such, with the curve (25519 or 448) not visible. Key sizes passed to `initialize()` are not
-read yet. C, C#, JavaScript, Rust and Terraform are not covered.
+such, with the curve (25519 or 448) not visible. Key sizes and curves are read from
+`initialize(2048)`, `RSAKeyGenParameterSpec`, `DSAGenParameterSpec`, `ECGenParameterSpec`
+and `KeyGenerator.init(256)` when the value is a literal or a same-file constant and
+the generator is held in a variable bound once in the file. An EC generator
+initialized with a size leaves the curve to the provider, so nothing is claimed, and
+`NamedParameterSpec` does not yet narrow EdDSA or XDH to a curve. C, C#, JavaScript,
+Rust and Terraform are not covered.
 
 Source code only. Certificates, TLS configuration, hardware security modules, and
 anything on the network are out of scope. A complete cryptographic inventory needs

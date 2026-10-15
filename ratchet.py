@@ -1325,6 +1325,9 @@ JAVA_TREE_SITTER_QUERY = """
 (import_declaration) @import
 (method_invocation name: (identifier) @method (#eq? @method "getInstance")) @call
 (variable_declarator value: (string_literal)) @declarator
+(variable_declarator value: (decimal_integer_literal)) @int_declarator
+(variable_declarator name: (identifier) @declared)
+(method_invocation name: (identifier) @init_method (#match? @init_method "^(initialize|init)$")) @init
 (string_literal) @string
 (assignment_expression) @assignment
 """
@@ -1357,6 +1360,12 @@ JCA_SIGNATURE = re.compile(r"(?P<hash>[a-z0-9/-]+?)with(?P<key>rsa|ecdsa|dsa)(?:
 JCA_PREFIXED = re.compile(r"(?:hmac|pbkdf2withhmac)(?P<hash>.+)")
 JCA_PBE = re.compile(r"pbewith(?P<hash>[a-z0-9-]+?)and(?P<cipher>.+)")
 JCA_OAEP = re.compile(r"oaepwith(?P<hash>.+?)andmgf1padding")
+
+
+# Where a key generator takes its parameter set: KeyPairGenerator.initialize
+# and KeyGenerator.init, with a size or a parameter spec.
+JCA_INIT_METHODS = {"KeyPairGenerator": "initialize", "KeyGenerator": "init"}
+JCA_SIZE_ALGORITHMS = {"RSA", "DSA", "DH", "AES"}  # whose parameter set is a key size
 
 
 # Named curves in JCA (ECGenParameterSpec, JWK "crv" lookups), recorded as EC
@@ -1451,8 +1460,40 @@ class TreeSitterJava(TreeSitterGrammar):
             if left is not None:
                 field = left.child_by_field_name("field") if left.type == "field_access" else left
                 assigned.add(text(field))
+        declared_count = defaultdict(int)  # every declaration of a name, whatever its value
+        for node in captures.get("declared", ()):
+            declared_count[text(node)] += 1
         constants = {name: values[0][1:-1] for name, values in declared.items()
-                     if len(values) == 1 and name not in assigned}
+                     if len(values) == 1 and declared_count[name] == 1 and name not in assigned}
+        int_constants = {}
+        for node in captures.get("int_declarator", ()):
+            name = text(node.child_by_field_name("name"))
+            if declared_count[name] == 1 and name not in assigned:
+                int_constants[name] = text(node.child_by_field_name("value"))
+
+        def int_value(node):
+            """The decimal value of an int literal or int constant, or None."""
+            raw = text(node) if node.type == "decimal_integer_literal" else (
+                int_constants.get(text(node)) if node.type == "identifier" else None)
+            raw = raw.replace("_", "").rstrip("lL") if raw else None
+            return str(int(raw)) if raw and raw.isdigit() else None
+
+        def binding_of(call):
+            """The variable a getInstance result is stored in, when that name is
+            bound exactly once in the file, or None."""
+            parent = call.parent
+            if parent is not None and parent.type == "variable_declarator":
+                name = text(parent.child_by_field_name("name"))
+            elif parent is not None and parent.type == "assignment_expression":
+                left = parent.child_by_field_name("left")
+                left = left.child_by_field_name("field") if left.type == "field_access" else left
+                name = text(left)
+            else:
+                return None
+            bound = declared_count[name] + (name in assigned)
+            return name if bound == 1 else None
+
+        generators = {}  # binding -> (JCA class, findings of its getInstance call)
 
         call_names = set()  # literals passed straight to getInstance: call sites, not names
         for node in sorted(captures.get("call", ()), key=lambda n: n.start_byte):
@@ -1470,8 +1511,53 @@ class TreeSitterJava(TreeSitterGrammar):
             else:
                 continue  # a name only known at run time
             line, snippet = line_of(node)
-            for algo in jca_algorithms(name):
-                findings.append(Finding(algo, path, line, snippet))
+            made = [Finding(algo, path, line, snippet) for algo in jca_algorithms(name)]
+            findings += made
+            cls = text(owner).rsplit(".", 1)[-1]
+            binding = binding_of(node) if cls in JCA_INIT_METHODS else None
+            if binding:
+                generators[binding] = (cls, made)
+
+        # Key sizes and curves: gen.initialize(2048), gen.initialize(new
+        # RSAKeyGenParameterSpec(3072, F4)), gen.initialize(new
+        # ECGenParameterSpec("secp384r1")), aesGen.init(256). Only literal
+        # values and constants, through a generator bound once in the file; a
+        # generator initialized with two different values claims neither.
+        stated = defaultdict(set)
+        for node in captures.get("init", ()):
+            receiver, arguments = node.child_by_field_name("object"), node.child_by_field_name("arguments")
+            if receiver is None or arguments is None:
+                continue
+            receiver = receiver.child_by_field_name("field") if receiver.type == "field_access" else receiver
+            generator = generators.get(text(receiver))
+            if generator is None or JCA_INIT_METHODS[generator[0]] != text(node.child_by_field_name("name")):
+                continue
+            first = next((c for c in arguments.named_children if c.type != "comment"), None)
+            if first is None:
+                continue
+            value = None
+            if first.type == "object_creation_expression":
+                spec = text(first.child_by_field_name("type")).rsplit(".", 1)[-1]
+                spec_args = first.child_by_field_name("arguments")
+                spec_first = next((c for c in spec_args.named_children if c.type != "comment"), None) \
+                    if spec_args is not None else None
+                if spec_first is not None and spec in ("RSAKeyGenParameterSpec", "DSAGenParameterSpec"):
+                    value = ("size", int_value(spec_first))
+                elif spec_first is not None and spec == "ECGenParameterSpec":
+                    curve = text(spec_first)[1:-1] if spec_first.type == "string_literal" else \
+                        constants.get(text(spec_first)) if spec_first.type == "identifier" else None
+                    value = ("curve", JCA_CURVES.get((curve or "").lower()))
+            else:
+                value = ("size", int_value(first))
+            if value and value[1]:
+                stated[text(receiver)].add(value)
+        for binding, values in stated.items():
+            if len(values) != 1:
+                continue
+            (kind, value), = values
+            for f in generators[binding][1]:
+                if (kind == "size" and f.algorithm in JCA_SIZE_ALGORITHMS) or (kind == "curve" and f.algorithm == "EC"):
+                    f.params = value
 
         # Algorithm names held in string literals anywhere else: an enum of JWT
         # algorithms, a constant passed on to another class. They show the

@@ -10,7 +10,7 @@ no .ratchetignore; no findings suppressed
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
   RSA  (5 call sites, 1 import)
-    parameter set: not stated in any call site
+    key sizes: 2048: 1, 3072: 1, 4096: 1, not stated: 2
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       KeyGen.java:14   KeyPairGenerator rsaGen = KeyPairGenerator.getInstance("RSA");
@@ -19,7 +19,7 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       ... and 3 more
 
   DSA  (1 call site)
-    parameter set: not stated in any call site
+    key sizes: 1024: 1
     Shor's algorithm solves the finite-field discrete log.
     migrate to: ML-DSA-65 (FIPS 204)
       KeyGen.java:29   KeyPairGenerator dsaGen = KeyPairGenerator.getInstance("DSA");
@@ -28,7 +28,7 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
   EC  (2 call sites, 1 import, 1 algorithm name)
-    parameter set: not stated in any call site
+    parameter sets: SECP384R1: 1, not stated: 1
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
       KeyGen.java:34   KeyPairGenerator ecGen = KeyPairGenerator.getInstance("EC");
@@ -40,6 +40,7 @@ USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not vis
 REVIEW               reduced margin under Grover, usually acceptable
 
   AES  (1 call site)
+    key sizes: 256: 1
     Grover halves effective key length. AES-256 stays at 128-bit margin.
     migrate to: AES-256 if currently AES-128
       KeyGen.java:44   KeyGenerator aesGen = KeyGenerator.getInstance("AES");

@@ -69,13 +69,13 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/aes",
-      "name": "AES",
+      "bom-ref": "crypto/algorithm/aes-256",
+      "name": "AES-256",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "block-cipher",
-          "parameterSetIdentifier": "unspecified",
+          "parameterSetIdentifier": "256",
           "executionEnvironment": "software-plain-ram",
           "implementationPlatform": "generic",
           "certificationLevel": [
@@ -85,7 +85,7 @@
             "decrypt",
             "encrypt"
           ],
-          "nistQuantumSecurityLevel": 1
+          "nistQuantumSecurityLevel": 5
         }
       },
       "evidence": {
@@ -133,13 +133,13 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/algorithm/dsa",
-      "name": "DSA",
+      "bom-ref": "crypto/algorithm/dsa-1024",
+      "name": "DSA-1024",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "signature",
-          "parameterSetIdentifier": "unspecified",
+          "parameterSetIdentifier": "1024",
           "executionEnvironment": "software-plain-ram",
           "implementationPlatform": "generic",
           "certificationLevel": [
@@ -225,10 +225,6 @@
             "additionalContext": "import"
           },
           {
-            "location": "KeyGen.java#L34",
-            "additionalContext": "call site"
-          },
-          {
             "location": "KeyGen.java#L39",
             "additionalContext": "call site"
           }
@@ -241,7 +237,7 @@
         },
         {
           "name": "ratchet:call_site_count",
-          "value": "2"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -253,7 +249,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "3"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -295,6 +291,10 @@
           {
             "location": "KeyGen.java#L11",
             "additionalContext": "algorithm name"
+          },
+          {
+            "location": "KeyGen.java#L34",
+            "additionalContext": "call site"
           }
         ]
       },
@@ -305,7 +305,7 @@
         },
         {
           "name": "ratchet:call_site_count",
-          "value": "0"
+          "value": "1"
         },
         {
           "name": "ratchet:classical_status",
@@ -317,7 +317,7 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "1"
+          "value": "2"
         },
         {
           "name": "ratchet:quantum_status",
@@ -365,18 +365,6 @@
             "additionalContext": "import"
           },
           {
-            "location": "KeyGen.java#L14",
-            "additionalContext": "call site"
-          },
-          {
-            "location": "KeyGen.java#L19",
-            "additionalContext": "call site"
-          },
-          {
-            "location": "KeyGen.java#L24",
-            "additionalContext": "call site"
-          },
-          {
             "location": "KeyGen.java#L49",
             "additionalContext": "call site"
           },
@@ -393,7 +381,7 @@
         },
         {
           "name": "ratchet:call_site_count",
-          "value": "5"
+          "value": "2"
         },
         {
           "name": "ratchet:classical_status",
@@ -405,7 +393,211 @@
         },
         {
           "name": "ratchet:occurrence_count",
-          "value": "6"
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-2048",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "2048",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "KeyGen.java#L14",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-3072",
+      "name": "RSA-3072",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "3072",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "KeyGen.java#L24",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-4096",
+      "name": "RSA-4096",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "4096",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "KeyGen.java#L19",
+            "additionalContext": "call site"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
         },
         {
           "name": "ratchet:quantum_status",
