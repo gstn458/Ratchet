@@ -500,12 +500,40 @@ PY_CALL_OBJECTS = {
 # call site of that module's algorithm.
 PY_NEW_PACKAGES = ("Crypto.Cipher.", "Crypto.Hash.")
 
+# Functions named like a hash are reported as that hash, whatever module they
+# come from (tests/fixtures/python/name_collision pins the cost of this).
+PY_HASH_FUNCTIONS = ("md5", "sha1")
+
 PY_HASH_NAMES = {
     "md5": "MD5",
     "sha1": "SHA-1",
     "sha256": "SHA-256",
     "sha-1": "SHA-1",
 }
+
+# Text every Python finding requires, as a whole word: the top-level package
+# of a module in the tables above, as an import names it, or a hash name in
+# any case (hashlib.new("SHA1") passes it as a string). A file with none of
+# them cannot produce a finding, so scan_python parses it, which still
+# reports a file that does not parse, but does not walk its tree.
+# tests/test_performance.py checks this against every fixture.
+PY_TRIGGER_PACKAGES = {
+    name.split(".")[0]
+    for table in (PY_MODULES, PY_EC_USAGE_OBJECTS, PY_EC_USAGE_FUNCTIONS, PY_KEYGEN_PARAMS, PY_CALL_OBJECTS)
+    for name in table
+} | {package.split(".")[0] for package in PY_NEW_PACKAGES}
+PY_TRIGGER = re.compile(
+    r"\b(?:" + "|".join(sorted(map(re.escape, PY_TRIGGER_PACKAGES))) + r")\b"
+    r"|(?i:\b(?:" + "|".join(sorted(map(re.escape, set(PY_HASH_FUNCTIONS) | set(PY_HASH_NAMES)))) + r")\b)")
+# The same words in lower case, without the word boundaries: a looser test
+# that plain substring search answers much faster than the expression, so the
+# expression only runs on files that pass it.
+PY_TRIGGER_WORDS = tuple(sorted({w.lower() for w in PY_TRIGGER_PACKAGES | set(PY_HASH_FUNCTIONS) | set(PY_HASH_NAMES)}))
+
+
+def py_triggered(source):
+    lowered = source.lower()
+    return any(word in lowered for word in PY_TRIGGER_WORDS) and bool(PY_TRIGGER.search(source))
 
 # ---------------------------------------------------------------------------
 # Go detection: import paths
@@ -876,7 +904,7 @@ class PyVisitor(ast.NodeVisitor):
             self._add(PY_MODULES[new_module], node)
 
         # hashlib.md5(), hashlib.sha1()
-        elif name in ("md5", "sha1"):
+        elif name in PY_HASH_FUNCTIONS:
             self._add(PY_HASH_NAMES[name], node)
 
         # hashlib.new("md5")
@@ -923,6 +951,8 @@ def scan_python(path):
                        if e.lineno else "not valid Python 3 syntax")
     except (RecursionError, MemoryError):
         raise Unparsed("too deeply nested to parse")
+    if not py_triggered(source):
+        return []
     visitor = PyVisitor(path, source.splitlines())
     visitor.visit(tree)
     visitor.resolve_ec()
