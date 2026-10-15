@@ -147,3 +147,9 @@ def test_ci_gate_counts_call_sites_not_imports():
     assert r.returncode == 0
     # An undetermined EC call site is still quantum vulnerable and does fail.
     assert run(str(FIXTURES / "python" / "ec_undetermined"), "--fail-on-vulnerable").returncode == 1
+
+
+def test_version_names_the_tool_and_registry():
+    r = run("--version")
+    assert r.returncode == 0
+    assert r.stdout.startswith("ratchet ") and "(registry 20" in r.stdout

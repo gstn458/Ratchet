@@ -2897,6 +2897,8 @@ def ci_gate_count(scan):
 
 def main():
     p = argparse.ArgumentParser(description="Find quantum-breakable cryptography in a codebase.")
+    p.add_argument("--version", action="version",
+                   version=f"ratchet {VERSION} (registry {REGISTRY['registry_version']})")
     p.add_argument("path", help="repository or directory to scan")
     p.add_argument("--cbom", metavar="FILE", help="write a CycloneDX 1.6 CBOM to FILE")
     p.add_argument("--json", action="store_true", help="print the CBOM to stdout instead of a report")

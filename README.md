@@ -14,6 +14,13 @@ Ratchet answers that question for source code.
 ## Install
 
 There is nothing to install. Python 3.9 or newer, standard library only.
+`ratchet.py` runs as it is, or it can be installed as the `ratchet` command (the
+package is `ratchet-cbom`; it is not on PyPI yet, so install from a checkout):
+
+```
+pip install .                  # the ratchet command, no dependencies
+pip install '.[tree-sitter]'   # plus tree-sitter for Go, Java, JavaScript and TypeScript
+```
 
 ```
 python3 ratchet.py /path/to/repo

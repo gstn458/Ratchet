@@ -30,3 +30,33 @@ jobs:
         run: python -m pip install -r requirements-treesitter.txt
       - name: Run tests (tree-sitter Go backend too)
         run: python -m pytest -v
+
+  package:
+    # The wheel installs a working ratchet command whose output matches the
+    # source file's: same registry, same findings, nothing left behind.
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install build
+          python -m build -o dist .
+      - name: Install the wheel in a fresh environment
+        run: |
+          python -m venv /tmp/installed
+          /tmp/installed/bin/pip install dist/*.whl
+      - name: Installed command matches the source
+        run: |
+          /tmp/installed/bin/ratchet --version
+          normalise='import json,sys; d=json.load(sys.stdin); d["serialNumber"]=d["metadata"]["timestamp"]=""; print(json.dumps(d, sort_keys=True))'
+          (cd /tmp && /tmp/installed/bin/ratchet "$GITHUB_WORKSPACE/tests/fixtures/walk/mixed" --json) | python -c "$normalise" > /tmp/installed.json
+          python ratchet.py tests/fixtures/walk/mixed --json | python -c "$normalise" > /tmp/source.json
+          cmp /tmp/installed.json /tmp/source.json
+          test "$(/tmp/installed/bin/python -c 'import ratchet; print(ratchet.REGISTRY_SOURCE)')" = embedded
