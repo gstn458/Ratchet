@@ -29,8 +29,16 @@
         "value": "true"
       },
       {
+        "name": "ratchet:not_scanned_file_count",
+        "value": "0"
+      },
+      {
         "name": "ratchet:parser",
         "value": "Go: regex (requested)"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Java: not scanned (regex backend requested)"
       },
       {
         "name": "ratchet:parser",

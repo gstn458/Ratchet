@@ -24,13 +24,15 @@ python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, nod
 python3 ratchet.py /path/to/repo --jobs 1                # one process (default: one worker per CPU)
 ```
 
-Go can optionally be parsed with tree-sitter instead of the built-in regex backend:
+tree-sitter is optional. With it, Go is parsed by tree-sitter instead of the built-in
+regex backend, and Java is scanned at all; without it, Java files are listed as not
+scanned:
 
 ```
 pip install -r requirements-treesitter.txt
 python3 ratchet.py /path/to/repo                         # tree-sitter if installed
 python3 ratchet.py /path/to/repo --backend regex         # never load it
-python3 ratchet.py /path/to/repo --backend tree-sitter   # fail if it is missing
+python3 ratchet.py /path/to/repo --backend tree-sitter   # fail if any grammar is missing
 ```
 
 `ratchet.py` runs on its own. The algorithm registry, which holds every claim Ratchet
@@ -204,7 +206,11 @@ Hand-rolled cryptography is missed. paramiko implements Diffie-Hellman with raw
 modular exponentiation rather than calling a library, and Ratchet does not flag it.
 Anything not routed through a recognized library or import is invisible.
 
-Only Python and Go. Java, C, C#, JavaScript, Rust and Terraform are not covered.
+Python, Go, and Java with tree-sitter installed. Java has no fallback parser: without
+`tree-sitter-java`, every Java file is counted and listed as not scanned, in the report
+and the CBOM. Java detection so far covers imports of the JDK's key interfaces and
+specs and of BouncyCastle classes; JCA `getInstance` calls are next. C, C#,
+JavaScript, Rust and Terraform are not covered.
 
 Source code only. Certificates, TLS configuration, hardware security modules, and
 anything on the network are out of scope. A complete cryptographic inventory needs

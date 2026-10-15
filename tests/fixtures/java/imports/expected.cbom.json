@@ -1,0 +1,450 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "1970-01-01T00:00:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "ratchet",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "target",
+      "name": "imports"
+    },
+    "properties": [
+      {
+        "name": "ratchet:ignored_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:include_vendored",
+        "value": "false"
+      },
+      {
+        "name": "ratchet:not_scanned_file_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Go: tree-sitter 0.23.2 with tree-sitter-go 0.23.4"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Java: tree-sitter 0.23.2 with tree-sitter-java 0.23.5"
+      },
+      {
+        "name": "ratchet:parser",
+        "value": "Python: ast"
+      },
+      {
+        "name": "ratchet:scan_registry_sha256",
+        "value": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b"
+      },
+      {
+        "name": "ratchet:scan_registry_version",
+        "value": "2026.10.2"
+      },
+      {
+        "name": "ratchet:skipped_directory_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:suppressed_finding_count",
+        "value": "0"
+      },
+      {
+        "name": "ratchet:unparsed_file_count",
+        "value": "0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/3des",
+      "name": "3DES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.3.7"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L7",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "AES-256-GCM"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dh",
+      "name": "DH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keyderive",
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.3.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L8",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the finite-field discrete log."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 (FIPS 203)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L5",
+            "additionalContext": "import"
+          },
+          {
+            "location": "src/main/java/app/Keys.java#L6",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L9",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L4",
+            "additionalContext": "import"
+          },
+          {
+            "location": "src/main/java/app/Keys.java#L11",
+            "additionalContext": "import"
+          },
+          {
+            "location": "src/test/java/app/KeysTest.java#L3",
+            "additionalContext": "import (test code)"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "3"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.14.3.2.26"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/app/Keys.java#L10",
+            "additionalContext": "import"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "reduced"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Chosen-prefix collisions demonstrated in 2020. Retire it."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "SHA-256 or SHA-3"
+        }
+      ]
+    }
+  ]
+}

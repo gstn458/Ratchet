@@ -32,10 +32,10 @@ GO_FIXTURES = [root for root in fixture_dirs() if any(root.rglob("*.go"))]
 
 
 def without_parser(cbom, report):
-    """CBOM and report with the Go parser's description taken out."""
+    """CBOM and report with the parsers that depend on tree-sitter taken out."""
     cbom["metadata"]["properties"] = [
         p for p in cbom["metadata"]["properties"]
-        if not (p["name"] == "ratchet:parser" and p["value"].startswith("Go: "))
+        if not (p["name"] == "ratchet:parser" and p["value"].startswith(("Go: ", "Java: ")))
     ]
     lines = [line for line in report.splitlines() if not line.startswith("parsers  ")]
     return dumps(cbom), "\n".join(lines)
@@ -104,7 +104,21 @@ def test_bare_interpreter_reports_the_regex_fallback():
     assert r.returncode == 0, r.stderr
     parsers = [p["value"] for p in json.loads(r.stdout)["metadata"]["properties"]
                if p["name"] == "ratchet:parser"]
-    assert parsers == ["Go: regex (tree-sitter not installed)", "Python: ast"]
+    assert parsers == ["Go: regex (tree-sitter not installed)",
+                       "Java: not scanned (tree-sitter-java not installed)", "Python: ast"]
+
+
+def test_java_without_tree_sitter_is_counted_not_dropped(tmp_path):
+    (tmp_path / "Keys.java").write_text('class Keys { Object k = java.security.KeyPairGenerator.getInstance("RSA"); }')
+    (tmp_path / "keys.py").write_text("import hashlib\nhashlib.md5()\n")
+    r = run_bare(str(tmp_path))
+    assert r.returncode == 0, r.stderr
+    assert "not scanned  1 Java file: tree-sitter-java not installed" in r.stdout
+    assert "1 Java file was not scanned (tree-sitter-java not installed)" in r.stdout
+    r = run_bare(str(tmp_path), "--json")
+    props = {(p["name"], p["value"]) for p in json.loads(r.stdout)["metadata"]["properties"]}
+    assert ("ratchet:not_scanned_file", "Keys.java (Java: tree-sitter-java not installed)") in props
+    assert ("ratchet:not_scanned_file_count", "1") in props
 
 
 def test_requiring_tree_sitter_without_it_exits_2():

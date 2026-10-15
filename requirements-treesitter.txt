@@ -4,3 +4,4 @@
 # report and CBOM records which ones parsed the scan.
 tree-sitter==0.23.2
 tree-sitter-go==0.23.4
+tree-sitter-java==0.23.5

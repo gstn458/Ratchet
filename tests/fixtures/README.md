@@ -102,6 +102,15 @@ after the fixtures were first written:
 | `variant_imports` | crypto/des and crypto/ecdh calls only through the name their import binds: a project package called `des` or `ecdh` is not crypto; the aliased `goecdh.P256()` is ECDH and `stddes.NewTripleDESCipher` is 3DES, which makes the aliased import 3DES too | ok (before: the project packages were DES and X25519, and the aliased calls were missed) |
 | `comments` | Calls inside `//` comments, `/* */` blocks and after a trailing `//` are not matched | ok (block and trailing comments matched before step 5) |
 
+## java/
+
+Java is parsed only with tree-sitter, so these fixtures set `{"backend": "tree-sitter"}`
+and are skipped when the grammars are not installed; CI installs them.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `imports` | Imports of JDK key interfaces and specs and BouncyCastle classes map to their algorithm by the longest matching prefix (`RSAPublicKey` RSA, `ECPrivateKey` and `ECGenParameterSpec` EC, `DESedeKeySpec` 3DES, `ECDSASigner` ECDSA, `SHA1Digest` SHA-1); a static import of an RSA class counts; package wildcards, `java.util`, a commented-out import and an import written in a string do not; `KeysTest.java` under `src/test` is test code | ok |
+
 ## walk/
 
 | Case | Pins down | Status |

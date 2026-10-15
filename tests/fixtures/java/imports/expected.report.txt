@@ -1,0 +1,54 @@
+
+ratchet 0.1.0  scanned 2 files in .
+registry 2026.10.2  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, Python ast
+skipped no directories
+parsed all 2 files
+no .ratchetignore; no findings suppressed
+========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  RSA  (no call sites, 3 imports)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      src/main/java/app/Keys.java:4   import java.security.interfaces.RSAPublicKey;
+      src/main/java/app/Keys.java:11   import static java.security.spec.RSAKeyGenParameterSpec.F4;
+      src/test/java/app/KeysTest.java:3   import java.security.interfaces.RSAPrivateKey;
+
+  DH  (no call sites, 1 import)
+    Shor's algorithm solves the finite-field discrete log.
+    migrate to: ML-KEM-768 (FIPS 203)
+      src/main/java/app/Keys.java:8   import javax.crypto.interfaces.DHPublicKey;
+
+  ECDSA  (no call sites, 1 import)
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      src/main/java/app/Keys.java:9   import org.bouncycastle.crypto.signers.ECDSASigner;
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (no call sites, 2 imports)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      src/main/java/app/Keys.java:5   import java.security.interfaces.ECPrivateKey;
+      src/main/java/app/Keys.java:6   import java.security.spec.ECGenParameterSpec;
+
+
+ALREADY BROKEN       weak today, quantum is not the issue
+
+  3DES  (no call sites, 1 import)
+    Sweet32 birthday attacks. Disallowed by NIST for encryption after 2023.
+    migrate to: AES-256-GCM
+      src/main/java/app/Keys.java:7   import javax.crypto.spec.DESedeKeySpec;
+
+  SHA-1  (no call sites, 1 import)
+    Chosen-prefix collisions demonstrated in 2020. Retire it.
+    migrate to: SHA-256 or SHA-3
+      src/main/java/app/Keys.java:10   import org.bouncycastle.crypto.digests.SHA1Digest;
+
+========================================================================
+No quantum-vulnerable call sites and 7 imports across 2 files.
+No call sites and 2 imports with usage undetermined: review before choosing a migration target.
+

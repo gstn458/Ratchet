@@ -1126,28 +1126,35 @@ GO_TREE_SITTER_QUERY = """
 """
 
 
-class TreeSitterGo:
-    """The tree-sitter Go grammar, loaded once. Raises ImportError when
+class TreeSitterGrammar:
+    """A tree-sitter grammar and query, loaded once. Raises ImportError when
     tree-sitter or the grammar is not installed, and RuntimeError when they are
     installed but cannot load (a grammar built for another tree-sitter ABI)."""
 
+    module = language_name = query_source = None  # set by each language
+
     def __init__(self):
-        import tree_sitter
-        import tree_sitter_go
+        import importlib
         from importlib.metadata import version
+        tree_sitter = importlib.import_module("tree_sitter")
+        grammar = importlib.import_module(self.module)
         try:
-            language = tree_sitter.Language(tree_sitter_go.language())
+            language = tree_sitter.Language(grammar.language())
             self.parser = tree_sitter.Parser(language)
-            self.query = tree_sitter.Query(language, GO_TREE_SITTER_QUERY)
+            self.query = tree_sitter.Query(language, self.query_source)
         except (TypeError, ValueError) as e:
-            raise RuntimeError("tree-sitter could not load the Go grammar") from e
+            raise RuntimeError(f"tree-sitter could not load the {self.language_name} grammar") from e
         # tree-sitter 0.25 moved query execution to QueryCursor; 0.23 and 0.24
         # run it on the query. Both return {capture name: [nodes]}.
         cursor = getattr(tree_sitter, "QueryCursor", None)
         self.captures = (lambda node: cursor(self.query).captures(node)) if cursor \
             else self.query.captures
-        self.description = (f"tree-sitter {version('tree-sitter')} "
-                            f"with tree-sitter-go {version('tree-sitter-go')}")
+        package = self.module.replace("_", "-")
+        self.description = f"tree-sitter {version('tree-sitter')} with {package} {version(package)}"
+
+
+class TreeSitterGo(TreeSitterGrammar):
+    module, language_name, query_source = "tree_sitter_go", "Go", GO_TREE_SITTER_QUERY
 
     def lex(self, text):
         """(code, strings, imports) for Go source, in the shapes go_lex and
@@ -1198,6 +1205,86 @@ class TreeSitterGo:
 def regex_go_lex(text):
     code, strings = go_lex(text)
     return code, strings, go_imports(code, strings)
+
+
+# ---------------------------------------------------------------------------
+# Java via tree-sitter (optional)
+#
+# Java is parsed only with tree-sitter. Without tree-sitter-java installed,
+# Java files are counted and reported as not scanned: there is no fallback,
+# and they are never silently left out.
+# ---------------------------------------------------------------------------
+
+# Imported classes that work with one algorithm's keys, parameters or
+# engines, matched by the longest prefix of the imported name. They show the
+# algorithm is present, as Python and Go imports do, not that it is used.
+JAVA_IMPORTS = {
+    # Key and parameter interfaces and specs in the JDK
+    "java.security.interfaces.RSA": "RSA",
+    "java.security.spec.RSA": "RSA",
+    "java.security.spec.PSSParameterSpec": "RSA",
+    "java.security.interfaces.EC": "EC",
+    "java.security.spec.EC": "EC",
+    "java.security.interfaces.DSA": "DSA",
+    "java.security.spec.DSA": "DSA",
+    "javax.crypto.interfaces.DH": "DH",
+    "javax.crypto.spec.DH": "DH",
+    "javax.crypto.spec.DESKeySpec": "DES",
+    "javax.crypto.spec.DESedeKeySpec": "3DES",
+    # BouncyCastle lightweight API
+    "org.bouncycastle.crypto.engines.RSA": "RSA",
+    "org.bouncycastle.crypto.signers.RSADigestSigner": "RSA",
+    "org.bouncycastle.crypto.signers.PSSSigner": "RSA",
+    "org.bouncycastle.crypto.generators.RSAKeyPairGenerator": "RSA",
+    "org.bouncycastle.crypto.params.RSA": "RSA",
+    "org.bouncycastle.crypto.signers.ECDSASigner": "ECDSA",
+    "org.bouncycastle.crypto.agreement.ECDH": "ECDH",
+    "org.bouncycastle.crypto.generators.ECKeyPairGenerator": "EC",
+    "org.bouncycastle.crypto.params.EC": "EC",
+    "org.bouncycastle.crypto.signers.DSASigner": "DSA",
+    "org.bouncycastle.crypto.params.DSA": "DSA",
+    "org.bouncycastle.crypto.agreement.DH": "DH",
+    "org.bouncycastle.crypto.params.DH": "DH",
+    "org.bouncycastle.crypto.signers.Ed25519": "Ed25519",
+    "org.bouncycastle.crypto.params.Ed25519": "Ed25519",
+    "org.bouncycastle.crypto.agreement.X25519": "X25519",
+    "org.bouncycastle.crypto.params.X25519": "X25519",
+    "org.bouncycastle.crypto.digests.MD5Digest": "MD5",
+    "org.bouncycastle.crypto.digests.SHA1Digest": "SHA-1",
+    "org.bouncycastle.crypto.engines.DESedeEngine": "3DES",
+    "org.bouncycastle.crypto.engines.DESEngine": "DES",
+    "org.bouncycastle.crypto.engines.RC4Engine": "RC4",
+}
+
+JAVA_TREE_SITTER_QUERY = """
+(import_declaration) @import
+"""
+
+
+def java_import_algorithm(name):
+    """The algorithm an imported Java name belongs to, or None."""
+    best = max((prefix for prefix in JAVA_IMPORTS if name.startswith(prefix)), key=len, default=None)
+    return JAVA_IMPORTS[best] if best else None
+
+
+class TreeSitterJava(TreeSitterGrammar):
+    module, language_name, query_source = "tree_sitter_java", "Java", JAVA_TREE_SITTER_QUERY
+
+    def scan(self, path):
+        text = read_source(path)
+        lines = text.splitlines()
+        source = "\n".join(lines).encode("utf-8")
+        captures = self.captures(self.parser.parse(source).root_node)
+        findings = []
+        for node in sorted(captures.get("import", ()), key=lambda n: n.start_byte):
+            # A package wildcard (java.security.*) matches no class-level prefix,
+            # so it names no algorithm; a class's static members do.
+            names = [c for c in node.children if c.type in ("scoped_identifier", "identifier")]
+            algo = java_import_algorithm(names[0].text.decode("utf-8", "replace")) if names else None
+            if algo:
+                row = node.start_point[0]
+                findings.append(Finding(algo, path, row + 1, lines[row] if row < len(lines) else "", kind=IMPORT))
+        return findings
 
 
 class GoFindings(list):
@@ -1470,9 +1557,10 @@ class Scan:
     file), and the parser that ran for each language."""
 
     def __init__(self, findings, files, skipped, include_vendored, unparsed=(),
-                 ignore_rules=None, suppress_rules=None, parsers=None):
+                 ignore_rules=None, suppress_rules=None, parsers=None, not_scanned=None):
         self.findings = findings
         self.parsers = dict(parsers or PARSERS)
+        self.not_scanned = dict(not_scanned or {})  # language -> paths no parser read
         self.files = files
         self.skipped = skipped
         self.include_vendored = include_vendored
@@ -1496,10 +1584,14 @@ def skip_reason(name, include_vendored):
 
 SCANNERS = {".py": scan_python, ".go": scan_go}
 
+# Every source language Ratchet knows, by extension. A file in one of these
+# whose parser is not available is counted and reported as not scanned.
+LANGUAGES = {".py": "Python", ".go": "Go", ".java": "Java"}
+
 # The parser behind each language, recorded in every report and CBOM. Two
 # runs that used different parsers can find different things, and the output
 # has to say so.
-PARSERS = {"Python": "ast", "Go": "regex"}
+PARSERS = {"Python": "ast", "Go": "regex", "Java": "not scanned"}
 
 # Go backends: "auto" uses tree-sitter when it is installed and the regex
 # backend otherwise; "tree-sitter" requires it; "regex" never loads it.
@@ -1529,11 +1621,29 @@ def go_backend(backend="auto"):
         return regex_go_lex, f"regex ({e})"
     return grammar.lex, grammar.description
 
+
+def java_backend(backend="auto"):
+    """(TreeSitterJava or None, description) for the requested backend. Java
+    has no fallback: without tree-sitter-java its files are not scanned."""
+    if backend == "regex":
+        return None, "not scanned (regex backend requested)"
+    try:
+        return (grammar := TreeSitterJava()), grammar.description
+    except ImportError:
+        if backend == "tree-sitter":
+            raise BackendError("--backend tree-sitter: tree-sitter-java is not installed "
+                               "(pip install -r requirements-treesitter.txt)")
+        return None, "not scanned (tree-sitter-java not installed)"
+    except RuntimeError as e:
+        if backend == "tree-sitter":
+            raise BackendError(f"--backend tree-sitter: {e}")
+        return None, f"not scanned ({e})"
+
 # Test code, by convention of each language. Findings there are real, but
 # test-only cryptography is not what a migration plan is about, so they are
 # counted apart in the report, the CBOM and the corpus measurement.
 TEST_DIRS = {"test", "tests", "testing", "testdata"}
-TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py)$")
+TEST_FILE = re.compile(r"(_test\.go|^test_.*\.py|_test\.py|^conftest\.py|(Test|Tests|[a-z0-9]IT)\.java)$")
 
 
 def is_test_path(path):
@@ -1555,8 +1665,12 @@ def default_jobs():
         return os.cpu_count() or 1
 
 
-def make_scanners(go_lex_fn):
-    return dict(SCANNERS, **{".go": functools.partial(scan_go, lex=go_lex_fn)})
+def make_scanners(go_lex_fn, java=None):
+    """{extension: scanner} for the parsers available in this run."""
+    scanners = dict(SCANNERS, **{".go": functools.partial(scan_go, lex=go_lex_fn)})
+    if java is not None:
+        scanners[".java"] = java.scan
+    return scanners
 
 
 def scan_file(scanners, path):
@@ -1570,37 +1684,42 @@ def scan_file(scanners, path):
 _worker_scanners = None
 
 
-def _start_worker(go_backend_name):
+def _start_worker(go_backend_name, scan_java):
     # A tree-sitter parser cannot be sent to another process, so each worker
-    # loads its own, with the backend the main process resolved.
+    # loads its own, with the backends the main process resolved.
     global _worker_scanners
-    _worker_scanners = make_scanners(go_backend(go_backend_name)[0])
+    _worker_scanners = make_scanners(go_backend(go_backend_name)[0],
+                                     TreeSitterJava() if scan_java else None)
 
 
 def _scan_in_worker(path):
     return scan_file(_worker_scanners, path)
 
 
-def scan_files(paths, go_lex_fn, jobs=None):
+def scan_files(paths, go_lex_fn, java=None, jobs=None):
     """scan_file for every path, in order, in parallel when worthwhile."""
     jobs = default_jobs() if jobs is None else jobs
     if jobs > 1 and len(paths) >= PARALLEL_MIN_FILES:
         try:
             import multiprocessing
             pool = multiprocessing.Pool(
-                jobs, _start_worker, ("regex" if go_lex_fn is regex_go_lex else "tree-sitter",))
+                jobs, _start_worker,
+                ("regex" if go_lex_fn is regex_go_lex else "tree-sitter", java is not None))
         except (ImportError, OSError):
             pool = None  # no process support here (no /dev/shm, say): scan in this one
         if pool is not None:
             with pool:
                 chunk = max(1, min(64, len(paths) // (jobs * 8)))
                 return list(pool.imap(_scan_in_worker, paths, chunk))
-    scanners = make_scanners(go_lex_fn)
+    scanners = make_scanners(go_lex_fn, java)
     return [scan_file(scanners, path) for path in paths]
 
 
 def walk(root, include_vendored=False, backend="auto", jobs=None):
     go_lex_fn, go_parser = go_backend(backend)
+    java, java_parser = java_backend(backend)
+    scannable = set(SCANNERS) | ({".java"} if java else set())
+    not_scanned = defaultdict(list)  # language -> paths with no parser in this run
     ignore_rules, suppress_rules = load_ignore_file(root)
     findings, skipped, unparsed = [], [], []
     go_packages = defaultdict(list)  # directory -> GoFindings of its files
@@ -1617,7 +1736,8 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
         # depend on the filesystem's directory ordering.
         dirnames[:] = sorted(keep)
         for fn in sorted(filenames):
-            if os.path.splitext(fn)[1] not in SCANNERS:
+            ext = os.path.splitext(fn)[1]
+            if ext not in LANGUAGES:
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, root)
@@ -1625,9 +1745,12 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
             if rule:
                 rule.matched.append(rel)
                 continue
+            if ext not in scannable:
+                not_scanned[LANGUAGES[ext]].append(rel)
+                continue
             listed.append((dirpath, full, rel))
     files = len(listed)
-    results = scan_files([full for _, full, _ in listed], go_lex_fn, jobs)
+    results = scan_files([full for _, full, _ in listed], go_lex_fn, java, jobs)
     for (dirpath, _, rel), (found, error) in zip(listed, results):
         if error is not None:
             unparsed.append((rel, error))
@@ -1650,7 +1773,8 @@ def walk(root, include_vendored=False, backend="auto", jobs=None):
                 rule.matched.append(f)
                 break
     return Scan(findings, files, sorted(skipped), include_vendored, sorted(unparsed),
-                ignore_rules, suppress_rules, dict(PARSERS, Go=go_parser))
+                ignore_rules, suppress_rules, dict(PARSERS, Go=go_parser, Java=java_parser),
+                {language: sorted(paths) for language, paths in sorted(not_scanned.items())})
 
 
 # ---------------------------------------------------------------------------
@@ -1763,6 +1887,13 @@ def build_cbom(scan, root, tool_version=VERSION):
             ] + [
                 {"name": "ratchet:skipped_directory_count", "value": str(len(scan.skipped))},
                 {"name": "ratchet:unparsed_file_count", "value": str(len(scan.unparsed))},
+                {"name": "ratchet:not_scanned_file_count",
+                 "value": str(sum(len(paths) for paths in scan.not_scanned.values()))},
+            ] + [
+                {"name": "ratchet:not_scanned_file",
+                 "value": f"{path} ({language}: {not_scanned_reason(scan, language)})"}
+                for language, paths in scan.not_scanned.items() for path in paths
+            ] + [
                 {"name": "ratchet:ignored_file_count",
                  "value": str(sum(len(r.matched) for r in scan.ignore_rules or ()))},
                 {"name": "ratchet:suppressed_finding_count",
@@ -1878,6 +2009,18 @@ def print_unparsed(scan, shown=10):
         print(f"  ... and {len(scan.unparsed) - shown} more")
 
 
+def not_scanned_reason(scan, language):
+    """Why a language's files were not scanned, from its parser description."""
+    parser = scan.parsers.get(language, "")
+    return parser[len("not scanned ("):-1] if parser.startswith("not scanned (") else "no parser"
+
+
+def print_not_scanned(scan):
+    """Say which languages had files that no parser read, on every run."""
+    for language, paths in scan.not_scanned.items():
+        print(f"not scanned  {plural(len(paths), f'{language} file')}: {not_scanned_reason(scan, language)}")
+
+
 def report(scan, root):
     """Print the terminal report.
 
@@ -1910,6 +2053,7 @@ def report(scan, root):
     print("parsers  " + ", ".join(f"{lang} {parser}" for lang, parser in sorted(scan.parsers.items())))
     print_skipped(scan)
     print_unparsed(scan)
+    print_not_scanned(scan)
     print_ignored(scan)
     print("=" * 72)
 
@@ -1976,6 +2120,10 @@ def report(scan, root):
                   f"parsed; {plural(len(scan.unparsed), 'file was', 'files were')} not.")
         else:
             print(f"No {which}quantum-vulnerable primitives found.")
+    for language, paths in scan.not_scanned.items():
+        print(f"{plural(len(paths), f'{language} file was', f'{language} files were')} not scanned "
+              f"({not_scanned_reason(scan, language)}), so this result does not cover "
+              f"{'it' if len(paths) == 1 else 'them'}.")
     if suppressed:
         print(f"{plural(suppressed, 'quantum-vulnerable finding')} suppressed by {IGNORE_FILE} "
               f"{'is' if suppressed == 1 else 'are'} not counted here; the rules are listed above.")
