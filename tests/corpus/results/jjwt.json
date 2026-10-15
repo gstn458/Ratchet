@@ -33,6 +33,186 @@
       "snippet": "import java.security.interfaces.RSAKey;"
     },
     {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 106,
+      "snippet": "public static final AeadAlgorithm A128CBC_HS256 = get().forKey(\"A128CBC-HS256\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 106,
+      "snippet": "public static final AeadAlgorithm A128CBC_HS256 = get().forKey(\"A128CBC-HS256\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 113,
+      "snippet": "public static final AeadAlgorithm A192CBC_HS384 = get().forKey(\"A192CBC-HS384\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 120,
+      "snippet": "public static final AeadAlgorithm A256CBC_HS512 = get().forKey(\"A256CBC-HS512\");"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 127,
+      "snippet": "public static final AeadAlgorithm A128GCM = get().forKey(\"A128GCM\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 134,
+      "snippet": "public static final AeadAlgorithm A192GCM = get().forKey(\"A192GCM\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 141,
+      "snippet": "public static final AeadAlgorithm A256GCM = get().forKey(\"A256GCM\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 194,
+      "snippet": "public static final MacAlgorithm HS256 = Jwts.get(REGISTRY, \"HS256\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 215,
+      "snippet": "public static final SignatureAlgorithm RS256 = Jwts.get(REGISTRY, \"RS256\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 215,
+      "snippet": "public static final SignatureAlgorithm RS256 = Jwts.get(REGISTRY, \"RS256\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 222,
+      "snippet": "public static final SignatureAlgorithm RS384 = Jwts.get(REGISTRY, \"RS384\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 229,
+      "snippet": "public static final SignatureAlgorithm RS512 = Jwts.get(REGISTRY, \"RS512\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 240,
+      "snippet": "public static final SignatureAlgorithm PS256 = Jwts.get(REGISTRY, \"PS256\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 240,
+      "snippet": "public static final SignatureAlgorithm PS256 = Jwts.get(REGISTRY, \"PS256\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 251,
+      "snippet": "public static final SignatureAlgorithm PS384 = Jwts.get(REGISTRY, \"PS384\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 262,
+      "snippet": "public static final SignatureAlgorithm PS512 = Jwts.get(REGISTRY, \"PS512\");"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 269,
+      "snippet": "public static final SignatureAlgorithm ES256 = Jwts.get(REGISTRY, \"ES256\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 269,
+      "snippet": "public static final SignatureAlgorithm ES256 = Jwts.get(REGISTRY, \"ES256\");"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 276,
+      "snippet": "public static final SignatureAlgorithm ES384 = Jwts.get(REGISTRY, \"ES384\");"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 283,
+      "snippet": "public static final SignatureAlgorithm ES512 = Jwts.get(REGISTRY, \"ES512\");"
+    },
+    {
       "label": "EdDSA",
       "algorithm": "EdDSA",
       "kind": "algorithm name",
@@ -40,6 +220,204 @@
       "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
       "line": 304,
       "snippet": "public static final SignatureAlgorithm EdDSA = Jwts.get(REGISTRY, \"EdDSA\");"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 365,
+      "snippet": "public static final SecretKeyAlgorithm A128KW = Jwts.get(REGISTRY, \"A128KW\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 389,
+      "snippet": "public static final SecretKeyAlgorithm A192KW = Jwts.get(REGISTRY, \"A192KW\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 413,
+      "snippet": "public static final SecretKeyAlgorithm A256KW = Jwts.get(REGISTRY, \"A256KW\");"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 452,
+      "snippet": "public static final SecretKeyAlgorithm A128GCMKW = Jwts.get(REGISTRY, \"A128GCMKW\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 491,
+      "snippet": "public static final SecretKeyAlgorithm A192GCMKW = Jwts.get(REGISTRY, \"A192GCMKW\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 530,
+      "snippet": "public static final SecretKeyAlgorithm A256GCMKW = Jwts.get(REGISTRY, \"A256GCMKW\");"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 575,
+      "snippet": "public static final KeyAlgorithm<Password, Password> PBES2_HS256_A128KW = Jwts.get(REGISTRY, \"PBES2-HS256+A128KW\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 575,
+      "snippet": "public static final KeyAlgorithm<Password, Password> PBES2_HS256_A128KW = Jwts.get(REGISTRY, \"PBES2-HS256+A128KW\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 620,
+      "snippet": "public static final KeyAlgorithm<Password, Password> PBES2_HS384_A192KW = Jwts.get(REGISTRY, \"PBES2-HS384+A192KW\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 665,
+      "snippet": "public static final KeyAlgorithm<Password, Password> PBES2_HS512_A256KW = Jwts.get(REGISTRY, \"PBES2-HS512+A256KW\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 690,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA1_5 = Jwts.get(REGISTRY, \"RSA1_5\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 715,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP = Jwts.get(REGISTRY, \"RSA-OAEP\");"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 715,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP = Jwts.get(REGISTRY, \"RSA-OAEP\");"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 740,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP_256 = Jwts.get(REGISTRY, \"RSA-OAEP-256\");"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 740,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> RSA_OAEP_256 = Jwts.get(REGISTRY, \"RSA-OAEP-256\");"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 781,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES = Jwts.get(REGISTRY, \"ECDH-ES\");"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 829,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A128KW = Jwts.get(REGISTRY, \"ECDH-ES+A128KW\");"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 829,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A128KW = Jwts.get(REGISTRY, \"ECDH-ES+A128KW\");"
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 878,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A192KW = Jwts.get(REGISTRY, \"ECDH-ES+A192KW\");"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 878,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A192KW = Jwts.get(REGISTRY, \"ECDH-ES+A192KW\");"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 927,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A256KW = Jwts.get(REGISTRY, \"ECDH-ES+A256KW\");"
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/Jwts.java",
+      "line": 927,
+      "snippet": "public static final KeyAlgorithm<PublicKey, PrivateKey> ECDH_ES_A256KW = Jwts.get(REGISTRY, \"ECDH-ES+A256KW\");"
     },
     {
       "label": "EC",
@@ -114,6 +492,15 @@
       "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 80,
+      "snippet": "ES256(\"ES256\", \"ECDSA using P-256 and SHA-256\", \"ECDSA\", \"SHA256withECDSA\", true, 256, 256),"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "algorithm name",
@@ -132,7 +519,25 @@
       "snippet": "ES384(\"ES384\", \"ECDSA using P-384 and SHA-384\", \"ECDSA\", \"SHA384withECDSA\", true, 384, 384),"
     },
     {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 85,
+      "snippet": "ES384(\"ES384\", \"ECDSA using P-384 and SHA-384\", \"ECDSA\", \"SHA384withECDSA\", true, 384, 384),"
+    },
+    {
       "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 90,
+      "snippet": "ES512(\"ES512\", \"ECDSA using P-521 and SHA-512\", \"ECDSA\", \"SHA512withECDSA\", true, 512, 521),"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": false,
@@ -143,6 +548,15 @@
     {
       "label": "RSA",
       "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
+      "line": 97,
+      "snippet": "PS256(\"PS256\", \"RSASSA-PSS using SHA-256 and MGF1 with SHA-256\", \"RSA\", \"RSASSA-PSS\", false, 256, 2048),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
       "kind": "algorithm name",
       "test": false,
       "path": "api/src/main/java/io/jsonwebtoken/SignatureAlgorithm.java",
@@ -517,6 +931,15 @@
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultEcPublicJwk.java",
       "line": 26,
       "snippet": "import java.security.interfaces.ECPublicKey;"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/DefaultMacAlgorithm.java",
+      "line": 51,
+      "snippet": "private static final Set<String> JWA_STANDARD_IDS = new LinkedHashSet<>(Collections.of(\"HS256\", \"HS384\", \"HS512\"));"
     },
     {
       "label": "RSA",
@@ -1100,8 +1523,35 @@
       "kind": "algorithm name",
       "test": false,
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 36,
+      "snippet": "private static final String RSA1_5_ID = \"RSA1_5\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
       "line": 37,
       "snippet": "private static final String RSA1_5_TRANSFORMATION = \"RSA/ECB/PKCS1Padding\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 38,
+      "snippet": "private static final String RSA_OAEP_ID = \"RSA-OAEP\";"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 38,
+      "snippet": "private static final String RSA_OAEP_ID = \"RSA-OAEP\";"
     },
     {
       "label": "RSA",
@@ -1120,6 +1570,24 @@
       "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
       "line": 39,
       "snippet": "private static final String RSA_OAEP_TRANSFORMATION = \"RSA/ECB/OAEPWithSHA-1AndMGF1Padding\";"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 40,
+      "snippet": "private static final String RSA_OAEP_256_ID = \"RSA-OAEP-256\";"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "impl/src/main/java/io/jsonwebtoken/impl/security/StandardKeyAlgorithms.java",
+      "line": 40,
+      "snippet": "private static final String RSA_OAEP_256_ID = \"RSA-OAEP-256\";"
     },
     {
       "label": "RSA",

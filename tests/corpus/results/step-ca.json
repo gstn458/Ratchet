@@ -15,6 +15,771 @@
   "skipped_directories": 7,
   "findings": [
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/account_test.go",
+      "line": 23,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/account_test.go",
+      "line": 23,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/account_test.go",
+      "line": 32,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/account_test.go",
+      "line": 32,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 119,
+      "snippet": "Algorithm: jose.SignatureAlgorithm(\"HS256\"),"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 521,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 521,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 541,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 541,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 560,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 560,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 585,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 585,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 660,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 660,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 691,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 691,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 710,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 710,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 750,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/account_test.go",
+      "line": 750,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 20,
+      "snippet": "jwkX, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 20,
+      "snippet": "jwkX, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 22,
+      "snippet": "jwkY, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 22,
+      "snippet": "jwkY, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 24,
+      "snippet": "wrongJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 24,
+      "snippet": "wrongJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 92,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 92,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 115,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 115,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 177,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 177,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 201,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 201,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 226,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 226,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 272,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 272,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 319,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 319,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 368,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 368,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 417,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 417,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 466,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 466,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 523,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 523,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 570,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 570,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 629,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 629,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 684,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 684,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 686,
+      "snippet": "differentJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 686,
+      "snippet": "differentJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 741,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 741,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 795,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 795,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 907,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 907,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 919,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 919,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 931,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 931,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 943,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 943,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 955,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 955,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 967,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 967,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 980,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 980,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1018,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1018,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1055,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1055,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1093,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/eab_test.go",
+      "line": 1093,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/handler_test.go",
+      "line": 661,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/handler_test.go",
+      "line": 661,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/handler_test.go",
+      "line": 701,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/handler_test.go",
+      "line": 701,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "import",
@@ -22,6 +787,294 @@
       "path": "acme/api/middleware.go",
       "line": 5,
       "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 364,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 364,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 421,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 421,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 476,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 476,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 500,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 500,
+      "snippet": "_jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 680,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 680,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 979,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 979,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1263,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1263,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1379,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1379,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1459,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1459,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1551,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1551,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1627,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1627,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1665,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/middleware_test.go",
+      "line": 1665,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 568,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 568,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 572,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 572,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 2012,
+      "snippet": "Algorithms:  []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 2012,
+      "snippet": "Algorithms:  []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 2016,
+      "snippet": "SignatureAlgorithms:        []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/order_test.go",
+      "line": 2016,
+      "snippet": "SignatureAlgorithms:        []string{\"ES256\"},"
     },
     {
       "label": "ECDSA",
@@ -42,6 +1095,60 @@
       "snippet": "\"crypto/rsa\""
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 148,
+      "snippet": "return \"RS256\", crypto.SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 148,
+      "snippet": "return \"RS256\", crypto.SHA256"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 152,
+      "snippet": "return \"ES256\", crypto.SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 152,
+      "snippet": "return \"ES256\", crypto.SHA256"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 154,
+      "snippet": "return \"ES384\", crypto.SHA384"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/revoke_test.go",
+      "line": 156,
+      "snippet": "return \"ES512\", crypto.SHA512"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -58,6 +1165,87 @@
       "path": "acme/api/wire_integration_test.go",
       "line": 6,
       "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 132,
+      "snippet": "accessTokenSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 132,
+      "snippet": "accessTokenSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 145,
+      "snippet": "oidcTokenSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 145,
+      "snippet": "oidcTokenSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 173,
+      "snippet": "Algorithms:  []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 173,
+      "snippet": "Algorithms:  []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 177,
+      "snippet": "SignatureAlgorithms:        []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 177,
+      "snippet": "SignatureAlgorithms:        []string{\"ES256\"},"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/api/wire_integration_test.go",
+      "line": 218,
+      "snippet": "jwk, err := jose.GenerateJWK(\"OKP\", \"\", \"EdDSA\", \"sig\", \"\", 0)"
     },
     {
       "label": "Ed25519",
@@ -213,6 +1401,24 @@
       "snippet": "\"crypto/sha256\""
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 132,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 132,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -285,6 +1491,60 @@
       "snippet": "signer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 514,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 514,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 525,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 525,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 837,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 837,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -292,6 +1552,24 @@
       "path": "acme/challenge_test.go",
       "line": 842,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 883,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 883,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -303,6 +1581,384 @@
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1027,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1027,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1081,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1081,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1085,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1085,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1136,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1136,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1190,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1190,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1194,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1194,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1236,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1236,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1326,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1326,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1330,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1330,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1387,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1387,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1477,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1477,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1481,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1481,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1775,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1775,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1799,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1799,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1842,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1842,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1886,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1886,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1929,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 1929,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2075,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2075,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2098,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2098,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2141,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2141,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2183,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2183,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -310,6 +1966,24 @@
       "path": "acme/challenge_test.go",
       "line": 2188,
       "snippet": "h := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2227,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2227,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -330,6 +2004,60 @@
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2563,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2563,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2601,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2601,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2640,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2640,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -337,6 +2065,24 @@
       "path": "acme/challenge_test.go",
       "line": 2645,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2684,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2684,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -348,6 +2094,24 @@
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2729,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2729,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -355,6 +2119,24 @@
       "path": "acme/challenge_test.go",
       "line": 2734,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2773,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2773,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -366,6 +2148,24 @@
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2817,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2817,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -373,6 +2173,60 @@
       "path": "acme/challenge_test.go",
       "line": 2822,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2844,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2844,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2884,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2884,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2925,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2925,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -384,6 +2238,24 @@
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2969,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 2969,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -391,6 +2263,60 @@
       "path": "acme/challenge_test.go",
       "line": 2974,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3014,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3014,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3054,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3054,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3095,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3095,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -411,6 +2337,24 @@
       "snippet": "incorrectTokenHash := sha256.Sum256([]byte(\"mismatched\"))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3142,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3142,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -429,6 +2373,24 @@
       "snippet": "incorrectTokenHash := sha256.Sum256([]byte(\"mismatched\"))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3190,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3190,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -436,6 +2398,24 @@
       "path": "acme/challenge_test.go",
       "line": 3195,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3235,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3235,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -447,6 +2427,24 @@
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3281,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3281,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -454,6 +2452,24 @@
       "path": "acme/challenge_test.go",
       "line": 3286,
       "snippet": "expKeyAuthHash := sha256.Sum256([]byte(expKeyAuth))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3319,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3319,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -483,6 +2499,24 @@
       "snippet": "signer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3685,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3685,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -501,6 +2535,15 @@
       "snippet": "otherSigner, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3859,
+      "snippet": "\"x5c\": []any{makeLeaf(mustSigner(\"OKP\", \"Ed25519\", 0), serialNumber).Raw, ca.Intermediate.Raw},"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -508,6 +2551,24 @@
       "path": "acme/challenge_test.go",
       "line": 3917,
       "snippet": "signer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3927,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 3927,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -528,6 +2589,24 @@
       "snippet": "signer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 4680,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 4680,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -544,6 +2623,24 @@
       "path": "acme/challenge_test.go",
       "line": 4813,
       "snippet": "signer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 4815,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_test.go",
+      "line": 4815,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -609,6 +2706,24 @@
       "snippet": "keyAuthSum := sha256.Sum256([]byte(keyAuthorization))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_tpmsimulator_test.go",
+      "line": 485,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_tpmsimulator_test.go",
+      "line": 485,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "call site",
@@ -625,6 +2740,2004 @@
       "path": "acme/challenge_wire_test.go",
       "line": 6,
       "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 57,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 57,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 61,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 61,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 88,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 88,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 92,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 92,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 130,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 130,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 134,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 134,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 172,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 172,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 176,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 176,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 226,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 226,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 230,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 230,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 300,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 300,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 391,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 391,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 395,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 395,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 448,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 448,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 539,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 539,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 543,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 543,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 600,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 600,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 691,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 691,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 695,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 695,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 752,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 752,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 843,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 843,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 847,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 847,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 910,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 910,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1000,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1000,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1004,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1004,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1055,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1055,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1145,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1145,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1149,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1149,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1200,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1200,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1290,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1290,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1294,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1294,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1340,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1340,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1347,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1347,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1437,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1437,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1441,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1441,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1488,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1488,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1495,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1495,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1585,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1585,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1589,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1589,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1641,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1641,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1731,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1731,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1735,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1735,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1786,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1786,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1876,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1876,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1880,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1880,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1931,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 1931,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2021,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2021,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2025,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2025,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2076,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2076,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2166,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2166,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2170,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2170,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2221,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2221,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2223,
+      "snippet": "maliciousSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2223,
+      "snippet": "maliciousSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2313,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2313,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2317,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2317,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2368,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2368,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2458,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2458,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2462,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2462,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2514,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2514,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2604,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2604,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2608,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2608,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2712,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2712,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2716,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2716,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2743,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2743,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2747,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2747,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2792,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2792,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2796,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2796,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2830,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2830,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2837,
+      "snippet": "anotherSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2837,
+      "snippet": "anotherSignerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2886,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2886,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2890,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2890,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2939,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2939,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2993,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2993,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2997,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 2997,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3046,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3046,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3100,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3100,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3104,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3104,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3149,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3149,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3203,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3203,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3207,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3207,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3256,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3256,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3310,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3310,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3314,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3314,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3361,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3361,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3415,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3415,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3419,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3419,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3470,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3470,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3524,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3524,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3528,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3528,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3579,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3579,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3633,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3633,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3637,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3637,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3694,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3694,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3696,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3696,
+      "snippet": "maliciousJwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3750,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3750,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3754,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3754,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3799,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3799,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3853,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3853,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3857,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 3857,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4012,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4012,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4016,
+      "snippet": "SignatureAlgorithms: []string{\"RS256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4016,
+      "snippet": "SignatureAlgorithms: []string{\"RS256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4063,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4063,
+      "snippet": "Algorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4067,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/challenge_wire_test.go",
+      "line": 4067,
+      "snippet": "SignatureAlgorithms: []string{\"ES256\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 68,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 68,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 226,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 226,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 328,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 328,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 399,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 399,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 423,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 423,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 447,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 447,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 493,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 493,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 556,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/db/nosql/account_test.go",
+      "line": 556,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "DSA",
@@ -762,6 +4875,51 @@
       "snippet": "if err := dsa.GenerateKey(&dsa2048, rand.Reader); err != nil {"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "api/api_test.go",
+      "line": 1500,
+      "snippet": "{\"ed25519\", args{edPub, edPriv, nil}, \"Ed25519\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "api/api_test.go",
+      "line": 1551,
+      "snippet": "\"alg\": \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "api/api_test.go",
+      "line": 1551,
+      "snippet": "\"alg\": \"ES256\","
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "api/api_test.go",
+      "line": 1610,
+      "snippet": "\"alg\": \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "api/api_test.go",
+      "line": 1610,
+      "snippet": "\"alg\": \"ES256\","
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -859,6 +5017,24 @@
       "path": "authority/authorize_test.go",
       "line": 6,
       "snippet": "\"crypto/ed25519\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/authorize_test.go",
+      "line": 1016,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"foo\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/authorize_test.go",
+      "line": 1016,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"foo\", 0)"
     },
     {
       "label": "Ed25519",
@@ -1050,6 +5226,24 @@
       "snippet": "sum := sha256.Sum256([]byte(\"/subscriptions/subscriptionID/resourceGroups/resourceGroup/providers/Microsoft.Compute/virtualMachines/virtualMachine\"))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/azure_test.go",
+      "line": 274,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/azure_test.go",
+      "line": 274,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
@@ -1084,6 +5278,24 @@
       "path": "authority/provisioner/collection.go",
       "line": 325,
       "snippet": "sum := sha1.Sum([]byte(p.GetID()))"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/collection_test.go",
+      "line": 148,
+      "snippet": "jwk, err = jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/collection_test.go",
+      "line": 148,
+      "snippet": "jwk, err = jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -1149,6 +5361,24 @@
       "snippet": "sum = sha256.Sum256([]byte(t2))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/gcp_test.go",
+      "line": 249,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/gcp_test.go",
+      "line": 249,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "RSA-2048",
       "algorithm": "RSA",
       "kind": "call site",
@@ -1192,6 +5422,132 @@
       "path": "authority/provisioner/jwk_test.go",
       "line": 423,
       "snippet": "rsa1024, err := rsa.GenerateKey(rand.Reader, 1024)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 57,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 57,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 73,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 73,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 88,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 88,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 104,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 104,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 154,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 154,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 258,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 258,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 348,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/k8sSA_test.go",
+      "line": 348,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "ECDSA",
@@ -1374,6 +5730,114 @@
       "snippet": "\"crypto/rsa\""
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 45,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"foo\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 45,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"foo\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 148,
+      "snippet": "otherJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 148,
+      "snippet": "otherJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 507,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 507,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 518,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 518,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 532,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 532,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 546,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/sshpop_test.go",
+      "line": 546,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -1381,6 +5845,24 @@
       "path": "authority/provisioner/utils_test.go",
       "line": 6,
       "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/utils_test.go",
+      "line": 99,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/utils_test.go",
+      "line": 99,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-256",
@@ -1435,6 +5917,96 @@
       "path": "authority/provisioner/webhook_test.go",
       "line": 6,
       "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/wire/oidc_options_test.go",
+      "line": 184,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/wire/oidc_options_test.go",
+      "line": 184,
+      "snippet": "signerJWK, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 204,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 204,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 243,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 243,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 284,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 284,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 326,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "authority/provisioner/x5c_test.go",
+      "line": 326,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "ECDSA",
@@ -1606,6 +6178,204 @@
       "path": "authority/tls_test.go",
       "line": 224,
       "snippet": "hash := sha1.Sum(info.SubjectPublicKey.Bytes)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ca/acmeClient.go",
+      "line": 69,
+      "snippet": "ac.Key, err = jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ca/acmeClient.go",
+      "line": 69,
+      "snippet": "ac.Key, err = jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 250,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 250,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 381,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 381,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 516,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 516,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 638,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 638,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 760,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 760,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 883,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 883,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 985,
+      "snippet": "key, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 985,
+      "snippet": "key, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1096,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1096,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1223,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1223,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1356,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ca/acmeClient_test.go",
+      "line": 1356,
+      "snippet": "jwk, err := jose.GenerateJWK(\"EC\", \"P-256\", \"ES256\", \"sig\", \"\", 0)"
     },
     {
       "label": "SHA-1",
@@ -1968,6 +6738,69 @@
       "snippet": "rsaKey := mustSigner(rsa.GenerateKey(rand.Reader, 2048))"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 262,
+      "snippet": "{\"p256\", args{p256, nil}, []jose.Header{{Algorithm: \"ES256\"}}, false},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 262,
+      "snippet": "{\"p256\", args{p256, nil}, []jose.Header{{Algorithm: \"ES256\"}}, false},"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 263,
+      "snippet": "{\"p384\", args{p384, new(jose.SignerOptions).WithType(\"JWT\")}, []jose.Header{{Algorithm: \"ES384\", ExtraHeaders: map[jose.HeaderKey]any{\"typ\": \"JWT\"}}}, false},"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 264,
+      "snippet": "{\"p521\", args{p521, new(jose.SignerOptions).WithHeader(\"kid\", \"the-kid\")}, []jose.Header{{Algorithm: \"ES512\", KeyID: \"the-kid\"}}, false},"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 265,
+      "snippet": "{\"ed25519\", args{edKey, nil}, []jose.Header{{Algorithm: \"EdDSA\"}}, false},"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 266,
+      "snippet": "{\"rsa\", args{rsaKey, nil}, []jose.Header{{Algorithm: \"RS256\"}}, false},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "cas/stepcas/x5c_issuer_test.go",
+      "line": 266,
+      "snippet": "{\"rsa\", args{rsaKey, nil}, []jose.Header{{Algorithm: \"RS256\"}}, false},"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -2281,6 +7114,24 @@
       "path": "test/integration/scep/internal/x509/x509.go",
       "line": 39,
       "snippet": "_ \"crypto/sha256\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 95,
+      "snippet": "Ed25519: \"Ed25519\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "test/integration/scep/internal/x509/x509.go",
+      "line": 204,
+      "snippet": "{PureEd25519, \"Ed25519\", oidSignatureEd25519, emptyRawValue, Ed25519, crypto.Hash(0) /* no pre-hashing */, false},"
     },
     {
       "label": "RSA",

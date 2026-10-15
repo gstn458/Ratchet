@@ -123,6 +123,42 @@
       "snippet": "var sha1 = forge.md.sha1.create();"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/rsa.js",
+      "line": 1087,
+      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/rsa.js",
+      "line": 1087,
+      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/rsa.js",
+      "line": 1286,
+      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/rsa.js",
+      "line": 1286,
+      "snippet": "} else if(scheme === 'RSA-OAEP' || scheme === 'RSAES-OAEP') {"
+    },
+    {
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
@@ -328,6 +364,42 @@
       "path": "tests/pocs/ghsa-ppp5-5v6c-4jwp.js",
       "line": 155,
       "snippet": "const forgedNode = crypto.verify('sha256', msg, {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/unit/pkcs1.js",
+      "line": 1036,
+      "snippet": "ciphertext = publicKey.encrypt(message, 'RSA-OAEP', {md: md});"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/unit/pkcs1.js",
+      "line": 1036,
+      "snippet": "ciphertext = publicKey.encrypt(message, 'RSA-OAEP', {md: md});"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/unit/pkcs1.js",
+      "line": 1037,
+      "snippet": "decoded = privateKey.decrypt(ciphertext, 'RSA-OAEP', {md: md});"
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/unit/pkcs1.js",
+      "line": 1037,
+      "snippet": "decoded = privateKey.decrypt(ciphertext, 'RSA-OAEP', {md: md});"
     },
     {
       "label": "RSA-512",

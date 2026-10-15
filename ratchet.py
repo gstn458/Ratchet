@@ -466,8 +466,10 @@ REGISTRY_DIGEST = registry_digest(REGISTRY)
 # A string literal that is exactly a registered JOSE "alg" or "enc" value is
 # an algorithm-name occurrence: counted apart, never gating a build, never
 # evidence of EC usage. JOSE names are case-sensitive (RFC 7515, section
-# 4.1.1). Each fixes its primitives: ES256 is ECDSA on P-256 with SHA-256,
-# RSA-OAEP is RSA with SHA-1 (RFC 7518, section 4.3). Hashes and curves the
+# 4.1.1). Each fixes its primitives: ES256 is ECDSA on P-256 with SHA-256.
+# RSA-OAEP is RSA with SHA-1 in JOSE (RFC 7518, section 4.3), but WebCrypto
+# and node-forge use the same string for OAEP with a hash chosen separately,
+# so it records RSA only. Hashes and curves the
 # registry lacks (SHA-384, SHA-512) record nothing beyond the key algorithm.
 # Sources: RFC 7518 sections 3.1, 4.1 and 5.1; RFC 8037 (EdDSA); RFC 8812
 # (ES256K); RFC 9864 (Ed25519, Ed448).
@@ -481,7 +483,7 @@ def _jose_table():
         "ES256": [("ECDSA", "SECP256R1"), ("SHA-256", None)], "ES384": [("ECDSA", "SECP384R1")],
         "ES512": [("ECDSA", "SECP521R1")], "ES256K": [("ECDSA", "SECP256K1"), ("SHA-256", None)],
         "EdDSA": [("EdDSA", None)], "Ed25519": [("Ed25519", None)], "Ed448": [("Ed448", None)],
-        "RSA1_5": [("RSA", None)], "RSA-OAEP": [("RSA", None), ("SHA-1", None)],
+        "RSA1_5": [("RSA", None)], "RSA-OAEP": [("RSA", None)],
         "RSA-OAEP-256": [("RSA", None), ("SHA-256", None)], "RSA-OAEP-384": [("RSA", None)],
         "RSA-OAEP-512": [("RSA", None)], "ECDH-ES": [("ECDH", None)],
         "A128CBC-HS256": [("AES", "128"), ("SHA-256", None)], "A192CBC-HS384": [("AES", "192")],

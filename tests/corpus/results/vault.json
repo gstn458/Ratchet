@@ -564,6 +564,132 @@
       "snippet": "rootKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 18,
+      "snippet": "\"RS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 18,
+      "snippet": "\"RS256\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 19,
+      "snippet": "\"RS384\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 20,
+      "snippet": "\"RS512\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 21,
+      "snippet": "\"PS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 21,
+      "snippet": "\"PS256\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 22,
+      "snippet": "\"PS384\": true,"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 23,
+      "snippet": "\"PS512\": true,"
+    },
+    {
+      "label": "EC-SECP256R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 24,
+      "snippet": "\"ES256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 24,
+      "snippet": "\"ES256\": true,"
+    },
+    {
+      "label": "EC-SECP384R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 25,
+      "snippet": "\"ES384\": true,"
+    },
+    {
+      "label": "EC-SECP521R1",
+      "algorithm": "EC",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 26,
+      "snippet": "\"ES512\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/acme_jws.go",
+      "line": 30,
+      "snippet": "\"HS256\": true,"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pki/acme_state_test.go",
+      "line": 79,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -778,6 +904,15 @@
       "path": "builtin/logical/pki/ca_util_test.go",
       "line": 30,
       "snippet": "publicKey, _, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pki/crl_test.go",
+      "line": 178,
+      "snippet": "{\"ed25519\", 0, \"\", 0, false, \"Ed25519\"},"
     },
     {
       "label": "AES",
@@ -1039,6 +1174,15 @@
       "path": "builtin/logical/pki/issuing/signing_utils.go",
       "line": 12,
       "snippet": "\"crypto/rsa\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "builtin/logical/pki/issuing/signing_utils.go",
+      "line": 78,
+      "snippet": "{x509.PureEd25519, \"Ed25519\", oidSignatureEd25519, emptyRawValue, x509.Ed25519, crypto.Hash(0) /* no pre-hashing */, false},"
     },
     {
       "label": "ECDSA",
@@ -1464,6 +1608,24 @@
       "snippet": "\"crypto/rsa\""
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkcs12_jks_java_validator_test.go",
+      "line": 226,
+      "snippet": "{name: \"Ed25519\", keyType: \"ed25519\", keyBits: 0},"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "builtin/logical/pkiext/pkcs12_openssl_validator_test.go",
+      "line": 170,
+      "snippet": "{name: \"Ed25519\", keyType: \"ed25519\", keyBits: 0},"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -1869,6 +2031,42 @@
       "snippet": "sha256.New(),"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent/jwt_end_to_end_test.go",
+      "line": 80,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent/jwt_end_to_end_test.go",
+      "line": 80,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent_test.go",
+      "line": 82,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/agent_test.go",
+      "line": 82,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -1903,6 +2101,24 @@
       "path": "command/server/plugin_test.go",
       "line": 33,
       "snippet": "h := sha256.New()"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/proxy_test.go",
+      "line": 74,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "command/server/proxy_test.go",
+      "line": 74,
+      "snippet": "\"jwt_supported_algs\":     \"ES256\","
     },
     {
       "label": "SHA-256",
@@ -2904,6 +3120,15 @@
       "snippet": "\"crypto/sha1\""
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 87,
+      "snippet": "x509.PureEd25519:      \"Ed25519\","
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "call site",
@@ -2938,6 +3163,15 @@
       "path": "sdk/helper/certutil/helpers.go",
       "line": 429,
       "snippet": "_, privateKey, err = ed25519.GenerateKey(randReader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "sdk/helper/certutil/helpers.go",
+      "line": 2317,
+      "snippet": "case \"Ed25519\":"
     },
     {
       "label": "ECDSA",
@@ -3696,6 +3930,267 @@
       "snippet": "const hashBuffer = await crypto.subtle.digest('SHA-256', data);"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/forms/oidc/key.ts",
+      "line": 22,
+      "snippet": "possibleValues: ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'EdDSA'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/routes/vault/cluster/access/oidc/keys/create.js",
+      "line": 15,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/app/routes/vault/cluster/access/oidc/keys/create.js",
+      "line": 15,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 38,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 38,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/readonly/oidc.spec.ts",
+      "line": 95,
+      "snippet": "data: { algorithm: 'EdDSA' },"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 73,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('ES256');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 73,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('ES256');"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 92,
+      "snippet": "expect(key.algorithm).toBe('ES256');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 92,
+      "snippet": "expect(key.algorithm).toBe('ES256');"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 113,
+      "snippet": "await page.getByLabel('Algorithm').selectOption('EdDSA');"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/e2e/tests/superuser/oidc.spec.ts",
+      "line": 116,
+      "snippet": "expect((await readOidcData(page, 'key', 'test-oidc-key')).algorithm).toBe('EdDSA');"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/mirage/handlers/agent-registry.js",
+      "line": 24,
+      "snippet": "supported_algorithms: ['RS256'],"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "ui/mirage/handlers/agent-registry.js",
+      "line": 24,
+      "snippet": "supported_algorithms: ['RS256'],"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 229,
+      "snippet": "assert.dom(GENERAL.infoRowValue('Algorithm')).hasText('RS256', 'defaults to RS526 algorithm');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 229,
+      "snippet": "assert.dom(GENERAL.infoRowValue('Algorithm')).hasText('RS256', 'defaults to RS526 algorithm');"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 265,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 265,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 288,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 288,
+      "snippet": "data: { algorithm: 'RS256', rotation_period: 86400, verification_ttl: 86400 },"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 364,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/acceptance/oidc-config/clients-test.js",
+      "line": 364,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 37,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 37,
+      "snippet": "algorithm: 'RS256',"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 70,
+      "snippet": "assert.dom('[data-test-input=\"algorithm\"]').hasValue('RS256', 'default algorithm is correct');"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "ui/tests/integration/components/oidc/key-form-test.js",
+      "line": 70,
+      "snippet": "assert.dom('[data-test-input=\"algorithm\"]').hasValue('RS256', 'default algorithm is correct');"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -3885,6 +4380,42 @@
       "snippet": "privateKey, err := rsa.GenerateKey(rand.Reader, 2048)"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 347,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 347,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 696,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/external_tests/identity/oidc_provider_test.go",
+      "line": 696,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -3948,6 +4479,96 @@
       "snippet": "\"golang.org/x/crypto/ed25519\""
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 228,
+      "snippet": "Default:     \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 228,
+      "snippet": "Default:     \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1801,
+      "snippet": "case \"RS256\", \"RS384\", \"RS512\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1801,
+      "snippet": "case \"RS256\", \"RS384\", \"RS512\":"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1806,
+      "snippet": "case \"ES256\", \"ES384\", \"ES512\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1806,
+      "snippet": "case \"ES256\", \"ES384\", \"ES512\":"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1810,
+      "snippet": "case \"ES256\":"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1810,
+      "snippet": "case \"ES256\":"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1812,
+      "snippet": "case \"ES384\":"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1814,
+      "snippet": "case \"ES512\":"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "call site",
@@ -3957,6 +4578,15 @@
       "snippet": "if key, err = ecdsa.GenerateKey(curve, rand.Reader); err != nil {"
     },
     {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc.go",
+      "line": 1821,
+      "snippet": "case \"EdDSA\":"
+    },
+    {
       "label": "Ed25519",
       "algorithm": "Ed25519",
       "kind": "call site",
@@ -3964,6 +4594,42 @@
       "path": "vault/identity_store_oidc.go",
       "line": 1822,
       "snippet": "_, key, err = ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider.go",
+      "line": 2568,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/identity_store_oidc_provider.go",
+      "line": 2568,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_provider_test.go",
+      "line": 1180,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_provider_test.go",
+      "line": 1180,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
     },
     {
       "label": "SHA-256",
@@ -3984,6 +4650,132 @@
       "snippet": "hf := sha256.New()"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 426,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 426,
+      "snippet": "[]string{\"*\"}, \"RS256\"))"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 470,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 470,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 500,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 500,
+      "snippet": "\"algorithm\":          \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1033,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1033,
+      "snippet": "Algorithm:        \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1084,
+      "snippet": "Algorithm:       \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1084,
+      "snippet": "Algorithm:       \"RS256\","
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "EdDSA",
+      "algorithm": "EdDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "vault/identity_store_oidc_test.go",
+      "line": 1506,
+      "snippet": "for _, alg := range []string{\"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\", \"EdDSA\"} {"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "import",
@@ -4000,6 +4792,15 @@
       "path": "vault/logical_system.go",
       "line": 5482,
       "snippet": "hf = sha256.New()"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "vault/login_mfa.go",
+      "line": 2215,
+      "snippet": "\"alg\":       \"HS256\","
     },
     {
       "label": "SHA-256",

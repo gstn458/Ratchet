@@ -28,14 +28,6 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       tokens.py:11   return jwt.decode(token, key, algorithms=["ES384", "EdDSA"])
 
 
-ALREADY BROKEN       weak today, quantum is not the issue
-
-  SHA-1  (no call sites, 1 algorithm name)
-    Chosen-prefix collisions demonstrated in 2020. Retire it.
-    migrate to: SHA-256 or SHA-3
-      tokens.py:15   return {"alg": "RSA-OAEP", "enc": "A128CBC-HS256"}
-
-
 REVIEW               reduced margin under Grover, usually acceptable
 
   SHA-256  (no call sites, 3 algorithm names)

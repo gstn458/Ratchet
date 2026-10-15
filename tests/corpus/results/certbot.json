@@ -96,6 +96,60 @@
       "snippet": "privkey = rsa.generate_private_key(public_exponent=65537, key_size=2048)"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/jose_test.py",
+      "line": 32,
+      "snippet": "_test_it('', 'RS512')"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/jose_test.py",
+      "line": 43,
+      "snippet": "('jwa', 'HS256',),"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/messages_test.py",
+      "line": 221,
+      "snippet": "self.hmac_alg = \"HS256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/messages_test.py",
+      "line": 249,
+      "snippet": "self.key, self.kid, self.hmac_key, self.dir, \"HS256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/messages_test.py",
+      "line": 257,
+      "snippet": "assert protected_default['alg'] == 'HS256'"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/src/acme/_internal/tests/messages_test.py",
+      "line": 297,
+      "snippet": "hmac_alg = \"HS256\""
+    },
+    {
       "label": "DSA",
       "algorithm": "DSA",
       "kind": "import",
@@ -130,6 +184,24 @@
       "path": "acme/src/acme/crypto_util.py",
       "line": 16,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/src/acme/messages.py",
+      "line": 303,
+      "snippet": "directory: Directory, hmac_alg: str = \"HS256\") -> dict[str, Any]:"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/src/acme/messages.py",
+      "line": 311,
+      "snippet": "\"HS256\": jose.jwa.HS256,"
     },
     {
       "label": "EC",
@@ -301,6 +373,15 @@
       "path": "certbot/src/certbot/_internal/client.py",
       "line": 199,
       "snippet": "rsa_key = generate_private_key("
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "certbot/src/certbot/_internal/constants.py",
+      "line": 85,
+      "snippet": "eab_hmac_alg=\"HS256\","
     },
     {
       "label": "SHA-1",

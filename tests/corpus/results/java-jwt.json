@@ -69,6 +69,15 @@
       "snippet": "return new RSAAlgorithm(\"PS256\", \"RSASSA-PSS\", pssParams(\"SHA-256\", MGF1ParameterSpec.SHA256, 32), keyProvider);"
     },
     {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 143,
+      "snippet": "return new RSAAlgorithm(\"PS256\", \"RSASSA-PSS\", pssParams(\"SHA-256\", MGF1ParameterSpec.SHA256, 32), keyProvider);"
+    },
+    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "algorithm name",
@@ -114,6 +123,15 @@
       "snippet": "return new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 32, keyProvider);"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 339,
+      "snippet": "return new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 32, keyProvider);"
+    },
+    {
       "label": "SHA-256",
       "algorithm": "SHA-256",
       "kind": "algorithm name",
@@ -132,7 +150,25 @@
       "snippet": "return new ECDSAAlgorithm(\"ES384\", \"SHA384withECDSA\", 48, keyProvider);"
     },
     {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 375,
+      "snippet": "return new ECDSAAlgorithm(\"ES384\", \"SHA384withECDSA\", 48, keyProvider);"
+    },
+    {
       "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "lib/src/main/java/com/auth0/jwt/algorithms/Algorithm.java",
+      "line": 411,
+      "snippet": "return new ECDSAAlgorithm(\"ES512\", \"SHA512withECDSA\", 66, keyProvider);"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": false,
@@ -249,6 +285,24 @@
       "snippet": "import java.security.interfaces.RSAPrivateKey;"
     },
     {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTCreatorTest.java",
+      "line": 374,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"HS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTDecoderTest.java",
+      "line": 208,
+      "snippet": "assertThat(jwt.getAlgorithm(), is(\"HS256\"));"
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
@@ -271,9 +325,108 @@
       "algorithm": "SHA-256",
       "kind": "algorithm name",
       "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 210,
+      "snippet": "assertThat(jwt.getAlgorithm(), is(\"HS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 387,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"HS256\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 435,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"RS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 435,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"RS256\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 451,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"RS384\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 467,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"RS512\"));"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 483,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"ES256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 483,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"ES256\"));"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 499,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"ES384\"));"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/JWTTest.java",
+      "line": 515,
+      "snippet": "assertThat(headerJson, JsonMatcher.hasEntry(\"alg\", \"ES512\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 288,
       "snippet": "assertThat(algorithm.getDescription(), is(\"HmacSHA256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 289,
+      "snippet": "assertThat(algorithm.getName(), is(\"HS256\"));"
     },
     {
       "label": "SHA-256",
@@ -285,6 +438,15 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"HmacSHA256\"));"
     },
     {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 319,
+      "snippet": "assertThat(algorithm.getName(), is(\"HS256\"));"
+    },
+    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "algorithm name",
@@ -301,6 +463,24 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 349,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 350,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 350,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
     },
     {
       "label": "RSA",
@@ -326,6 +506,24 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 361,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 361,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 372,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
     },
@@ -344,6 +542,24 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 373,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 373,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 383,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
     },
@@ -355,6 +571,24 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 383,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 384,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 384,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS256\"));"
     },
     {
       "label": "RSA",
@@ -371,8 +605,26 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 395,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS384\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 405,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 406,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS384\"));"
     },
     {
       "label": "RSA",
@@ -389,8 +641,26 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 418,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS384\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 428,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 429,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS384\"));"
     },
     {
       "label": "RSA",
@@ -407,8 +677,26 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 440,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS512\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 450,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 451,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS512\"));"
     },
     {
       "label": "RSA",
@@ -425,8 +713,26 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 463,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS512\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 473,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withRSA\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 474,
+      "snippet": "assertThat(algorithm.getName(), is(\"RS512\"));"
     },
     {
       "label": "RSA",
@@ -443,8 +749,44 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 486,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 486,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS256\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 496,
       "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 497,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 497,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS256\"));"
     },
     {
       "label": "RSA",
@@ -461,8 +803,26 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 509,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS384\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 519,
       "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 520,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS384\"));"
     },
     {
       "label": "RSA",
@@ -479,10 +839,28 @@
       "kind": "algorithm name",
       "test": true,
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 532,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS512\"));"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 542,
       "snippet": "assertThat(algorithm.getDescription(), is(\"RSASSA-PSS\"));"
     },
     {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 543,
+      "snippet": "assertThat(algorithm.getName(), is(\"PS512\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -499,6 +877,24 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 553,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 554,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 554,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
     },
     {
       "label": "ECDSA",
@@ -519,6 +915,24 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 565,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 565,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -537,6 +951,24 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 577,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 577,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -553,6 +985,24 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 587,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA256withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 588,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 588,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES256\"));"
     },
     {
       "label": "ECDSA",
@@ -564,6 +1014,15 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 599,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES384\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -571,6 +1030,15 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 609,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 610,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES384\"));"
     },
     {
       "label": "ECDSA",
@@ -582,6 +1050,15 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 622,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES384\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -589,6 +1066,15 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 632,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA384withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 633,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES384\"));"
     },
     {
       "label": "ECDSA",
@@ -600,6 +1086,15 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 644,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES512\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -607,6 +1102,15 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 654,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 655,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES512\"));"
     },
     {
       "label": "ECDSA",
@@ -618,6 +1122,15 @@
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
     },
     {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 667,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES512\"));"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
@@ -625,6 +1138,15 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
       "line": 677,
       "snippet": "assertThat(algorithm.getDescription(), is(\"SHA512withECDSA\"));"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/AlgorithmTest.java",
+      "line": 678,
+      "snippet": "assertThat(algorithm.getName(), is(\"ES512\"));"
     },
     {
       "label": "EC",
@@ -664,6 +1186,15 @@
     },
     {
       "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/ECDSAAlgorithmTest.java",
+      "line": 453,
+      "snippet": "Algorithm algorithm = new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 128, provider);"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": true,
@@ -718,6 +1249,15 @@
     },
     {
       "label": "ECDSA",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/algorithms/ECDSABouncyCastleProviderTests.java",
+      "line": 470,
+      "snippet": "Algorithm algorithm = new ECDSAAlgorithm(\"ES256\", \"SHA256withECDSA\", 128, provider);"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
       "algorithm": "ECDSA",
       "kind": "algorithm name",
       "test": true,
@@ -787,6 +1327,42 @@
       "path": "lib/src/test/java/com/auth0/jwt/algorithms/RSAPSSAlgorithmTest.java",
       "line": 17,
       "snippet": "import java.security.interfaces.RSAPublicKey;"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/impl/BasicHeaderTest.java",
+      "line": 54,
+      "snippet": "BasicHeader header = new BasicHeader(\"HS256\", null, null, null, null, objectReader);"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/impl/BasicHeaderTest.java",
+      "line": 58,
+      "snippet": "assertThat(header.getAlgorithm(), is(\"HS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/impl/HeaderDeserializerTest.java",
+      "line": 78,
+      "snippet": "assertThat(header.getAlgorithm(), is(\"HS256\"));"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "lib/src/test/java/com/auth0/jwt/impl/HeaderDeserializerTest.java",
+      "line": 84,
+      "snippet": "assertThat(header.getHeaderClaim(\"alg\").asString(), is(\"HS256\"));"
     }
   ]
 }

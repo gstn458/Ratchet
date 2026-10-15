@@ -314,6 +314,69 @@
     {
       "label": "SHA-256",
       "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 131,
+      "snippet": "Algorithm: \"HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 231,
+      "snippet": "return \"RS256\", crypto.SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 231,
+      "snippet": "return \"RS256\", crypto.SHA256"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 235,
+      "snippet": "return \"ES256\", crypto.SHA256"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 235,
+      "snippet": "return \"ES256\", crypto.SHA256"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 237,
+      "snippet": "return \"ES384\", crypto.SHA384"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "acme/jws.go",
+      "line": 239,
+      "snippet": "return \"ES512\", crypto.SHA512"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
       "kind": "call site",
       "test": false,
       "path": "acme/jws.go",
@@ -384,6 +447,78 @@
       "snippet": "if !ecdsa.Verify(testKeyEC.Public().(*ecdsa.PublicKey), h[:], r, s) {"
     },
     {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 283,
+      "snippet": "{testKeyEC, testKeyECPubX, testKeyECPubY, \"ES256\", \"P-256\"},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 283,
+      "snippet": "{testKeyEC, testKeyECPubX, testKeyECPubY, \"ES256\", \"P-256\"},"
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 284,
+      "snippet": "{testKeyEC384, testKeyEC384PubX, testKeyEC384PubY, \"ES384\", \"P-384\"},"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 285,
+      "snippet": "{testKeyEC512, testKeyEC512PubX, testKeyEC512PubY, \"ES512\", \"P-521\"},"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 416,
+      "snippet": "{\"ES256\", es256phead, testKeyEC.Public(), es256stdsig, es256jwsig, false},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 416,
+      "snippet": "{\"ES256\", es256phead, testKeyEC.Public(), es256stdsig, es256jwsig, false},"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 417,
+      "snippet": "{\"RS256\", rs256phead, testKey.Public(), testsig, testsig, false},"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/jws_test.go",
+      "line": 417,
+      "snippet": "{\"RS256\", rs256phead, testKey.Public(), testsig, testsig, false},"
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -418,6 +553,24 @@
       "path": "acme/rfc8555_test.go",
       "line": 12,
       "snippet": "\"crypto/sha256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/rfc8555_test.go",
+      "line": 478,
+      "snippet": "if prot.Algorithm != \"HS256\" {"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "acme/rfc8555_test.go",
+      "line": 480,
+      "snippet": "prot.Algorithm, \"HS256\")"
     },
     {
       "label": "X25519",

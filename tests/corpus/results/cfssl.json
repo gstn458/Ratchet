@@ -141,6 +141,15 @@
       "snippet": "\"crypto/rsa\""
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "bundler/bundle.go",
+      "line": 115,
+      "snippet": "keyType = \"Ed25519\""
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -447,6 +456,24 @@
       "snippet": "\"crypto/rsa\""
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "helpers/helpers.go",
+      "line": 161,
+      "snippet": "return \"Ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "helpers/helpers.go",
+      "line": 202,
+      "snippet": "return \"Ed25519\""
+    },
+    {
       "label": "ECDSA",
       "algorithm": "ECDSA",
       "kind": "import",
@@ -499,6 +526,24 @@
       "path": "helpers/helpers_test.go",
       "line": 114,
       "snippet": "_, ed25519priv, _ := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "helpers/helpers_test.go",
+      "line": 235,
+      "snippet": "if HashAlgoString(x509.PureEd25519) != \"Ed25519\" {"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "helpers/helpers_test.go",
+      "line": 280,
+      "snippet": "if SignatureString(x509.PureEd25519) != \"Ed25519\" {"
     },
     {
       "label": "ECDSA",
@@ -1570,6 +1615,15 @@
       "path": "signer/signer_test.go",
       "line": 316,
       "snippet": "ed25519Pub, _, err := ed25519.GenerateKey(rand.Reader)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "signer/signer_test.go",
+      "line": 327,
+      "snippet": "{\"Ed25519\", ed25519Pub},"
     },
     {
       "label": "ECDSA",

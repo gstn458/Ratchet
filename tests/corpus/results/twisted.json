@@ -69,6 +69,24 @@
       "snippet": "keyPrimitive = ec.generate_private_key(curve=keys._curveTable[curve])"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/scripts/ckeygen.py",
+      "line": 191,
+      "snippet": "if keyType == \"Ed25519\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/scripts/ckeygen.py",
+      "line": 335,
+      "snippet": "KeyTypeMapping = {\"EC\": \"ecdsa\", \"Ed25519\": \"ed25519\", \"RSA\": \"rsa\", \"DSA\": \"dsa\"}"
+    },
+    {
       "label": "ECDH",
       "algorithm": "ECDH",
       "kind": "import",
@@ -123,6 +141,15 @@
       "snippet": "from cryptography.hazmat.primitives.asymmetric import dsa, ec, ed25519, padding, rsa"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 956,
+      "snippet": "by = v if self.type() == \"Ed25519\" else common.MP(v)[4:]"
+    },
+    {
       "label": "MD5",
       "algorithm": "MD5",
       "kind": "call site",
@@ -130,6 +157,42 @@
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1033,
       "snippet": "[binascii.hexlify(x) for x in iterbytes(md5(self.blob()).digest())]"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1039,
+      "snippet": "def type(self) -> Literal[\"RSA\", \"DSA\", \"EC\", \"Ed25519\"]:"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1058,
+      "snippet": "return \"Ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1092,
+      "snippet": "\"Ed25519\": b\"ssh-ed25519\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1126,
+      "snippet": "if self.type() == \"Ed25519\":"
     },
     {
       "label": "SHA-1",
@@ -150,6 +213,60 @@
       "snippet": "(\"DSA\", b\"ssh-dss\"): hashes.SHA1(),"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1147,
+      "snippet": "elif self.type() == \"Ed25519\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1313,
+      "snippet": "elif type == \"Ed25519\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1395,
+      "snippet": "elif type == \"Ed25519\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1571,
+      "snippet": "if self.type() != \"Ed25519\":"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1579,
+      "snippet": "assert self.type() == \"Ed25519\""
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1606,
+      "snippet": "elif subtype == \"v1\" or (subtype is None and self.type() == \"Ed25519\"):"
+    },
+    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
@@ -168,6 +285,15 @@
       "snippet": "signature = self._keyObject.sign(data, ec.ECDSA(hashAlgorithm))"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1778,
+      "snippet": "elif keyType == \"Ed25519\":"
+    },
+    {
       "label": "RSA",
       "algorithm": "RSA",
       "kind": "call site",
@@ -184,6 +310,15 @@
       "path": "src/twisted/conch/ssh/keys.py",
       "line": 1837,
       "snippet": "args = (signature, data, ec.ECDSA(hashAlgorithm))"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "src/twisted/conch/ssh/keys.py",
+      "line": 1839,
+      "snippet": "elif keyType == \"Ed25519\":"
     },
     {
       "label": "RSA",
@@ -301,6 +436,42 @@
       "path": "src/twisted/conch/test/sk_dummy.py",
       "line": 164,
       "snippet": "der_signature = private_key.sign(payload_to_sign, ec.ECDSA(hashes.SHA256()))"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "src/twisted/conch/test/test_ckeygen.py",
+      "line": 94,
+      "snippet": "self.assertEqual(privKey.type(), \"Ed25519\")"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 320,
+      "snippet": "\"Ed25519\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 327,
+      "snippet": "\"Ed25519\","
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "src/twisted/conch/test/test_keys.py",
+      "line": 797,
+      "snippet": "self.assertEqual(keys.Key(self.ed25519Obj).type(), \"Ed25519\")"
     },
     {
       "label": "EC",

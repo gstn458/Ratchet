@@ -141,6 +141,348 @@
       "snippet": "from rsa import DecryptionError"
     },
     {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 7,
+      "snippet": "HS256 = \"HS256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 10,
+      "snippet": "RS256 = \"RS256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 10,
+      "snippet": "RS256 = \"RS256\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 11,
+      "snippet": "RS384 = \"RS384\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 12,
+      "snippet": "RS512 = \"RS512\""
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 13,
+      "snippet": "ES256 = \"ES256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 13,
+      "snippet": "ES256 = \"ES256\""
+    },
+    {
+      "label": "ECDSA-SECP384R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 14,
+      "snippet": "ES384 = \"ES384\""
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 15,
+      "snippet": "ES512 = \"ES512\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 18,
+      "snippet": "A128CBC_HS256 = \"A128CBC-HS256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 18,
+      "snippet": "A128CBC_HS256 = \"A128CBC-HS256\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 19,
+      "snippet": "A192CBC_HS384 = \"A192CBC-HS384\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 20,
+      "snippet": "A256CBC_HS512 = \"A256CBC-HS512\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 21,
+      "snippet": "A128GCM = \"A128GCM\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 22,
+      "snippet": "A192GCM = \"A192GCM\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 23,
+      "snippet": "A256GCM = \"A256GCM\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 32,
+      "snippet": "RSA1_5 = \"RSA1_5\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 33,
+      "snippet": "RSA_OAEP = \"RSA-OAEP\""
+    },
+    {
+      "label": "SHA-1",
+      "algorithm": "SHA-1",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 33,
+      "snippet": "RSA_OAEP = \"RSA-OAEP\""
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 34,
+      "snippet": "RSA_OAEP_256 = \"RSA-OAEP-256\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 34,
+      "snippet": "RSA_OAEP_256 = \"RSA-OAEP-256\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 35,
+      "snippet": "A128KW = \"A128KW\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 36,
+      "snippet": "A192KW = \"A192KW\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 37,
+      "snippet": "A256KW = \"A256KW\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 38,
+      "snippet": "ECDH_ES = \"ECDH-ES\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 39,
+      "snippet": "ECDH_ES_A128KW = \"ECDH-ES+A128KW\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 39,
+      "snippet": "ECDH_ES_A128KW = \"ECDH-ES+A128KW\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 40,
+      "snippet": "ECDH_ES_A192KW = \"ECDH-ES+A192KW\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 40,
+      "snippet": "ECDH_ES_A192KW = \"ECDH-ES+A192KW\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 41,
+      "snippet": "ECDH_ES_A256KW = \"ECDH-ES+A256KW\""
+    },
+    {
+      "label": "ECDH",
+      "algorithm": "ECDH",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 41,
+      "snippet": "ECDH_ES_A256KW = \"ECDH-ES+A256KW\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 42,
+      "snippet": "A128GCMKW = \"A128GCMKW\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 43,
+      "snippet": "A192GCMKW = \"A192GCMKW\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 44,
+      "snippet": "A256GCMKW = \"A256GCMKW\""
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 45,
+      "snippet": "PBES2_HS256_A128KW = \"PBES2-HS256+A128KW\""
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 45,
+      "snippet": "PBES2_HS256_A128KW = \"PBES2-HS256+A128KW\""
+    },
+    {
+      "label": "AES-192",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 46,
+      "snippet": "PBES2_HS384_A192KW = \"PBES2-HS384+A192KW\""
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "jose/constants.py",
+      "line": 47,
+      "snippet": "PBES2_HS512_A256KW = \"PBES2-HS512+A256KW\""
+    },
+    {
       "label": "EC",
       "algorithm": "EC",
       "kind": "import",
@@ -193,6 +535,636 @@
       "path": "tests/algorithms/test_RSA.py",
       "line": 17,
       "snippet": "from cryptography.hazmat.primitives.asymmetric import rsa as pyca_rsa"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/rfc/test_rfc7520.py",
+      "line": 35,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/rfc/test_rfc7520.py",
+      "line": 45,
+      "snippet": "payload = verify(self.token, rsa_public_jwk, \"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/rfc/test_rfc7520.py",
+      "line": 45,
+      "snippet": "payload = verify(self.token, rsa_public_jwk, \"RS256\")"
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/rfc/test_rfc7520.py",
+      "line": 53,
+      "snippet": "payload = verify(self.token, ec_public_key, \"ES512\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/rfc/test_rfc7520.py",
+      "line": 61,
+      "snippet": "payload = verify(self.token, hmac_key, \"HS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 30,
+      "snippet": "algorithms=\"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 30,
+      "snippet": "algorithms=\"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 36,
+      "snippet": "firebase_token, firebase_certs, algorithms=\"RS256\", options={\"verify_exp\": False, \"verify_aud\": False}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 36,
+      "snippet": "firebase_token, firebase_certs, algorithms=\"RS256\", options={\"verify_exp\": False, \"verify_aud\": False}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 41,
+      "snippet": "jwt.decode(firebase_token, certs, algorithms=\"RS256\", options={\"verify_exp\": False, \"verify_aud\": False})"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_firebase.py",
+      "line": 41,
+      "snippet": "jwt.decode(firebase_token, certs, algorithms=\"RS256\", options={\"verify_exp\": False, \"verify_aud\": False})"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 78,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 78,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 78,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "AES-128",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 118,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 118,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwe.py",
+      "line": 118,
+      "snippet": "expected_header = {\"alg\": \"RSA1_5\", \"enc\": \"A128CBC-HS256\"}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 12,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 47,
+      "snippet": "key = HMACKey(hmac_key, \"RS512\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 53,
+      "snippet": "key = ECKey(ec_key, \"RS512\")  # noqa: F841"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 58,
+      "snippet": "key = HMACKey(rsa_key, \"HS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 61,
+      "snippet": "key = RSAKey(hmac_key, \"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 61,
+      "snippet": "key = RSAKey(hmac_key, \"RS256\")"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 64,
+      "snippet": "key = ECKey(rsa_key, \"ES256\")  # noqa: F841"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 64,
+      "snippet": "key = ECKey(rsa_key, \"ES256\")  # noqa: F841"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 77,
+      "snippet": "key = RSAKey(rsa_key, \"HS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 88,
+      "snippet": "key = RSAKey(rsa_key, \"RS256\")  # noqa: F841"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 88,
+      "snippet": "key = RSAKey(rsa_key, \"RS256\")  # noqa: F841"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 95,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
+      "label": "ECDSA-SECP521R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 103,
+      "snippet": "key = ECKey(ec_key, algorithm=\"ES512\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 121,
+      "snippet": "hs_key = jwk.get_key(\"HS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 125,
+      "snippet": "assert issubclass(jwk.get_key(\"RS256\"), Key)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 125,
+      "snippet": "assert issubclass(jwk.get_key(\"RS256\"), Key)"
+    },
+    {
+      "label": "ECDSA-SECP256R1",
+      "algorithm": "ECDSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 126,
+      "snippet": "assert issubclass(jwk.get_key(\"ES256\"), Key)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 126,
+      "snippet": "assert issubclass(jwk.get_key(\"ES256\"), Key)"
+    },
+    {
+      "label": "AES-256",
+      "algorithm": "AES",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwk.py",
+      "line": 132,
+      "snippet": "assert issubclass(jwk.get_key(\"A256CBC-HS512\"), Key)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 26,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 40,
+      "snippet": "jws.verify(token, {\"keys\": [\"incorrect\", \"secret\"]}, [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 52,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 57,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 62,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 67,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 72,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 76,
+      "snippet": "jws.sign(payload, \"secret\", algorithm=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 76,
+      "snippet": "jws.sign(payload, \"secret\", algorithm=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 96,
+      "snippet": "key = jwk.construct(key_data, algorithm=\"HS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 133,
+      "snippet": "\"alg\": \"HS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 215,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 215,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 223,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 223,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 231,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 231,
+      "snippet": "\"alg\": \"RS256\","
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 274,
+      "snippet": "key = {\"kty\": \"hsa\", \"k\": \"secret\", \"alg\": \"HS256\", \"use\": \"sig\"}"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 291,
+      "snippet": "jwkey = jwk.construct(\"key\", algorithm=\"HS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 332,
+      "snippet": "token = jws.sign(payload, rsa_private_key, algorithm=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 332,
+      "snippet": "token = jws.sign(payload, rsa_private_key, algorithm=\"RS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 335,
+      "snippet": "jws.verify(token, rsa_public_key, algorithms=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 335,
+      "snippet": "jws.verify(token, rsa_public_key, algorithms=\"RS256\")"
+    },
+    {
+      "label": "RSA",
+      "algorithm": "RSA",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 339,
+      "snippet": "jws.verify(token, rsa_private_key, algorithms=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 339,
+      "snippet": "jws.verify(token, rsa_private_key, algorithms=\"RS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 385,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 390,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jws.py",
+      "line": 395,
+      "snippet": "jws.verify(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 80,
+      "snippet": "jwt.decode(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 95,
+      "snippet": "jwt.decode(token, \"secret\", [\"HS256\"])"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 138,
+      "snippet": "encoded1 = jwt.encode(claims, key, algorithm=\"HS256\", headers=headers1)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 147,
+      "snippet": "encoded2 = jwt.encode(claims, key, algorithm=\"HS256\", headers=headers2)"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 181,
+      "snippet": "token = jwt.encode({\"testkey\": \"testvalue\"}, key, algorithm=\"HS256\")"
+    },
+    {
+      "label": "SHA-256",
+      "algorithm": "SHA-256",
+      "kind": "algorithm name",
+      "test": true,
+      "path": "tests/test_jwt.py",
+      "line": 182,
+      "snippet": "verified_data = jwt.decode(token, key, algorithms=[\"HS256\"])"
     }
   ]
 }

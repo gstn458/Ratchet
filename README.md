@@ -236,7 +236,8 @@ JOSE algorithm names, the `alg` and `enc` values of JWT, JWS and JWE (`RS256`, `
 `PS256`, `EdDSA`, `RSA-OAEP`, `ECDH-ES`, `A256GCM` and the rest of RFC 7518, 8037 and
 8812), are algorithm-name occurrences in every language when a string literal is exactly
 one of them, case and all. Each records the primitives it fixes: `ES256` is ECDSA on
-P-256 with SHA-256, `RSA-OAEP` is RSA with SHA-1. A JWT library that accepts a name
+P-256 with SHA-256. `RSA-OAEP` records RSA only: JOSE fixes SHA-1 for it, but WebCrypto
+and node-forge use the same string with a hash chosen elsewhere. A JWT library that accepts a name
 from configuration or a token header at run time is not seen, which is also why a
 verifier's `algorithms=` allow-list shows what it accepts, not what any token uses. TypeScript (`.ts`, `.mts`, `.cts`, `.tsx`) is scanned with the same
 rules through `tree-sitter-typescript`, including `import x = require(...)` and receivers

@@ -15,6 +15,24 @@
   "skipped_directories": 3,
   "findings": [
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/asn1/mib.py",
+      "line": 286,
+      "snippet": "\"1.3.101.112\": \"Ed25519\","
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/asn1/mib.py",
+      "line": 287,
+      "snippet": "\"1.3.101.113\": \"Ed448\","
+    },
+    {
       "label": "X25519",
       "algorithm": "X25519",
       "kind": "import",
@@ -40,6 +58,24 @@
       "path": "scapy/contrib/tacacs.py",
       "line": 46,
       "snippet": "msg = hashlib.md5()"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/dns.py",
+      "line": 112,
+      "snippet": "15: \"Ed25519\", 16: \"Ed448\","
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/dns.py",
+      "line": 112,
+      "snippet": "15: \"Ed25519\", 16: \"Ed448\","
     },
     {
       "label": "RC4",
@@ -312,6 +348,24 @@
       "snippet": "hashes.SHA1(),"
     },
     {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1991,
+      "snippet": "ASN1_OID(\"Ed25519\"),"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/tls/cert.py",
+      "line": 1997,
+      "snippet": "ASN1_OID(\"Ed448\"),"
+    },
+    {
       "label": "3DES",
       "algorithm": "3DES",
       "kind": "call site",
@@ -472,6 +526,42 @@
       "path": "scapy/layers/tls/keyexchange_tls13.py",
       "line": 217,
       "snippet": "pms = privkey.exchange(ec.ECDH(), pubkey)"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1127,
+      "snippet": "lambda pkt: getoid(pkt) in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1127,
+      "snippet": "lambda pkt: getoid(pkt) in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed25519",
+      "algorithm": "Ed25519",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1179,
+      "snippet": "in [\"Ed25519\", \"Ed448\"],"
+    },
+    {
+      "label": "Ed448",
+      "algorithm": "Ed448",
+      "kind": "algorithm name",
+      "test": false,
+      "path": "scapy/layers/x509.py",
+      "line": 1179,
+      "snippet": "in [\"Ed25519\", \"Ed448\"],"
     },
     {
       "label": "3DES",
