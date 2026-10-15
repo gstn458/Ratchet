@@ -1,0 +1,11 @@
+
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.3  from registry.json
+parsers  Go tree-sitter 0.23.2 with tree-sitter-go 0.23.4, Java tree-sitter 0.23.2 with tree-sitter-java 0.23.5, JavaScript tree-sitter 0.23.2 with tree-sitter-javascript 0.23.1, Python ast, TypeScript tree-sitter 0.23.2 with tree-sitter-typescript 0.23.2
+skipped no directories
+parsed all 1 file
+no .ratchetignore; no findings suppressed
+========================================================================
+========================================================================
+No quantum-vulnerable primitives found.
+
