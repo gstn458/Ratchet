@@ -146,6 +146,17 @@ JavaScript is parsed only with tree-sitter, so these fixtures set `{"backend": "
 | `occurrence_cap` | 51 MD5 call sites in one file: the CBOM lists all 51 locations, matching `occurrence_count` | ok (50 listed before step 10) |
 | `mixed` | Python and Go in one tree, relative paths, the report sections, RSA grouped across both languages, and a summary counting call sites and imports apart | ok |
 
+## certs/
+
+Written by `tools/make_cert_fixtures.py`. Every key is a throwaway made for these
+tests and protects nothing.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `x509` | PEM and DER certificates: an RSA chain of two in one file, EC certificates whose key usage says signing, key agreement or nothing, Ed25519, DSA and ML-DSA-65 | gap |
+| `keys` | PKCS#8, PKCS#1 and SEC1 private keys, an encrypted PKCS#8 key, SubjectPublicKeyInfo public keys (RSA-4096, ML-KEM-768), X25519, an OpenSSH private key, OpenSSH public keys and `authorized_keys`, and a certificate request | gap |
+| `malformed` | A PEM block that is not base64 and a truncated DER certificate, which are unparsed; a Keynote `.key` archive and a `.key` text file, which are not key material and are passed over | gap |
+
 ## Notes
 
 1. **Imports and call sites.** v0 counted every recognised import as a call site.
