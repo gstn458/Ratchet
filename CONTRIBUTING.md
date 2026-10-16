@@ -62,8 +62,9 @@ security tool that overstates its coverage is worse than one that admits a gap.
 
 ## Releasing
 
-1. Bump `VERSION` in `ratchet.py`, add a `## <version>` section to `CHANGELOG.md` naming
-   the registry version it ships, and change the version in the README's Action example.
+1. Bump `VERSION` in `ratchet.py`, rename `CHANGELOG.md`'s `## Unreleased` section to
+   `## <version>` (it names the registry version it ships), and change the version in
+   the README's Action example.
    `tests/test_release.py` fails until all three agree.
 2. Merge to `main`, then tag that commit and push the tag:
    `git tag v<version> && git push origin v<version>`.

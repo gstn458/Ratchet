@@ -4,6 +4,45 @@ Every change to `registry.json`, with the claim it makes and the primary source 
 it, as `CONTRIBUTING.md` requires. Each CBOM records the `registry_version` and
 content hash it was produced with, so this file says what any given CBOM was built on.
 
+## 2026.10.4 (registry schema 2)
+
+Certificates and key files. Approved as proposed.
+
+**Further key OIDs (new optional field `key_oids`).** An OID beside `oid` that identifies
+a key of the same algorithm in X.509 or PKCS#8. No claim about the algorithm changes.
+
+| Entry | Key OID | Source |
+| --- | --- | --- |
+| RSA | 1.2.840.113549.1.1.10, id-RSASSA-PSS | RFC 4055, section 3.1: an RSA public key restricted to RSASSA-PSS |
+| DH | 1.2.840.10046.2.1, dhpublicnumber | RFC 3279, section 2.3.3: the X9.42 Diffie-Hellman public key |
+
+**Two new hash entries, SHA-384 and SHA-512.** Both are SHA-2 functions (NIST FIPS
+180-4, section 6.5 and 6.4), quantum reduced and classically ok, like SHA-256: Grover's
+algorithm gives at most a quadratic speedup against preimages, and no practical
+collision is known.
+
+| Entry | OID | Level | Source and reasoning |
+| --- | --- | --- | --- |
+| SHA-384 | 2.16.840.1.101.3.4.2.2, id-sha384 | 4 | NIST CSOR; RFC 5754. NIST defines category 4 as at least the resources for a collision search on a 384-bit hash such as SHA-384 (NIST PQC call for proposals, 2016, section 4.A.5). |
+| SHA-512 | 2.16.840.1.101.3.4.2.3, id-sha512 | 4 | NIST CSOR; RFC 5754. Collision search on SHA-512 needs at least what SHA-384 does, so it meets category 4. NIST defines category 5 by AES-256 key search, not by a hash, so 4 is the lowest category it is known to meet, which is what this field records. |
+
+**A new top-level table, `signature_algorithms`.** The OIDs a certificate names in
+`signatureAlgorithm`, each with its public-key algorithm and hash as registry entries.
+The hash is null where it has no entry (SHA-224) or is carried in the parameters
+(RSASSA-PSS, whose hash defaults to SHA-1 when absent, RFC 4055 section 3.1).
+
+| OIDs | Names | Algorithm | Hash | Source |
+| --- | --- | --- | --- | --- |
+| 1.2.840.113549.1.1.4, .5 | md5WithRSAEncryption, sha1WithRSAEncryption | RSA | MD5, SHA-1 | RFC 3279, section 2.2.1 |
+| 1.2.840.113549.1.1.11, .12, .13, .14 | sha256/384/512/224WithRSAEncryption | RSA | SHA-256, SHA-384, SHA-512, none | RFC 4055, section 5 |
+| 1.2.840.113549.1.1.10 | RSASSA-PSS | RSA | from parameters | RFC 4055, section 3.1 |
+| 1.2.840.10045.4.1 | ecdsa-with-SHA1 | ECDSA | SHA-1 | RFC 3279, section 2.2.3 |
+| 1.2.840.10045.4.3.1 to .4 | ecdsa-with-SHA224/256/384/512 | ECDSA | none, SHA-256, SHA-384, SHA-512 | RFC 5758, section 3.2 |
+| 1.2.840.10040.4.3 | id-dsa-with-sha1 | DSA | SHA-1 | RFC 3279, section 2.2.2 |
+| 2.16.840.1.101.3.4.3.1, .2 | id-dsa-with-sha224, id-dsa-with-sha256 | DSA | none, SHA-256 | RFC 5758, section 3.1 |
+| 1.3.101.112, .113 | id-Ed25519, id-Ed448 | Ed25519, Ed448 | none (the hash is part of EdDSA) | RFC 8410, section 3 |
+| 2.16.840.1.101.3.4.3.17 to .19 | id-ml-dsa-44/65/87 | ML-DSA 44/65/87 | none (part of ML-DSA) | NIST CSOR; RFC 9881 |
+
 ## 2026.10.3 (registry schema 2)
 
 **Four new entries: Ed448, X448, and EdDSA and XDH with the curve not visible.** Java's

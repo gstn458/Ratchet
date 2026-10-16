@@ -59,8 +59,8 @@
             }
           ],
           "properties": {
-            "ratchet:registryVersion": "2026.10.3",
-            "ratchet:registrySha256": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71",
+            "ratchet:registryVersion": "2026.10.4",
+            "ratchet:registrySha256": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8",
             "ratchet:parsers": {
               "Go": "regex (requested)",
               "Java": "not scanned (regex backend requested)",

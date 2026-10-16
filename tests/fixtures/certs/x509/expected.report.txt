@@ -1,6 +1,6 @@
 
 ratchet 0.1.0  scanned 7 files in .
-registry 2026.10.3  from registry.json
+registry 2026.10.4  from registry.json
 parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
 skipped no directories
 parsed all 7 files
@@ -9,35 +9,41 @@ no .ratchetignore; no findings suppressed
 
 QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
-  RSA  (no call sites, 2 certificates)
+  RSA  (no call sites, 2 certificates, 3 certificate signatures)
     key sizes: 2048: 1, 4096: 1
     Shor's algorithm factors the modulus in polynomial time.
     migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
       chain.pem:1   CERTIFICATE CN=www.example.test
+      chain.pem:1   CERTIFICATE CN=www.example.test, signed with sha256WithRSAEncryption
       chain.pem:18   CERTIFICATE CN=Example Test CA
+      ... and 2 more
 
-  DSA  (no call sites, 1 certificate)
+  ECDSA  (no call sites, 1 certificate, 2 certificate signatures)
+    parameter sets: SECP256R1: 1
+    Shor's algorithm solves the discrete log on the curve.
+    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
+      ec_no_usage.der:1   DER certificate CN=unknown.example.test, signed with ecdsa-with-SHA256
+      ec_signing.crt:1   CERTIFICATE CN=signer.example.test
+      ec_signing.crt:1   CERTIFICATE CN=signer.example.test, signed with ecdsa-with-SHA256
+
+  DSA  (no call sites, 1 certificate, 1 certificate signature)
     key sizes: 2048: 1
     Shor's algorithm solves the finite-field discrete log.
     migrate to: ML-DSA-65 (FIPS 204)
       dsa.crt:1   CERTIFICATE CN=dsa.example.test
+      dsa.crt:1   CERTIFICATE CN=dsa.example.test, signed with id-dsa-with-sha256
+
+  Ed25519  (no call sites, 1 certificate, 1 certificate signature)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      ed25519.cer:1   CERTIFICATE CN=ed.example.test
+      ed25519.cer:1   CERTIFICATE CN=ed.example.test, signed with id-Ed25519
 
   ECDH  (no call sites, 1 certificate)
     parameter sets: SECP384R1: 1
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-KEM-768, ideally hybrid X25519+ML-KEM during transition
       ec_agreement.pem:1   CERTIFICATE CN=kex.example.test
-
-  ECDSA  (no call sites, 1 certificate)
-    parameter sets: SECP256R1: 1
-    Shor's algorithm solves the discrete log on the curve.
-    migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
-      ec_signing.crt:1   CERTIFICATE CN=signer.example.test
-
-  Ed25519  (no call sites, 1 certificate)
-    Edwards-curve discrete log falls to Shor's algorithm.
-    migrate to: ML-DSA-65 (FIPS 204)
-      ed25519.cer:1   CERTIFICATE CN=ed.example.test
 
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
@@ -49,13 +55,25 @@ USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not vis
       ec_no_usage.der:1   DER certificate CN=unknown.example.test
 
 
+REVIEW               reduced margin under Grover, usually acceptable
+
+  SHA-256  (no call sites, 6 certificate signatures)
+    Grover gives a quadratic speedup only. Still acceptable.
+    migrate to: no action needed
+      chain.pem:1   CERTIFICATE CN=www.example.test, signed with sha256WithRSAEncryption
+      chain.pem:18   CERTIFICATE CN=Example Test CA, signed with sha256WithRSAEncryption
+      dsa.crt:1   CERTIFICATE CN=dsa.example.test, signed with id-dsa-with-sha256
+      ... and 3 more
+
+
 POST-QUANTUM         NIST post-quantum standards, nothing to migrate
 
-  ML-DSA  (no call sites, 1 certificate)
+  ML-DSA  (no call sites, 1 certificate, 1 certificate signature)
     parameter sets: 65: 1
     FIPS 204. Module-lattice signature.
     migrate to: none
       mldsa65.pem:1   CERTIFICATE CN=pq.example.test
+      mldsa65.pem:1   CERTIFICATE CN=pq.example.test, signed with id-ml-dsa-65
 
 ========================================================================
 No quantum-vulnerable call sites, no imports and 7 certificates and keys across 6 files.

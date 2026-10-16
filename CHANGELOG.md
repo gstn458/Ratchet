@@ -7,6 +7,24 @@ release below names the registry version it ships.
 The release workflow publishes the section for a version as that release's notes, so
 every version in `ratchet.py` needs a section here before it is tagged.
 
+## Unreleased
+
+Registry 2026.10.4.
+
+### Scanning
+
+- Certificates and key files: X.509 certificates and requests, PKCS#8, PKCS#1 and SEC 1
+  keys in PEM or DER, and OpenSSH keys, read with a built-in DER decoder. Each records
+  its algorithm from the key's OID as the registry lists it, with its size or curve.
+  EC keys in certificates are ECDSA or ECDH when the key usage says which.
+- A certificate also records the algorithm and hash its issuer signed it with, so an
+  MD5-signed certificate reports MD5 as already broken.
+- Every file holding a private key is named at the top of the report and in the CBOM;
+  nothing is read past the key's algorithm and size.
+- Certificates and keys are inventory: they never fail `--fail-on-vulnerable` and are
+  notes in SARIF.
+- ML-DSA and ML-KEM report under their own post-quantum heading.
+
 ## 0.1.0
 
 First release. Registry 2026.10.3.

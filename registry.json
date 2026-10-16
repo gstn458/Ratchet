@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "registry_version": "2026.10.3",
+  "registry_version": "2026.10.4",
   "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
   "field_notes": {
     "quantum": {
@@ -14,7 +14,9 @@
     },
     "nist_quantum_security_level": "NIST PQC security category written to CycloneDX nistQuantumSecurityLevel: 0 meets no category, 1 to 5 as defined by NIST's PQC evaluation criteria. The entry's value applies when the parameter set is unknown and is the lowest category any common parameter set reaches; parameter_sets overrides it when the parameter set is known.",
     "oid": "OID of the algorithm. null when no single OID identifies it without information Ratchet does not detect; oid_note says why.",
-    "parameter_sets": "Optional. Keyed by the parameterSetIdentifier Ratchet records; each may set its own oid and nist_quantum_security_level."
+    "parameter_sets": "Optional. Keyed by the parameterSetIdentifier Ratchet records; each may set its own oid and nist_quantum_security_level.",
+    "key_oids": "Optional. Further OIDs that identify a public or private key of this algorithm in X.509 or PKCS#8, beside oid.",
+    "signature_algorithms": "Top-level table, keyed by OID: the signature algorithms a certificate names in signatureAlgorithm, each with the registry entry for its public-key algorithm, the parameter set where the OID fixes one, and the registry entry for its hash, or null when the hash has no entry or is carried in the algorithm's parameters (hash_from_parameters)."
   },
   "algorithms": {
     "RSA": {
@@ -31,7 +33,10 @@
         "verify"
       ],
       "replacement": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures",
-      "why": "Shor's algorithm factors the modulus in polynomial time."
+      "why": "Shor's algorithm factors the modulus in polynomial time.",
+      "key_oids": [
+        "1.2.840.113549.1.1.10"
+      ]
     },
     "ECDSA": {
       "primitive": "signature",
@@ -167,7 +172,10 @@
         "keyderive"
       ],
       "replacement": "ML-KEM-768 (FIPS 203)",
-      "why": "Shor's algorithm solves the finite-field discrete log."
+      "why": "Shor's algorithm solves the finite-field discrete log.",
+      "key_oids": [
+        "1.2.840.10046.2.1"
+      ]
     },
     "DSA": {
       "primitive": "signature",
@@ -283,6 +291,30 @@
       "replacement": "no action needed",
       "why": "Grover gives a quadratic speedup only. Still acceptable."
     },
+    "SHA-384": {
+      "primitive": "hash",
+      "quantum": "reduced",
+      "classical": "ok",
+      "oid": "2.16.840.1.101.3.4.2.2",
+      "nist_quantum_security_level": 4,
+      "functions": [
+        "digest"
+      ],
+      "replacement": "no action needed",
+      "why": "Grover gives a quadratic speedup only. Still acceptable."
+    },
+    "SHA-512": {
+      "primitive": "hash",
+      "quantum": "reduced",
+      "classical": "ok",
+      "oid": "2.16.840.1.101.3.4.2.3",
+      "nist_quantum_security_level": 4,
+      "functions": [
+        "digest"
+      ],
+      "replacement": "no action needed",
+      "why": "Grover gives a quadratic speedup only. Still acceptable."
+    },
     "ML-KEM": {
       "primitive": "kem",
       "quantum": "safe",
@@ -340,6 +372,112 @@
       ],
       "replacement": "none",
       "why": "FIPS 204. Module-lattice signature."
+    }
+  },
+  "signature_algorithms": {
+    "1.2.840.113549.1.1.4": {
+      "name": "md5WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": "MD5"
+    },
+    "1.2.840.113549.1.1.5": {
+      "name": "sha1WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": "SHA-1"
+    },
+    "1.2.840.113549.1.1.10": {
+      "name": "RSASSA-PSS",
+      "algorithm": "RSA",
+      "hash": null,
+      "hash_from_parameters": true
+    },
+    "1.2.840.113549.1.1.11": {
+      "name": "sha256WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": "SHA-256"
+    },
+    "1.2.840.113549.1.1.12": {
+      "name": "sha384WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": "SHA-384"
+    },
+    "1.2.840.113549.1.1.13": {
+      "name": "sha512WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": "SHA-512"
+    },
+    "1.2.840.113549.1.1.14": {
+      "name": "sha224WithRSAEncryption",
+      "algorithm": "RSA",
+      "hash": null
+    },
+    "1.2.840.10045.4.1": {
+      "name": "ecdsa-with-SHA1",
+      "algorithm": "ECDSA",
+      "hash": "SHA-1"
+    },
+    "1.2.840.10045.4.3.1": {
+      "name": "ecdsa-with-SHA224",
+      "algorithm": "ECDSA",
+      "hash": null
+    },
+    "1.2.840.10045.4.3.2": {
+      "name": "ecdsa-with-SHA256",
+      "algorithm": "ECDSA",
+      "hash": "SHA-256"
+    },
+    "1.2.840.10045.4.3.3": {
+      "name": "ecdsa-with-SHA384",
+      "algorithm": "ECDSA",
+      "hash": "SHA-384"
+    },
+    "1.2.840.10045.4.3.4": {
+      "name": "ecdsa-with-SHA512",
+      "algorithm": "ECDSA",
+      "hash": "SHA-512"
+    },
+    "1.2.840.10040.4.3": {
+      "name": "id-dsa-with-sha1",
+      "algorithm": "DSA",
+      "hash": "SHA-1"
+    },
+    "2.16.840.1.101.3.4.3.1": {
+      "name": "id-dsa-with-sha224",
+      "algorithm": "DSA",
+      "hash": null
+    },
+    "2.16.840.1.101.3.4.3.2": {
+      "name": "id-dsa-with-sha256",
+      "algorithm": "DSA",
+      "hash": "SHA-256"
+    },
+    "1.3.101.112": {
+      "name": "id-Ed25519",
+      "algorithm": "Ed25519",
+      "hash": null
+    },
+    "1.3.101.113": {
+      "name": "id-Ed448",
+      "algorithm": "Ed448",
+      "hash": null
+    },
+    "2.16.840.1.101.3.4.3.17": {
+      "name": "id-ml-dsa-44",
+      "algorithm": "ML-DSA",
+      "parameter_set": "44",
+      "hash": null
+    },
+    "2.16.840.1.101.3.4.3.18": {
+      "name": "id-ml-dsa-65",
+      "algorithm": "ML-DSA",
+      "parameter_set": "65",
+      "hash": null
+    },
+    "2.16.840.1.101.3.4.3.19": {
+      "name": "id-ml-dsa-87",
+      "algorithm": "ML-DSA",
+      "parameter_set": "87",
+      "hash": null
     }
   }
 }

@@ -154,8 +154,8 @@ tests and protects nothing.
 | Case | Pins down | Status |
 | --- | --- | --- |
 | `x509` | PEM and DER certificates: an RSA chain of two in one file, EC certificates whose key usage says signing (ECDSA), key agreement (ECDH) or nothing (EC), Ed25519, DSA and ML-DSA-65, which appears under its own post-quantum heading | ok |
-| `keys` | PKCS#8, PKCS#1 and SEC1 private keys in PEM and DER, an encrypted PKCS#8 key, SubjectPublicKeyInfo public keys (RSA-4096, ML-KEM-768), X25519, an OpenSSH private key, OpenSSH public keys and `authorized_keys`, and a certificate request; the private key files are listed at the top of the report | ok |
-| `signatures` | Certificates signed with md5WithRSAEncryption and with RSASSA-PSS over SHA-384 (an RSASSA-PSS key), and an X9.42 DH public key (dhpublicnumber) | gap |
+| `keys` | PKCS#8, PKCS#1 and SEC1 private keys in PEM and DER, an encrypted PKCS#8 key, SubjectPublicKeyInfo public keys (RSA-4096, ML-KEM-768), X25519, an OpenSSH private key, OpenSSH public keys and `authorized_keys`, and a certificate request whose ECDSA self-signature makes its EC key ECDSA; the private key files are listed at the top of the report | ok |
+| `signatures` | Certificates signed with md5WithRSAEncryption (MD5, already broken) and with RSASSA-PSS over SHA-384 read from the parameters (an RSASSA-PSS key, RSA-2048), and an X9.42 DH public key (dhpublicnumber, DH-2048) | ok |
 | `malformed` | A PEM block that is not base64 and a truncated DER certificate, which are unparsed; a Keynote `.key` archive and a `.key` text file, which are not key material and are passed over | ok |
 
 ## Notes

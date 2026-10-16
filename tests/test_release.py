@@ -19,7 +19,16 @@ def test_changelog_has_a_section_for_this_version():
     text = (REPO_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     notes = release_notes.section(text, ratchet.VERSION)
     assert notes and notes.strip()
-    assert f"Registry {ratchet.REGISTRY['registry_version']}." in notes
+
+
+def test_changelog_names_the_registry_this_tree_ships():
+    # Either the released version's section names it, or work since that
+    # release sits under "Unreleased", which does.
+    text = (REPO_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    registry = f"Registry {ratchet.REGISTRY['registry_version']}."
+    released = release_notes.section(text, ratchet.VERSION)
+    unreleased = release_notes.section(text, "Unreleased")
+    assert registry in released or (unreleased is not None and registry in unreleased)
 
 
 def test_section_stops_at_the_next_version():
@@ -28,6 +37,9 @@ def test_section_stops_at_the_next_version():
     assert release_notes.section(text, "0.1.0") == "Old.\n"
     assert release_notes.section(text, "0.1") is None
     assert release_notes.section(text, "0.3.0") is None
+    text = "## Unreleased\n\nNext.\n\n## 0.1.0\n\nOld.\n"
+    assert release_notes.section(text, "Unreleased") == "Next.\n"
+    assert release_notes.section(text, "0.1.0") == "Old.\n"
 
 
 def test_cli_accepts_the_tag_name():

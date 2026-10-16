@@ -74,11 +74,11 @@
       },
       {
         "name": "ratchet:scan_registry_sha256",
-        "value": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71"
+        "value": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.3"
+        "value": "2026.10.4"
       },
       {
         "name": "ratchet:skipped_directory_count",

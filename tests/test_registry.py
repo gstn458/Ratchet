@@ -26,13 +26,14 @@ REGISTRY_CONTENT = {
     "2026.10.1": "ced35b2338a8b06fae7249629ed17b3a62c34309eaaf86341aff98e182a427c2",
     "2026.10.2": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b",
     "2026.10.3": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71",
+    "2026.10.4": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8",
 }
 
 ENTRY_FIELDS = {
     "primitive", "quantum", "classical", "oid", "nist_quantum_security_level",
     "functions", "replacement", "why",
 }
-OPTIONAL_FIELDS = {"oid_note", "parameter_sets"}
+OPTIONAL_FIELDS = {"oid_note", "parameter_sets", "key_oids"}
 OID = r"[0-2](\.(0|[1-9][0-9]*))+"
 
 
@@ -193,6 +194,42 @@ def test_oids_are_dotted_decimal_or_explained(registry):
             assert set(ps) <= {"oid", "nist_quantum_security_level"}, (name, ps_name)
             if "oid" in ps:
                 assert re.fullmatch(OID, ps["oid"]), (name, ps_name)
+
+
+def test_key_oids_are_dotted_decimal_and_unique(registry):
+    seen = {}
+    for name, entry in registry["algorithms"].items():
+        oids = [entry["oid"]] if entry["oid"] else []
+        oids += [ps["oid"] for ps in entry.get("parameter_sets", {}).values() if "oid" in ps]
+        oids += entry.get("key_oids", [])
+        for oid in oids:
+            assert re.fullmatch(OID, oid), (name, oid)
+            assert seen.setdefault(oid, name) == name, f"{oid} claimed by {seen[oid]} and {name}"
+
+
+def test_signature_algorithms_name_registry_entries(registry):
+    algorithms = registry["algorithms"]
+    for oid, sig in registry["signature_algorithms"].items():
+        assert re.fullmatch(OID, oid), oid
+        assert set(sig) <= {"name", "algorithm", "parameter_set", "hash", "hash_from_parameters"}, oid
+        assert sig["name"].strip(), oid
+        assert algorithms[sig["algorithm"]]["primitive"] in ("signature", "pke"), oid
+        if "parameter_set" in sig:
+            assert sig["parameter_set"] in algorithms[sig["algorithm"]]["parameter_sets"], oid
+        if sig["hash"] is not None:
+            assert algorithms[sig["hash"]]["primitive"] == "hash", oid
+            assert not sig.get("hash_from_parameters"), oid
+
+
+def test_signature_oids_that_name_a_key_algorithm_agree_with_it(registry):
+    # Ed25519 and ML-DSA use one OID for the key and the signature.
+    for oid, sig in registry["signature_algorithms"].items():
+        entry = registry["algorithms"][sig["algorithm"]]
+        sets = {ps.get("oid"): name for name, ps in entry.get("parameter_sets", {}).items()}
+        if oid in sets:
+            assert sig.get("parameter_set") == sets[oid], oid
+        elif oid == entry["oid"]:
+            assert "parameter_set" not in sig, oid
 
 
 def test_parameter_set_overrides_reach_the_cbom():

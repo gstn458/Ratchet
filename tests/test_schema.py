@@ -74,7 +74,8 @@ def test_every_occurrence_is_listed(root):
                  if p["name"].endswith("_count")}
         assert len(c["evidence"]["occurrences"]) == props["ratchet:occurrence_count"], c["name"]
         kinds = ["ratchet:call_site_count", "ratchet:import_count", "ratchet:algorithm_name_count",
-                 "ratchet:certificate_count", "ratchet:public_key_count", "ratchet:private_key_count"]
+                 "ratchet:certificate_count", "ratchet:public_key_count", "ratchet:private_key_count",
+                 "ratchet:certificate_signature_count"]
         assert sum(props.get(k, 0) for k in kinds) == props["ratchet:occurrence_count"], c["name"]
 
 

@@ -63,17 +63,38 @@ def test_key_oids_come_from_the_registry():
     assert "1.3.14.3.2.26" not in ratchet.KEY_OIDS
 
 
+GOST_2012_256 = "1.2.643.7.1.1.1.1"   # GOST R 34.10-2012, not in the registry
+
+
 def test_unknown_key_algorithm_is_unparsed_not_guessed(tmp_path):
-    # dhpublicnumber (RFC 3279) is not in the registry: say so, claim nothing.
-    spki = tlv(0x30, tlv(0x30, oid("1.2.840.10046.2.1")) + tlv(0x03, b"\x00\x02\x01\x05"))
-    with pytest.raises(ratchet.Unparsed, match="1.2.840.10046.2.1 is not in the registry"):
-        scan(tmp_path, "dh.pem", pem("PUBLIC KEY", spki))
+    spki = tlv(0x30, tlv(0x30, oid(GOST_2012_256)) + tlv(0x03, b"\x00\x02\x01\x05"))
+    with pytest.raises(ratchet.Unparsed, match=f"{GOST_2012_256} is not in the registry"):
+        scan(tmp_path, "gost.pem", pem("PUBLIC KEY", spki))
+
+
+def integer(n):
+    return tlv(0x02, n.to_bytes(n.bit_length() // 8 + 1, "big"))
+
+
+def test_x509_dh_key_is_dh_with_its_prime_size(tmp_path):
+    # dhpublicnumber, DomainParameters p, g, q (RFC 3279, 2.3.3); key_oids since 2026.10.4.
+    params = tlv(0x30, integer(2 ** 2047 + 1) + integer(2) + integer(2 ** 255 + 1))
+    spki = tlv(0x30, tlv(0x30, oid("1.2.840.10046.2.1") + params) + tlv(0x03, b"\x00" + integer(5)))
+    found = scan(tmp_path, "dh.pem", pem("PUBLIC KEY", spki))
+    assert [(f.algorithm, f.params) for f in found] == [("DH", "2048")]
+
+
+def test_rsassa_pss_key_is_rsa(tmp_path):
+    rsa_key = tlv(0x30, integer(2 ** 3071 + 1) + integer(65537))
+    spki = tlv(0x30, tlv(0x30, oid("1.2.840.113549.1.1.10")) + tlv(0x03, b"\x00" + rsa_key))
+    found = scan(tmp_path, "pss.pub", pem("PUBLIC KEY", spki))
+    assert [(f.algorithm, f.params) for f in found] == [("RSA", "3072")]
 
 
 def test_unknown_key_algorithm_in_der_is_unparsed_with_its_oid(tmp_path):
-    spki = tlv(0x30, tlv(0x30, oid("1.2.840.10046.2.1")) + tlv(0x03, b"\x00\x02\x01\x05"))
-    with pytest.raises(ratchet.Unparsed, match="1.2.840.10046.2.1 is not in the registry"):
-        scan(tmp_path, "dh.key", spki)
+    spki = tlv(0x30, tlv(0x30, oid(GOST_2012_256)) + tlv(0x03, b"\x00\x02\x01\x05"))
+    with pytest.raises(ratchet.Unparsed, match=f"{GOST_2012_256} is not in the registry"):
+        scan(tmp_path, "gost.key", spki)
 
 
 def test_python_error_wording_does_not_reach_the_output(tmp_path):
@@ -118,7 +139,10 @@ def test_private_key_material_never_reaches_the_output():
 def test_pem_among_other_text(tmp_path):
     cert = (CERTS / "x509" / "ec_signing.crt").read_text()
     found = scan(tmp_path, "bundle.pem", "# issued for the signer\nsubject=CN signer\n\n" + cert)
-    assert [(f.algorithm, f.params, f.line) for f in found] == [("ECDSA", "SECP256R1", 4)]
+    assert [(f.algorithm, f.params, f.line, f.kind) for f in found] == [
+        ("ECDSA", "SECP256R1", 4, ratchet.CERTIFICATE),
+        ("ECDSA", None, 4, ratchet.CERT_SIGNATURE),
+        ("SHA-256", None, 4, ratchet.CERT_SIGNATURE)]
 
 
 def test_ssh_options_and_certificate_types(tmp_path):

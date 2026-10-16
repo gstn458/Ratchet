@@ -202,8 +202,11 @@ Certificates and key files are read too: files ending `.pem`, `.crt`, `.cer`,
 SubjectPublicKeyInfo) and OpenSSH keys, and takes the algorithm from the key's OID as
 the registry lists it, with the RSA modulus size, the DSA prime size or the named
 curve. An EC key in a certificate is ECDSA or ECDH when its key usage extension says
-which, and EC, usage undetermined, otherwise. Each key is counted as a certificate, a
-public key or a private key. These are inventory, like imports: they show what a
+which, and EC, usage undetermined, otherwise; in a certificate request, which is signed
+with its own key, an ECDSA signature makes it ECDSA. Each key is counted as a
+certificate, a public key or a private key. A certificate also records how its issuer
+signed it, as a certificate signature: the issuer's algorithm and the hash, so a
+certificate signed with md5WithRSAEncryption reports MD5 as already broken. These are inventory, like imports: they show what a
 repository holds, not what its code does, so they never fail `--fail-on-vulnerable`
 and are notes in SARIF. Every file holding a private key is named at the top of the
 report and in the CBOM, with nothing read from the key past its algorithm and size;
@@ -331,12 +334,10 @@ negative case and it is the reason the roadmap has a language model triage step.
 Certificates and keys are read only from files with the names above. A PEM block
 inside source code, such as a test certificate in a Go string, is not read yet, and
 neither are PKCS#12 (`.p12`, `.pfx`) or Java keystores. A key whose algorithm OID is
-not in the registry is listed as unparsed with the OID rather than guessed at; RSASSA-PSS
-keys (1.2.840.113549.1.1.10) and X.509 Diffie-Hellman keys (dhpublicnumber,
-1.2.840.10046.2.1) are the common cases. A certificate's own signature algorithm, the
-issuer's key type and hash such as sha1WithRSAEncryption, is not recorded yet; only the
-key the certificate certifies is. `known_hosts` is not read, because the keys in it
-belong to other machines.
+not in the registry is listed as unparsed with the OID rather than guessed at, and a
+certificate signed with an algorithm the registry does not list records its key but
+not its signature. `known_hosts` is not read, because the keys in it belong to other
+machines.
 
 Hand-rolled cryptography is missed. paramiko implements Diffie-Hellman with raw
 modular exponentiation rather than calling a library, and Ratchet does not flag it.

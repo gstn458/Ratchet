@@ -1,6 +1,6 @@
 
 ratchet 0.1.0  scanned 13 files in .
-registry 2026.10.3  from registry.json
+registry 2026.10.4  from registry.json
 parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
 skipped no directories
 parsed all 13 files
@@ -27,11 +27,12 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
       legacy_rsa.key:1   RSA PRIVATE KEY
       ... and 2 more
 
-  ECDSA  (no call sites, 1 public key)
-    parameter sets: SECP256R1: 1
+  ECDSA  (no call sites, 2 public keys)
+    parameter sets: SECP256R1: 2
     Shor's algorithm solves the discrete log on the curve.
     migrate to: ML-DSA-65 (FIPS 204), or SLH-DSA if you need hash-based
       authorized_keys:3   ecdsa-sha2-nistp256 key ci@example.test
+      request.csr:1   CERTIFICATE REQUEST CN=csr.example.test
 
   Ed25519  (no call sites, 1 public key)
     Edwards-curve discrete log falls to Shor's algorithm.
@@ -46,14 +47,13 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
 
 USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
 
-  EC  (no call sites, 1 public key, 3 private keys)
-    parameter sets: SECP256R1: 3, SECP384R1: 1
+  EC  (no call sites, 3 private keys)
+    parameter sets: SECP256R1: 2, SECP384R1: 1
     Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
     migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
       ec_sec1.key:1   EC PRIVATE KEY
-      request.csr:1   CERTIFICATE REQUEST CN=csr.example.test
       sec1.der:1   DER private key
-      ... and 1 more
+      server.key:1   PRIVATE KEY
 
 
 POST-QUANTUM         NIST post-quantum standards, nothing to migrate
