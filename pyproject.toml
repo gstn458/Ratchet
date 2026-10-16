@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ratchet-cbom"
+dynamic = ["version"]
+description = "Find quantum-breakable cryptography in a codebase and write a CycloneDX 1.6 CBOM."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+# None: the scanner runs on the standard library alone.
+dependencies = []
+keywords = ["cryptography", "post-quantum", "pqc", "cbom", "cyclonedx", "sbom", "security"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.optional-dependencies]
+# tree-sitter parses Go more exactly and makes Java, JavaScript and TypeScript
+# scannable at all. The ranges allow the versions the test suite has run
+# against; requirements-treesitter.txt pins the exact ones CI uses, and every
+# report and CBOM records the versions that ran.
+tree-sitter = [
+    "tree-sitter>=0.23,<0.27",
+    "tree-sitter-go>=0.23,<0.26",
+    "tree-sitter-java>=0.23,<0.24",
+    "tree-sitter-javascript>=0.23,<0.26",
+    "tree-sitter-typescript>=0.23,<0.24",
+]
+
+[project.scripts]
+ratchet = "ratchet:main"
+
+[project.urls]
+Source = "https://github.com/gstn458/Ratchet"
+
+[tool.setuptools]
+# One module. The algorithm registry is embedded in it, so nothing else ships.
+py-modules = ["ratchet"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ratchet.VERSION"}

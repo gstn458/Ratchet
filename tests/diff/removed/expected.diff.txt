@@ -1,0 +1,13 @@
+
+ratchet diff  old.cbom.json -> new.cbom.json
+========================================================================
+
+FEWER  counts that went down
+
+  RSA call site  keys.py  1 -> 0  (was at line 4)
+  RSA import  keys.py  1 -> 0  (was at line 2)
+  MD5 call site  keys.py  1 -> 0  (was at line 5)
+
+========================================================================
+quantum-vulnerable call sites: 1 -> 0 in total, none more counting file by file.
+

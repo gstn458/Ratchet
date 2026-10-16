@@ -1,0 +1,9 @@
+
+ratchet diff  old.cbom.json -> new.cbom.json
+========================================================================
+
+no changes
+
+========================================================================
+quantum-vulnerable call sites: 1 -> 1 in total, none more counting file by file.
+

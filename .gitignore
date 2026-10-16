@@ -3,3 +3,8 @@ __pycache__/
 .pytest_cache/
 # Do not add build/, dist/, vendor/, venv/ or similar here: tests/fixtures/walk
 # has directories with those names on purpose.
+# Packaging output at the repository root only; the leading / keeps these
+# from matching the fixture directories above.
+/build/
+/dist/
+*.egg-info/

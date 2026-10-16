@@ -14,11 +14,20 @@ Ratchet answers that question for source code.
 ## Install
 
 There is nothing to install. Python 3.9 or newer, standard library only.
+`ratchet.py` runs as it is, or it can be installed as the `ratchet` command (the
+package is `ratchet-cbom`; it is not on PyPI yet, so install from a checkout):
+
+```
+pip install .                  # the ratchet command, no dependencies
+pip install '.[tree-sitter]'   # plus tree-sitter for Go, Java, JavaScript and TypeScript
+```
 
 ```
 python3 ratchet.py /path/to/repo
 python3 ratchet.py /path/to/repo --cbom cbom.json
 python3 ratchet.py /path/to/repo --json > cbom.json
+python3 ratchet.py /path/to/repo --sarif ratchet.sarif     # SARIF 2.1.0 for code scanning
+python3 ratchet.py diff old.cbom.json new.cbom.json --fail-on-new-vulnerable
 python3 ratchet.py /path/to/repo --fail-on-vulnerable   # exit 1 on a quantum-vulnerable call site
 python3 ratchet.py /path/to/repo --include-vendored     # also scan vendor/, node_modules/, build/...
 python3 ratchet.py /path/to/repo --jobs 1                # one process (default: one worker per CPU)
@@ -39,6 +48,61 @@ python3 ratchet.py /path/to/repo --backend tree-sitter   # fail if any grammar i
 makes about an algorithm, is maintained in `registry.json` and embedded in the script.
 If `registry.json` sits next to `ratchet.py` it is used instead of the embedded copy.
 A `registry.json` that is present but unreadable is an error, not a silent fallback.
+
+## GitHub Action
+
+```yaml
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  ratchet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gstn458/Ratchet@v0.1.0
+```
+
+A tag can be moved; a commit cannot. To be sure the Action you reviewed is the one that
+runs, pin the full commit SHA the release's tag points to, with the version in a
+comment (`uses: gstn458/Ratchet@<40-character SHA> # v0.1.0`).
+
+On a pull request the Action scans the checkout, checks the pull request's base out in
+a separate git worktree, scans that too, and compares the two with `ratchet diff`. By
+default it fails only when a file gains unsuppressed quantum-vulnerable call sites, so
+a repository that already uses RSA can adopt it without first migrating. Each file
+that gained call sites is annotated in the pull request at each of its call sites; the
+diff counts per file, so it cannot tell which of them is the new one. On a push there
+is no base, so it reports and does not fail. The comparison, the counts and the full
+report go to the run's job summary. Nothing is posted to the pull request and the
+Action needs only `contents: read`.
+
+| Input | Default | |
+| --- | --- | --- |
+| `path` | `.` | directory to scan, relative to the workspace |
+| `fail-on` | `new` | `new`: fail on added quantum-vulnerable call sites, compared with the base; `any`: fail on any; `none`: never |
+| `base` | the pull request's base | commit or branch to compare with, on any event |
+| `tree-sitter` | `true` | install the pinned grammars; without them Java, JavaScript and TypeScript are not scanned |
+| `include-vendored` | `false` | also scan vendored and test-data directories |
+| `upload-sarif` | `false` | upload the SARIF to code scanning (needs `security-events: write`, and GitHub Advanced Security on a private repository) |
+| `sarif-category` | `ratchet` | code scanning category |
+| `python-version` | `3.12` | Python that runs ratchet; it is kept off the job's `PATH` |
+
+Outputs: `cbom`, `sarif`, `base-cbom` and `diff` (file paths), `vulnerable` (unsuppressed
+quantum-vulnerable call sites in the checkout), `new-vulnerable` (added compared with the
+base, empty without one) and `failed`. When the gate fails, the SARIF upload still runs
+before the job fails.
+
+The base comes from the event: the pull request's base commit, or the merge queue's.
+`actions/checkout` checks out the merge of the pull request into its base, and that is
+compared with the base itself. If the workflow checks out the pull request's head
+instead, it is compared with the merge base, fetching more history when the clone is
+shallow. The base is fetched through the checkout's credentials; with
+`persist-credentials: false`, use `fetch-depth: 0`. Under `pull_request_target` the
+default checkout is the base branch, so check out the head to scan the change. Ratchet
+never runs the code it scans.
 
 ## Tests
 
@@ -194,6 +258,54 @@ by its hash. The parser that read each language is recorded the same way, as
 `ratchet:parser`, and printed at the top of every report. Output is deterministic: two scans of the same tree differ only in
 timestamp and serial number.
 
+### SARIF
+
+`--sarif FILE` writes SARIF 2.1.0 for GitHub code scanning and other SARIF tools. It
+is an alert list, not an inventory, so it holds less than the CBOM:
+
+| Finding | Level |
+| --- | --- |
+| Quantum-vulnerable call site (RSA, ECDSA, ECDH, Ed25519, DH, DSA, ...) | `error` |
+| Classically broken call site (MD5, SHA-1, DES, 3DES, RC4) | `warning` |
+| Import or algorithm name of either | `note` |
+| Reduced margin under Grover (AES, SHA-256, ...) | left out |
+
+There is one rule per algorithm, with the same id as the CBOM's vulnerability
+(`ratchet-pqc-rsa`, `ratchet-classical-md5`). Findings suppressed in `.ratchetignore`
+stay in the file with an external suppression giving the rule and its reason, so code
+scanning shows them as dismissed rather than dropping them. Each result has a
+`ratchet/v1` partial fingerprint built from the rule, the file, the kind and the code
+on the line, so an alert keeps its identity when lines above it move. Files that could
+not be parsed, and languages that were not scanned, are listed as tool notifications.
+Paths are relative to the scan root (`%SRCROOT%`); scan from the repository root so
+they match the repository. Like the CBOM, the file has no timestamp, and two scans of
+the same tree give identical SARIF.
+
+### Comparing two scans
+
+`ratchet diff OLD NEW` compares two CBOMs written by ratchet, typically one from the
+base branch and one from a pull request:
+
+```
+git switch main      && ratchet . --cbom /tmp/old.cbom.json
+git switch my-branch && ratchet . --cbom /tmp/new.cbom.json
+ratchet diff /tmp/old.cbom.json /tmp/new.cbom.json --fail-on-new-vulnerable
+```
+
+It counts occurrences per algorithm, file and kind (call site, import, algorithm name)
+and lists every count that went up or down, with the lines where the occurrences are
+now. Line numbers are not compared, so code that only moves within a file is no
+change. Suppressed findings are listed apart. `--fail-on-new-vulnerable` exits 1 when
+any file has more unsuppressed quantum-vulnerable call sites than before; like
+`--fail-on-vulnerable`, it ignores imports, algorithm names and suppressed findings,
+and counts test code. `--json` prints the comparison as JSON.
+
+The diff warns when the two scans were made differently: another ratchet or registry
+version, another parser for a language, a different `--include-vendored`, or files
+the new scan could not parse or did not scan. Each of those can change findings with
+no change to the code. Scan both sides from the repository root so the paths match.
+To scan a directory called `diff`, write it as `./diff`.
+
 ## Limitations, stated plainly
 
 Because they will come up in the first conversation with anyone technical.
@@ -268,6 +380,12 @@ library that is imported but never called, or an algorithm only named, does not 
 a build. That is deliberate:
 anything that gates CI favours precision, while the inventory favours recall.
 
+`ratchet diff` counts per file, so renaming or moving a file that has a
+quantum-vulnerable call site reads as a new call site in the new path, and fails
+`--fail-on-new-vulnerable`. Counting per file is what lets it catch one file dropping
+RSA while another starts using it; renames are the cost. The report then shows the
+same count leaving the old path, which is how a reviewer tells a rename from new use.
+
 Findings in test code are marked as such, by each language's convention: Go `_test.go`
 files, Python `test_*.py`, `*_test.py` and `conftest.py`, and anything under a `test`,
 `tests`, `testing` or `testdata` directory. The report counts them apart and the CBOM
@@ -330,11 +448,10 @@ and the actual product.
 
 ## Roadmap
 
-1. Java and JavaScript detection, since that is where most enterprise code is
-2. Certificate and TLS configuration scanning
-3. Language model triage to cut false positives on wrapped and dynamic calls
-4. GitHub App that posts the CBOM diff as a check on every pull request
-5. Remediation pull requests, hybrid mode first, behind a test suite gate
+1. Certificate, TLS configuration and dependency manifest scanning
+2. Language model triage to cut false positives on wrapped and dynamic calls
+3. A GitHub App that posts the CBOM diff as a check run on every pull request, without a workflow
+4. Remediation pull requests, hybrid mode first, behind a test suite gate
 
 ## License
 

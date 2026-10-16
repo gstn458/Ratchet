@@ -1,6 +1,7 @@
 """End-to-end behaviour of the command line, run as a subprocess."""
 
 import json
+import os
 import subprocess
 import sys
 
@@ -147,3 +148,17 @@ def test_ci_gate_counts_call_sites_not_imports():
     assert r.returncode == 0
     # An undetermined EC call site is still quantum vulnerable and does fail.
     assert run(str(FIXTURES / "python" / "ec_undetermined"), "--fail-on-vulnerable").returncode == 1
+
+
+def test_version_names_the_tool_and_registry():
+    r = run("--version")
+    assert r.returncode == 0
+    assert r.stdout.startswith("ratchet ") and "(registry 20" in r.stdout
+
+
+def test_report_survives_an_output_encoding_without_the_code(tmp_path):
+    (tmp_path / "clé.py").write_text("# Schlüssel\nimport hashlib\nhashlib.md5('ü'.encode())\n", encoding="utf-8")
+    r = subprocess.run([sys.executable, RATCHET, str(tmp_path)], capture_output=True,
+                       env={**os.environ, "PYTHONIOENCODING": "ascii"})
+    assert r.returncode == 0, r.stderr.decode()
+    assert b"cl\\xe9.py:3   hashlib.md5('\\xfc'.encode())" in r.stdout

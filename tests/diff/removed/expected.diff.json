@@ -1,0 +1,54 @@
+{
+  "old": "old.cbom.json",
+  "new": "new.cbom.json",
+  "warnings": [],
+  "changes": [
+    {
+      "algorithm": "RSA",
+      "path": "keys.py",
+      "kind": "call site",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 1,
+      "new": 0,
+      "old_lines": [
+        4
+      ],
+      "new_lines": []
+    },
+    {
+      "algorithm": "RSA",
+      "path": "keys.py",
+      "kind": "import",
+      "suppressed": false,
+      "quantum_status": "broken",
+      "classical_status": "ok",
+      "old": 1,
+      "new": 0,
+      "old_lines": [
+        2
+      ],
+      "new_lines": []
+    },
+    {
+      "algorithm": "MD5",
+      "path": "keys.py",
+      "kind": "call site",
+      "suppressed": false,
+      "quantum_status": "reduced",
+      "classical_status": "broken",
+      "old": 1,
+      "new": 0,
+      "old_lines": [
+        5
+      ],
+      "new_lines": []
+    }
+  ],
+  "quantum_vulnerable_call_sites": {
+    "old": 1,
+    "new": 0
+  },
+  "new_quantum_vulnerable_call_sites": 0
+}

@@ -1,0 +1,418 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ratchet",
+          "version": "0.1.0",
+          "informationUri": "https://github.com/gstn458/Ratchet",
+          "rules": [
+            {
+              "id": "ratchet-classical-des",
+              "name": "DES",
+              "shortDescription": {
+                "text": "DES: classically broken cryptography"
+              },
+              "fullDescription": {
+                "text": "56-bit key. Brute-forced on commodity hardware."
+              },
+              "help": {
+                "text": "56-bit key. Brute-forced on commodity hardware. Migrate to: AES-256-GCM."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "cryptography",
+                  "weak-crypto"
+                ],
+                "ratchet:quantum": "reduced",
+                "ratchet:classical": "broken"
+              }
+            },
+            {
+              "id": "ratchet-classical-md5",
+              "name": "MD5",
+              "shortDescription": {
+                "text": "MD5: classically broken cryptography"
+              },
+              "fullDescription": {
+                "text": "Collisions are practical today. Quantum is not the problem here."
+              },
+              "help": {
+                "text": "Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "cryptography",
+                  "weak-crypto"
+                ],
+                "ratchet:quantum": "reduced",
+                "ratchet:classical": "broken"
+              }
+            },
+            {
+              "id": "ratchet-classical-sha-1",
+              "name": "SHA-1",
+              "shortDescription": {
+                "text": "SHA-1: classically broken cryptography"
+              },
+              "fullDescription": {
+                "text": "Chosen-prefix collisions demonstrated in 2020. Retire it."
+              },
+              "help": {
+                "text": "Chosen-prefix collisions demonstrated in 2020. Retire it. Migrate to: SHA-256 or SHA-3."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "cryptography",
+                  "weak-crypto"
+                ],
+                "ratchet:quantum": "reduced",
+                "ratchet:classical": "broken"
+              }
+            }
+          ],
+          "properties": {
+            "ratchet:registryVersion": "2026.10.3",
+            "ratchet:registrySha256": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71",
+            "ratchet:parsers": {
+              "Go": "regex (requested)",
+              "Java": "not scanned (regex backend requested)",
+              "JavaScript": "not scanned (regex backend requested)",
+              "Python": "ast",
+              "TypeScript": "not scanned (regex backend requested)"
+            }
+          }
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolExecutionNotifications": []
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "ratchet-classical-sha-1",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "SHA-1 call site. Chosen-prefix collisions demonstrated in 2020. Retire it. Migrate to: SHA-256 or SHA-3."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app/main.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.sha1(b\"first-party\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "9d56712fea9cd455f2959202fedcd67e:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "build/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "92299731b26f1b1d48ba055f0d00881a:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "dist/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "322e493a757fd550d18f8a8272ad885a:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "node_modules/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "eb5007c3638818956f8c697953c5e903:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "site-packages/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "dca9adcc9802bcf50be31d3776fb5cce:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site in test code. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "testdata/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "73788fafc94a0f193a47b5299f0f51cf:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": true
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-des",
+          "ruleIndex": 0,
+          "level": "note",
+          "message": {
+            "text": "DES import. 56-bit key. Brute-forced on commodity hardware. Migrate to: AES-256-GCM."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vendor/github.com/old/lib/legacy.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "import \"crypto/des\""
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "2332db813df12abd5d11b33e44b9c375:1"
+          },
+          "properties": {
+            "ratchet:kind": "import",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-des",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "DES call site. 56-bit key. Brute-forced on commodity hardware. Migrate to: AES-256-GCM."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vendor/github.com/old/lib/legacy.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5,
+                  "snippet": {
+                    "text": "func Old(key []byte) { _, _ = des.NewCipher(key) }"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "4ce8793d219cdeb869adedc3c22df2fe:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vendor/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "898623ce26285dff26c6d9c37a061e21:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        },
+        {
+          "ruleId": "ratchet-classical-md5",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "MD5 call site. Collisions are practical today. Quantum is not the problem here. Migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "venv/lib.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "snippet": {
+                    "text": "hashlib.md5(b\"scanned only with --include-vendored\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "ratchet/v1": "94cfceccbf6d88d0d82dbe224c491a77:1"
+          },
+          "properties": {
+            "ratchet:kind": "call site",
+            "ratchet:testCode": false
+          }
+        }
+      ]
+    }
+  ]
+}
