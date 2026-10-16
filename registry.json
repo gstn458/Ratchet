@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "registry_version": "2026.10.5",
+  "registry_version": "2026.10.6",
   "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
   "field_notes": {
     "quantum": {
@@ -556,7 +556,8 @@
       },
       "elliptic": {
         "algorithms": [
-          "EC"
+          "EC",
+          "Ed25519"
         ],
         "source": "https://www.npmjs.com/package/elliptic"
       },

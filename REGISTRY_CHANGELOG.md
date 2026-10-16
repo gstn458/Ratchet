@@ -4,6 +4,13 @@ Every change to `registry.json`, with the claim it makes and the primary source 
 it, as `CONTRIBUTING.md` requires. Each CBOM records the `registry_version` and
 content hash it was produced with, so this file says what any given CBOM was built on.
 
+## 2026.10.6 (registry schema 2)
+
+**npm `elliptic` implements Ed25519 as well as EC.** Approved. Its README
+(https://www.npmjs.com/package/elliptic) documents ECDSA, ECDH and EdDSA over ed25519,
+so a dependency on it is an occurrence of both EC (usage undetermined) and Ed25519.
+2026.10.5 recorded EC only.
+
 ## 2026.10.5 (registry schema 2)
 
 **A new top-level table, `libraries`,** for dependency manifests. Approved as proposed.

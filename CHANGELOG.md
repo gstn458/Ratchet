@@ -9,7 +9,7 @@ every version in `ratchet.py` needs a section here before it is tagged.
 
 ## Unreleased
 
-Registry 2026.10.5.
+Registry 2026.10.6.
 
 ### Scanning
 
