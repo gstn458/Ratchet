@@ -1,0 +1,14 @@
+<project>
+  <dependencies>
+    <!-- <dependency><groupId>io.jsonwebtoken</groupId><artifactId>jjwt-api</artifactId></dependency> -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk18on</artifactId>
+      <version>1.78.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+</project>

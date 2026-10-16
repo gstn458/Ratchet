@@ -158,6 +158,17 @@ tests and protects nothing.
 | `signatures` | Certificates signed with md5WithRSAEncryption (MD5, already broken) and with RSASSA-PSS over SHA-384 read from the parameters (an RSASSA-PSS key, RSA-2048), and an X9.42 DH public key (dhpublicnumber, DH-2048) | ok |
 | `malformed` | A PEM block that is not base64 and a truncated DER certificate, which are unparsed; a Keynote `.key` archive and a `.key` text file, which are not key material and are passed over | ok |
 
+## manifests/
+
+Dependency manifests: what a project declares, never lockfiles.
+
+| Case | Pins down | Status |
+| --- | --- | --- |
+| `python` | `requirements*.txt` with comments, `-r` and markers; `pyproject.toml` `[project]` dependencies, optional dependencies and Poetry, with a non-dependency table naming `rsa` that must be ignored; PEP 503 names (`PyNaCl`, `Ed25519`) | gap |
+| `node` | `package.json` dependencies and devDependencies, including a scoped package | gap |
+| `go` | `go.mod` single and block `require`s, a `/v5` major-version path, and an `// indirect` requirement that must be ignored | gap |
+| `java` | `pom.xml` dependencies with a commented-out one that must be ignored, and Gradle coordinates; BouncyCastle and jjwt matched by group | gap |
+
 ## Notes
 
 1. **Imports and call sites.** v0 counted every recognised import as a call site.

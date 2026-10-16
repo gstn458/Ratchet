@@ -1,0 +1,2 @@
+pytest
+Ed25519; python_version < "4"

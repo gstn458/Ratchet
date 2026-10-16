@@ -1,0 +1,16 @@
+[project]
+name = "example"
+dependencies = [
+    "PyNaCl>=1.5",          # Ed25519 and X25519
+    "requests[security]",
+]
+
+[project.optional-dependencies]
+jwt = ["PyJWT[crypto]>=2"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ecdsa = "^0.19"
+
+[tool.ruff]
+dependencies = ["rsa"]      # not a dependency table

@@ -1,0 +1,5 @@
+dependencies {
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.40'
+    testImplementation "io.jsonwebtoken:jjwt-impl:0.12.6"
+    implementation 'com.google.guava:guava:33.2.1-jre'
+}
