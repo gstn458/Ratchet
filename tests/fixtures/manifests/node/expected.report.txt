@@ -12,13 +12,21 @@ QUANTUM VULNERABLE   Shor's algorithm breaks these outright
   Ed25519  (no call sites, 2 dependencies)
     Edwards-curve discrete log falls to Shor's algorithm.
     migrate to: ML-DSA-65 (FIPS 204)
-      package.json:7   "@noble/ed25519": "^2.1.0"
-      package.json:11   "tweetnacl": "^1.0.3"
+      package.json:8   "@noble/ed25519": "^2.1.0"
+      package.json:12   "tweetnacl": "^1.0.3"
 
   X25519  (no call sites, 1 dependency)
     Curve25519 discrete log falls to Shor's algorithm.
     migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
-      package.json:11   "tweetnacl": "^1.0.3"
+      package.json:12   "tweetnacl": "^1.0.3"
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (no call sites, 1 dependency)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      package.json:7   "elliptic": "^6.6.1",
 
 
 ALREADY BROKEN       weak today, quantum is not the issue
@@ -26,20 +34,22 @@ ALREADY BROKEN       weak today, quantum is not the issue
   MD5  (no call sites, 1 dependency)
     Collisions are practical today. Quantum is not the problem here.
     migrate to: SHA-256 or SHA-3, or BLAKE2 for non-compliance use
-      package.json:10   "md5": "^2.3.0",
+      package.json:11   "md5": "^2.3.0",
 
 
 CRYPTO LIBRARIES     declared as dependencies; a dependency alone is not use
 
   @noble/ed25519 (npm)  Ed25519
+      package.json:8
+  elliptic (npm)  EC
       package.json:7
   md5 (npm)  MD5
-      package.json:10
+      package.json:11
   node-forge (npm)  general: names no algorithm
       package.json:6
   tweetnacl (npm)  Ed25519, X25519
-      package.json:11
+      package.json:12
 
 ========================================================================
-No quantum-vulnerable call sites, no imports and 3 dependencies across 1 file.
+No quantum-vulnerable call sites, no imports and 4 dependencies across 1 file.
 

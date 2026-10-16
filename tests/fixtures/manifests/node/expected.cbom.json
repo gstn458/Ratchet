@@ -83,7 +83,7 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L7",
+            "location": "package.json#L8",
             "additionalContext": "dependency"
           }
         ]
@@ -100,6 +100,74 @@
         {
           "name": "ratchet:library_source",
           "value": "https://www.npmjs.com/package/@noble/ed25519"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "package.json#L7",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:dependency_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
         }
       ]
     },
@@ -129,11 +197,11 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L7",
+            "location": "package.json#L8",
             "additionalContext": "dependency"
           },
           {
-            "location": "package.json#L11",
+            "location": "package.json#L12",
             "additionalContext": "dependency"
           }
         ]
@@ -201,7 +269,7 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L10",
+            "location": "package.json#L11",
             "additionalContext": "dependency"
           }
         ]
@@ -270,7 +338,7 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L11",
+            "location": "package.json#L12",
             "additionalContext": "dependency"
           }
         ]
@@ -316,13 +384,41 @@
     },
     {
       "type": "library",
+      "bom-ref": "library/npm/elliptic",
+      "name": "elliptic",
+      "purl": "pkg:npm/elliptic",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "package.json#L7",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "npm"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "EC"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://www.npmjs.com/package/elliptic"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "bom-ref": "library/npm/md5",
       "name": "md5",
       "purl": "pkg:npm/md5",
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L10",
+            "location": "package.json#L11",
             "additionalContext": "dependency"
           }
         ]
@@ -378,7 +474,7 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "package.json#L11",
+            "location": "package.json#L12",
             "additionalContext": "dependency"
           }
         ]
