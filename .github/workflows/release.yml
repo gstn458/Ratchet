@@ -1,0 +1,59 @@
+name: release
+
+# Pushing a tag vX.Y.Z drafts a GitHub release for it. The draft is not
+# published: listing the action on GitHub Marketplace is a checkbox on the
+# release page, which the API cannot set, and publishing needs the owner's
+# two-factor authentication. See CONTRIBUTING.md, "Releasing".
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Tag matches the version, is on main, and has release notes
+        run: |
+          version="$(python -I -c 'import sys; sys.path.insert(0, "."); import ratchet; print(ratchet.VERSION)')"
+          test "$GITHUB_REF_NAME" = "v$version" || { echo "::error::tag $GITHUB_REF_NAME does not match ratchet.VERSION $version"; exit 1; }
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main || { echo "::error::$GITHUB_REF_NAME is not on main"; exit 1; }
+          python tools/release_notes.py "$version" > /dev/null
+      - name: Tests, without and with tree-sitter
+        run: |
+          python -I ratchet.py tests/fixtures --json > /dev/null
+          python -m pip install -r requirements-dev.txt
+          python -m pytest -q
+          python -m pip install -r requirements-treesitter.txt
+          python -m pytest -q
+
+  draft:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install build
+          python -m build -o dist .
+      - name: Draft the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python tools/release_notes.py "$GITHUB_REF_NAME" > notes.md
+          gh release create "$GITHUB_REF_NAME" dist/* --draft --verify-tag \
+            --title "Ratchet $GITHUB_REF_NAME" --notes-file notes.md

@@ -62,8 +62,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gstn458/Ratchet@<commit SHA>   # no release yet: pin a full commit
+      - uses: gstn458/Ratchet@v0.1.0
 ```
+
+A tag can be moved; a commit cannot. To be sure the Action you reviewed is the one that
+runs, pin the full commit SHA the release's tag points to, with the version in a
+comment (`uses: gstn458/Ratchet@<40-character SHA> # v0.1.0`).
 
 On a pull request the Action scans the checkout, checks the pull request's base out in
 a separate git worktree, scans that too, and compares the two with `ratchet diff`. By
