@@ -164,10 +164,10 @@ Dependency manifests: what a project declares, never lockfiles.
 
 | Case | Pins down | Status |
 | --- | --- | --- |
-| `python` | `requirements*.txt` with comments, `-r` and markers; `pyproject.toml` `[project]` dependencies, optional dependencies and Poetry, with a non-dependency table naming `rsa` that must be ignored; PEP 503 names (`PyNaCl`, `Ed25519`) | gap |
-| `node` | `package.json` dependencies and devDependencies, including a scoped package | gap |
-| `go` | `go.mod` single and block `require`s, a `/v5` major-version path, and an `// indirect` requirement that must be ignored | gap |
-| `java` | `pom.xml` dependencies with a commented-out one that must be ignored, and Gradle coordinates; BouncyCastle and jjwt matched by group | gap |
+| `python` | `requirements*.txt` with comments, `-r` and markers; `pyproject.toml` `[project]` dependencies, optional dependencies and Poetry, with a non-dependency table naming `rsa` that must be ignored; PEP 503 names (`PyNaCl`, `Ed25519`) | ok |
+| `node` | `package.json` dependencies and devDependencies, including a scoped package | ok |
+| `go` | `go.mod` single and block `require`s, a `/v5` major-version path, and an `// indirect` requirement that must be ignored | ok |
+| `java` | `pom.xml` dependencies with a commented-out one that must be ignored, and Gradle coordinates; BouncyCastle and jjwt matched by group and shown by artifact | ok |
 
 ## Notes
 

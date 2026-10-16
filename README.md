@@ -212,6 +212,15 @@ and are notes in SARIF. Every file holding a private key is named at the top of 
 report and in the CBOM, with nothing read from the key past its algorithm and size;
 an encrypted private key is listed with its algorithm marked as not visible.
 
+Dependency manifests are read for the cryptography libraries a project declares:
+`requirements*.txt`, `pyproject.toml`, `Pipfile`, `setup.cfg`, `go.mod`, `package.json`,
+`pom.xml` and Gradle build files. Each library the registry lists becomes a CycloneDX
+`library` component with its package URL. A library that implements particular
+algorithms, such as `rsa`, `tweetnacl` or `md5`, is also an occurrence of each, of kind
+dependency; a general library such as `cryptography`, `node-forge` or BouncyCastle names
+no algorithm and is listed only. The report lists them under CRYPTO LIBRARIES.
+Dependencies are inventory and never fail a build.
+
 Every finding is classified three ways. Quantum broken means Shor's algorithm defeats
 it outright and it has to be migrated. Already broken means it is weak today and
 quantum has nothing to do with it, which is usually the more urgent finding. Reduced
@@ -338,6 +347,13 @@ not in the registry is listed as unparsed with the OID rather than guessed at, a
 certificate signed with an algorithm the registry does not list records its key but
 not its signature. `known_hosts` is not read, because the keys in it belong to other
 machines.
+
+Manifests are read for what a project declares directly. Lockfiles (`package-lock.json`,
+`poetry.lock`, `go.sum` and the like) and `setup.py` are not read, so a library pulled in
+by another dependency is not listed, and a Go requirement marked `// indirect` is
+skipped. Versions are not considered. Gradle's map notation (`group: 'x', name: 'y'`)
+and Maven versions or groups set through properties are not resolved. Only the
+libraries in the registry's table are recognised.
 
 Hand-rolled cryptography is missed. paramiko implements Diffie-Hellman with raw
 modular exponentiation rather than calling a library, and Ratchet does not flag it.

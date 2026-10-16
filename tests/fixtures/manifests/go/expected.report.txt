@@ -1,11 +1,29 @@
 
-ratchet 0.1.0  scanned no files in .
-registry 2026.10.4  from registry.json
+ratchet 0.1.0  scanned 1 file in .
+registry 2026.10.5  from registry.json
 parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
 skipped no directories
-found no source files
+parsed all 1 file
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  Ed25519  (no call sites, 1 dependency)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      go.mod:8   filippo.io/edwards25519 v1.1.0
+
+
+CRYPTO LIBRARIES     declared as dependencies; a dependency alone is not use
+
+  filippo.io/edwards25519 (Go)  Ed25519
+      go.mod:8
+  github.com/golang-jwt/jwt/v5 (Go)  general: names no algorithm
+      go.mod:9
+  golang.org/x/crypto (Go)  general: names no algorithm
+      go.mod:5
+
 ========================================================================
-No quantum-vulnerable primitives found.
+No quantum-vulnerable call sites, no imports and 1 dependency across 1 file.
 

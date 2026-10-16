@@ -1,11 +1,54 @@
 
-ratchet 0.1.0  scanned no files in .
-registry 2026.10.4  from registry.json
+ratchet 0.1.0  scanned 3 files in .
+registry 2026.10.5  from registry.json
 parsers  Go regex (requested), Java not scanned (regex backend requested), JavaScript not scanned (regex backend requested), Python ast, TypeScript not scanned (regex backend requested)
 skipped no directories
-found no source files
+parsed all 3 files
 no .ratchetignore; no findings suppressed
 ========================================================================
+
+QUANTUM VULNERABLE   Shor's algorithm breaks these outright
+
+  Ed25519  (no call sites, 2 dependencies)
+    Edwards-curve discrete log falls to Shor's algorithm.
+    migrate to: ML-DSA-65 (FIPS 204)
+      pyproject.toml:4   "PyNaCl>=1.5",          # Ed25519 and X25519
+      requirements-dev.txt:2   Ed25519; python_version < "4"
+
+  RSA  (no call sites, 1 dependency)
+    Shor's algorithm factors the modulus in polynomial time.
+    migrate to: ML-KEM-768 for key establishment, ML-DSA-65 for signatures
+      requirements.txt:3   rsa==4.9
+
+  X25519  (no call sites, 1 dependency)
+    Curve25519 discrete log falls to Shor's algorithm.
+    migrate to: hybrid X25519+ML-KEM-768, then ML-KEM alone
+      pyproject.toml:4   "PyNaCl>=1.5",          # Ed25519 and X25519
+
+
+USAGE UNDETERMINED   quantum vulnerable, but signing or key agreement is not visible
+
+  EC  (no call sites, 1 dependency)
+    Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which.
+    migrate to: determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement
+      pyproject.toml:13   ecdsa = "^0.19"
+
+
+CRYPTO LIBRARIES     declared as dependencies; a dependency alone is not use
+
+  cryptography (PyPI)  general: names no algorithm
+      requirements.txt:2
+  ecdsa (PyPI)  EC
+      pyproject.toml:13
+  ed25519 (PyPI)  Ed25519
+      requirements-dev.txt:2
+  pyjwt (PyPI)  general: names no algorithm
+      pyproject.toml:9
+  pynacl (PyPI)  Ed25519, X25519
+      pyproject.toml:4
+  rsa (PyPI)  RSA
+      requirements.txt:3
+
 ========================================================================
-No quantum-vulnerable primitives found.
+No quantum-vulnerable call sites, no imports and 5 dependencies across 3 files.
 

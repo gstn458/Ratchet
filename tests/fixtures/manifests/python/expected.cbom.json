@@ -54,11 +54,11 @@
       },
       {
         "name": "ratchet:scan_registry_sha256",
-        "value": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8"
+        "value": "507b7ccb0eabe442f5bbbcdfc5b605f575b2e657cd256679972bec2f191044d0"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.4"
+        "value": "2026.10.5"
       },
       {
         "name": "ratchet:skipped_directory_count",
@@ -74,5 +74,457 @@
       }
     ]
   },
-  "components": []
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "EC",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "unknown",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "unknown"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L13",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:dependency_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm solves the discrete log on the curve. Whether this key signs or agrees keys was not visible to the scanner, and the migration target depends on which."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "determine usage before migrating, ML-DSA-65 if signing, ML-KEM-768 if key agreement"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.112"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L4",
+            "additionalContext": "dependency"
+          },
+          {
+            "location": "requirements-dev.txt#L2",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:dependency_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "2"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Edwards-curve discrete log falls to Shor's algorithm."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt",
+            "keygen",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "requirements.txt#L3",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:dependency_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Shor's algorithm factors the modulus in polynomial time."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "ML-KEM-768 for key establishment, ML-DSA-65 for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/x25519",
+      "name": "X25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "generic",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keyderive",
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.110"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L4",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:algorithm_name_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:call_site_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:classical_status",
+          "value": "ok"
+        },
+        {
+          "name": "ratchet:dependency_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:import_count",
+          "value": "0"
+        },
+        {
+          "name": "ratchet:occurrence_count",
+          "value": "1"
+        },
+        {
+          "name": "ratchet:quantum_status",
+          "value": "broken"
+        },
+        {
+          "name": "ratchet:rationale",
+          "value": "Curve25519 discrete log falls to Shor's algorithm."
+        },
+        {
+          "name": "ratchet:recommended_replacement",
+          "value": "hybrid X25519+ML-KEM-768, then ML-KEM alone"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/cryptography",
+      "name": "cryptography",
+      "purl": "pkg:pypi/cryptography",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "requirements.txt#L2",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "general"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/cryptography/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/ecdsa",
+      "name": "ecdsa",
+      "purl": "pkg:pypi/ecdsa",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L13",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "EC"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/ecdsa/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/ed25519",
+      "name": "ed25519",
+      "purl": "pkg:pypi/ed25519",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "requirements-dev.txt#L2",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "Ed25519"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/ed25519/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/pyjwt",
+      "name": "pyjwt",
+      "purl": "pkg:pypi/pyjwt",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L9",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "general"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/PyJWT/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/pynacl",
+      "name": "pynacl",
+      "purl": "pkg:pypi/pynacl",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml#L4",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "Ed25519, X25519"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/PyNaCl/"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/rsa",
+      "name": "rsa",
+      "purl": "pkg:pypi/rsa",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "requirements.txt#L3",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "PyPI"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "RSA"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://pypi.org/project/rsa/"
+        }
+      ]
+    }
+  ]
 }

@@ -54,11 +54,11 @@
       },
       {
         "name": "ratchet:scan_registry_sha256",
-        "value": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8"
+        "value": "507b7ccb0eabe442f5bbbcdfc5b605f575b2e657cd256679972bec2f191044d0"
       },
       {
         "name": "ratchet:scan_registry_version",
-        "value": "2026.10.4"
+        "value": "2026.10.5"
       },
       {
         "name": "ratchet:skipped_directory_count",
@@ -74,5 +74,90 @@
       }
     ]
   },
-  "components": []
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "library/maven/com.nimbusds:nimbus-jose-jwt",
+      "name": "com.nimbusds:nimbus-jose-jwt",
+      "purl": "pkg:maven/com.nimbusds/nimbus-jose-jwt",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "build.gradle#L2",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "Maven"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "general"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://central.sonatype.com/artifact/com.nimbusds/nimbus-jose-jwt"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/maven/io.jsonwebtoken:jjwt-impl",
+      "name": "io.jsonwebtoken:jjwt-impl",
+      "purl": "pkg:maven/io.jsonwebtoken/jjwt-impl",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "build.gradle#L3",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "Maven"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "general"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://central.sonatype.com/namespace/io.jsonwebtoken"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/maven/org.bouncycastle:bcprov-jdk18on",
+      "name": "org.bouncycastle:bcprov-jdk18on",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk18on",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pom.xml#L6",
+            "additionalContext": "dependency"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "ratchet:ecosystem",
+          "value": "Maven"
+        },
+        {
+          "name": "ratchet:implements",
+          "value": "general"
+        },
+        {
+          "name": "ratchet:library_source",
+          "value": "https://central.sonatype.com/namespace/org.bouncycastle"
+        }
+      ]
+    }
+  ]
 }

@@ -4,6 +4,43 @@ Every change to `registry.json`, with the claim it makes and the primary source 
 it, as `CONTRIBUTING.md` requires. Each CBOM records the `registry_version` and
 content hash it was produced with, so this file says what any given CBOM was built on.
 
+## 2026.10.5 (registry schema 2)
+
+**A new top-level table, `libraries`,** for dependency manifests. Approved as proposed.
+Each package carries the registry entries it implements and, as its source, the
+package's own published description, quoted below as fetched from its registry on
+2026-10-16. An empty list is a general cryptography library: depending on it names no
+algorithm, so none is claimed.
+
+Packages that implement particular algorithms:
+
+| Ecosystem | Package | Algorithms | The package's own description |
+| --- | --- | --- | --- |
+| PyPI | rsa | RSA | "Pure-Python RSA implementation" |
+| PyPI | ecdsa | EC | "ECDSA cryptographic signature library (pure python)"; its README is titled "Pure-Python ECDSA and ECDH", so the usage is undetermined |
+| PyPI | ed25519 | Ed25519 | "Ed25519 public-key signatures" |
+| PyPI | pynacl | Ed25519, X25519 | "Python binding to the Networking and Cryptography (NaCl) library": NaCl's signatures are Ed25519 and its public-key boxes use X25519 |
+| npm | node-rsa | RSA | "RSA library for Node.js and browsers" |
+| npm | elliptic | EC | "EC cryptography"; its README covers ECDSA, ECDH and EdDSA |
+| npm | tweetnacl | Ed25519, X25519 | "Port of TweetNaCl cryptographic library to JavaScript" |
+| npm | @noble/ed25519 | Ed25519 | "...ed25519 EDDSA signatures compliant with RFC8032, FIPS 186-5 & ZIP215" |
+| npm | secp256k1 | EC | "native bindings to ecdsa secp256k1 functions"; its README also documents ECDH |
+| npm | md5, js-md5, blueimp-md5 | MD5 | "js function for hashing messages with MD5"; "A simple MD5 hash function for JavaScript"; "JavaScript MD5 implementation" |
+| npm | sha1 | SHA-1 | "native js function for hashing messages with SHA-1" |
+| Go | filippo.io/edwards25519 | Ed25519 | The edwards25519 group, the curve under Ed25519 (pkg.go.dev) |
+
+General cryptography libraries, recorded with no algorithm:
+
+| Ecosystem | Packages |
+| --- | --- |
+| PyPI | cryptography, pycryptodome, pycryptodomex, pyopenssl, m2crypto, pyjwt |
+| npm | node-forge, jsrsasign, crypto-js, jose, jsonwebtoken, @noble/curves |
+| Go | golang.org/x/crypto, github.com/golang-jwt/jwt (any major version) |
+| Maven | org.bouncycastle (every artifact), com.nimbusds:nimbus-jose-jwt, io.jsonwebtoken (every artifact) |
+
+PyPI keys are normalised as PEP 503 does, Go keys omit the `/vN` major-version suffix,
+and a Maven key `group:*` covers the whole group.
+
 ## 2026.10.4 (registry schema 2)
 
 Certificates and key files. Approved as proposed.

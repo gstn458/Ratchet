@@ -9,7 +9,7 @@ every version in `ratchet.py` needs a section here before it is tagged.
 
 ## Unreleased
 
-Registry 2026.10.4.
+Registry 2026.10.5.
 
 ### Scanning
 
@@ -24,6 +24,11 @@ Registry 2026.10.4.
 - Certificates and keys are inventory: they never fail `--fail-on-vulnerable` and are
   notes in SARIF.
 - ML-DSA and ML-KEM report under their own post-quantum heading.
+- Dependency manifests (`requirements*.txt`, `pyproject.toml`, `Pipfile`, `setup.cfg`,
+  `go.mod`, `package.json`, `pom.xml`, Gradle build files): each cryptography library
+  the registry lists becomes a CycloneDX library component with a purl, and one that
+  implements particular algorithms, such as `rsa` or `tweetnacl`, is also an
+  occurrence of each. Lockfiles are not read. Dependencies never fail a build.
 
 ## 0.1.0
 

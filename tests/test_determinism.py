@@ -42,5 +42,6 @@ def test_every_cbom_array_is_sorted(root):
         assert locations == sorted(locations)
         props = [p["name"] for p in c["properties"]]
         assert props == sorted(props)
-        functions = c["cryptoProperties"]["algorithmProperties"]["cryptoFunctions"]
-        assert functions == sorted(functions)
+        if c["type"] == "cryptographic-asset":
+            functions = c["cryptoProperties"]["algorithmProperties"]["cryptoFunctions"]
+            assert functions == sorted(functions)

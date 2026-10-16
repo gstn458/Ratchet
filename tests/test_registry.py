@@ -27,6 +27,7 @@ REGISTRY_CONTENT = {
     "2026.10.2": "932a3cfe8ec37f022781be741037fcc982243eb5d5a9c3e2444f2eafa356996b",
     "2026.10.3": "457bf471a75ef4d07be972f9206b20f83ce30b6ac7036e2e9c5d74145c8b7c71",
     "2026.10.4": "202218d728ffb55067771066dd6b910e7c95dd51ee0fce58aff3b45b3fe999a8",
+    "2026.10.5": "507b7ccb0eabe442f5bbbcdfc5b605f575b2e657cd256679972bec2f191044d0",
 }
 
 ENTRY_FIELDS = {
@@ -230,6 +231,22 @@ def test_signature_oids_that_name_a_key_algorithm_agree_with_it(registry):
             assert sig.get("parameter_set") == sets[oid], oid
         elif oid == entry["oid"]:
             assert "parameter_set" not in sig, oid
+
+
+def test_libraries_name_registry_entries_and_cite_their_source(registry):
+    for ecosystem, table in registry["libraries"].items():
+        assert ecosystem in ("pypi", "npm", "go", "maven"), ecosystem
+        for key, entry in table.items():
+            assert set(entry) == {"algorithms", "source"}, key
+            assert set(entry["algorithms"]) <= set(registry["algorithms"]), key
+            assert entry["algorithms"] == sorted(set(entry["algorithms"])), key
+            assert entry["source"].startswith("https://"), key
+            if ecosystem == "pypi":
+                assert key == re.sub(r"[-_.]+", "-", key).lower(), f"{key} is not PEP 503 normalised"
+            if ecosystem == "go":
+                assert not re.search(r"/v[0-9]+$", key), key
+            if ecosystem == "maven":
+                assert re.fullmatch(r"[A-Za-z0-9_.-]+:([A-Za-z0-9_.-]+|\*)", key), key
 
 
 def test_parameter_set_overrides_reach_the_cbom():

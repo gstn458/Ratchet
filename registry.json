@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "registry_version": "2026.10.4",
+  "registry_version": "2026.10.5",
   "description": "Ratchet algorithm registry. Every entry is a claim about cryptography; see CONTRIBUTING.md before changing one.",
   "field_notes": {
     "quantum": {
@@ -16,7 +16,8 @@
     "oid": "OID of the algorithm. null when no single OID identifies it without information Ratchet does not detect; oid_note says why.",
     "parameter_sets": "Optional. Keyed by the parameterSetIdentifier Ratchet records; each may set its own oid and nist_quantum_security_level.",
     "key_oids": "Optional. Further OIDs that identify a public or private key of this algorithm in X.509 or PKCS#8, beside oid.",
-    "signature_algorithms": "Top-level table, keyed by OID: the signature algorithms a certificate names in signatureAlgorithm, each with the registry entry for its public-key algorithm, the parameter set where the OID fixes one, and the registry entry for its hash, or null when the hash has no entry or is carried in the algorithm's parameters (hash_from_parameters)."
+    "signature_algorithms": "Top-level table, keyed by OID: the signature algorithms a certificate names in signatureAlgorithm, each with the registry entry for its public-key algorithm, the parameter set where the OID fixes one, and the registry entry for its hash, or null when the hash has no entry or is carried in the algorithm's parameters (hash_from_parameters).",
+    "libraries": "Top-level table by ecosystem (pypi, npm, go, maven): the packages a dependency manifest may name, each with the registry entries it implements and the package's own published description as its source. An empty algorithms list is a general cryptography library, which names no algorithm by being a dependency. PyPI names are normalised as PEP 503 does; Go module paths omit any /vN major-version suffix; a Maven key group:* covers every artifact in the group."
   },
   "algorithms": {
     "RSA": {
@@ -478,6 +479,170 @@
       "algorithm": "ML-DSA",
       "parameter_set": "87",
       "hash": null
+    }
+  },
+  "libraries": {
+    "pypi": {
+      "cryptography": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/cryptography/"
+      },
+      "ecdsa": {
+        "algorithms": [
+          "EC"
+        ],
+        "source": "https://pypi.org/project/ecdsa/"
+      },
+      "ed25519": {
+        "algorithms": [
+          "Ed25519"
+        ],
+        "source": "https://pypi.org/project/ed25519/"
+      },
+      "m2crypto": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/M2Crypto/"
+      },
+      "pycryptodome": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/pycryptodome/"
+      },
+      "pycryptodomex": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/pycryptodomex/"
+      },
+      "pyjwt": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/PyJWT/"
+      },
+      "pynacl": {
+        "algorithms": [
+          "Ed25519",
+          "X25519"
+        ],
+        "source": "https://pypi.org/project/PyNaCl/"
+      },
+      "pyopenssl": {
+        "algorithms": [],
+        "source": "https://pypi.org/project/pyOpenSSL/"
+      },
+      "rsa": {
+        "algorithms": [
+          "RSA"
+        ],
+        "source": "https://pypi.org/project/rsa/"
+      }
+    },
+    "npm": {
+      "@noble/curves": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/@noble/curves"
+      },
+      "@noble/ed25519": {
+        "algorithms": [
+          "Ed25519"
+        ],
+        "source": "https://www.npmjs.com/package/@noble/ed25519"
+      },
+      "blueimp-md5": {
+        "algorithms": [
+          "MD5"
+        ],
+        "source": "https://www.npmjs.com/package/blueimp-md5"
+      },
+      "crypto-js": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/crypto-js"
+      },
+      "elliptic": {
+        "algorithms": [
+          "EC"
+        ],
+        "source": "https://www.npmjs.com/package/elliptic"
+      },
+      "jose": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/jose"
+      },
+      "js-md5": {
+        "algorithms": [
+          "MD5"
+        ],
+        "source": "https://www.npmjs.com/package/js-md5"
+      },
+      "jsonwebtoken": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/jsonwebtoken"
+      },
+      "jsrsasign": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/jsrsasign"
+      },
+      "md5": {
+        "algorithms": [
+          "MD5"
+        ],
+        "source": "https://www.npmjs.com/package/md5"
+      },
+      "node-forge": {
+        "algorithms": [],
+        "source": "https://www.npmjs.com/package/node-forge"
+      },
+      "node-rsa": {
+        "algorithms": [
+          "RSA"
+        ],
+        "source": "https://www.npmjs.com/package/node-rsa"
+      },
+      "secp256k1": {
+        "algorithms": [
+          "EC"
+        ],
+        "source": "https://www.npmjs.com/package/secp256k1"
+      },
+      "sha1": {
+        "algorithms": [
+          "SHA-1"
+        ],
+        "source": "https://www.npmjs.com/package/sha1"
+      },
+      "tweetnacl": {
+        "algorithms": [
+          "Ed25519",
+          "X25519"
+        ],
+        "source": "https://www.npmjs.com/package/tweetnacl"
+      }
+    },
+    "go": {
+      "filippo.io/edwards25519": {
+        "algorithms": [
+          "Ed25519"
+        ],
+        "source": "https://pkg.go.dev/filippo.io/edwards25519"
+      },
+      "github.com/golang-jwt/jwt": {
+        "algorithms": [],
+        "source": "https://pkg.go.dev/github.com/golang-jwt/jwt/v5"
+      },
+      "golang.org/x/crypto": {
+        "algorithms": [],
+        "source": "https://pkg.go.dev/golang.org/x/crypto"
+      }
+    },
+    "maven": {
+      "com.nimbusds:nimbus-jose-jwt": {
+        "algorithms": [],
+        "source": "https://central.sonatype.com/artifact/com.nimbusds/nimbus-jose-jwt"
+      },
+      "io.jsonwebtoken:*": {
+        "algorithms": [],
+        "source": "https://central.sonatype.com/namespace/io.jsonwebtoken"
+      },
+      "org.bouncycastle:*": {
+        "algorithms": [],
+        "source": "https://central.sonatype.com/namespace/org.bouncycastle"
+      }
     }
   }
 }
