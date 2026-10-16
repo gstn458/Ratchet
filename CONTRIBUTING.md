@@ -60,6 +60,26 @@ The limitations section of the README is load-bearing, not boilerplate. If your 
 removes a limitation, delete it from that list. If your change adds one, add it. A
 security tool that overstates its coverage is worse than one that admits a gap.
 
+## Releasing
+
+1. Bump `VERSION` in `ratchet.py`, add a `## <version>` section to `CHANGELOG.md` naming
+   the registry version it ships, and change the version in the README's Action example.
+   `tests/test_release.py` fails until all three agree.
+2. Merge to `main`, then tag that commit and push the tag:
+   `git tag v<version> && git push origin v<version>`.
+3. The release workflow checks that the tag matches `VERSION`, is on `main` and has
+   changelog notes, runs the tests with and without tree-sitter, builds the sdist and
+   wheel, and drafts a GitHub release with them attached and the changelog section as
+   its notes.
+4. Open the draft. To list the Action on GitHub Marketplace, tick **Publish this Action
+   to the GitHub Marketplace** (the first time, GitHub asks the repository owner to
+   accept the Marketplace Developer Agreement), choose **Security** as the primary
+   category, and publish. Publishing needs two-factor authentication, and the API cannot
+   tick the Marketplace box, so this step is by hand.
+
+If GitHub reports that the Action's name is taken, change `name` in `action.yml`
+(currently "Ratchet CBOM"); Marketplace names must be unique.
+
 ## Reporting a false positive or false negative
 
 Open an issue with the smallest source snippet that reproduces it, the language, and
