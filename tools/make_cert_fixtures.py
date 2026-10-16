@@ -3,7 +3,8 @@
 
     python3 tools/make_cert_fixtures.py
 
-Needs the cryptography package, which Ratchet itself never imports. Keys are
+Needs the cryptography package, which Ratchet itself never imports, and the
+openssl command for the fixtures cryptography cannot make. Keys are
 random, so a rerun writes different bytes; the goldens then need
 regenerating, and the findings must not change. Every key here is a
 throwaway made for these tests and protects nothing.
@@ -11,7 +12,9 @@ throwaway made for these tests and protects nothing.
 
 import datetime
 import os
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 from cryptography import x509
@@ -109,6 +112,20 @@ def main():
     write(m / "truncated.der", cert(p256b, "cut.example.test").public_bytes(DER)[:120])
     write(m / "keynote.key", b"PK\x03\x04 a zip archive, as a Keynote .key file is")
     write(m / "translations.key", b"greeting=Hello\nfarewell=Goodbye\n")
+    # What cryptography will not make: an MD5-signed certificate, an RSASSA-PSS
+    # key signed with PSS and SHA-384, and an X9.42 (dhpublicnumber) DH key.
+    s = OUT / "signatures"
+    s.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        def openssl(*args):
+            subprocess.run(["openssl", *args], cwd=tmp, check=True, capture_output=True)
+        openssl("req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", "md5.key", "-out", str(s / "md5.crt"),
+                "-md5", "-subj", "/CN=md5.example.test", "-days", "3650")
+        openssl("genpkey", "-algorithm", "RSA-PSS", "-pkeyopt", "rsa_keygen_bits:2048", "-out", "pss.key")
+        openssl("req", "-x509", "-key", "pss.key", "-out", str(s / "pss.crt"), "-subj", "/CN=pss.example.test",
+                "-days", "3650", "-sigopt", "rsa_padding_mode:pss", "-sha384")
+        openssl("genpkey", "-algorithm", "DHX", "-pkeyopt", "dh_rfc5114:2", "-out", "dhx.key")
+        openssl("pkey", "-in", "dhx.key", "-pubout", "-out", str(s / "dhx.pub"))
     print(f"wrote fixtures under {OUT}", file=sys.stderr)
 
 
